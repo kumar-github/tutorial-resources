@@ -221,7 +221,7 @@ management.endpoints.web.base-path=/admin
 
 After configuring the web endpoints base path like above, the endpoints can be accessed by either
 
-```properties
+```http
 http://localhost:9090/admin
 ```
 or

@@ -35,7 +35,6 @@ TOC
 ---
 
 <br/>
-     
 
 ## Few things about Spring Boot Actuator
 
@@ -72,7 +71,6 @@ For example, by default, the health endpoint is mapped to `/actuator/health`.
 
 * OpenJDK 17+
 * Apache Maven 3.9.4+
-
 
 <br/>
 

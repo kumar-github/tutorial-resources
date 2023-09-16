@@ -229,7 +229,6 @@ management.endpoints.jmx.domain=tech.badprogrammer.app
 
 ![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/3c756d7d-ebb6-4c83-a7f1-a0f45b123d65)
 
-
 ### Customizing the Management Server Port
 
 By default management endpoints are exposed on the same HTTP port in which the service is running. But it is possible to expose them on a different HTTP port, using the `management.server.port` property as below.

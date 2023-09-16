@@ -71,6 +71,10 @@ If you want to disable all the endpoints, you can use the `management.endpoints.
 management.endpoints.enabled-by-default=false
 ~~~
 
+After setting the `management.endpoints.enabled-by-default` property to `false`, all the ebdpoints are **disabled** and it is **exposed**. *Check the below screenshot.*
+
+![All Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/a7be2812-7f5f-4070-b5fa-05347ecea94a)
+
 *Note: A **disabled** endpoint will not be exposed neither over **JMX** nor over **HTTP**.*
 
 #### Disabling Individual Endpoints
@@ -80,7 +84,12 @@ If you want to disable an individual endpoint, you can use the respective `manag
 ~~~properties
 management.endpoint.health.enabled=false
 management.endpoint.info.enabled=false
+management.endpoint.beans.enabled=false
 ~~~
+
+After disabling `health`, `info`, `beans` endpoints, they are not exposed. *Check the below screenshot.*
+
+![Health-Info-Beans Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/371bc9ce-8a5c-4747-91fd-f83f2bbb4104)
 
 :question:**Any Questions**:question:
 

@@ -14,6 +14,9 @@ This project will walk you through a simple demo of Spring Boot Actuator. It wil
 
 <br/>
 
+TOC
+===
+
 * [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
   * [Requirements](#requirements)
   * [Run Locally](#run-locally)

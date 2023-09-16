@@ -23,7 +23,7 @@ TOC
     * [Run Locally](#run-locally)
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
-        * [Starting the Project and Observe Console Log](#starting-the-project-and-observe-console-log)
+        * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
         * [Access Various Endpoints](#access-various-endpoints)
      
 <br/>
@@ -137,7 +137,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 *Note: `spring-boot-devtools` is not mandatory but i am using here because of the live reload feature which will save some development time.*
 
-### Starting the Project and Observe Console Log
+### Start the Project and Observe the Console Log
 
 At this point, the application can be started and accessed on `http://localhost:9090`. Though accessing `http://localhost:9090` will give you a `Whitelabel Error Page` but that is understandable since we did not map any controller to handle the request.
 

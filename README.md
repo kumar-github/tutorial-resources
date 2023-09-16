@@ -24,19 +24,20 @@ TOC
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
-        * [Access Various Endpoints](#access-various-endpoints)     
+        * [Access Various Endpoints](#access-various-endpoints)
     * [Commit-01 :sparkles:](#commit-01-sparkles)
         * [Customizing JMX Domain](#customizing-jmx-domain)
         * [Customizing the Management Server Port](#customizing-the-management-server-port)
         * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
         * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-    * [Commit-02:sparkles:](#commit-02sparkles)
-        * [Enabling All Endpoints](#enabling-all-endpoints)
-        * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-        * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-        * [Disabling All Endpoints](#disabling-all-endpoints)
-        * [Disabling Individual Endpoints](#disabling-individual-endpoints)
-     
+  * [Commit-02:sparkles:](#commit-02sparkles)
+      * [Enabling All Endpoints](#enabling-all-endpoints)
+      * [Enabling Individual Endpoints](#enabling-individual-endpoints)
+      * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
+      * [Disabling All Endpoints](#disabling-all-endpoints)
+      * [Disabling Individual Endpoints](#disabling-individual-endpoints)
+  * [Commit-03:sparkles:](#commit-03sparkles)
+      * [Commented Out Previous Configs](#commented-out-previous-configs)
 
 <br/>
 
@@ -235,6 +236,7 @@ management.endpoints.jmx.domain=tech.badprogrammer.app
 
 ![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/3c756d7d-ebb6-4c83-a7f1-a0f45b123d65)
 
+
 ### Customizing the Management Server Port
 
 By default management endpoints are exposed on the same HTTP port in which the service is running. But it is possible to expose them on a different HTTP port, using the `management.server.port` property as below.
@@ -375,11 +377,13 @@ If you want to disable all the endpoints, you can use the `management.endpoints.
 management.endpoints.enabled-by-default=false
 ~~~
 
-After setting the `management.endpoints.enabled-by-default` property to `false`, all the ebdpoints are **disabled** and it is **exposed**. *Check the below screenshot.*
+After setting the `management.endpoints.enabled-by-default` property to `false`, all the endpoints are **disabled** and hence **not exposed**. *Check the below screenshot.*
 
 ![All Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/a7be2812-7f5f-4070-b5fa-05347ecea94a)
 
 *Note: A **disabled** endpoint will not be exposed neither over **JMX** nor over **HTTP**.*
+
+*Note: The `shutdown` endpoint is visible because we **enabled** it individually.*
 
 ### Disabling Individual Endpoints
 
@@ -394,6 +398,27 @@ management.endpoint.beans.enabled=false
 After disabling `health`, `info`, `beans` endpoints, they are not exposed. *Check the below screenshot.*
 
 ![Health-Info-Beans Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/371bc9ce-8a5c-4747-91fd-f83f2bbb4104)
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-03:sparkles:
+
+| **Agenda for this commit**         |      Covered?      |
+|------------------------------------|:------------------:|
+| 1. Commented out previous configs. | :white_check_mark: |
+
+### Commented Out Previous Configs
+Commented the previously made config changes just to be clear.
 
 :question:**Any Questions**:question:
 

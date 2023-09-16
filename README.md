@@ -1,7 +1,8 @@
-# Spring Boot Actuator
+# Spring Boot Actuator Demo
+
 > **Every day is a learning day.**
 
-This project will help you in understanding **Spring Boot Actuator** module step by step. Each concept is covered in-depth and organized as individual git commits. The commits are numbered sequentially starting from `00`, `01`, `02` and so on. You can clone the entire project to your local machine and then start applying commits one by one starting from `00`. This `README.md` file will be updated in every commit and will tell you what has been covered in the specific commit.
+This project will walk you through a simple demo of Spring Boot Actuator. It will help you in understanding **Spring Boot Actuator** module step by step. Each concept is covered in-depth and organized as individual git commits. The commits are numbered sequentially starting from `00`, `01`, `02` and so on. As you go through it, take the time to understand the changes each step makes to the code. You can clone the entire project to your local machine and then start applying the commits one by one starting from `00`. This `README.md` file will be updated in every commit and will tell you what has been covered in the specific commit.
 
 <br/>
 
@@ -13,40 +14,50 @@ This project will help you in understanding **Spring Boot Actuator** module step
 
 <br/>
 
-TOC
-===
+- [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
+  - [Requirements](#requirements)
+  - [Run Locally](#run-locally)
+  - [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
+  - [Complete Reference](#complete-reference)
+  - [Commit-00 :sparkles:](#commit-00-sparkles)
+    - [Project Creation](#project-creation)
+    - [Starting the Project and Observe Console Log](#starting-the-project-and-observe-console-log)
+    - [Access Various Endpoints](#access-various-endpoints)
+  - [Commit-01 :sparkles:](#commit-01-sparkles)
+    - [Customizing JMX Domain](#customizing-jmx-domain)
+    - [Customizing the Management Server Port](#customizing-the-management-server-port)
+    - [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
+    - [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
+  - [Commit-02:sparkles:](#commit-02sparkles)
+    - [Enabling/Disabling Endpoints](#enablingdisabling-endpoints)
+      - [Enabling All Endpoints](#enabling-all-endpoints)
+      - [Enabling Individual Endpoints](#enabling-individual-endpoints)
+      - [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
+      - [Disabling All Endpoints](#disabling-all-endpoints)
+      - [Disabling Individual Endpoints](#disabling-individual-endpoints)
 
-* [Spring Boot Actuator](#spring-boot-actuator)
-  * [Run Locally](#run-locally)
-  * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
-  * [Complete Reference](#complete-reference)
-  * [Commit-00 :sparkles:](#commit-00-sparkles)
-  * [Commit-01 :sparkles:](#commit-01-sparkles)
-    * [Customizing JMX Domain](#customizing-jmx-domain)
-    * [Customizing the Management Server Port](#customizing-the-management-server-port)
-    * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
-    * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-  * [Commit-02:sparkles:](#commit-02sparkles)
-    * [Enabling/Disabling Endpoints](#enablingdisabling-endpoints)
-      * [Enabling All Endpoints](#enabling-all-endpoints)
-      * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-    * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-      * [Disabling All Endpoints](#disabling-all-endpoints)
-      * [Disabling Individual Endpoints](#disabling-individual-endpoints)
+
+## Requirements
+
+* OpenJDK 17+
+* Apache Maven 3.9.4+
 
 ## Run Locally
 
 Clone the project
+
 ```bash
 git clone https://github.com/kumar-github/spring-boot-actuator-demo
 ```
 
 Go to the project root directory
+
 ```bash
 cd spring-boot-actuator-demo
 ```
 
 Start the service
+
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -96,15 +107,17 @@ For example, by default, the health endpoint is mapped to `/actuator/health`.
 
 *This is the Initial Commit.*
 
-| **Agenda for this commit**                                    |      Covered?      |
-|---------------------------------------------------------------|:------------------:|
-| 1. Project creation with needed dependencies.                 | :white_check_mark: |
-| 2. Observe actuator related console log.                      | :white_check_mark: |
-| 3. Hit the actuator endpoints over **HTTP**.                  | :white_check_mark: |
-| 4. Talk about `Health` endpoint.                              | :white_check_mark: |
+| **Agenda for this commit**                                   |      Covered?      |
+| ------------------------------------------------------------ | :----------------: |
+| 1. Project creation with needed dependencies.                | :white_check_mark: |
+| 2. Observe actuator related console log.                     | :white_check_mark: |
+| 3. Hit the actuator endpoints over **HTTP**.                 | :white_check_mark: |
+| 4. Talk about `Health` endpoint.                             | :white_check_mark: |
 | 5. Access the actuator endpoints over **JMX** using jconsole. | :white_check_mark: |
-| 6. Talk about `Shutdown` endpoint.                            | :white_check_mark: |
-| 7. Talk briefly about `Info` endpoint.                        | :white_check_mark: |
+| 6. Talk about `Shutdown` endpoint.                           | :white_check_mark: |
+| 7. Talk briefly about `Info` endpoint.                       | :white_check_mark: |
+
+### Project Creation
 
 We have created a spring boot project via [Spring Initializr](https://start.spring.io/) with below dependencies.
 
@@ -114,6 +127,10 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 *Note: `spring-boot-devtools` is not mandatory but i am using here because of the live reload feature which will save some development time.*
 
+
+
+### Starting the Project and Observe Console Log
+
 At this point, the application can be started and accessed on `http://localhost:9090`. Though accessing `http://localhost:9090` will give you a `Whitelabel Error Page` but that is understandable since we did not map any controller to handle the request.
 
 But we can find the below line logged in the console which is the proof that actuator is enabled.
@@ -121,6 +138,10 @@ But we can find the below line logged in the console which is the proof that act
 ```console
 Exposing 1 endpoint(s) beneath base path '/actuator'
 ```
+
+
+
+### Access Various Endpoints
 
 Once the service is started, open your browser and hit `http://localhost:9090/actuator`. You will be getting a response that is similar to this
 
@@ -150,6 +171,7 @@ The `health` endpoint is the only one that is exposed by default over **HTTP**. 
   "status": "UP"
 }
 ```
+
 *Note: Though the `health` endpoint is exposed, it is not giving all the details except the status of the service. We will tweak this in a moment to provide more details.*
 
 Besides, you can access all the endpoints over **JMX** using `jconsole` from your `Terminal`.
@@ -182,7 +204,7 @@ You can access the individual endpoints like `beans`, `health`, `info` etc here.
 ## Commit-01 :sparkles:
 
 | **Agenda for this commit**                  |      Covered?      |
-|---------------------------------------------|:------------------:|
+| ------------------------------------------- | :----------------: |
 | 1. Customizing JMX Domain.                  | :white_check_mark: |
 | 2. Customizing Management Server Base Path. | :white_check_mark: |
 | 3. Customizing the Management Server Port.  | :white_check_mark: |
@@ -229,6 +251,7 @@ After changing the management server base path like above, the way to access the
 ```http
 http://localhost:9123/management/actuator
 ```
+
 *Note: The management sever base path change will work only if a custom management server port is configured.*
 
 ### Customizing the Web Endpoints Base Path
@@ -238,6 +261,7 @@ By default all the web endpoints are grouped under `/actuator` endpoint. But som
 ```properties
 management.endpoints.web.base-path=/admin
 ```
+
 *Note: The above path is relative to the servlet context path when the management server is sharing the main server port and relative to the management server base path when a separate management server port is configured.*
 
 After configuring the web endpoints base path like above, the endpoints can be accessed by either
@@ -245,10 +269,13 @@ After configuring the web endpoints base path like above, the endpoints can be a
 ```http
 http://localhost:9090/admin
 ```
+
 or
+
 ```http
 http://localhost:9123/management/admin
 ```
+
 depends on the `management.server.port` property configuration.
 
 :question:**Any Questions**:question:
@@ -266,7 +293,7 @@ depends on the `management.server.port` property configuration.
 ## Commit-02:sparkles:
 
 | **Agenda for this commit**                            |      Covered?      |
-|-------------------------------------------------------|:------------------:|
+| ----------------------------------------------------- | :----------------: |
 | 1. Enabling All Endpoints.                            | :white_check_mark: |
 | 2. Enabling Individual Endpoints (`shutdown`).        | :white_check_mark: |
 | 3. Talk briefly about CONDITION EVALUATION DELTA.     | :white_check_mark: |
@@ -280,6 +307,7 @@ depends on the `management.server.port` property configuration.
 By default all management endpoints are **enabled** (except `shutdown`). You don't have to do anything extra to enable them.
 
 #### Enabling Individual Endpoints
+
 If you want to enable individual endpoints, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
 
 ~~~properties
@@ -290,7 +318,7 @@ Since the `shutdown` endpoint is **enabled** now, it is automatically **exposed*
 
 ![Shutdown Endpoint Enabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/3fa9152a-ea61-4799-a0fc-b4f65191ccce)
 
-### Quick note about Spring's Auto Configuration.
+#### Quick note about Spring's Auto Configuration.
 
 If `spring-boot-dev-tools` dependency is available in the classpath, then you can observe the below CONDITION EVALUATION DELTA in the console log after enabling the `shutdown` endpoint.
 

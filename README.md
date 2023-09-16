@@ -254,13 +254,11 @@ depends on the `management.server.port` property configuration.
 
 ### Enabling/Disabling Endpoints
 
-#### Enabling Endpoints
-
-##### Enabling All Endpoints
+#### Enabling All Endpoints
 
 By default all management endpoints are **enabled** (except `shutdown`). You don't have to do anything extra to enable them.
 
-##### Enabling Individual Endpoints
+#### Enabling Individual Endpoints
 If you want to enable individual endpoints, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
 
 ~~~properties
@@ -271,7 +269,7 @@ Since the `shutdown` endpoint is **enabled** now, it is automatically **exposed*
 
 ![Shutdown Endpoint Enabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/3fa9152a-ea61-4799-a0fc-b4f65191ccce)
 
-#### Quick note about Spring's Auto Configuration.
+### Quick note about Spring's Auto Configuration.
 
 If `spring-boot-dev-tools` dependency is available in the classpath, then you can observe the below CONDITION EVALUATION DELTA in the console log after enabling the `shutdown` endpoint.
 
@@ -309,9 +307,7 @@ Unconditional classes:
 
 Since we enabled the `shutdown` endpoint in the `application.properties`, that triggered the `ShutdownEndpointAutoConfiguration` which then created the `ShutdownEndpoint` bean automatically.
 
-#### Disabling Endpoints
-
-##### Disabling All Endpoints
+#### Disabling All Endpoints
 
 If you want to disable all the endpoints, you can use the `management.endpoints.enabled-by-default` property as below.
 
@@ -321,7 +317,7 @@ management.endpoints.enabled-by-default=false
 
 *Note: A **disabled** endpoint will not be exposed neither over **JMX** nor over **HTTP**.*
 
-##### Disabling Individual Endpoints
+#### Disabling Individual Endpoints
 
 If you want to disable an individual endpoint, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property as below.
 

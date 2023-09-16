@@ -17,52 +17,15 @@ TOC
 ===
 
 * [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
-    * [Requirements](#requirements)
-    * [Run Locally](#run-locally)
     * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
     * [Complete Reference](#complete-reference)
+    * [Requirements](#requirements)
+    * [Run Locally](#run-locally)
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Starting the Project and Observe Console Log](#starting-the-project-and-observe-console-log)
         * [Access Various Endpoints](#access-various-endpoints)
-    * [Commit-01 :sparkles:](#commit-01-sparkles)
-        * [Customizing JMX Domain](#customizing-jmx-domain)
-        * [Customizing the Management Server Port](#customizing-the-management-server-port)
-        * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
-        * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-    * [Commit-02:sparkles:](#commit-02sparkles)
-        * [Enabling All Endpoints](#enabling-all-endpoints)
-        * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-        * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-        * [Disabling All Endpoints](#disabling-all-endpoints)
-        * [Disabling Individual Endpoints](#disabling-individual-endpoints)
-
-
-## Requirements
-
-* OpenJDK 17+
-* Apache Maven 3.9.4+
-
-## Run Locally
-
-Clone the project
-
-```bash
-git clone https://github.com/kumar-github/spring-boot-actuator-demo
-```
-
-Go to the project root directory
-
-```bash
-cd spring-boot-actuator-demo
-```
-
-Start the service
-
-```bash
-./mvnw spring-boot:run
-```
-
+     
 <br/>
 
 ---
@@ -72,6 +35,7 @@ Start the service
 ---
 
 <br/>
+     
 
 ## Few things about Spring Boot Actuator
 
@@ -104,6 +68,52 @@ For example, by default, the health endpoint is mapped to `/actuator/health`.
 
 <br/>
 
+## Requirements
+
+* OpenJDK 17+
+* Apache Maven 3.9.4+
+
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/kumar-github/spring-boot-actuator-demo
+```
+
+Go to the project root directory
+
+```bash
+cd spring-boot-actuator-demo
+```
+
+Start the service
+
+```bash
+./mvnw spring-boot:run
+```
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
 ## Commit-00 :sparkles:
 
 *This is the Initial Commit.*
@@ -115,8 +125,7 @@ For example, by default, the health endpoint is mapped to `/actuator/health`.
 | 3. Hit the actuator endpoints over **HTTP**.                  | :white_check_mark: |
 | 4. Talk about `Health` endpoint.                              | :white_check_mark: |
 | 5. Access the actuator endpoints over **JMX** using jconsole. | :white_check_mark: |
-| 6. Talk about `Shutdown` endpoint.                            | :white_check_mark: |
-| 7. Talk briefly about `Info` endpoint.                        | :white_check_mark: |
+| 6. Talk briefly about `Info` endpoint.                        | :white_check_mark: |
 
 ### Project Creation
 
@@ -128,8 +137,6 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 *Note: `spring-boot-devtools` is not mandatory but i am using here because of the live reload feature which will save some development time.*
 
-
-
 ### Starting the Project and Observe Console Log
 
 At this point, the application can be started and accessed on `http://localhost:9090`. Though accessing `http://localhost:9090` will give you a `Whitelabel Error Page` but that is understandable since we did not map any controller to handle the request.
@@ -139,8 +146,6 @@ But we can find the below line logged in the console which is the proof that act
 ```console
 Exposing 1 endpoint(s) beneath base path '/actuator'
 ```
-
-
 
 ### Access Various Endpoints
 
@@ -179,12 +184,9 @@ Besides, you can access all the endpoints over **JMX** using `jconsole` from you
 
 *Note: Compared to **HTTP**, **JMX** is considered to be secure and all the endpoints are exposed by default. Below is the sample screenshot of the endpoints exposed via **JMX**.*
 
-![Endpoints Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/fa21802c-67d7-4a9c-a66f-415e7a896ecb)
-
+![Endpoints Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/f192df0d-59cb-4a32-8f55-e7c031ee6e59)
 
 You can access the individual endpoints like `beans`, `health`, `info` etc here.
-
-*Note: The `shutdown` endpoint is also exposed here by default. But in **HTTP** we need to enable and expose it manually.*
 
 *Note: Spend some time exploring few endpoints like `beans`, `health`, `info` etc.*
 

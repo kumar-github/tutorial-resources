@@ -30,14 +30,14 @@ TOC
         * [Customizing the Management Server Port](#customizing-the-management-server-port)
         * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
         * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-  * [Commit-02:sparkles:](#commit-02sparkles)
-      * [Enabling All Endpoints](#enabling-all-endpoints)
-      * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-      * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-      * [Disabling All Endpoints](#disabling-all-endpoints)
-      * [Disabling Individual Endpoints](#disabling-individual-endpoints)
-  * [Commit-03:sparkles:](#commit-03sparkles)
-      * [Commented Out Previous Configs](#commented-out-previous-configs)
+    * [Commit-02:sparkles:](#commit-02sparkles)
+        * [Enabling All Endpoints](#enabling-all-endpoints)
+        * [Enabling Individual Endpoints](#enabling-individual-endpoints)
+        * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
+        * [Disabling All Endpoints](#disabling-all-endpoints)
+        * [Disabling Individual Endpoints](#disabling-individual-endpoints)
+    * [Commit-03:sparkles:](#commit-03sparkles)
+        * [Commented Out Previous Configs](#commented-out-previous-configs)
 
 <br/>
 

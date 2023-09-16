@@ -157,3 +157,75 @@ You can access the individual endpoints like `beans`, `health`, `info` etc here.
 ---
 
 <br/>
+
+## Commit-01 :sparkles:
+
+| **Agenda for this commit**                  | Covered?           |
+| --------------------------------------------| :--:               |
+| 1. Customizing JMX Domain.                  | :white_check_mark: |
+| 2. Customizing Management Server Base Path. | :white_check_mark: |
+| 3. Customizing the Management Server Port.  | :white_check_mark: |
+| 4. Customizing the Web Endpoints Base Path. | :white_check_mark: |
+
+### Customizing JMX Domain
+
+By default, Spring Boot exposes all management endpoints as **JMX** MBeans under the `org.springframework.boot` (except `shutdown`) domain. You can customize the **JMX** domain under which endpoints are exposed using the `management.endpoints.jmx.domain` property as below.
+
+```properties
+management.endpoints.jmx.domain=tech.badprogrammer.app
+```
+
+*Below is the sample screenshot after changing the **JMX** domain.*
+
+![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/6d371fad-e2eb-4b31-8338-d7202c02967a)
+
+### Customizing the Management Server Port
+
+By default management endpoints are exposed on the same HTTP port in which the service is running. But it is possible to expose them on a different HTTP port, using the `management.server.port` property as below.
+
+```properties
+management.server.port=9123
+```
+
+After changing the management server port like above, the way to access the endpoints over **HTTP** is as below
+
+```http
+http://localhost:9123/actuator
+```
+
+### Customizing the Management Server Base Path
+
+By default the *management server's base path* is configured to `/` and the *web endpoints base path* is configured to `actuator`. So the default way to access any endpoint over **HTTP** is the *management server base path* followed by the *web endpoints base path* which is `/actuator`
+
+If needed, the management server's base path can be configured using the `management.server.base-path` property as below
+
+```properties
+management.server.base-path=/management
+```
+
+After changing the management server base path like above, the way to access the endpoints over **HTTP** is as below
+
+```http
+http://localhost:9123/management/actuator
+```
+*Note: The management sever base path change will work only if a custom management server port is configured.*
+
+### Customizing the Web Endpoints Base Path
+
+By default all the web endpoints are grouped under `/actuator` endpoint. But sometimes, it is useful to customize the prefix of the endpoints. For example, our application might already use `/actuator` for another purpose. We can use the `management.endpoints.web.base-path` property to change the prefix for the web endpoint as  below.
+
+```properties
+management.endpoints.web.base-path=/admin
+```
+*Note: The above path is relative to the servlet context path when the management server is sharing the main server port and relative to the management server base path when a separate management server port is configured.*
+
+After configuring the web endpoints base path like above, the endpoints can be accessed by either
+
+```http
+http://localhost:9090/admin
+```
+or
+```http
+http://localhost:9123/management/admin
+```
+depends on the `management.server.port` property configuration.

@@ -24,7 +24,13 @@ TOC
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
-        * [Access Various Endpoints](#access-various-endpoints)
+        * [Access Various Endpoints](#access-various-endpoints)     
+    * [Commit-01 :sparkles:](#commit-01-sparkles)
+        * [Customizing JMX Domain](#customizing-jmx-domain)
+        * [Customizing the Management Server Port](#customizing-the-management-server-port)
+        * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
+        * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
+
      
 <br/>
 
@@ -221,7 +227,8 @@ management.endpoints.jmx.domain=tech.badprogrammer.app
 
 *Below is the sample screenshot after changing the **JMX** domain.*
 
-![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/6d371fad-e2eb-4b31-8338-d7202c02967a)
+![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/3c756d7d-ebb6-4c83-a7f1-a0f45b123d65)
+
 
 ### Customizing the Management Server Port
 

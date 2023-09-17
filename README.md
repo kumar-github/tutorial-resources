@@ -38,6 +38,8 @@ TOC
         * [Disabling Individual Endpoints](#disabling-individual-endpoints)
     * [Commit-03:sparkles:](#commit-03sparkles)
         * [Commented Out Previous Configs](#commented-out-previous-configs)
+    * [Commit-04:sparkles:](#commit-04sparkles)
+        * [Include All Endpoints and Exclude Selectively](#include-all-endpoints-and-exclude-selectively)
 
 <br/>
 
@@ -419,6 +421,33 @@ After disabling `health`, `info`, `beans` endpoints, they are not exposed. *Chec
 
 ### Commented Out Previous Configs
 Commented the previously made config changes just to be clear.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-04:sparkles:
+
+| **Agenda for this commit**              |      Covered?      |
+|-----------------------------------------|:------------------:|
+| 1. Include All and Exclude Selectively. | :white_check_mark: |
+
+### Include All Endpoints and Exclude Selectively
+We can use the `management.endpoints.web.exposure.include` and `management.endpoints.web.exposure.exclude` properties together to have more fine-grained control in what to expose and what not to like below.
+
+```properties
+management.endpoints.web.exposure.include=*
+management.endpoints.web.exposure.exclude=beans
+```
+As `management.endpoints.web.exposure.exclude` has higher priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans` endpoint.
 
 :question:**Any Questions**:question:
 

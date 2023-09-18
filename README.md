@@ -500,7 +500,7 @@ Any (*enabled*) endpoint can be exposed over **HTTP** by using the `management.e
 management.endpoints.web.exposure.include=beans,health,info
 ~~~
 
-![HTTP Endpoints beans-health-info Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/eb7eeca0-2db4-41a3-88f1-0b3a66572ff8)
+![HTTP Endpoints beans-health-info Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/96629de9-993f-4dfb-8380-2c8eacb0d85a)
 
 ### Hiding All HTTP Endpoints
 

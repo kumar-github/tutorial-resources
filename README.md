@@ -492,93 +492,6 @@ management.endpoints.web.exposure.include=*
 
 ![All HTTP Endpoints Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/037b4cc9-5037-4da4-88c4-e937a0760e28)
 
-```json
-{
-   "_links":{
-      "self":{
-         "href":"http://localhost:9090/actuator",
-         "templated":false
-      },
-      "beans":{
-         "href":"http://localhost:9090/actuator/beans",
-         "templated":false
-      },
-      "caches-cache":{
-         "href":"http://localhost:9090/actuator/caches/{cache}",
-         "templated":true
-      },
-      "caches":{
-         "href":"http://localhost:9090/actuator/caches",
-         "templated":false
-      },
-      "health":{
-         "href":"http://localhost:9090/actuator/health",
-         "templated":false
-      },
-      "health-path":{
-         "href":"http://localhost:9090/actuator/health/{*path}",
-         "templated":true
-      },
-      "info":{
-         "href":"http://localhost:9090/actuator/info",
-         "templated":false
-      },
-      "conditions":{
-         "href":"http://localhost:9090/actuator/conditions",
-         "templated":false
-      },
-      "configprops-prefix":{
-         "href":"http://localhost:9090/actuator/configprops/{prefix}",
-         "templated":true
-      },
-      "configprops":{
-         "href":"http://localhost:9090/actuator/configprops",
-         "templated":false
-      },
-      "env":{
-         "href":"http://localhost:9090/actuator/env",
-         "templated":false
-      },
-      "env-toMatch":{
-         "href":"http://localhost:9090/actuator/env/{toMatch}",
-         "templated":true
-      },
-      "loggers":{
-         "href":"http://localhost:9090/actuator/loggers",
-         "templated":false
-      },
-      "loggers-name":{
-         "href":"http://localhost:9090/actuator/loggers/{name}",
-         "templated":true
-      },
-      "heapdump":{
-         "href":"http://localhost:9090/actuator/heapdump",
-         "templated":false
-      },
-      "threaddump":{
-         "href":"http://localhost:9090/actuator/threaddump",
-         "templated":false
-      },
-      "metrics":{
-         "href":"http://localhost:9090/actuator/metrics",
-         "templated":false
-      },
-      "metrics-requiredMetricName":{
-         "href":"http://localhost:9090/actuator/metrics/{requiredMetricName}",
-         "templated":true
-      },
-      "scheduledtasks":{
-         "href":"http://localhost:9090/actuator/scheduledtasks",
-         "templated":false
-      },
-      "mappings":{
-         "href":"http://localhost:9090/actuator/mappings",
-         "templated":false
-      }
-   }
-}
-```
-
 ### Exposing Individual HTTP Endpoints
 
 Any (*enabled*) endpoint can be exposed over **HTTP** by using the `management.endpoints.web.exposure.include` property as below.
@@ -588,33 +501,6 @@ management.endpoints.web.exposure.include=beans,health,info
 ~~~
 
 ![HTTP Endpoints beans-health-info Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/eb7eeca0-2db4-41a3-88f1-0b3a66572ff8)
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    },
-    "beans": {
-      "href": "http://localhost:9090/actuator/beans",
-      "templated": false
-    },
-    "health-path": {
-      "href": "http://localhost:9090/actuator/health/{*path}",
-      "templated": true
-    },
-    "health": {
-      "href": "http://localhost:9090/actuator/health",
-      "templated": false
-    },
-    "info": {
-      "href": "http://localhost:9090/actuator/info",
-      "templated": false
-    }
-  }
-}
-```
 
 ### Hiding All HTTP Endpoints
 
@@ -626,17 +512,6 @@ management.endpoints.web.exposure.exclude=*
 
 ![All HTTP Endpoints Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/84153c3c-7a51-4b69-bba4-07321d4a7aa9)
 
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    }
-  }
-}
-```
-
 ### Hiding Individual HTTP Endpoints
 
 To hide (not expose) individual endpoints over **HTTP**, use the `management.endpoints.web.exposure.exclude` property as below.
@@ -647,17 +522,6 @@ management.endpoints.web.exposure.exclude=health
 
 ![HTTP health Endpoint Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/b793c50e-0905-45a6-8284-00e67f7a1f7b)
 
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    }
-  }
-}
-```
-
 Both `management.endpoints.web.exposure.exclude` and `management.endpoints.web.exposure.include` properties can be used together to have more fine-grained control over what to expose and what not to like below
 
 ```properties
@@ -666,77 +530,6 @@ management.endpoints.web.exposure.exclude=beans,health,info
 ```
 
 ![HTTP Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3910ea39-2a73-4106-927e-cad4d1832c71)
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    },
-    "caches-cache": {
-      "href": "http://localhost:9090/actuator/caches/{cache}",
-      "templated": true
-    },
-    "caches": {
-      "href": "http://localhost:9090/actuator/caches",
-      "templated": false
-    },
-    "conditions": {
-      "href": "http://localhost:9090/actuator/conditions",
-      "templated": false
-    },
-    "configprops": {
-      "href": "http://localhost:9090/actuator/configprops",
-      "templated": false
-    },
-    "configprops-prefix": {
-      "href": "http://localhost:9090/actuator/configprops/{prefix}",
-      "templated": true
-    },
-    "env": {
-      "href": "http://localhost:9090/actuator/env",
-      "templated": false
-    },
-    "env-toMatch": {
-      "href": "http://localhost:9090/actuator/env/{toMatch}",
-      "templated": true
-    },
-    "loggers": {
-      "href": "http://localhost:9090/actuator/loggers",
-      "templated": false
-    },
-    "loggers-name": {
-      "href": "http://localhost:9090/actuator/loggers/{name}",
-      "templated": true
-    },
-    "heapdump": {
-      "href": "http://localhost:9090/actuator/heapdump",
-      "templated": false
-    },
-    "threaddump": {
-      "href": "http://localhost:9090/actuator/threaddump",
-      "templated": false
-    },
-    "metrics": {
-      "href": "http://localhost:9090/actuator/metrics",
-      "templated": false
-    },
-    "metrics-requiredMetricName": {
-      "href": "http://localhost:9090/actuator/metrics/{requiredMetricName}",
-      "templated": true
-    },
-    "scheduledtasks": {
-      "href": "http://localhost:9090/actuator/scheduledtasks",
-      "templated": false
-    },
-    "mappings": {
-      "href": "http://localhost:9090/actuator/mappings",
-      "templated": false
-    }
-  }
-}
-```
 
 As `management.endpoints.web.exposure.exclude` has more priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans`, `health`, `info` endpoints.
 

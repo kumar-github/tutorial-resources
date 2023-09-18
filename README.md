@@ -17,37 +17,37 @@ TOC
 ===
 
 * [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
-    * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
-    * [Complete Reference](#complete-reference)
-    * [Requirements](#requirements)
-    * [Run Locally](#run-locally)
-    * [Commit-00 :sparkles:](#commit-00-sparkles)
-        * [Project Creation](#project-creation)
-        * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
-        * [Access Various Endpoints](#access-various-endpoints)
-    * [Commit-01 :sparkles:](#commit-01-sparkles)
-        * [Customizing JMX Domain](#customizing-jmx-domain)
-        * [Customizing the Management Server Port](#customizing-the-management-server-port)
-        * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
-        * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-    * [Commit-02:sparkles:](#commit-02sparkles)
-        * [Enabling All Endpoints](#enabling-all-endpoints)
-        * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-        * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-        * [Disabling All Endpoints](#disabling-all-endpoints)
-        * [Disabling Individual Endpoints](#disabling-individual-endpoints)
-    * [Commit-03:sparkles:](#commit-03sparkles)
-        * [Commented Out Previous Configs](#commented-out-previous-configs)
-    * [Commit-04:sparkles:](#commit-04sparkles)
-        * [Exposing JMX Endpoints](#exposing-jmx-endpoints)
-        * [Hiding All JMX Endpoints](#hiding-all-jmx-endpoints)
-        * [Hiding Individual JMX Endpoints](#hiding-individual-jmx-endpoints)
-        * [Exposing HTTP Endpoints](#exposing-http-endpoints)
-        * [Exposing All HTTP Endpoints](#exposing-all-http-endpoints)
-        * [Exposing Individual HTTP Endpoints](#exposing-individual-http-endpoints)
-        * [Hiding All HTTP Endpoints](#hiding-all-http-endpoints)
-        * [Hiding Individual HTTP Endpoints](hiding-individual-http-endpoints)
-
+  * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
+  * [Complete Reference](#complete-reference)
+  * [Requirements](#requirements)
+  * [Run Locally](#run-locally)
+  * [Commit-00 :sparkles:](#commit-00-sparkles)
+    * [Project Creation](#project-creation)
+    * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
+    * [Talk About Accessing Endpoints Over HTTP and JMX](#talk-about-accessing-endpoints-over-http-and-jmx)
+  * [Commit-01 :sparkles:](#commit-01-sparkles)
+    * [Customizing JMX Domain](#customizing-jmx-domain)
+    * [Customizing the Management Server Port](#customizing-the-management-server-port)
+    * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
+    * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
+  * [Commit-02 :sparkles:](#commit-02-sparkles)
+    * [Enabling All Endpoints](#enabling-all-endpoints)
+    * [Enabling Individual Endpoints](#enabling-individual-endpoints)
+    * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
+    * [Disabling All Endpoints](#disabling-all-endpoints)
+    * [Disabling Individual Endpoints](#disabling-individual-endpoints)
+  * [Commit-03 :sparkles:](#commit-03-sparkles)
+    * [Removed All the Previous Configs](#removed-all-the-previous-configs)
+  * [Commit-04 :sparkles:](#commit-04-sparkles)
+    * [Exposing JMX Endpoints](#exposing-jmx-endpoints)
+    * [Hiding All JMX Endpoints](#hiding-all-jmx-endpoints)
+    * [Hiding Individual JMX Endpoints](#hiding-individual-jmx-endpoints)
+    * [Exposing HTTP Endpoints](#exposing-http-endpoints)
+    * [Exposing All HTTP Endpoints](#exposing-all-http-endpoints)
+    * [Exposing Individual HTTP Endpoints](#exposing-individual-http-endpoints)
+    * [Hiding All HTTP Endpoints](#hiding-all-http-endpoints)
+    * [Hiding Individual HTTP Endpoints](#hiding-individual-http-endpoints)
+  
 <br/>
 
 ---
@@ -140,12 +140,12 @@ Start the service
 
 | **Agenda for this commit**                                    |      Covered?      |
 |---------------------------------------------------------------|:------------------:|
-| 1. Project creation with needed dependencies.                 | :white_check_mark: |
+| 1. Project creation with required dependencies.               | :white_check_mark: |
 | 2. Observe actuator related console log.                      | :white_check_mark: |
-| 3. Hit the actuator endpoints over **HTTP**.                  | :white_check_mark: |
-| 4. Talk about `Health` endpoint.                              | :white_check_mark: |
+| 3. Access the actuator endpoints over **HTTP**.               | :white_check_mark: |
+| 4. Talk about `health` endpoint.                              | :white_check_mark: |
 | 5. Access the actuator endpoints over **JMX** using jconsole. | :white_check_mark: |
-| 6. Talk briefly about `Info` endpoint.                        | :white_check_mark: |
+| 6. Talk briefly about `info` endpoint.                        | :white_check_mark: |
 
 ### Project Creation
 
@@ -167,7 +167,7 @@ But we can find the below line logged in the console which is the proof that act
 Exposing 1 endpoint(s) beneath base path '/actuator'
 ```
 
-### Access Various Endpoints
+### Talk About Accessing Endpoints Over HTTP and JMX
 
 Once the service is started, open your browser and hit `http://localhost:9090/actuator`. You will be getting a response that is similar to this
 
@@ -190,7 +190,7 @@ Once the service is started, open your browser and hit `http://localhost:9090/ac
 }
 ```
 
-The `health` endpoint is the only one that is exposed by default over **HTTP**. Though the other endpoints are enabled, they are **not exposed** over ***HTTP*** (but ***exposed*** over **JMX**) because of security reasons. You can access the `health` endpoint by clicking the link or hitting `http://localhost:9090/actuator/health` which will give you the below response.
+The `health` endpoint is the only one that is exposed over **HTTP** by default. Though other endpoints are enabled, they are **not exposed** over ***HTTP*** (but ***exposed*** over **JMX**) because of security reasons. You can access the `health` endpoint through `http://localhost:9090/actuator/health` which will give you the below response.
 
 ```json
 {
@@ -314,7 +314,7 @@ depends on the `management.server.port` property configuration.
 
 <br/>
 
-## Commit-02:sparkles:
+## Commit-02 :sparkles:
 
 | **Agenda for this commit**                            |      Covered?      |
 |-------------------------------------------------------|:------------------:|
@@ -330,7 +330,7 @@ By default all management endpoints are **enabled** (except `shutdown`). You don
 
 ### Enabling Individual Endpoints
 
-If you want to enable individual endpoints, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
+To enable individual endpoints, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
 
 ~~~properties
 management.endpoint.shutdown.enabled=true
@@ -380,7 +380,7 @@ Since we enabled the `shutdown` endpoint in the `application.properties`, that t
 
 ### Disabling All Endpoints
 
-If you want to disable all the endpoints, you can use the `management.endpoints.enabled-by-default` property as below.
+To disable all the endpoints, you can use the `management.endpoints.enabled-by-default` property as below.
 
 ~~~properties
 management.endpoints.enabled-by-default=false
@@ -396,7 +396,7 @@ After setting the `management.endpoints.enabled-by-default` property to `false`,
 
 ### Disabling Individual Endpoints
 
-If you want to disable an individual endpoint, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property as below.
+To disable an individual endpoint, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property as below.
 
 ~~~properties
 management.endpoint.health.enabled=false
@@ -420,14 +420,14 @@ After disabling `health`, `info`, `beans` endpoints, they are not exposed. *Chec
 
 <br/>
 
-## Commit-03:sparkles:
+## Commit-03 :sparkles:
 
-| **Agenda for this commit**         |      Covered?      |
-|------------------------------------|:------------------:|
-| 1. Commented out previous configs. | :white_check_mark: |
+| **Agenda for this commit**            |      Covered?      |
+|---------------------------------------|:------------------:|
+| 1. Removing all the previous configs. | :white_check_mark: |
 
-### Commented Out Previous Configs
-Commented the previously made config changes just to be clear.
+### Removed All the Previous Configs
+Removed all the previously made config changes so that we can start fresh.
 
 :question:**Any Questions**:question:
 
@@ -441,18 +441,18 @@ Commented the previously made config changes just to be clear.
 
 <br/>
 
-## Commit-04:sparkles:
+## Commit-04 :sparkles:
 
-| **Agenda for this commit**              |      Covered?      |
-|-----------------------------------------|:------------------:|
-| 1. Exposing JMX Endpoints. | :white_check_mark: |
-| 2. Hiding All JMX Endpoints. | :white_check_mark: |
-| 3. Hiding Individual JMX Endpoints. | :white_check_mark: |
-| 4. Exposing HTTP Endpoints. | :white_check_mark: |
-| 5. Exposing All HTTP Endpoints. | :white_check_mark: |
+| **Agenda for this commit**             |      Covered?      |
+|----------------------------------------|:------------------:|
+| 1. Exposing JMX Endpoints.             | :white_check_mark: |
+| 2. Hiding All JMX Endpoints.           | :white_check_mark: |
+| 3. Hiding Individual JMX Endpoints.    | :white_check_mark: |
+| 4. Exposing HTTP Endpoints.            | :white_check_mark: |
+| 5. Exposing All HTTP Endpoints.        | :white_check_mark: |
 | 6. Exposing Individual HTTP Endpoints. | :white_check_mark: |
-| 7. Hiding All HTTP Endpoints. | :white_check_mark: |
-| 8. Hiding Individual HTTP Endpoints. | :white_check_mark: |
+| 7. Hiding All HTTP Endpoints.          | :white_check_mark: |
+| 8. Hiding Individual HTTP Endpoints.   | :white_check_mark: |
 
 ### Exposing JMX Endpoints
 
@@ -490,8 +490,6 @@ management.endpoints.web.exposure.include=*
 {"_links":{"self":{"href":"http://localhost:9090/actuator","templated":false},"beans":{"href":"http://localhost:9090/actuator/beans","templated":false},"caches-cache":{"href":"http://localhost:9090/actuator/caches/{cache}","templated":true},"caches":{"href":"http://localhost:9090/actuator/caches","templated":false},"health":{"href":"http://localhost:9090/actuator/health","templated":false},"health-path":{"href":"http://localhost:9090/actuator/health/{*path}","templated":true},"info":{"href":"http://localhost:9090/actuator/info","templated":false},"conditions":{"href":"http://localhost:9090/actuator/conditions","templated":false},"configprops-prefix":{"href":"http://localhost:9090/actuator/configprops/{prefix}","templated":true},"configprops":{"href":"http://localhost:9090/actuator/configprops","templated":false},"env":{"href":"http://localhost:9090/actuator/env","templated":false},"env-toMatch":{"href":"http://localhost:9090/actuator/env/{toMatch}","templated":true},"loggers":{"href":"http://localhost:9090/actuator/loggers","templated":false},"loggers-name":{"href":"http://localhost:9090/actuator/loggers/{name}","templated":true},"heapdump":{"href":"http://localhost:9090/actuator/heapdump","templated":false},"threaddump":{"href":"http://localhost:9090/actuator/threaddump","templated":false},"metrics":{"href":"http://localhost:9090/actuator/metrics","templated":false},"metrics-requiredMetricName":{"href":"http://localhost:9090/actuator/metrics/{requiredMetricName}","templated":true},"scheduledtasks":{"href":"http://localhost:9090/actuator/scheduledtasks","templated":false},"mappings":{"href":"http://localhost:9090/actuator/mappings","templated":false}}}
 ```
 
-
-
 ### Exposing Individual HTTP Endpoints
 
 Any (*enabled*) endpoint can be exposed over **HTTP** by using the `management.endpoints.web.exposure.include` property as below.
@@ -504,8 +502,6 @@ management.endpoints.web.exposure.include=beans,health,info
 {"_links":{"self":{"href":"http://localhost:9090/actuator","templated":false},"beans":{"href":"http://localhost:9090/actuator/beans","templated":false},"health-path":{"href":"http://localhost:9090/actuator/health/{*path}","templated":true},"health":{"href":"http://localhost:9090/actuator/health","templated":false},"info":{"href":"http://localhost:9090/actuator/info","templated":false}}}
 ```
 
-
-
 ### Hiding All HTTP Endpoints
 
 To hide (not expose) all endpoints over **HTTP**, use the `management.endpoints.web.exposure.exclude` property as below.
@@ -517,8 +513,6 @@ management.endpoints.web.exposure.exclude=*
 ```json
 {"_links":{"self":{"href":"http://localhost:9090/actuator","templated":false}}}
 ```
-
-
 
 ### Hiding Individual HTTP Endpoints
 
@@ -536,14 +530,14 @@ Both `management.endpoints.web.exposure.exclude` and `management.endpoints.web.e
 
 ```properties
 management.endpoints.web.exposure.include=*
-management.endpoints.web.exposure.exclude=beans
+management.endpoints.web.exposure.exclude=beans,health,info
 ```
 
 ```json
 {"_links":{"self":{"href":"http://localhost:9090/actuator","templated":false},"caches-cache":{"href":"http://localhost:9090/actuator/caches/{cache}","templated":true},"caches":{"href":"http://localhost:9090/actuator/caches","templated":false},"conditions":{"href":"http://localhost:9090/actuator/conditions","templated":false},"configprops":{"href":"http://localhost:9090/actuator/configprops","templated":false},"configprops-prefix":{"href":"http://localhost:9090/actuator/configprops/{prefix}","templated":true},"env":{"href":"http://localhost:9090/actuator/env","templated":false},"env-toMatch":{"href":"http://localhost:9090/actuator/env/{toMatch}","templated":true},"loggers":{"href":"http://localhost:9090/actuator/loggers","templated":false},"loggers-name":{"href":"http://localhost:9090/actuator/loggers/{name}","templated":true},"heapdump":{"href":"http://localhost:9090/actuator/heapdump","templated":false},"threaddump":{"href":"http://localhost:9090/actuator/threaddump","templated":false},"metrics":{"href":"http://localhost:9090/actuator/metrics","templated":false},"metrics-requiredMetricName":{"href":"http://localhost:9090/actuator/metrics/{requiredMetricName}","templated":true},"scheduledtasks":{"href":"http://localhost:9090/actuator/scheduledtasks","templated":false},"mappings":{"href":"http://localhost:9090/actuator/mappings","templated":false}}}
 ```
 
-As `management.endpoints.web.exposure.exclude` has more priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans` endpoint.
+As `management.endpoints.web.exposure.exclude` has more priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans`, `health`, `info` endpoints.
 
 :question:**Any Questions**:question:
 

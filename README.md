@@ -466,13 +466,17 @@ To **hide** (not expose) all the endpoints that are **exposed** over **JMX**, us
 management.endpoints.jmx.exposure.exclude=*
 ~~~
 
+![All JMX Endpoints Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/98d960ec-51ea-4da5-a766-4a1e42bab72a)
+
 ### Hiding Individual JMX Endpoints
 
-To **hide** (not expose) an individual endpoint that is **exposed** over **JMX**, use the `management.endpoints.jmx.exposure.exclude` property as below.
+To **hide** (not expose) individual endpoints that are **exposed** over **JMX**, use the `management.endpoints.jmx.exposure.exclude` property as below.
 
 ~~~properties
-management.endpoints.jmx.exposure.exclude=health,info
+management.endpoints.jmx.exposure.exclude=beans,health,info
 ~~~
+
+![JMX Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3ad8cf00-7e3c-4b18-9fb6-7adae06462c6)
 
 ### Exposing HTTP Endpoints
 
@@ -485,6 +489,8 @@ To expose all the (*enabled*) endpoints over **HTTP**, use the `management.endpo
 ~~~properties
 management.endpoints.web.exposure.include=*
 ~~~
+
+![All HTTP Endpoints Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/037b4cc9-5037-4da4-88c4-e937a0760e28)
 
 ```json
 {
@@ -581,6 +587,8 @@ Any (*enabled*) endpoint can be exposed over **HTTP** by using the `management.e
 management.endpoints.web.exposure.include=beans,health,info
 ~~~
 
+![HTTP Endpoints beans-health-info Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/eb7eeca0-2db4-41a3-88f1-0b3a66572ff8)
+
 ```json
 {
   "_links": {
@@ -616,6 +624,8 @@ To hide (not expose) all endpoints over **HTTP**, use the `management.endpoints.
 management.endpoints.web.exposure.exclude=*
 ~~~
 
+![All HTTP Endpoints Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/84153c3c-7a51-4b69-bba4-07321d4a7aa9)
+
 ```json
 {
   "_links": {
@@ -635,6 +645,8 @@ To hide (not expose) individual endpoints over **HTTP**, use the `management.end
 management.endpoints.web.exposure.exclude=health
 ~~~
 
+![HTTP health Endpoint Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/b793c50e-0905-45a6-8284-00e67f7a1f7b)
+
 ```json
 {
   "_links": {
@@ -652,6 +664,8 @@ Both `management.endpoints.web.exposure.exclude` and `management.endpoints.web.e
 management.endpoints.web.exposure.include=*
 management.endpoints.web.exposure.exclude=beans,health,info
 ```
+
+![HTTP Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3910ea39-2a73-4106-927e-cad4d1832c71)
 
 ```json
 {

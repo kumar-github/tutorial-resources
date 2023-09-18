@@ -13,8 +13,8 @@ This project will walk you through a simple demo of Spring Boot Actuator. It wil
 
 <br/>
 
-TOC
-===
+Table Of Contents
+=================
 
 * [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
   * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)

@@ -49,6 +49,13 @@ Table Of Contents
     * [Hiding Individual HTTP Endpoints](#hiding-individual-http-endpoints)
   * [Commit-05 :sparkles:](#commit-05-sparkles)
     * [Reverted All the Previous Configs](#reverted-all-the-previous-configs)
+  * [Commit-06 :sparkles:](#commit-06-sparkles)
+    * [The Info Endpoint](#the-info-endpoint)
+    * [The Built-In Info Contributors](#the-built-in-info-contributors)
+    * [Exposing the info Endpoint](#exposing-the-info-endpoint)
+    * [Enabling Individual Endpoints Under Info Endpoint](#enabling-individual-endpoints-under-info-endpoint)
+    * [Adding Information to the env Endpoint](#adding-information-to-the-env-endpoint)
+    * [Writing Custom InfoContributors](#writing-custom-infocontributors)
 
 <br/>
 
@@ -570,14 +577,14 @@ Reverted all the previously made config changes so that we can start fresh.
 
 ## Commit-06 :sparkles:
 
-| **Agenda for this commit**         |      Covered?      |
-|------------------------------------|:------------------:|
-| 1. About `info` endpoint.          | :white_check_mark: |
-| 2. The Built-In Info Contributors. | :white_check_mark: |
-| 3. Expose `info` endpoint.         | :white_check_mark: |
-| 4. Enable Individual Endpoints Under Info Endpoint. | :white_check_mark: |
-| 5. Add Information to the env Endpoint. | :white_check_mark: |
-| 6. Writing Custom InfoContributors. | :white_check_mark: |
+| **Agenda for this commit**                            |      Covered?      |
+|-------------------------------------------------------|:------------------:|
+| 1. About `info` endpoint.                             | :white_check_mark: |
+| 2. The Built-In Info Contributors.                    | :white_check_mark: |
+| 3. Exposing the `info` endpoint.                      | :white_check_mark: |
+| 4. Enabling Individual Endpoints Under Info Endpoint. | :white_check_mark: |
+| 5. Adding Information to the env Endpoint.            | :white_check_mark: |
+| 6. Writing Custom InfoContributors.                   | :white_check_mark: |
 
 ### The Info Endpoint
 
@@ -595,7 +602,7 @@ The `info` endpoint is useful, if you want to expose information related to your
 
 *Note: All the above `InfoContributor`s are grouped under the `info` endpoint and can be enabled/disabled individually. We can also write our own custom `InfoContributor` to provide more detailed information.*
 
-### Expose `info` Endpoint
+### Exposing the info Endpoint
 
 Though the `info` endpoint is enabled by default, it is **not exposed** over **HTTP**. To expose the `info` endpoint over **HTTP** use the `management.endpoints.web.exposure.include` property as below.
 
@@ -607,12 +614,16 @@ Once exposed, we can access the `info` endpoint via the below url.
 
 `http://localhost:9090/actuator/info`
 
+```json
+{}
+```
+
 By default, the `info` endpoint returns an empty response. It is because either, the specific `InfoContributor` might be disabled or the pre-requisite is not met.
 
 The `build` and `git` endpoints (under the `info` endpoint) are enabled by default but it is not shown because the prerequisite for `BuildInfoContributor` and the `GitInfoContributor` is not met.
 The `env`, `java`, `os` endpoints (under the `info` endpoint) are not shown because they are not enabled by default.
 
-### Enable Individual Endpoints Under Info Endpoint
+### Enabling Individual Endpoints Under Info Endpoint
 
 To enable the `build` and `git` endpoints, we need to have `build-info.properties` and `git.properties` in the classpath. We are not going to talk about it in this tutorial.
 
@@ -654,7 +665,7 @@ After enabling the `env`, `java` and `os` endpoints, accessing the `info` endpoi
 
 We can see the `java` endpoint returns the *java runtime information* and the `os` endpoint returns the *os information*. The `env` endpoint is still missing because currently we did not have any information added under `env`.
 
-### Add Information to the env Endpoint
+### Adding Information to the env Endpoint
 
 To add information to the `env` endpoint, use the `info.*` property like below.
 
@@ -793,9 +804,57 @@ public class PersonalInfoContributor implements InfoContributor {
   @Override
   public void contribute(final Info.Builder builder) {
     builder.withDetails(
-      Map.of("personal",
+      Map.of("personalDetails",
         Map.of("githubUrl", "https://github.com/kumar-github/spring-boot-actuator-demo",
           "linkedInUrl", "https://www.linkedin.com/in/saravana-kumar-m")));
+  }
+}
+```
+
+Below is the response after adding the above custom info contributors.
+
+```json
+{
+  "env": {
+    "application": {
+      "name": "spring-boot-actuator-demo",
+      "description": "spring-boot-actuator-demo",
+      "encoding": "UTF-8",
+      "java": {
+        "version": "17.0.3"
+      }
+    }
+  },
+  "java": {
+    "version": "17.0.3",
+    "vendor": {
+      "name": "Eclipse Adoptium",
+      "version": "Temurin-17.0.3+7"
+    },
+    "runtime": {
+      "name": "OpenJDK Runtime Environment",
+      "version": "17.0.3+7"
+    },
+    "jvm": {
+      "name": "OpenJDK 64-Bit Server VM",
+      "vendor": "Eclipse Adoptium",
+      "version": "17.0.3+7"
+    }
+  },
+  "os": {
+    "name": "Mac OS X",
+    "version": "13.4.1",
+    "arch": "x86_64"
+  },
+  "personalDetails": {
+    "linkedInUrl": "https://www.linkedin.com/in/saravana-kumar-m",
+    "githubUrl": "https://github.com/kumar-github/spring-boot-actuator-demo"
+  },
+  "appDetails": {
+    "defaultProfiles": [
+      "default"
+    ],
+    "serverPort": "9090"
   }
 }
 ```

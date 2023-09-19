@@ -785,16 +785,6 @@ public InfoContributor appDetailsInfoContributor() {
 
 Approach-2
 ```java
-package tech.badprogrammer.springbootactuatordemo;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.info.Info;
-import org.springframework.boot.actuate.info.InfoContributor;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
-
-import java.util.Map;
-
 @Component
 public class PersonalInfoContributor implements InfoContributor {
 

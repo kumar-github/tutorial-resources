@@ -592,13 +592,13 @@ The `info` endpoint is useful, if you want to expose information related to your
 
 ### The Built-In Info Contributors
 
-| ID    | Name                         | Description                                                                | Prerequisites                                | Status   |
-|-------|------------------------------|----------------------------------------------------------------------------|----------------------------------------------|----------|
-| build | `BuildInfoContributor`       | Exposes build information.                                                 | A `META-INF/build-info.properties` resource. | Enabled  |
-| env   | `EnvironmentInfoContributor` | Exposes any property from the `Environment` whose name starts with *info*. | None.                                        | Disabled |
-| git   | `GitInfoContributor`         | Exposes git information.                                                   | A `git.properties` resource.                 | Enabled  |
-| java  | `JavaInfoContributor`        | Exposes Java runtime information.                                          | None.                                        | Disabled |
-| os    | `OsInfoContributor`          | Exposes Operating System information.                                      | None.                                        | Disabled |
+| ID    | Name                         | Description                                                                | Prerequisites                                | Default Status |
+|-------|------------------------------|----------------------------------------------------------------------------|----------------------------------------------|----------------|
+| build | `BuildInfoContributor`       | Exposes build information.                                                 | A `META-INF/build-info.properties` resource. | Enabled        |
+| env   | `EnvironmentInfoContributor` | Exposes any property from the `Environment` whose name starts with *info*. | None.                                        | Disabled       |
+| git   | `GitInfoContributor`         | Exposes git information.                                                   | A `git.properties` resource.                 | Enabled        |
+| java  | `JavaInfoContributor`        | Exposes Java runtime information.                                          | None.                                        | Disabled       |
+| os    | `OsInfoContributor`          | Exposes Operating System information.                                      | None.                                        | Disabled       |
 
 *Note: All the above `InfoContributor`s are grouped under the `info` endpoint and can be enabled/disabled individually. We can also write our own custom `InfoContributor` to provide more detailed information.*
 

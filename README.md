@@ -577,14 +577,14 @@ Reverted all the previously made config changes so that we can start fresh.
 
 ## Commit-06 :sparkles:
 
-| **Agenda for this commit**                            |      Covered?      |
-|-------------------------------------------------------|:------------------:|
-| 1. About `info` endpoint.                             | :white_check_mark: |
-| 2. The Built-In Info Contributors.                    | :white_check_mark: |
-| 3. Exposing the `info` endpoint.                      | :white_check_mark: |
-| 4. Enabling Individual Endpoints Under Info Endpoint. | :white_check_mark: |
-| 5. Adding Information to the env Endpoint.            | :white_check_mark: |
-| 6. Writing Custom InfoContributors.                   | :white_check_mark: |
+| **Agenda for this commit**                              |      Covered?      |
+|---------------------------------------------------------|:------------------:|
+| 1. About `info` endpoint.                               | :white_check_mark: |
+| 2. The Built-In Info Contributors.                      | :white_check_mark: |
+| 3. Exposing the `info` endpoint.                        | :white_check_mark: |
+| 4. Enabling Individual Endpoints Under `info` Endpoint. | :white_check_mark: |
+| 5. Adding Information to the `env` Endpoint.            | :white_check_mark: |
+| 6. Writing Custom InfoContributors.                     | :white_check_mark: |
 
 ### The Info Endpoint
 

@@ -715,7 +715,7 @@ After adding the above properties, we can see the below response.
 }
 ```
 
-*Note: If we use any build tools like *Gradle* or *Maven*, then instead of hard coding those values, we could expand the *info* properties at build time like below.*
+*Note: If we use any build tools like *Gradle* or *Maven*, then instead of hard coding these values, we could expand the *info* properties at build time like below.*
 
 ```properties
 info.env.application.name=@project.name@

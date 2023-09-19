@@ -47,7 +47,9 @@ Table Of Contents
     * [Exposing Individual HTTP Endpoints](#exposing-individual-http-endpoints)
     * [Hiding All HTTP Endpoints](#hiding-all-http-endpoints)
     * [Hiding Individual HTTP Endpoints](#hiding-individual-http-endpoints)
-  
+  * [Commit-05 :sparkles:](#commit-05-sparkles)
+    * [Reverted All the Previous Configs](#reverted-all-the-previous-configs)
+
 <br/>
 
 ---
@@ -138,14 +140,14 @@ Start the service
 
 *This is the Initial Commit.*
 
-| **Agenda for this commit**                                    |      Covered?      |
-|---------------------------------------------------------------|:------------------:|
-| 1. Project creation with required dependencies.               | :white_check_mark: |
-| 2. Observe actuator related console log.                      | :white_check_mark: |
-| 3. Access the actuator endpoints over **HTTP**.               | :white_check_mark: |
-| 4. Talk about `health` endpoint.                              | :white_check_mark: |
-| 5. Access the actuator endpoints over **JMX** using jconsole. | :white_check_mark: |
-| 6. Talk briefly about `info` endpoint.                        | :white_check_mark: |
+| **Agenda for this commit**                                      |      Covered?      |
+|-----------------------------------------------------------------|:------------------:|
+| 1. Project creation with required dependencies.                 | :white_check_mark: |
+| 2. Observe actuator related console log.                        | :white_check_mark: |
+| 3. Access the actuator endpoints over **HTTP**.                 | :white_check_mark: |
+| 4. Talk about `health` endpoint.                                | :white_check_mark: |
+| 5. Access the actuator endpoints over **JMX** using `jconsole`. | :white_check_mark: |
+| 6. Talk briefly about `info` endpoint.                          | :white_check_mark: |
 
 ### Project Creation
 
@@ -226,12 +228,12 @@ You can access the individual endpoints like `beans`, `health`, `info` etc here.
 
 ## Commit-01 :sparkles:
 
-| **Agenda for this commit**                  |      Covered?      |
-|---------------------------------------------|:------------------:|
-| 1. Customizing JMX Domain.                  | :white_check_mark: |
-| 2. Customizing Management Server Base Path. | :white_check_mark: |
-| 3. Customizing the Management Server Port.  | :white_check_mark: |
-| 4. Customizing the Web Endpoints Base Path. | :white_check_mark: |
+| **Agenda for this commit**                      |      Covered?      |
+|-------------------------------------------------|:------------------:|
+| 1. Customizing **JMX** Domain.                  | :white_check_mark: |
+| 2. Customizing the Management Server Port.      | :white_check_mark: |
+| 3. Customizing the Management Server Base Path. | :white_check_mark: |
+| 4. Customizing the Web Endpoints Base Path.     | :white_check_mark: |
 
 ### Customizing JMX Domain
 
@@ -399,14 +401,14 @@ After setting the `management.endpoints.enabled-by-default` property to `false`,
 To disable an individual endpoint, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property as below.
 
 ~~~properties
+management.endpoint.beans.enabled=false
 management.endpoint.health.enabled=false
 management.endpoint.info.enabled=false
-management.endpoint.beans.enabled=false
 ~~~
 
-After disabling `health`, `info`, `beans` endpoints, they are not exposed. *Check the below screenshot.*
+After disabling `beans`, `health`, `info` endpoints, they are **not exposed**. *Check the below screenshot.*
 
-![Health-Info-Beans Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/371bc9ce-8a5c-4747-91fd-f83f2bbb4104)
+![Beans-Health-Info Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/371bc9ce-8a5c-4747-91fd-f83f2bbb4104)
 
 :question:**Any Questions**:question:
 
@@ -443,16 +445,16 @@ Removed all the previously made config changes so that we can start fresh.
 
 ## Commit-04 :sparkles:
 
-| **Agenda for this commit**             |      Covered?      |
-|----------------------------------------|:------------------:|
-| 1. Exposing JMX Endpoints.             | :white_check_mark: |
-| 2. Hiding All JMX Endpoints.           | :white_check_mark: |
-| 3. Hiding Individual JMX Endpoints.    | :white_check_mark: |
-| 4. Exposing HTTP Endpoints.            | :white_check_mark: |
-| 5. Exposing All HTTP Endpoints.        | :white_check_mark: |
-| 6. Exposing Individual HTTP Endpoints. | :white_check_mark: |
-| 7. Hiding All HTTP Endpoints.          | :white_check_mark: |
-| 8. Hiding Individual HTTP Endpoints.   | :white_check_mark: |
+| **Agenda for this commit**                 |      Covered?      |
+|--------------------------------------------|:------------------:|
+| 1. Exposing **JMX** Endpoints.             | :white_check_mark: |
+| 2. Hiding All **JMX** Endpoints.           | :white_check_mark: |
+| 3. Hiding Individual **JMX** Endpoints.    | :white_check_mark: |
+| 4. Exposing **HTTP** Endpoints.            | :white_check_mark: |
+| 5. Exposing All **HTTP** Endpoints.        | :white_check_mark: |
+| 6. Exposing Individual **HTTP** Endpoints. | :white_check_mark: |
+| 7. Hiding All **HTTP** Endpoints.          | :white_check_mark: |
+| 8. Hiding Individual **HTTP** Endpoints.   | :white_check_mark: |
 
 ### Exposing JMX Endpoints
 
@@ -532,6 +534,264 @@ management.endpoints.web.exposure.exclude=beans,health,info
 ![HTTP Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3910ea39-2a73-4106-927e-cad4d1832c71)
 
 As `management.endpoints.web.exposure.exclude` has more priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans`, `health`, `info` endpoints.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-05 :sparkles:
+
+| **Agenda for this commit**             |      Covered?      |
+|----------------------------------------|:------------------:|
+| 1. Reverting all the previous configs. | :white_check_mark: |
+
+### Reverted All the Previous Configs
+Reverted all the previously made config changes so that we can start fresh.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-06 :sparkles:
+
+| **Agenda for this commit**         |      Covered?      |
+|------------------------------------|:------------------:|
+| 1. About `info` endpoint.          | :white_check_mark: |
+| 2. The Built-In Info Contributors. | :white_check_mark: |
+| 3. Expose `info` endpoint.         | :white_check_mark: |
+
+### The Info Endpoint
+
+The `info` endpoint is useful, if you want to expose any information related to the application like the *environment details*, *java runtime details*, *git information*, *OS information*, *build information* or any arbitrary information.In fact, Spring is already collecting all these information through some of the pre-defined `InfoContributor` beans.
+
+### The Built-In Info Contributors
+
+| ID    | Name                         | Description                                                                | Prerequisites                                | Status   |
+|-------|------------------------------|----------------------------------------------------------------------------|----------------------------------------------|----------|
+| build | `BuildInfoContributor`       | Exposes build information.                                                 | A `META-INF/build-info.properties` resource. | Enabled  |
+| env   | `EnvironmentInfoContributor` | Exposes any property from the `Environment` whose name starts with *info*. | None.                                        | Disabled |
+| git   | `GitInfoContributor`         | Exposes git information.                                                   | A `git.properties` resource.                 | Enabled  |
+| java  | `JavaInfoContributor`        | Exposes Java runtime information.                                          | None.                                        | Disabled |
+| os    | `OsInfoContributor`          | Exposes Operating System information.                                      | None.                                        | Disabled |
+
+*Note: All the above `InfoContributor`s are grouped under the `info` endpoint and can be enabled/disabled individually. We can also write our own custom `InfoContributor` to provide more detailed information.*
+
+### Expose `info` Endpoint
+
+Though the `info` endpoint is enabled by default, it is **not exposed** over **HTTP**. To expose the `info` endpoint over **HTTP** use the `management.endpoints.web.exposure.include` property as below.
+
+```properties
+management.endpoints.web.exposure.include=info
+```
+
+We can access the `info` endpoint via the below url.
+
+`http://localhost:9090/actuator/info`
+
+By default, the `info` endpoint returns an empty response. It is because either, the specific `InfoContributor` might be disabled or the pre-requisite does not met.
+
+The `build` and `git` endpoints (under the `info` endpoint) are enabled by default but it is not shown because the prerequisite for `BuildInfoContributor` and the `GitInfoContributor` is not met.
+The `env`, `java`, `os` endpoints (under the `info` endpoint) are not shown because they are not enabled by default.
+
+### Expose Information Under Info Endpoint
+
+To enable the `build` and `git` endpoints, we need to have `build-info.properties` and `git.properties` in the classpath. We are not going to talk about it in this tutorial.
+
+To enable the `env`, `java`, `os` endpoints, use the respective `management.info.<ID>.enabled` property as below.
+
+```properties
+management.info.env.enabled=true
+management.info.java.enabled=true
+management.info.os.enabled=true
+```
+
+After enabling the `env`, `java` and `os` endpoints, accessing the `info` endpoint will return the below response.
+
+```json
+{
+  "java": {
+    "version": "17.0.3",
+    "vendor": {
+      "name": "Eclipse Adoptium",
+      "version": "Temurin-17.0.3+7"
+    },
+    "runtime": {
+      "name": "OpenJDK Runtime Environment",
+      "version": "17.0.3+7"
+    },
+    "jvm": {
+      "name": "OpenJDK 64-Bit Server VM",
+      "vendor": "Eclipse Adoptium",
+      "version": "17.0.3+7"
+    }
+  },
+  "os": {
+    "name": "Mac OS X",
+    "version": "13.4.1",
+    "arch": "x86_64"
+  }
+}
+```
+
+We can see the `java` endpoint returns the *java runtime information* and the `os` endpoint returns the *os information*. The `env` endpoint is still missing because currently we did not have any information added under `env`. Let's add some information using the `info.*` property like below.
+
+```properties
+info.env.application.name=Spring Boot Actuator Demo
+info.env.application.description=Step by step tutorial for Spring Boot Actuator
+info.env.application.encoding=UTF-8
+info.env.application.java.version=17
+```
+*Note: Any property that starts with the *info* word will be automatically picked up.*
+
+After adding the above properties, we can see the below response.
+
+```json
+{
+  "env": {
+    "application": {
+      "name": "Spring Boot Actuator Demo",
+      "description": "Step by step tutorial for Spring Boot Actuator",
+      "encoding": "UTF-8",
+      "java": {
+        "version": "17"
+      }
+    }
+  },
+  "java": {
+    "version": "17.0.3",
+    "vendor": {
+      "name": "Eclipse Adoptium",
+      "version": "Temurin-17.0.3+7"
+    },
+    "runtime": {
+      "name": "OpenJDK Runtime Environment",
+      "version": "17.0.3+7"
+    },
+    "jvm": {
+      "name": "OpenJDK 64-Bit Server VM",
+      "vendor": "Eclipse Adoptium",
+      "version": "17.0.3+7"
+    }
+  },
+  "os": {
+    "name": "Mac OS X",
+    "version": "13.4.1",
+    "arch": "x86_64"
+  }
+}
+```
+
+*Note: Rather than hard coding those values, we could also expand *info* properties at build time if we use any build tools like *Gradle* or *Maven* like below.*
+
+```properties
+info.env.application.name=@project.name@
+info.env.application.description=@project.description@
+info.env.application.encoding=@project.build.sourceEncoding@
+info.env.application.java.version=@java.version@
+```
+
+After setting the above properties, you can see the below response.
+
+```json
+{
+  "env": {
+    "application": {
+      "name": "spring-boot-actuator-demo",
+      "description": "spring-boot-actuator-demo",
+      "encoding": "UTF-8",
+      "java": {
+        "version": "17.0.3"
+      }
+    }
+  },
+  "java": {
+    "version": "17.0.3",
+    "vendor": {
+      "name": "Eclipse Adoptium",
+      "version": "Temurin-17.0.3+7"
+    },
+    "runtime": {
+      "name": "OpenJDK Runtime Environment",
+      "version": "17.0.3+7"
+    },
+    "jvm": {
+      "name": "OpenJDK 64-Bit Server VM",
+      "vendor": "Eclipse Adoptium",
+      "version": "17.0.3+7"
+    }
+  },
+  "os": {
+    "name": "Mac OS X",
+    "version": "13.4.1",
+    "arch": "x86_64"
+  }
+}
+```
+
+### Writing Custom InfoContributors
+
+We can write our own custom `InfoContributor`s to provide custom and more detailed information about the application. These custom information can be pulled from various sources like *database*, *remote API*, *environment variables* etc.
+
+Custom `InfoContributor`s can be implemented in below 2 ways.
+
+Approach-1
+```java
+@Bean
+public InfoContributor appDetailsInfoContributor() {
+  return new MapInfoContributor(
+    Map.of("appDetails",
+      Map.of(
+        "serverPort", environment.getProperty("server.port"),
+        "defaultProfiles", environment.getDefaultProfiles()
+      )
+    )
+  );
+}
+```
+
+Approach-2
+```java
+package tech.badprogrammer.springbootactuatordemo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.info.Info;
+import org.springframework.boot.actuate.info.InfoContributor;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Component
+public class PersonalInfoContributor implements InfoContributor {
+
+  @Autowired
+  private Environment environment;
+
+  @Override
+  public void contribute(final Info.Builder builder) {
+    builder.withDetails(
+      Map.of("personal",
+        Map.of("githubUrl", "https://github.com/kumar-github/spring-boot-actuator-demo",
+          "linkedInUrl", "https://www.linkedin.com/in/saravana-kumar-m")));
+  }
+}
+```
 
 :question:**Any Questions**:question:
 

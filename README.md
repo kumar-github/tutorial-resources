@@ -575,10 +575,13 @@ Reverted all the previously made config changes so that we can start fresh.
 | 1. About `info` endpoint.          | :white_check_mark: |
 | 2. The Built-In Info Contributors. | :white_check_mark: |
 | 3. Expose `info` endpoint.         | :white_check_mark: |
+| 4. Enable Individual Endpoints Under Info Endpoint. | :white_check_mark: |
+| 5. Add Information to the env Endpoint. | :white_check_mark: |
+| 6. Writing Custom InfoContributors. | :white_check_mark: |
 
 ### The Info Endpoint
 
-The `info` endpoint is useful, if you want to expose any information related to the application like the *environment details*, *java runtime details*, *git information*, *OS information*, *build information* or any arbitrary information.In fact, Spring is already collecting all these information through some of the pre-defined `InfoContributor` beans.
+The `info` endpoint is useful, if you want to expose information related to your application like the *environment details*, *java runtime details*, *git information*, *OS information*, *build information* or any arbitrary information. Spring collects the information from the `InfoContributor` beans. The `InfoContributor` beans are responsible for contributing the information. The below are some of the built-in *InfoContributors*.
 
 ### The Built-In Info Contributors
 
@@ -600,16 +603,16 @@ Though the `info` endpoint is enabled by default, it is **not exposed** over **H
 management.endpoints.web.exposure.include=info
 ```
 
-We can access the `info` endpoint via the below url.
+Once exposed, we can access the `info` endpoint via the below url.
 
 `http://localhost:9090/actuator/info`
 
-By default, the `info` endpoint returns an empty response. It is because either, the specific `InfoContributor` might be disabled or the pre-requisite does not met.
+By default, the `info` endpoint returns an empty response. It is because either, the specific `InfoContributor` might be disabled or the pre-requisite is not met.
 
 The `build` and `git` endpoints (under the `info` endpoint) are enabled by default but it is not shown because the prerequisite for `BuildInfoContributor` and the `GitInfoContributor` is not met.
 The `env`, `java`, `os` endpoints (under the `info` endpoint) are not shown because they are not enabled by default.
 
-### Expose Information Under Info Endpoint
+### Enable Individual Endpoints Under Info Endpoint
 
 To enable the `build` and `git` endpoints, we need to have `build-info.properties` and `git.properties` in the classpath. We are not going to talk about it in this tutorial.
 
@@ -649,7 +652,11 @@ After enabling the `env`, `java` and `os` endpoints, accessing the `info` endpoi
 }
 ```
 
-We can see the `java` endpoint returns the *java runtime information* and the `os` endpoint returns the *os information*. The `env` endpoint is still missing because currently we did not have any information added under `env`. Let's add some information using the `info.*` property like below.
+We can see the `java` endpoint returns the *java runtime information* and the `os` endpoint returns the *os information*. The `env` endpoint is still missing because currently we did not have any information added under `env`.
+
+### Add Information to the env Endpoint
+
+To add information to the `env` endpoint, use the `info.*` property like below.
 
 ```properties
 info.env.application.name=Spring Boot Actuator Demo
@@ -657,7 +664,7 @@ info.env.application.description=Step by step tutorial for Spring Boot Actuator
 info.env.application.encoding=UTF-8
 info.env.application.java.version=17
 ```
-*Note: Any property that starts with the *info* word will be automatically picked up.*
+*Note: Any property that starts with the word *info* will be automatically picked up and displayed under `info` endpoint. I have added the `env` key just to group them and it is not mandatory.*
 
 After adding the above properties, we can see the below response.
 
@@ -697,7 +704,7 @@ After adding the above properties, we can see the below response.
 }
 ```
 
-*Note: Rather than hard coding those values, we could also expand *info* properties at build time if we use any build tools like *Gradle* or *Maven* like below.*
+*Note: If we use any build tools like *Gradle* or *Maven*, then instead of hard coding those values, we could expand the *info* properties at build time like below.*
 
 ```properties
 info.env.application.name=@project.name@

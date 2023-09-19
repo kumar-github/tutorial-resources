@@ -788,9 +788,6 @@ Approach-2
 @Component
 public class PersonalInfoContributor implements InfoContributor {
 
-  @Autowired
-  private Environment environment;
-
   @Override
   public void contribute(final Info.Builder builder) {
     builder.withDetails(

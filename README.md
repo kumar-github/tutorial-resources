@@ -56,6 +56,8 @@ Table Of Contents
     * [Enabling Individual Endpoints Under Info Endpoint](#enabling-individual-endpoints-under-info-endpoint)
     * [Adding Information to the env Endpoint](#adding-information-to-the-env-endpoint)
     * [Writing Custom InfoContributors](#writing-custom-infocontributors)
+  * [Commit-07 :sparkles:](#commit-07-sparkles)
+    * [Rolled Back All the Previous Configs](#rolled-back-all-the-previous-configs)
 
 <br/>
 
@@ -845,6 +847,27 @@ Below is the response after adding the above custom info contributors.
   }
 }
 ```
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-07 :sparkles:
+
+| **Agenda for this commit**                |      Covered?      |
+|-------------------------------------------|:------------------:|
+| 1. Rolling back all the previous configs. | :white_check_mark: |
+
+### Rolled Back All the Previous Configs
+Rolled back all the previously made config changes so that we can start fresh.
 
 :question:**Any Questions**:question:
 

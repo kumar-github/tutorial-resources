@@ -1120,3 +1120,68 @@ Process finished with exit code 1
 ---
 
 <br/>
+
+## Commit-09 :sparkles:
+
+| **Agenda for this commit**                                  |      Covered?      |
+|-------------------------------------------------------------|:------------------:|
+| 1. Implementing custom endpoint.                               | :white_check_mark: |
+
+### Implementing Custom Endpoints
+
+To write a custom endpoint that should be picked up by the Actuator, it should be a spring bean (annotated with `@Bean` or `@Component`) that is annotated with `@Endpoint` annotation. Any methods that are annotated with `@ReadOperation`, `@WriteOperation`, or `@DeleteOperation` are automatically exposed over **JMX** and **HTTP**.
+
+The following code snippet exposes a read operation that returns a person object:
+
+```java
+@ReadOperation
+public Person getPersonData() {
+  return new Person(1001, "Marius");
+}
+```
+
+You can also write technology-specific endpoints by using `@JmxEndpoint` or `@WebEndpoint`. These endpoints are restricted to their respective technologies. For example, `@WebEndpoint` is exposed only over **HTTP** and not over **JMX** and vice-versa.
+You can also write technology-specific extensions by using `@EndpointWebExtension` and `@EndpointJmxExtension`. These annotations let you provide technology-specific operations to augment an existing endpoint.
+
+### Receiving Input
+
+Operations on an endpoint can receive input through their parameters. When exposed over the web, the values for these parameters are taken from the URL’s query parameters and from the JSON request body. When exposed over **JMX**, the parameters are mapped to the parameters of the MBean’s operations. Parameters are required by default. They can be made optional by annotating them with either `@javax.annotation.Nullable` or `@org.springframework.lang.Nullable`.
+
+You can map each root property in the JSON request body to a parameter of the endpoint. Consider the following JSON request body:
+
+```json
+{
+  "id": 1001,
+  "name": "Marius"
+}
+```
+
+You can use this to invoke a write operation that takes int id and String name parameters, as the following snippet shows:
+
+```java
+@WriteOperation
+public void updateData(int id, String name) {
+  // injects 1001 into id and "Marius" into name
+}
+```
+
+*Note: To let the input be mapped to the operation method’s parameters, Java code that implements an endpoint should be compiled with `-parameters`. This will happen automatically if you use Spring Boot’s Gradle plugin or if you use Maven and spring-boot-starter-parent.*
+
+### Web Endpoint Response Status
+
+The default response status for an endpoint operation depends on the operation type (read, write, or delete) and what, if anything, the operation returns.
+If a `@ReadOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `404 (Not Found)`.
+If a `@WriteOperation` or `@DeleteOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `204 (No Content)`.
+If an operation is invoked without a required parameter or with a parameter that cannot be converted to the required type, the operation method will not be called, and the response status will be `400 (Bad Request)`.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>

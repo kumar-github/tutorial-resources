@@ -56,6 +56,11 @@ Table Of Contents
     * [Enabling Individual Endpoints Under Info Endpoint](#enabling-individual-endpoints-under-info-endpoint)
     * [Adding Information to the env Endpoint](#adding-information-to-the-env-endpoint)
     * [Writing Custom InfoContributors](#writing-custom-infocontributors)
+  * [Commit-07 :sparkles:](#commit-07-sparkles)
+    * [The Health Endpoint](#the-health-endpoint)
+    * [Show Full Health Details](#show-full-health-details)
+    * [Auto Configured HealthIndicators](#auto-configured-healthindicators)
+    * [Writing Custom HealthIndicators](#writing-custom-healthindicators)
 
 <br/>
 
@@ -860,9 +865,12 @@ Below is the response after adding the above custom info contributors.
 
 ## Commit-07 :sparkles:
 
-| **Agenda for this commit**  |      Covered?      |
-|-----------------------------|:------------------:|
-| 1. About `health` endpoint. | :white_check_mark: |
+| **Agenda for this commit**           |      Covered?      |
+|--------------------------------------|:------------------:|
+| 1. About `health` endpoint.          | :white_check_mark: |
+| 2. Show Full Health Details.         | :white_check_mark: |
+| 3. Auto Configured HealthIndicators. | :white_check_mark: |
+| 4. Writing Custom HealthIndicators.  | :white_check_mark: |
 
 ### The Health Endpoint
 
@@ -896,6 +904,8 @@ By default, the `health` endpoint just reveals the status of the application lik
   status: "UP"
 }
 ```
+
+### Show Full Health Details
 
 To show the full health details, use the `management.endpoint.health.show-details` property like below.
 ```properties

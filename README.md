@@ -1176,9 +1176,10 @@ public void updateData(int id, String name) {
 ### Web Endpoint Response Status
 
 The default response status for an endpoint operation depends on the operation type (read, write, or delete) and what, if anything, the operation returns.
-If a `@ReadOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `404 (Not Found)`.
-If a `@WriteOperation` or `@DeleteOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `204 (No Content)`.
-If an operation is invoked without a required parameter or with a parameter that cannot be converted to the required type, the operation method will not be called, and the response status will be `400 (Bad Request)`.
+
+* If a `@ReadOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `404 (Not Found)`.
+* If a `@WriteOperation` or `@DeleteOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `204 (No Content)`.
+* If an operation is invoked without a required parameter or with a parameter that cannot be converted to the required type, the operation method will not be called, and the response status will be `400 (Bad Request)`.
 
 :question:**Any Questions**:question:
 

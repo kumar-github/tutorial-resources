@@ -1130,8 +1130,8 @@ Process finished with exit code 1
 | **Agenda for this commit**        |      Covered?      |
 |-----------------------------------|:------------------:|
 | 1. Implementing custom endpoints. | :white_check_mark: |
-| 2. Receiving Input.               | :white_check_mark: |
-| 3. Web Endpoint Response Status.  | :white_check_mark: |
+| 2. Receiving input.               | :white_check_mark: |
+| 3. Web endpoint response status.  | :white_check_mark: |
 
 ### Implementing Custom Endpoints
 

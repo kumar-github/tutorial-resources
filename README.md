@@ -66,6 +66,10 @@ Table Of Contents
     * [Enabling The Shutdown Endpoint](#enabling-the-shutdown-endpoint)
     * [Exposing The Shutdown Endpoint Over JMX](#exposing-the-shutdown-endpoint-over-jmx)
     * [Exposing The Shutdown Endpoint Over HTTP](#exposing-the-shutdown-endpoint-over-http)
+  * [Commit-09 :sparkles:](#commit-09-sparkles)
+    * [Implementing Custom Endpoints](#implementing-custom-endpoints)
+    * [Receiving Input](#receiving-input)
+    * [Web Endpoint Response Status](#web-endpoint-response-status)
 
 <br/>
 
@@ -1123,13 +1127,15 @@ Process finished with exit code 1
 
 ## Commit-09 :sparkles:
 
-| **Agenda for this commit**                                  |      Covered?      |
-|-------------------------------------------------------------|:------------------:|
-| 1. Implementing custom endpoint.                               | :white_check_mark: |
+| **Agenda for this commit**        |      Covered?      |
+|-----------------------------------|:------------------:|
+| 1. Implementing custom endpoints. | :white_check_mark: |
+| 2. Receiving Input.               | :white_check_mark: |
+| 3. Web Endpoint Response Status.  | :white_check_mark: |
 
 ### Implementing Custom Endpoints
 
-To write a custom endpoint that should be picked up by the Actuator, it should be a spring bean (annotated with `@Bean` or `@Component`) that is annotated with `@Endpoint` annotation. Any methods that are annotated with `@ReadOperation`, `@WriteOperation`, or `@DeleteOperation` are automatically exposed over **JMX** and **HTTP**.
+To write a custom endpoint that should be picked up by the *Actuator*, it should be a spring bean (annotated with `@Bean` or `@Component`) that is annotated with `@Endpoint` annotation. Any methods that are annotated with `@ReadOperation`, `@WriteOperation`, or `@DeleteOperation` are automatically exposed over **JMX** and **HTTP**.
 
 The following code snippet exposes a read operation that returns a person object:
 
@@ -1156,7 +1162,7 @@ You can map each root property in the JSON request body to a parameter of the en
 }
 ```
 
-You can use this to invoke a write operation that takes int id and String name parameters, as the following snippet shows:
+You can use this to invoke a write operation that takes *int id* and *String name* parameters, as the following snippet shows:
 
 ```java
 @WriteOperation

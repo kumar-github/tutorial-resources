@@ -879,7 +879,7 @@ Health information about an application is collected from the content of a `Heal
 
 A `HealthContributor` can be either a `HealthIndicator` or a `CompositeHealthContributor`. A `HealthIndicator` provides actual health information, including a `Status`. A `CompositeHealthContributor` provides a composite of other HealthContributors. Taken together, contributors form a tree structure to represent the overall system health.
 
-By default the `health` endpoint is **enabled** and **exposed** over both **JMX** and **HTTP**. If needed, the `health` endpoint can be enabled using the `management.endpoint.health.enabled` property like below.
+By default the `health` endpoint is **enabled** and **exposed** over both **JMX** and **HTTP**. If needed, the `health` endpoint can be enabled or disabled using the `management.endpoint.health.enabled` property like below.
 
 ```properties
 management.endpoint.health.enabled=true
@@ -901,7 +901,7 @@ By default, the `health` endpoint just reveals the status of the application lik
 
 ```json
 {
-  status: "UP"
+  "status": "UP"
 }
 ```
 
@@ -911,7 +911,7 @@ To show the full health details, use the `management.endpoint.health.show-detail
 ```properties
 management.endpoint.health.show-details=always
 ```
-*Note: We can also use the `when_authorized` value to reveal the full health details only to an authorized user using spring security.*
+*Note: We can also use the `when_authorized` value, to reveal the details only to an authorized user using spring security.*
 
 After setting the `management.endpoint.health.show-details` property to `always`, you can see the below response.
 
@@ -964,7 +964,7 @@ management.health.diskspace.enabled=false
 ```
 
 ### Writing Custom HealthIndicators
-To provide custom health information, you can register Spring beans that implement the `HealthIndicator` interface and implement the `health()` method and return a `Health` response. The `Health` response should include a status and can optionally include additional details to be displayed. The following code shows a sample HealthIndicator implementation:
+To provide custom health information, you can register Spring beans that implement the `HealthIndicator` interface and implement the `health()` method and return a `Health` response. The `Health` response should include a status and can optionally include additional details to be displayed. The following code shows a sample `HealthIndicator` implementation:
 
 ```java
 @Component("AppHealth")

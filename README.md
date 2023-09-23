@@ -56,8 +56,6 @@ Table Of Contents
     * [Enabling Individual Endpoints Under Info Endpoint](#enabling-individual-endpoints-under-info-endpoint)
     * [Adding Information to the env Endpoint](#adding-information-to-the-env-endpoint)
     * [Writing Custom InfoContributors](#writing-custom-infocontributors)
-  * [Commit-07 :sparkles:](#commit-07-sparkles)
-    * [Rolled Back All the Previous Configs](#rolled-back-all-the-previous-configs)
 
 <br/>
 
@@ -862,12 +860,152 @@ Below is the response after adding the above custom info contributors.
 
 ## Commit-07 :sparkles:
 
-| **Agenda for this commit**                |      Covered?      |
-|-------------------------------------------|:------------------:|
-| 1. Rolling back all the previous configs. | :white_check_mark: |
+| **Agenda for this commit**  |      Covered?      |
+|-----------------------------|:------------------:|
+| 1. About `health` endpoint. | :white_check_mark: |
 
-### Rolled Back All the Previous Configs
-Rolled back all the previously made config changes so that we can start fresh.
+### The Health Endpoint
+
+The `health` endpoint helps to check the status of a running application. It is often used by monitoring tools to alert someone when a production system goes down.
+Health information about an application is collected from the content of a `HealthContributorRegistry` (by default, all `HealthContributor` instances defined in your ApplicationContext). Spring Boot includes a number of auto-configured HealthContributors, and you can also write your own.
+
+A `HealthContributor` can be either a `HealthIndicator` or a `CompositeHealthContributor`. A `HealthIndicator` provides actual health information, including a `Status`. A `CompositeHealthContributor` provides a composite of other HealthContributors. Taken together, contributors form a tree structure to represent the overall system health.
+
+By default the `health` endpoint is **enabled** and **exposed** over both **JMX** and **HTTP**. If needed, the `health` endpoint can be enabled using the `management.endpoint.health.enabled` property like below.
+
+```properties
+management.endpoint.health.enabled=true
+```
+
+The `health` endpoint can be exposed over **JMX** using the `management.endpoints.jmx.exposure.include` property like below.
+
+```properties
+management.endpoints.jmx.exposure.include=health
+```
+
+The `health` endpoint can be exposed over **HTTP** using the `management.endpoints.web.exposure.include` property like below.
+
+```properties
+management.endpoints.web.exposure.include=health
+```
+
+By default, the `health` endpoint just reveals the status of the application like below.
+
+```json
+{
+  status: "UP"
+}
+```
+
+To show the full health details, use the `management.endpoint.health.show-details` property like below.
+```properties
+management.endpoint.health.show-details=always
+```
+*Note: We can also use the `when_authorized` value to reveal the full health details only to an authorized user using spring security.*
+
+After setting the `management.endpoint.health.show-details` property to `always`, you can see the below response.
+
+```json
+{
+  "status": "UP",
+  "components": {
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 250685575168,
+        "free": 21200076800,
+        "threshold": 10485760,
+        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
+        "exists": true
+      }
+    },
+    "ping": {
+      "status": "UP"
+    }
+  }
+}
+```
+
+### Auto Configured HealthIndicators
+When appropriate, Spring Boot auto-configures the HealthIndicators listed in the following table.
+
+| Key           | Name                             | Description                                             |
+|---------------|----------------------------------|---------------------------------------------------------|
+| cassandra     | CassandraDriverHealthIndicator   | Checks that a Cassandra database is up.                 |
+| couchbase     | CouchbaseHealthIndicator         | Checks that a Couchbase cluster is up.                  |
+| db            | DataSourceHealthIndicator        | Checks that a connection to DataSource can be obtained. |
+| diskspace     | DiskSpaceHealthIndicator         | Checks for low disk space.                              |
+| elasticsearch | ElasticsearchRestHealthIndicator | Checks that an Elasticsearch cluster is up.             |
+| hazelcast     | HazelcastHealthIndicator         | Checks that a Hazelcast server is up.                   |
+| influxdb      | InfluxDbHealthIndicator          | Checks that an InfluxDB server is up.                   |
+| jms           | JmsHealthIndicator               | Checks that a JMS broker is up.                         |
+| ldap          | LdapHealthIndicator              | Checks that an LDAP server is up.                       |
+| mail          | MailHealthIndicator              | Checks that a mail server is up.                        |
+| mongo         | MongoHealthIndicator             | Checks that a Mongo database is up.                     |
+| neo4j         | Neo4jHealthIndicator             | Checks that a Neo4j database is up.                     |
+| ping          | PingHealthIndicator              | Always responds with UP.                                |
+| rabbit        | RabbitHealthIndicator            | Checks that a Rabbit server is up.                      |
+| redis         | RedisHealthIndicator             | Checks that a Redis server is up.                       |
+
+You can also **enable** or **disable** selected indicators using the `management.health.<KEY>.enabled` property like below.
+```properties
+management.health.db.enabled=true
+management.health.diskspace.enabled=false
+```
+
+### Writing Custom HealthIndicators
+To provide custom health information, you can register Spring beans that implement the `HealthIndicator` interface and implement the `health()` method and return a `Health` response. The `Health` response should include a status and can optionally include additional details to be displayed. The following code shows a sample HealthIndicator implementation:
+
+```java
+@Component("AppHealth")
+public class MyHealthIndicator implements HealthIndicator {
+
+    @Override
+    public Health health() {
+        int errorCode = check();
+        if (errorCode != 0) {
+            return Health.down()
+                         .withDetail("Error Code", errorCode)
+                         .build();
+        }
+        return Health.up()
+                     .build();
+    }
+
+    private int check() {
+        return new Random().nextInt(2);
+    }
+}
+```
+
+*Note: The identifier for a given HealthIndicator is the name of the bean without the `HealthIndicator` suffix, if it exists. In the above example, the health information is available in an entry named `my` if the name is not provided in the `@Component` annotation. Since the name is provided in the `@Component` annotation, the entry name would be `AppHealth`. Check the below response.*
+
+```json
+{
+  "status": "DOWN",
+  "components": {
+    "AppHealth": {
+      "status": "DOWN",
+      "details": {
+        "Error Code": 1
+      }
+    },
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 250685575168,
+        "free": 21993676800,
+        "threshold": 10485760,
+        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
+        "exists": true
+      }
+    },
+    "ping": {
+      "status": "UP"
+    }
+  }
+}
+```
 
 :question:**Any Questions**:question:
 

@@ -61,6 +61,11 @@ Table Of Contents
     * [Show Full Health Details](#show-full-health-details)
     * [Auto Configured HealthIndicators](#auto-configured-healthindicators)
     * [Writing Custom HealthIndicators](#writing-custom-healthindicators)
+  * [Commit-08 :sparkles:](#commit-08-sparkles)
+    * [The Shutdown Endpoint](#the-shutdown-endpoint)
+    * [Enabling The Shutdown Endpoint](#enabling-the-shutdown-endpoint)
+    * [Exposing The Shutdown Endpoint Over JMX](#exposing-the-shutdown-endpoint-over-jmx)
+    * [Exposing The Shutdown Endpoint Over HTTP](#exposing-the-shutdown-endpoint-over-http)
 
 <br/>
 
@@ -1031,17 +1036,20 @@ public class MyHealthIndicator implements HealthIndicator {
 
 ## Commit-08 :sparkles:
 
-| **Agenda for this commit**           |      Covered?      |
-|--------------------------------------|:------------------:|
-| 1. About `shutdown` endpoint.        | :white_check_mark: |
+| **Agenda for this commit**                                  |      Covered?      |
+|-------------------------------------------------------------|:------------------:|
+| 1. About `shutdown` endpoint.                               | :white_check_mark: |
+| 2. Enabling the `shutdown` endpoint.                        | :white_check_mark: |
+| 3. Exposing the `shutdown` endpoint over **JMX** endpoint.  | :white_check_mark: |
+| 4. Exposing the `shutdown` endpoint over **HTTP** endpoint. | :white_check_mark: |
 
-### The `Shutdown` Endpoint
+### The Shutdown Endpoint
 
-As the name suggests, the `shutdown` will help to shutdown the application remotely.
+As the name suggests, the `shutdown` endpoint will help to *shutdown* the application remotely.
 
 ### Enabling The Shutdown Endpoint
 
-The `shutdown` endpoint is disabled by default for security reasons and hence not exposed neither over **JMX** nor over **HTTP**. To enable the `shutdown` endpoint use the `management.endpoint.shutdown.enabled` property as below.
+The `shutdown` endpoint is disabled by default for security reasons and hence not exposed neither over **JMX** nor over **HTTP**. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
 
 ```properties
 management.endpoint.shutdown.enabled=true
@@ -1049,7 +1057,7 @@ management.endpoint.shutdown.enabled=true
 
 ### Exposing The Shutdown Endpoint Over JMX
 
-Enabling the `shutdown` endpoint will automatically exposes it over **JMX**. Check the below screeshot.
+Enabling the `shutdown` endpoint will automatically exposes it over **JMX**. Check the below screenshot.
 
 ![Shutdown Endpoint Exposed Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/c968024d-4441-4ac3-8647-44b4e23007b2)
 
@@ -1065,13 +1073,14 @@ Process finished with exit code 1
 ```
 
 ### Exposing The Shutdown Endpoint Over HTTP
+
 Enabling the `shutdown` endpoint will **not expose** it over **HTTP** automatically. To expose the `shutdown` endpoint over **HTTP**, use the `management.endpoints.web.exposure.include` property as below.
 
 ```properties
 management.endpoints.web.exposure.include=shutdown
 ```
 
-After exposing the `shutdown` endpoint over **HTTP**, you can see the below json reposnse.
+After exposing the `shutdown` endpoint over **HTTP**, you can see the below json response.
 
 ```json
 {
@@ -1098,7 +1107,7 @@ To invoke the `shutdown` operation over **HTTP**, you have to make a **POST** re
 
 Process finished with exit code 1
 ```
-*Note: It is not a good practice to **enable** and **expose** the `shutdown` endpoint without implementing proper authorization. If not, You may end up bringing down a production application by mistake.*
+*Note: It is not a good practice to **enable** and **expose** the `shutdown` endpoint without implementing proper authorization. If not, you may end up bringing down a production application by mistake.*
 
 :question:**Any Questions**:question:
 

@@ -69,6 +69,7 @@ Table Of Contents
   * [Commit-09 :sparkles:](#commit-09-sparkles)
     * [Implementing Custom Endpoints](#implementing-custom-endpoints)
     * [Receiving Input](#receiving-input)
+    * [Sample Custom Web Endpoint](#sample-custom-web-endpoint)
     * [Web Endpoint Response Status](#web-endpoint-response-status)
 
 <br/>
@@ -1131,7 +1132,8 @@ Process finished with exit code 1
 |-----------------------------------|:------------------:|
 | 1. Implementing custom endpoints. | :white_check_mark: |
 | 2. Receiving input.               | :white_check_mark: |
-| 3. Web endpoint response status.  | :white_check_mark: |
+| 3. Sample custom web endpoint.    | :white_check_mark: |
+| 4. Web endpoint response status.  | :white_check_mark: |
 
 ### Implementing Custom Endpoints
 
@@ -1169,6 +1171,48 @@ You can use this to invoke a write operation that takes *int id* and *String nam
 public void updateData(int id, String name) {
   // injects 1001 into id and "Marius" into name
 }
+```
+
+### Sample Custom Web Endpoint
+
+Below is the sample code snippet to create a custom web endpoint.
+
+```java
+@WebEndpoint(id = "person")
+@Component
+public class CustomPersonEndpoint {
+
+  private final Map < Integer, String > data = new HashMap < > ();
+
+  // GET: http://localhost:9090/actuator/person?id=1
+  @ReadOperation
+  public Map < Integer, String > readPersonDataById(int id) {
+    final String value = data.get(id);
+    return (value != null) ? Map.of(id, value) : Collections.emptyMap();
+  }
+
+  // POST: http://localhost:9090/actuator/person
+  // {
+  //   "id": 1001,
+  //   "name": "Marius"
+  // }
+  @WriteOperation
+  public Map < Integer, String > writePersonData(int id, String name) {
+    data.put(id, name);
+    return data;
+  }
+
+  // GET: http://localhost:9090/actuator/person/{id}
+  @DeleteOperation
+  public void deletePersonData(@Selector int id) {
+    data.remove(id);
+  }
+}
+```
+
+The above custom endpoint can be exposed using the `management.endpoints.web.exposure.include` property as below.
+```properties
+management.endpoints.web.exposure.include=person
 ```
 
 *Note: To let the input be mapped to the operation method’s parameters, Java code that implements an endpoint should be compiled with `-parameters`. This will happen automatically if you use Spring Boot’s Gradle plugin or if you use Maven and spring-boot-starter-parent.*

@@ -1186,7 +1186,7 @@ public class CustomPersonEndpoint {
 
   // GET: http://localhost:9090/actuator/person?id=1
   @ReadOperation
-  public Map < Integer, String > readPersonDataById(int id) {
+  public Map < Integer, String > readPersonData(int id) {
     final String value = data.get(id);
     return (value != null) ? Map.of(id, value) : Collections.emptyMap();
   }

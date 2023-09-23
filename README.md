@@ -1028,3 +1028,86 @@ public class MyHealthIndicator implements HealthIndicator {
 ---
 
 <br/>
+
+## Commit-08 :sparkles:
+
+| **Agenda for this commit**           |      Covered?      |
+|--------------------------------------|:------------------:|
+| 1. About `shutdown` endpoint.        | :white_check_mark: |
+
+### The `Shutdown` Endpoint
+
+As the name suggests, the `shutdown` will help to shutdown the application remotely.
+
+### Enabling The Shutdown Endpoint
+
+The `shutdown` endpoint is disabled by default for security reasons and hence not exposed neither over **JMX** nor over **HTTP**. To enable the `shutdown` endpoint use the `management.endpoint.shutdown.enabled` property as below.
+
+```properties
+management.endpoint.shutdown.enabled=true
+```
+
+### Exposing The Shutdown Endpoint Over JMX
+
+Enabling the `shutdown` endpoint will automatically exposes it over **JMX**. Check the below screeshot.
+
+![Shutdown Endpoint Exposed Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/c968024d-4441-4ac3-8647-44b4e23007b2)
+
+Invoking the `shutdown` operation will shutdown the application. Check the below screenshot and the console log.
+
+![Shutdown Operation Invoked Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/8a647589-8425-4148-bbec-f11b53823764)
+
+```console
+0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+
+Process finished with exit code 1
+```
+
+### Exposing The Shutdown Endpoint Over HTTP
+Enabling the `shutdown` endpoint will **not expose** it over **HTTP** automatically. To expose the `shutdown` endpoint over **HTTP**, use the `management.endpoints.web.exposure.include` property as below.
+
+```properties
+management.endpoints.web.exposure.include=shutdown
+```
+
+After exposing the `shutdown` endpoint over **HTTP**, you can see the below json reposnse.
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:9090/actuator",
+      "templated": false
+    },
+    "shutdown": {
+      "href": "http://localhost:9090/actuator/shutdown",
+      "templated": false
+    }
+  }
+}
+```
+
+To invoke the `shutdown` operation over **HTTP**, you have to make a **POST** request like below. Check the below screenshot and the console log.
+
+![Shutdown Operation Invoked Over HTTP](https://github.com/kumar-github/tutorial-resources/assets/2657313/04934f3e-00d9-474d-b9d7-8493b43efae3)
+
+```console
+0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+
+Process finished with exit code 1
+```
+*Note: It is not a good practice to **enable** and **expose** the `shutdown` endpoint without implementing proper authorization. If not, You may end up bringing down a production application by mistake.*
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>

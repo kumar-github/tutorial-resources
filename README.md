@@ -1236,3 +1236,100 @@ The default response status for an endpoint operation depends on the operation t
 ---
 
 <br/>
+
+## Commit-10 :sparkles:
+
+| **Agenda for this commit**                   |      Covered?      |
+|----------------------------------------------|:------------------:|
+| 1. Securing the management endpoints.        | :white_check_mark: |
+| 2. Bring in Spring Boot Security dependency. | :white_check_mark: |
+| 3. Health endpoint with authorization.       | :white_check_mark: |
+
+### Securing The Management Endpoints
+
+Before setting the `management.endpoints.web.exposure.include`, ensure that the endpoints are secured by placing them behind a **firewall**, or are secured by something like **Spring Security**.
+
+### Bringing In Spring Boot Security Dependency
+
+If Spring Security dependency is on the classpath and if you define a custom `SecurityFilterChain` bean, Spring Boot auto-configuration backs off and lets you fully control the actuator access rules. Since we did not define any `SecurityFilterChain` bean (we are not going to, since this is not a Spring Security tutorial), all actuators other than `/health` are secured by Spring Boot auto-configuration.
+
+Accessing `http://localhost:9090/actuator` will be automatically redirected to `http://localhost:9090/login` with below login page.
+
+![spring-security-sign-in](https://github.com/kumar-github/tutorial-resources/assets/2657313/56295661-9779-4366-832a-c3bcecb0cee1)
+
+Accessing any url other than `http://localhost:9090/health` will display the same login page. You need to sign in, in order to see (*if exposed*) the other endpoints like `beans`, `info` etc.
+Accessing `http://localhost:9090/health` will give you the below response. You are able to access the `health` endpoint because it is not secured by Spring Security by default and, you are not seeing the full health details because you are not authorized.
+
+```json
+{
+  "status": "UP"
+}
+```
+
+### Health Endpoint Show Details With Authorization
+
+Set the `management.endpoint.health.show-details` property to `when_authorized` as below.
+
+`management.endpoint.health.show-details=when_authorized`
+
+This above setting will make the full health details to be displayed but only for an authorized user.
+
+Access the `http://localhost:9090/actuator` url and you will be redirected to `http://localhost:9090/login` and you need to **Sign In** to see the actuator endpoints page. But we are not signing in now, instead access the `http://localhost:9090/actuator/health` url and you can see the below response because the `health` endpoint is not secured by default.
+
+```json
+{
+  "status": "UP"
+}
+```
+or
+```json
+{
+  "status": "DOWN"
+}
+```
+
+Now let's authorize ourself by signing in. Open a new tab with url `http://localhost:9090/actuator` and enter the user name and password. Since we did not configure any user name and password in the `application.properties` file or anywhere, Spring will let us use the default username and a randomly generated password. The default user name is `user` and the password will be auto-generated upon service start-up and logged in the console like below.
+
+```console
+Using generated security password: 6dc9fa57-fbdf-4be1-98a3-c0007724069b
+```
+
+Now enter `user` in the username field and `6dc9fa57-fbdf-4be1-98a3-c0007724069b` in the password field and you will be logged in successfully. Now open a new tab and hit the url `http://localhost:9090/actuator/health`. You can see the below response.
+
+```json
+{
+  "status": "UP",
+  "components": {
+    "AppHealth": {
+      "status": "UP"
+    },
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 250685575168,
+        "free": 28970192896,
+        "threshold": 10485760,
+        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
+        "exists": true
+      }
+    },
+    "ping": {
+      "status": "UP"
+    }
+  }
+}
+```
+
+You can logout by accessing the url `http://localhost:9090/logout`. If you try the `health` endpoint after logging out, you will not see the full health details instead just the status.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>

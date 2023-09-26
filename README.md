@@ -71,6 +71,10 @@ Table Of Contents
     * [Receiving Input](#receiving-input)
     * [Sample Custom Web Endpoint](#sample-custom-web-endpoint)
     * [Web Endpoint Response Status](#web-endpoint-response-status)
+  * [Commit-10 :sparkles:](#commit-10-sparkles)
+    * [Securing The Management Endpoints](#securing-the-management-endpoints)
+    * [Bringing In Spring Boot Security Dependency](#bringing-in-spring-boot-security-dependency)
+    * [Full Health Details With Authorization](#full-health-details-with-authorization)
 
 <br/>
 
@@ -1243,7 +1247,7 @@ The default response status for an endpoint operation depends on the operation t
 |----------------------------------------------|:------------------:|
 | 1. Securing the management endpoints.        | :white_check_mark: |
 | 2. Bring in Spring Boot Security dependency. | :white_check_mark: |
-| 3. Full health details with authorization.       | :white_check_mark: |
+| 3. Full health details with authorization.   | :white_check_mark: |
 
 ### Securing The Management Endpoints
 

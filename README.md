@@ -1253,7 +1253,7 @@ Before setting the `management.endpoints.web.exposure.include`, ensure that the 
 
 If Spring Security dependency is on the classpath and if you define a custom `SecurityFilterChain` bean, Spring Boot auto-configuration backs off and lets you fully control the actuator access rules. Since we did not define any `SecurityFilterChain` bean (we are not going to, since this is not a Spring Security tutorial), Spring Security's auto-configuration will lock all the actuator endpoints except the `health` endpoint.
 
-Accessing `http://localhost:9090/actuator` or any other url except `http://localhost:9090/actuator/health` will be automatically redirected to `http://localhost:9090/login` with below login page.
+Accessing `http://localhost:9090/actuator` or any other url except `http://localhost:9090/actuator/health` will be automatically redirected to `http://localhost:9090/login` with the below auto-generated login page.
 
 ![spring-security-sign-in](https://github.com/kumar-github/tutorial-resources/assets/2657313/56295661-9779-4366-832a-c3bcecb0cee1)
 

@@ -106,6 +106,8 @@ Start the service
 
 ![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/540ccaff-a224-4f67-b976-1130b309c8a5)
 
+![Deserialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/2915c8ab-2450-4d88-9c07-06c63340f1e0)
+
 
 
 Secrets of the Java Serialization API

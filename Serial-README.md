@@ -1,3 +1,32 @@
+# Serialization Deserialization Demo
+> **Every day is a learning day.**
+
+This project will walk you through a simple demo of Serialization and Deserialization in Java. This is **not** going to be an in-depth tutorial about Serialization and Deserialization. Instead, this will cover the basics and act as refresher for my another tutorial `jackson-demo`. As usual, the concepts (though few) are covered in-depth and organized as individual git commits. The commits are numbered sequentially starting from `00`, `01`, `02` and so on. As you go through it, take the time to understand the changes each step makes to the code. You can clone the entire project to your local machine and then start applying the commits one by one starting from `00`. This `README.md` file will be updated in every commit and will tell you what has been covered in the specific commit.
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+Table Of Contents
+=================
+
+* [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
+  * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
+  * [Complete Reference](#complete-reference)
+  * [Requirements](#requirements)
+  * [Run Locally](#run-locally)
+  * [Commit-00 :sparkles:](#commit-00-sparkles)
+    * [Project Creation](#project-creation)
+    * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
+    * [Talk About Accessing Endpoints Over HTTP and JMX](#talk-about-accessing-endpoints-over-http-and-jmx)
+
+
 Secrets of the Java Serialization API
 
 The Java platform allows us to create reusable objects in memory. However all of those objects exist only as long as the Java Virtual Machine remains running. It would be nice if the objects we create could exist beyond the lifetime of the JVM. With Serialization and Deserialization, you can flatten your objects, store, transmit and reuse them.

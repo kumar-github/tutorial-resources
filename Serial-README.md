@@ -123,21 +123,11 @@ Start the service
 | **Agenda for this commit**                                      |      Covered?      |
 |-----------------------------------------------------------------|:------------------:|
 | 1. Project creation.                 | :white_check_mark: |
-| 2. Observe actuator related console log.                        | :white_check_mark: |
-| 3. Access the actuator endpoints over **HTTP**.                 | :white_check_mark: |
-| 4. Talk about `health` endpoint.                                | :white_check_mark: |
-| 5. Access the actuator endpoints over **JMX** using `jconsole`. | :white_check_mark: |
-| 6. Talk briefly about `info` endpoint.                          | :white_check_mark: |
+| 2. Create Person POJO.                        | :white_check_mark: |
 
 ### Project Creation
 
-We have created a spring boot project via [Spring Initializr](https://start.spring.io/) with below dependencies.
-
-
-
-
-
-
+We have created a basic maven project. Since the Serialization and Deserialization API is part of the JDK, we don't need any external dependencies. Later in this tutorial, we will learn how to serialize a java object into JSON and deserialize JSON into java object. For this we will use the `jackson` thirdparty library.
 
 
 

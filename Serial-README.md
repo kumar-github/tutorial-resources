@@ -108,12 +108,6 @@ Start the service
 
 <br/>
 
-![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/e2a74b2c-23ce-42b6-badf-bceb4c89a3c5)
-
-![Deserialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/2915c8ab-2450-4d88-9c07-06c63340f1e0)
-
-
-
 Secrets of the Java Serialization API
 
 The Java Serialization API provides a standard mechanism for developers to handle object serialization and deserialization.

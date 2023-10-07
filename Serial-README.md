@@ -104,8 +104,7 @@ Start the service
 
 <br/>
 
-<img width="2443" alt="image" src="https://github.com/kumar-github/tutorial-resources/assets/2657313/b6bd929d-5544-4b4f-bdaa-3e56f9a2ae57">
-![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/b6bd929d-5544-4b4f-bdaa-3e56f9a2ae57)
+![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/540ccaff-a224-4f67-b976-1130b309c8a5)
 
 
 

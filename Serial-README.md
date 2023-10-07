@@ -21,6 +21,7 @@ Table Of Contents
   * [Complete Reference](#complete-reference)
   * [Requirements](#requirements)
   * [Run Locally](#run-locally)
+  * [Commit-00 :sparkles:](#commit-00-sparkles)
    
 ## Few things about Serialization and Deserialization
 
@@ -114,6 +115,31 @@ Start the service
 ---
 
 <br/>
+
+## Commit-00 :sparkles:
+
+*This is the Initial Commit.*
+
+| **Agenda for this commit**                                      |      Covered?      |
+|-----------------------------------------------------------------|:------------------:|
+| 1. Project creation.                 | :white_check_mark: |
+| 2. Observe actuator related console log.                        | :white_check_mark: |
+| 3. Access the actuator endpoints over **HTTP**.                 | :white_check_mark: |
+| 4. Talk about `health` endpoint.                                | :white_check_mark: |
+| 5. Access the actuator endpoints over **JMX** using `jconsole`. | :white_check_mark: |
+| 6. Talk briefly about `info` endpoint.                          | :white_check_mark: |
+
+### Project Creation
+
+We have created a spring boot project via [Spring Initializr](https://start.spring.io/) with below dependencies.
+
+
+
+
+
+
+
+
 
 Secrets of the Java Serialization API
 

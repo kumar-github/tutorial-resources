@@ -106,6 +106,8 @@ Start the service
 
 ![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/540ccaff-a224-4f67-b976-1130b309c8a5)
 
+![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/e2a74b2c-23ce-42b6-badf-bceb4c89a3c5)
+
 ![Deserialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/2915c8ab-2450-4d88-9c07-06c63340f1e0)
 
 

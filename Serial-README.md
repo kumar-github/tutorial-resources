@@ -124,12 +124,15 @@ Start the service
 |-----------------------------------------------------------------|:------------------:|
 | 1. Project creation.                 | :white_check_mark: |
 | 2. Create Person POJO.                        | :white_check_mark: |
+| 3. Create Person object.                        | :white_check_mark: |
 
 ### Project Creation
 
-We have created a basic maven project. Since the Serialization and Deserialization API is part of the JDK, we don't need any external dependencies. Later in this tutorial, we will learn how to serialize a java object into JSON and deserialize JSON into java object. For this we will use the `jackson` thirdparty library.
+We have created a basic maven project. Since the *Serialization* and *Deserialization* API is part of the JDK, we don't need any external dependencies. Later in this tutorial, we will learn how to serialize a java object into JSON and deserialize JSON into java object using a thirdparty library called `jackson`.
 
+Fow now, we have a very simple `Person` class with few properties and respective getters and setters. We have overridden the `toString()` method, so that we will have a meaningful string representation whenever we print the person object. As we move forward, we will add more features to our `Person` class and explore the Serialization and Deserialization process.
 
+At this point, We can run the project and see a person object getting created and printed to the console.
 
 Secrets of the Java Serialization API
 

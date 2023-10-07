@@ -16,28 +16,97 @@ This project will walk you through a simple demo of Serialization and Deserializ
 Table Of Contents
 =================
 
-* [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
-  * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
+* [Serialization Deserialization Demo](#serialization-deserialization-demo)
+  * [Few things about Serialization Deserialization](#few-things-about-serialization-deserialization)
   * [Complete Reference](#complete-reference)
   * [Requirements](#requirements)
   * [Run Locally](#run-locally)
   * [Commit-00 :sparkles:](#commit-00-sparkles)
     * [Project Creation](#project-creation)
-    * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
-    * [Talk About Accessing Endpoints Over HTTP and JMX](#talk-about-accessing-endpoints-over-http-and-jmx)
+   
+## Few things about Serialization and Deserialization
+
+The Java platform allows us to create reusable objects in memory. However all of those objects exist only as long as the **Java Virtual Machine** remains running. It would be nice if the objects we create could exist beyond the lifetime of the **JVM**. With *Serialization* and *Deserialization*, you can flatten your objects, store, transmit and reuse them.
+
+**Serialization** is the process of saving an object's state in to a sequence of bytes.
+**Deserialization** (*reverse of Serialization*) is the process of rebuilding those bytes into a live object.
+
+The main reason behind **Serialization** and **Deserialization** is to store and/or transmit the objects and then reconstruct the same object (*not same but a replica*) in different contexts. The contexts could be:
+1. Needing the same object in the same JVM but at a later time.
+2. Needing the same object in a different JVM, which might be on a different machine.
+3. Needing the same object in a non-JVM application.
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Complete Reference
+
+[Serialization Deserialization Reference](https://docs.oracle.com/javase/8/docs/platform/serialization/spec/serialTOC.html)
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Requirements
+
+* OpenJDK 17+
+* Apache Maven 3.9.4+
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/kumar-github/serialization-deserialization-demo
+```
+
+Go to the project root directory
+
+```bash
+cd serialization-deserialization-demo
+```
+
+Start the service
+
+```bash
+./mvnw clean compile exec:java -Dexec.mainClass=tech.badprogrammer.Main
+```
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
 
 
 Secrets of the Java Serialization API
-
-The Java platform allows us to create reusable objects in memory. However all of those objects exist only as long as the Java Virtual Machine remains running. It would be nice if the objects we create could exist beyond the lifetime of the JVM. With Serialization and Deserialization, you can flatten your objects, store, transmit and reuse them.
-
-Serialization is the process of saving an object's state in to a sequence of bytes.
-Deserialization (reverse of Serialization) is the process of rebuilding those bytes into a live object.
-
-The main reason behind Serialization and Deserialization is to store and/or transmit the objects and then reconstruct the same object (not same but a replica) in different contexts. The contexts could be:
-Needing the same object in the same JVM but at a later time
-Needing the same object in a different JVM, which might be on a different machine
-Needing the same object in a non-JVM application
 
 The Java Serialization API provides a standard mechanism for developers to handle object serialization and deserialization.
 

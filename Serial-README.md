@@ -39,6 +39,13 @@ The main reason behind **Serialization** and **Deserialization** is to store and
 2. Needing the same object in a different JVM, which might be on a different machine.
 3. Needing the same object in a non-JVM application.
 
+The Java Serialization API provides a standard mechanism for developers to handle object serialization and deserialization.
+
+We'll see three different ways to perform serialization and deserialization
+1. Using the default protocol.
+2. Customizing the default protocol.
+3. Creating our own protocol.
+
 <br/>
 
 ---
@@ -109,13 +116,6 @@ Start the service
 <br/>
 
 Secrets of the Java Serialization API
-
-The Java Serialization API provides a standard mechanism for developers to handle object serialization and deserialization.
-
-We'll see three different ways to perform serialization and deserialization
-1. Using the default protocol.
-2. Customizing the default protocol.
-3. Creating our own protocol.
 
 The Default Protocol
 To save an object in Java, we must have a savable (or serializable) object. An object can be made savable or serializable by implementing the `Serializable` interface, which signifies to the underlying API that the object can be flattened into bytes and subsequently inflated in the future.

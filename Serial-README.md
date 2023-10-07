@@ -27,6 +27,7 @@ Table Of Contents
 The Java platform allows us to create reusable objects in memory. However all of those objects exist only as long as the **Java Virtual Machine** remains running. It would be nice if the objects we create could exist beyond the lifetime of the **JVM**. With *Serialization* and *Deserialization*, you can flatten your objects, store, transmit and reuse them.
 
 **Serialization** is the process of saving an object's state in to a sequence of bytes.
+
 **Deserialization** (*reverse of Serialization*) is the process of rebuilding those bytes into a live object.
 
 The main reason behind **Serialization** and **Deserialization** is to store and/or transmit the objects and then reconstruct the same object (*not same but a replica*) in different contexts. The contexts could be:
@@ -102,6 +103,10 @@ Start the service
 ---
 
 <br/>
+
+<img width="2443" alt="image" src="https://github.com/kumar-github/tutorial-resources/assets/2657313/b6bd929d-5544-4b4f-bdaa-3e56f9a2ae57">
+![Serialization](https://github.com/kumar-github/tutorial-resources/assets/2657313/b6bd929d-5544-4b4f-bdaa-3e56f9a2ae57)
+
 
 
 Secrets of the Java Serialization API

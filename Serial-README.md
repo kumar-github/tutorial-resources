@@ -17,7 +17,7 @@ Table Of Contents
 =================
 
 * [Serialization Deserialization Demo](#serialization-deserialization-demo)
-  * [Few things about Serialization Deserialization](#few-things-about-serialization-deserialization)
+  * [Few things about Serialization Deserialization](#few-things-about-serialization-and-deserialization)
   * [Complete Reference](#complete-reference)
   * [Requirements](#requirements)
   * [Run Locally](#run-locally)

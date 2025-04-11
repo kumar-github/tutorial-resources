@@ -172,6 +172,8 @@ java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 
 ![maven clean package](https://github.com/user-attachments/assets/cf2b494e-e64f-4f69-9019-ed81a8bc8a0a)
 
+![run using java](https://github.com/user-attachments/assets/16193add-28b5-4d79-91a6-927cc38677ef)
+
 ![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
 
 At this point, the application can be started and accessed on `http://localhost:8081`. Though accessing

@@ -31,8 +31,8 @@ Table Of Contents
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Run the project from IDE](#run-the-project-from-ide)
-        * [Run the project from command line using maven](#run-the-project-from-command-line-using-maven)
-        * [Run the project from command line using java](#run-the-project-from-command-line-using-java)
+        * [Run the project from the command line using maven](#run-the-project-from-command-line-using-maven)
+        * [Run the project from the command line using java](#run-the-project-from-command-line-using-java)
 
 <br/>
 
@@ -130,8 +130,8 @@ Start the service
 |------------------------------------------------------|:------------------:|
 | 1. Project creation with required dependencies.      | :white_check_mark: |
 | 2. Run the project from IDE.                         | :white_check_mark: |
-| 3. Run the project from command line using maven.    | :white_check_mark: |
-| 4. Run the project from command line using java. | :white_check_mark: |
+| 3. Run the project from the command line using maven.    | :white_check_mark: |
+| 4. Run the project from the command line using java. | :white_check_mark: |
 
 ### Project Creation
 
@@ -141,11 +141,11 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 ### Run the project from IDE
 
-Go the `Application.java` file and run the application from the IDE.
+Go to the `Application.java` file and run the application from the IDE.
 
 ### Run the project from command line using maven
 
-Since it is a maven project, the application can be run from command line using the below maven command.
+Since it is a maven project, the application can be run from the command line using the below maven command.
 
 Go to the project root directory
 
@@ -155,7 +155,7 @@ cd spring-boot-externalized-configuration-101
 ```
 *Note: I am using the maven wrapper command to run the project.*
 
-### Run the project from command line using java
+### Run the project from the command line using java
 
 Go to the project root directory
 

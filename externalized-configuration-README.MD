@@ -143,7 +143,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 Go to the `Application.java` file and run the application from the IDE.
 
-### Run the project from command line using maven
+### Run the project from the command line using maven
 
 Since it is a maven project, the application can be run from the command line using the below maven command.
 

@@ -163,8 +163,6 @@ Run the application
 
 ![run using maven](https://github.com/user-attachments/assets/5090602f-3c4a-408b-b221-299011e66fb9)
 
-![run using maven](https://github.com/user-attachments/assets/a6df0066-e15a-4fa5-be09-ee081f53ad2f)
-
 ### Run the project from the command line using java
 
 Go to the project root directory

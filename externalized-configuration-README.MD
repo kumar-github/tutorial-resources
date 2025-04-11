@@ -185,6 +185,8 @@ java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 
 *Note: Make sure java is on the path*
 
+![maven package](https://github.com/user-attachments/assets/cf2b494e-e64f-4f69-9019-ed81a8bc8a0a)
+
 ![maven clean package](https://github.com/user-attachments/assets/cf2b494e-e64f-4f69-9019-ed81a8bc8a0a)
 
 ![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)

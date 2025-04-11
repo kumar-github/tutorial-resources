@@ -143,7 +143,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 Go to the `Application.java` file and run the application from the IDE.
 
-![Run from IDE](https://github.com/user-attachments/assets/3a84aac8-c309-4909-b415-2a5c5374a2f6)
+![run from IDE](https://github.com/user-attachments/assets/54927187-805e-4995-8ea7-df30814b1780)
 
 ### Run the project from the command line using maven
 
@@ -157,6 +157,8 @@ cd spring-boot-externalized-configuration-101
 ```
 *Note: I am using the maven wrapper command to run the project.*
 
+![run using maven](https://github.com/user-attachments/assets/a6df0066-e15a-4fa5-be09-ee081f53ad2f)
+
 ### Run the project from the command line using java
 
 Go to the project root directory
@@ -167,6 +169,10 @@ cd spring-boot-externalized-configuration-101
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
 *Note: Make sure java is on the path*
+
+![maven clean package](https://github.com/user-attachments/assets/cf2b494e-e64f-4f69-9019-ed81a8bc8a0a)
+
+![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
 
 At this point, the application can be started and accessed on `http://localhost:8081`. Though accessing
 `http://localhost:8081` will give you a `Whitelabel Error Page` but that is understandable since we did not map any

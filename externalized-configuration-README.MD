@@ -126,12 +126,12 @@ Start the service
 
 *This is the Initial Commit.*
 
-| **Agenda for this commit**                           |      Covered?      |
-|------------------------------------------------------|:------------------:|
-| 1. Project creation with required dependencies.      | :white_check_mark: |
-| 2. Run the project from IDE.                         | :white_check_mark: |
-| 3. Run the project from the command line using maven.    | :white_check_mark: |
-| 4. Run the project from the command line using java. | :white_check_mark: |
+| **Agenda for this commit**                            |      Covered?      |
+|-------------------------------------------------------|:------------------:|
+| 1. Project creation with required dependencies.       | :white_check_mark: |
+| 2. Run the project from IDE.                          | :white_check_mark: |
+| 3. Run the project from the command line using maven. | :white_check_mark: |
+| 4. Run the project from the command line using java.  | :white_check_mark: |
 
 ### Project Creation
 
@@ -155,6 +155,7 @@ Go to the project root directory
 cd spring-boot-externalized-configuration-101
 ./mvnw spring-boot:run
 ```
+
 *Note: I am using the maven wrapper command to run the project.*
 
 ![run using maven](https://github.com/user-attachments/assets/a6df0066-e15a-4fa5-be09-ee081f53ad2f)
@@ -168,6 +169,7 @@ cd spring-boot-externalized-configuration-101
 ./mvnw clean package
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
+
 *Note: Make sure java is on the path*
 
 ![maven clean package](https://github.com/user-attachments/assets/cf2b494e-e64f-4f69-9019-ed81a8bc8a0a)

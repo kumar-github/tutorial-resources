@@ -147,8 +147,6 @@ Go to the `Application.java` file and run the application from the IDE.
 
 ### Run the project from the command line using maven
 
-Since it is a maven project, the application can be run from the command line using the below maven command.
-
 Go to the project root directory
 
 ```bash
@@ -179,8 +177,6 @@ java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 At this point, the application can be started and accessed on `http://localhost:8081`. Though accessing
 `http://localhost:8081` will give you a `Whitelabel Error Page` but that is understandable since we did not map any
 controller to handle the request.
-
-But we can find the below line logged in the console which is the proof that actuator is enabled.
 
 :question:**Any Questions**:question:
 

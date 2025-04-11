@@ -169,7 +169,17 @@ Go to the project root directory
 
 ```bash
 cd spring-boot-externalized-configuration-101
+```
+
+Generate the jar
+
+```bash
 ./mvnw clean package
+```
+
+Run the application
+
+```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
 

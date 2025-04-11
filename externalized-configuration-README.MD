@@ -151,10 +151,17 @@ Go to the project root directory
 
 ```bash
 cd spring-boot-externalized-configuration-101
+```
+
+Run the application
+
+```bash
 ./mvnw spring-boot:run
 ```
 
 *Note: I am using the maven wrapper command to run the project.*
+
+![run using maven](https://github.com/user-attachments/assets/5090602f-3c4a-408b-b221-299011e66fb9)
 
 ![run using maven](https://github.com/user-attachments/assets/a6df0066-e15a-4fa5-be09-ee081f53ad2f)
 

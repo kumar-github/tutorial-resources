@@ -31,8 +31,8 @@ Table Of Contents
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Run the project from IDE](#run-the-project-from-ide)
-        * [Run the project from the command line using maven](#run-the-project-from-command-line-using-maven)
-        * [Run the project from the command line using java](#run-the-project-from-command-line-using-java)
+        * [Run the project from the command line using maven](#run-the-project-from-the-command-line-using-maven)
+        * [Run the project from the command line using java](#run-the-project-from-the-command-line-using-java)
 
 <br/>
 

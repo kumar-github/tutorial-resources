@@ -31,8 +31,8 @@ Table Of Contents
     * [Commit-00 :sparkles:](#commit-00-sparkles)
         * [Project Creation](#project-creation)
         * [Run the project from IDE](#run-the-project-from-ide)
-        * [Run the project from the command line using maven](#run-the-project-from-the-command-line-using-maven)
-        * [Run the project from the command line using java](#run-the-project-from-the-command-line-using-java)
+        * [Run the project from command line using maven](#run-the-project-from-command-line-using-maven)
+        * [Run the project from command line using java](#run-the-project-from-command-line-using-java)
 
 <br/>
 
@@ -130,8 +130,8 @@ Start the service
 |-------------------------------------------------------|:------------------:|
 | 1. Project creation with required dependencies.       | :white_check_mark: |
 | 2. Run the project from IDE.                          | :white_check_mark: |
-| 3. Run the project from the command line using maven. | :white_check_mark: |
-| 4. Run the project from the command line using java.  | :white_check_mark: |
+| 3. Run the project from command line using maven. | :white_check_mark: |
+| 4. Run the project from command line using java.  | :white_check_mark: |
 
 ### Project Creation
 
@@ -145,7 +145,7 @@ Go to the `Application.java` file and run the application from the IDE.
 
 ![run from IDE](https://github.com/user-attachments/assets/54927187-805e-4995-8ea7-df30814b1780)
 
-### Run the project from the command line using maven
+### Run the project from command line using maven
 
 Go to the project root directory
 
@@ -163,7 +163,7 @@ Run the application
 
 ![run using maven](https://github.com/user-attachments/assets/5090602f-3c4a-408b-b221-299011e66fb9)
 
-### Run the project from the command line using java
+### Run the project from command line using java
 
 Go to the project root directory
 

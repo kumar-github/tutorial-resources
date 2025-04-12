@@ -155,7 +155,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 Open the project in your favourite IDE and go to the `Application.java` file and run the application.
 
-![run from IDE](https://github.com/user-attachments/assets/54927187-805e-4995-8ea7-df30814b1780)
+![run from ide](https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f)
 
 ### Run the project from command line using maven
 
@@ -196,7 +196,7 @@ Run the application
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
-![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
+![run using java](https://github.com/user-attachments/assets/70f66807-b340-44a3-b269-8452f38e4a7d)
 
 *Note: Make sure java is on the path*
 

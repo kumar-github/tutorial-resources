@@ -115,7 +115,7 @@ Go to the project root directory
 ```bash
 cd spring-boot-externalized-configuration-101
 ```
-![change directory](https://github.com/user-attachments/assets/6ffd0498-a08f-40f7-9cde-06ab59f4a06b)
+![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
 Start the service
 
@@ -182,24 +182,23 @@ Go to the project root directory
 ```bash
 cd spring-boot-externalized-configuration-101
 ```
+![change directory](https://github.com/user-attachments/assets/6ffd0498-a08f-40f7-9cde-06ab59f4a06b)
 
 Generate the jar
 
 ```bash
 ./mvnw clean package
 ```
+![maven package](https://github.com/user-attachments/assets/770c7603-77cf-49aa-9619-3872be4ebf47)
 
 Run the application
 
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
+![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
 
 *Note: Make sure java is on the path*
-
-![maven package](https://github.com/user-attachments/assets/770c7603-77cf-49aa-9619-3872be4ebf47)
-
-![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
 
 At this point, the application can be started and accessed on `http://localhost:8081`. Though accessing
 `http://localhost:8081` will give you the `Whitelabel Error Page` but that is understandable since we did not map any

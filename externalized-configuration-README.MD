@@ -175,8 +175,6 @@ Run the application
 
 *Note: I am using the maven wrapper command to run the project.*
 
-![run using maven](https://github.com/user-attachments/assets/5090602f-3c4a-408b-b221-299011e66fb9)
-
 ### Run the project from command line using java
 
 Go to the project root directory

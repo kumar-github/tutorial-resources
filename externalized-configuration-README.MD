@@ -199,7 +199,7 @@ java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ![run using java](https://github.com/user-attachments/assets/7382e4e5-0814-4495-bd4b-002bdd583a09)
 
 At this point, the application can be started and accessed on `http://localhost:8081`. Though accessing
-`http://localhost:8081` will give you a `Whitelabel Error Page` but that is understandable since we did not map any
+`http://localhost:8081` will give you the `Whitelabel Error Page` but that is understandable since we did not map any
 controller to handle the request.
 
 :question:**Any Questions**:question:

@@ -171,7 +171,7 @@ Run the application
 ```bash
 ./mvnw spring-boot:run
 ```
-![run using maven](https://github.com/user-attachments/assets/b7439361-ae1b-4d71-bfec-c67a9dc66a33)
+![run using maven](https://github.com/user-attachments/assets/4d681b76-7094-43a3-8c66-a31c0e482d3c)
 
 *Note: I am using the maven wrapper command to run the project.*
 

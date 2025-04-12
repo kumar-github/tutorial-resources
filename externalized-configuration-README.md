@@ -173,7 +173,8 @@ Run the application
 ```
 ![run using maven](https://github.com/user-attachments/assets/b7439361-ae1b-4d71-bfec-c67a9dc66a33)
 
-*Note: I am using the maven wrapper command to run the project.*
+> [!NOTE]
+> I am using the maven wrapper command to run the project.
 
 ### Run the project from command line using java
 

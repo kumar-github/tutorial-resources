@@ -101,14 +101,14 @@ Using HTTPS
 ```bash
 git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
 ```
-![clone using https](https://github.com/user-attachments/assets/2e68cbd4-b7e1-4065-b054-dfef8589984f)
+![clone using https](https://github.com/user-attachments/assets/d96cea39-d852-43d0-8575-6a7bcddc010e)
 
 Using SSH
 
 ```bash
 git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101.git
 ```
-![clone using ssh](https://github.com/user-attachments/assets/b13bab19-452e-49d3-9414-3731522b3d76)
+![clone using https](https://github.com/user-attachments/assets/ff8df5e4-b89d-493f-a6d3-e95250ffc988)
 
 Go to the project root directory
 

@@ -96,9 +96,18 @@ Property values can be injected directly into your beans by using the `@Value` a
 
 Clone the project
 
+Using HTTPS
+
 ```bash
-git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101
+git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
 ```
+
+Using SSH
+
+```bash
+git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101.git
+```
+
 
 Go to the project root directory
 

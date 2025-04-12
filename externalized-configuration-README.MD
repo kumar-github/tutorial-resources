@@ -164,14 +164,14 @@ Go to the project root directory
 ```bash
 cd spring-boot-externalized-configuration-101
 ```
-![change directory](https://github.com/user-attachments/assets/6ffd0498-a08f-40f7-9cde-06ab59f4a06b)
+![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
 Run the application
 
 ```bash
 ./mvnw spring-boot:run
 ```
-![run using maven](https://github.com/user-attachments/assets/4d681b76-7094-43a3-8c66-a31c0e482d3c)
+![run using maven](https://github.com/user-attachments/assets/b7439361-ae1b-4d71-bfec-c67a9dc66a33)
 
 *Note: I am using the maven wrapper command to run the project.*
 
@@ -182,7 +182,7 @@ Go to the project root directory
 ```bash
 cd spring-boot-externalized-configuration-101
 ```
-![change directory](https://github.com/user-attachments/assets/6ffd0498-a08f-40f7-9cde-06ab59f4a06b)
+![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
 Generate the jar
 

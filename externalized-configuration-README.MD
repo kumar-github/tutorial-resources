@@ -7,7 +7,7 @@ It will help you to understand various approaches in externalizing the configura
 Each concept is covered in-depth and organized as individual git commits. The commits are numbered sequentially starting
 from `00`, `01`, `02` and so on. As you go through it, take your time to understand the changes made to the
 code in each commit. In order to follow along, clone the repository to your local machine, revert back to the
-initial commit and then start applying the commits one by one starting from `00`. This `README.md` file will be updated
+initial commit and then start applying the commits one by one starting from `00`. This `README.MD` file will be updated
 in every commit and will tell you what has been covered in the specific commit.
 
 <br/>

@@ -94,7 +94,7 @@ Property values can be injected directly into your beans by using the `@Value` a
 
 ## Run Locally
 
-Clone the project
+Clone the project either via HTTPS or SSH
 
 Using HTTPS
 

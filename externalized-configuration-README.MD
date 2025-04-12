@@ -189,7 +189,7 @@ Generate the jar
 ```bash
 ./mvnw clean package
 ```
-![maven package](https://github.com/user-attachments/assets/770c7603-77cf-49aa-9619-3872be4ebf47)
+![maven clean package](https://github.com/user-attachments/assets/e3f7eb40-f709-4b03-b4d3-80791a93fedd)
 
 Run the application
 

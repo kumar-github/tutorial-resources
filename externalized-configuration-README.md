@@ -289,10 +289,10 @@ app.username            = admin
 ```
 
 > [!TIP]
-> It is a convention to follow the `.` notation for property names and group them based on their functionality.
+> It is a convention to follow the `.` and lower case notation for property names and group them based on their
+> functionality.
 >
 > Example: `app.database.url`, `app.database.driver-class-name`, `app.database.security.username` etc
-
 
 :question:**Any Questions**:question:
 

@@ -326,3 +326,5 @@ app.username            = admin
 ![run from ide](https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f)
 <br><br>
 ![run using java](https://github.com/user-attachments/assets/70f66807-b340-44a3-b269-8452f38e4a7d)
+<br><br>
+![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)

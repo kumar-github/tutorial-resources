@@ -7,3 +7,7 @@
 ![run using maven](https://github.com/user-attachments/assets/b7439361-ae1b-4d71-bfec-c67a9dc66a33)
 <br><br>
 ![maven clean package](https://github.com/user-attachments/assets/e3f7eb40-f709-4b03-b4d3-80791a93fedd)
+<br><br>
+![run from ide](https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f)
+<br><br>
+![run using java](https://github.com/user-attachments/assets/70f66807-b340-44a3-b269-8452f38e4a7d)

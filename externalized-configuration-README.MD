@@ -150,7 +150,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 ### Run the project from IDE
 
-Go to the `Application.java` file and run the application from the IDE.
+Open the project in your favourite IDE and go to the `Application.java` file and run the application.
 
 ![run from IDE](https://github.com/user-attachments/assets/54927187-805e-4995-8ea7-df30814b1780)
 

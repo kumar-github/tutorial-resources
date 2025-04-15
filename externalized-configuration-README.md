@@ -380,6 +380,14 @@ The following figure shows how the Spring environment is created from the availa
 > the `Environment`'s search, you can do so by implementing and instantiating your own `PropertySource` and add it to
 > the set of `PropertySources` for the current `Environment`.
 
+Run the application and hit the below endpoint
+
+`http://localhost:8081/appDetails`
+
+We can see the below response
+
+![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
+
 :question:**Any Questions**:question:
 
 <br/>

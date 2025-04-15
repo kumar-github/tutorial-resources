@@ -336,3 +336,5 @@ We can see the below response
 ![run using java](https://github.com/user-attachments/assets/70f66807-b340-44a3-b269-8452f38e4a7d)
 <br><br>
 ![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
+<br><br>
+![app details endpoint using environment](https://github.com/user-attachments/assets/85110cfd-7423-4b0c-95e9-6df29ff4dd47)

@@ -362,3 +362,5 @@ We added a new custom property named `app.password` to the `application.properti
 ![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
 <br><br>
 ![app details endpoint using environment](https://github.com/user-attachments/assets/85110cfd-7423-4b0c-95e9-6df29ff4dd47)
+<br><br>
+![spring configuration generated from java property sources](https://github.com/user-attachments/assets/64e922ce-2e48-4c7e-990c-2f7ab7cf8f14)

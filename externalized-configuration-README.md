@@ -329,7 +329,8 @@ We can see the below response
 In the previous commit, we have used `@Value` annotation to access the properties from the `application.properties`
 file. In this commit, we will use Spring's `Environment` abstraction to do the same. We also added a new custom property
 named `app.password` to the `application.properties` file. In the `HelloController` class, we have removed all the
-`@Value` annotated fields and instead we used the `Environment` abstraction's `getProperty()` method to get the value.
+`@Value` annotated fields and instead we used the `Environment` abstraction's `getProperty(...)` method to get the
+value.
 
 ```java
     @GetMapping("/appDetails")

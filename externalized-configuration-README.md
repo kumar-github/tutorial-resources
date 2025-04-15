@@ -375,9 +375,10 @@ The following figure shows how the Spring environment is created from the availa
 
 ![spring configuration generated from java property sources](https://github.com/user-attachments/assets/64e922ce-2e48-4c7e-990c-2f7ab7cf8f14)
 
-Most importantly, the entire mechanism is configurable. If you have a custom source of properties that you
-want to integrate into this search, you can do so by implementing and instantiating your own `PropertySource` and add
-it to the set of `PropertySources` for the current `Environment`.
+> [!TIP]
+> The entire mechanism is configurable. If you have a custom source of properties that you want to integrate into this
+> search, you can do so by implementing and instantiating your own `PropertySource` and add it to the set of
+`PropertySources` for the current `Environment`.
 
 :question:**Any Questions**:question:
 

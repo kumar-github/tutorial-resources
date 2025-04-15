@@ -61,6 +61,8 @@ Table Of Contents
     * [Commit-01 :sparkles:](#commit-01-sparkles)
         * [Add custom properties in application properties file](#add-custom-properties-in-application-properties-file)
         * [Access the custom properties using @Value annotation](#access-the-custom-properties-using-value-annotation)
+    * [Commit-02 :sparkles:](#commit-02-sparkles)
+        * [Access the properties using the Environment abstraction](#access-the-properties-using-the-environment-abstraction)
 
 <br/>
 
@@ -301,6 +303,28 @@ Run the application and hit the below endpoint
 We can see the below response
 
 ![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-02 :sparkles:
+
+| **Agenda for this commit**                                  |      Covered?      |
+|-------------------------------------------------------------|:------------------:|
+| 1. Access the properties using the Environment abstraction. | :white_check_mark: |
+
+### Access the properties using the Environment abstraction
+
+We added a new custom property named `app.password` to the `application.properties` file.
 
 :question:**Any Questions**:question:
 

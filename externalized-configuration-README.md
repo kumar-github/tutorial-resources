@@ -415,6 +415,6 @@ The following figure shows how the Spring environment is created from the availa
 <br><br>
 ![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
 <br><br>
-![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
+![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
 <br><br>
 ![spring configuration generated from java property sources](https://github.com/user-attachments/assets/64e922ce-2e48-4c7e-990c-2f7ab7cf8f14)

@@ -329,7 +329,26 @@ We can see the below response
 In the previous commit, we have used `@Value` annotation to access the properties from the `application.properties`
 file. In this commit, we will use Spring's `Environment` abstraction to do the same. We also added a new custom property
 named `app.password` to the `application.properties` file. In the `HelloController` class, we have removed all the
-`@Value` annotated fields and instead we used the `Environment` abstraction to get the value.
+`@Value` annotated fields and instead we used the `Environment` abstraction's `getProperty()` method to get the value.
+
+```java
+    @GetMapping("/appDetails")
+    public String appDetails() {
+        final String appName    = environment.getProperty("spring.application.name");
+        final String serverPort = environment.getProperty("server.port");
+        final String username   = environment.getProperty("app.username");
+        final String password   = environment.getProperty("app.password");
+        return appName + " : " + serverPort + " : " + username + " : " + password;
+    }
+```
+
+Run the application and hit the below endpoint
+
+`http://localhost:8081/appDetails`
+
+We can see the below response
+
+![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
 
 ### The Environment abstraction
 
@@ -379,14 +398,6 @@ The following figure shows how the Spring environment is created from the availa
 > The entire mechanism is configurable. If you have a custom source of properties that you want to integrate into
 > the `Environment`'s search, you can do so by implementing and instantiating your own `PropertySource` and add it to
 > the set of `PropertySources` for the current `Environment`.
-
-Run the application and hit the below endpoint
-
-`http://localhost:8081/appDetails`
-
-We can see the below response
-
-![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
 
 :question:**Any Questions**:question:
 

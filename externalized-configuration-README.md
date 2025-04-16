@@ -692,3 +692,29 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 ![app started from console](https://github.com/user-attachments/assets/58edb65b-e6c7-411a-82b2-8b77635767d1)
 <br><br>
 ![application properties file inside target folder](https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99)
+<br><br>
+![print env](https://github.com/user-attachments/assets/ca60cc4c-3553-410d-b871-aab357fd4139)
+<br><br>
+![multiple line export](https://github.com/user-attachments/assets/0cde4ea6-668f-41ac-b4ac-9876d7dcceec)
+<br><br>
+![single line export](https://github.com/user-attachments/assets/10f22d9c-38fa-4117-b3be-4669b8fb38dc)
+<br><br>
+![multiple line echo](https://github.com/user-attachments/assets/a30b19a9-5b0a-4fd5-8761-31c9eababde3)
+<br><br>
+![change directory](https://github.com/user-attachments/assets/b989181b-2dbe-4860-bde1-b57501fd681a)
+<br><br>
+![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
+<br><br>
+![run using java](https://github.com/user-attachments/assets/59136705-6009-488b-8575-a6429a1d391d)
+<br><br>
+![app details endpoint on browser](https://github.com/user-attachments/assets/22ac35c2-b33a-418d-8042-d396fd19cc4e)
+<br><br>
+![run using maven](https://github.com/user-attachments/assets/d84345b3-b9c1-48f9-8347-3183db1a90c9)
+<br><br>
+![multiple line export](https://github.com/user-attachments/assets/91f29e78-340e-4edd-9525-f7bd07505b30)
+<br><br>
+![single line echo](https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e)
+
+
+
+

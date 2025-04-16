@@ -465,3 +465,33 @@ jar that will override the values of the above mentioned properties.
 ![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
 <br><br>
 ![spring configuration generated from java property sources](https://github.com/user-attachments/assets/64e922ce-2e48-4c7e-990c-2f7ab7cf8f14)
+<br><br>
+![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
+<br><br>
+![maven clean package](https://github.com/user-attachments/assets/93540c9a-865b-4a90-bcd1-79c1baaad901)
+<br><br>
+![target folder and jar generated](https://github.com/user-attachments/assets/e9853a60-559b-4d85-ac3d-416c2b7ac229)
+<br><br>
+![run using java](https://github.com/user-attachments/assets/44267789-2b19-4ba5-9b95-ccfbe3f32d20)
+<br><br>
+![app started from console](https://github.com/user-attachments/assets/3d87116d-f1d4-4365-bc1b-6950b72819bd)
+<br><br>
+![maven run](https://github.com/user-attachments/assets/3d21ec95-4866-41ca-be18-fb810d0a49d3)
+<br><br>
+![app started from console](https://github.com/user-attachments/assets/b0c94d3a-ad09-4ed5-b085-72650313ef9c)
+<br><br>
+![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
+<br><br>
+![added application properties file externally](https://github.com/user-attachments/assets/512522da-782f-497c-a6d0-756abcaadbff)
+<br><br>
+![run using java](https://github.com/user-attachments/assets/d1908e31-8d19-4767-b995-495b1d2575fb)
+<br><br>
+![app started from console](https://github.com/user-attachments/assets/1021e0dc-a10e-46d3-ace6-38a2238175ce)
+<br><br>
+![app details endpoint](https://github.com/user-attachments/assets/9861c308-1bcb-4c8c-8e16-336496a2f4b1)
+<br><br>
+![run using maven](https://github.com/user-attachments/assets/44e97ba2-5a9f-40cc-940b-7ea14f65148e)
+<br><br>
+![app started from console](https://github.com/user-attachments/assets/58edb65b-e6c7-411a-82b2-8b77635767d1)
+<br><br>
+![application properties file inside target folder](https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99)

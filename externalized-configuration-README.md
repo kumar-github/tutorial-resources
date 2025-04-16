@@ -424,9 +424,8 @@ The following figure shows how the Spring environment is created from the availa
 
 On the application classpath (for example, inside the jar) currently we have an `application.properties` file
 that provides sensible default values for properties `spring.application.name`, `server.port`, `app.username` and
-`app.password`.
-But when running in a new environment, an `application.properties` file can be provided outside of the jar that will
-override the values of the above mentioned properties.
+`app.password`. But when running in a new environment, an `application.properties` file can be provided outside of the
+jar that will override the values of the above mentioned properties.
 
 :question:**Any Questions**:question:
 

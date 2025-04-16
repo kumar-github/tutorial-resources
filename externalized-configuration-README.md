@@ -65,7 +65,11 @@ Table Of Contents
         * [Access the properties using the Environment abstraction](#access-the-properties-using-the-environment-abstraction)
         * [The Environment abstraction](#the-environment-abstraction)
     * [Commit-03 :sparkles:](#commit-03-sparkles)
-        * [Overriding the properties from an external application properties file](#overriding-the-properties-from-an-external-application-properties-file)
+        * [Overriding the properties using an external application properties file](#overriding-the-properties-using-an-external-application-properties-file)
+        * [Run the project from command line using java with the internal application properties file](#run-the-project-from-command-line-using-java-with-the-internal-application-properties-file)
+        * [Run the project from command line using maven with the internal application properties file](#run-the-project-from-command-line-using-maven-with-the-internal-application-properties-file)
+        * [Run the project from command line using java with an external application properties file](#run-the-project-from-command-line-using-java-with-an-external-application-properties-file)
+        * [Run the project from command line using maven with an external application properties file](#run-the-project-from-command-line-using-maven-with-an-external-application-properties-file)
 
 <br/>
 
@@ -416,16 +420,161 @@ The following figure shows how the Spring environment is created from the availa
 
 ## Commit-03 :sparkles:
 
-| **Agenda for this commit**                                                 |      Covered?      |
-|----------------------------------------------------------------------------|:------------------:|
-| 1. Overriding the properties from an external application properties file. | :white_check_mark: |
+| **Agenda for this commit**                                                                      |      Covered?      |
+|-------------------------------------------------------------------------------------------------|:------------------:|
+| 1. Overriding the properties using an external application properties file.                     | :white_check_mark: |
+| 2. Run the project from command line using java with the internal application properties file.  | :white_check_mark: |
+| 3. Run the project from command line using maven with the internal application properties file. | :white_check_mark: |
+| 4. Run the project from command line using java with an external application properties file.   | :white_check_mark: |
+| 5. Run the project from command line using maven with an external application properties file.  | :white_check_mark: |
 
-### Overriding the properties from an external application properties file
+### Overriding the properties using an external application properties file
 
 On the application classpath (for example, inside the jar) currently we have an `application.properties` file
 that provides sensible default values for properties `spring.application.name`, `server.port`, `app.username` and
 `app.password`. But when running in a new environment, an `application.properties` file can be provided outside of the
 jar that will override the values of the above mentioned properties.
+
+### Run the project from command line using java with the internal application properties file
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/ 
+```
+
+![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
+
+Generate the jar.
+
+```bash
+./mvnw clean package
+```
+
+![maven clean package](https://github.com/user-attachments/assets/93540c9a-865b-4a90-bcd1-79c1baaad901)
+
+Target folder generated with jar.
+
+![target folder and jar generated](https://github.com/user-attachments/assets/e9853a60-559b-4d85-ac3d-416c2b7ac229)
+
+Run the application using java jar command.
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+![run using java](https://github.com/user-attachments/assets/44267789-2b19-4ba5-9b95-ccfbe3f32d20)
+
+Check the port on the console.
+
+![app started from console](https://github.com/user-attachments/assets/3d87116d-f1d4-4365-bc1b-6950b72819bd)
+
+Check the response on the browser.
+
+![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
+
+The application uses the `application.properties` file from inside the jar and started on port 8081. The values for
+other properties also picked up from the same `application.properties` file (inside the jar).
+
+### Run the project from command line using maven with the internal application properties file
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/ 
+```
+
+![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
+
+Run the application using maven command.
+
+```bash
+./mvnw spring-boot:run
+```
+
+![maven run](https://github.com/user-attachments/assets/3d21ec95-4866-41ca-be18-fb810d0a49d3)
+
+Check the port on the console.
+
+![app started from console](https://github.com/user-attachments/assets/b0c94d3a-ad09-4ed5-b085-72650313ef9c)
+
+Check the response on the browser.
+
+![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
+
+### Run the project from command line using java with an external application properties file
+
+Create a new `application.properties` file with different values for the properties and place it in the project root
+directory.
+
+![added application properties file externally](https://github.com/user-attachments/assets/512522da-782f-497c-a6d0-756abcaadbff)
+
+> [!TIP]
+> This `application.properties` file can be placed anywhere (external to the project) but you need to make sure that
+> the command to run the application should be issued from the folder where the `application.propertiles` file exists.
+
+Run the application using java jar command.
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+![run using java](https://github.com/user-attachments/assets/d1908e31-8d19-4767-b995-495b1d2575fb)
+
+Check the port on the console.
+
+![app started from console](https://github.com/user-attachments/assets/1021e0dc-a10e-46d3-ace6-38a2238175ce)
+
+Check the response on the browser.
+
+![app details endpoint](https://github.com/user-attachments/assets/9861c308-1bcb-4c8c-8e16-336496a2f4b1)
+
+Now the application uses the external `application.properties` file and starts on port 8082. The values for other
+properties also picked up from the same `application.properties` file (external to the jar).
+
+### Run the project from command line using maven with an external application properties file
+
+Follow the above steps to create a new `application.properties` file and place it external to the jar.
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/ 
+```
+
+![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
+
+Run the application using maven command.
+
+```bash
+./mvnw spring-boot:run
+```
+
+![run using maven](https://github.com/user-attachments/assets/44e97ba2-5a9f-40cc-940b-7ea14f65148e)
+
+Check the port on the console.
+
+![app started from console](https://github.com/user-attachments/assets/58edb65b-e6c7-411a-82b2-8b77635767d1)
+
+Check the response on the browser.
+
+![app details endpoint](https://github.com/user-attachments/assets/9861c308-1bcb-4c8c-8e16-336496a2f4b1)
+
+Now the application uses the external `application.properties` file and starts on port 8082. The values for other
+properties also picked up from the same `application.properties` file (external to the jar).
+
+> [!TIP]
+> Make sure to run the application from the folder where the external `application.properties` file is placed. In
+> our example the `application.properties` file is placed in the project root folder and the command to start the
+> application is executed from the same folder.
+
+> [!WARNING]  
+> Check the below screenshot.
+>
+> We copied the same `application.properties` file inside the target folder. In this case, if the commands are not
+> executed from the target folder, the `application.properties` file will NOT be picked up.
+
+![application properties file inside target folder](https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99)
 
 :question:**Any Questions**:question:
 

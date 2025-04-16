@@ -64,6 +64,8 @@ Table Of Contents
     * [Commit-02 :sparkles:](#commit-02-sparkles)
         * [Access the properties using the Environment abstraction](#access-the-properties-using-the-environment-abstraction)
         * [The Environment abstraction](#the-environment-abstraction)
+    * [Commit-03 :sparkles:](#commit-03-sparkles)
+        * [Overriding the properties from an external application properties file](#overriding-the-properties-from-an-external-application-properties-file)
 
 <br/>
 
@@ -399,6 +401,32 @@ The following figure shows how the Spring environment is created from the availa
 > The entire mechanism is configurable. If you have a custom source of properties that you want to integrate into
 > the `Environment`'s search, you can do so by implementing and instantiating your own `PropertySource` and add it to
 > the set of `PropertySources` for the current `Environment`.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-03 :sparkles:
+
+| **Agenda for this commit**                                                 |      Covered?      |
+|----------------------------------------------------------------------------|:------------------:|
+| 1. Overriding the properties from an external application properties file. | :white_check_mark: |
+
+### Overriding the properties from an external application properties file
+
+On the application classpath (for example, inside the jar) currently we have an `application.properties` file
+that provides sensible default values for properties `spring.application.name`, `server.port`, `app.username` and
+`app.password`.
+But when running in a new environment, an `application.properties` file can be provided outside of the jar that will
+override the values of the above mentioned properties.
 
 :question:**Any Questions**:question:
 

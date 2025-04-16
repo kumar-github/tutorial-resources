@@ -473,8 +473,9 @@ Check the response on the browser.
 
 ![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
 
-The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for other
-properties also picked up from the same `application.properties` file (inside the jar).
+> [!NOTE]
+> The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for
+> other properties also picked up from the same `application.properties` file (inside the jar).
 
 ### Run the project from command line using maven with the internal application properties file
 
@@ -502,8 +503,9 @@ Check the response on the browser.
 
 ![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
 
-The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for other
-properties also picked up from the same `application.properties` file (inside the jar).
+> [!NOTE]
+> The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for
+> other properties also picked up from the same `application.properties` file (inside the jar).
 
 ### Run the project from command line using java with an external application properties file
 
@@ -532,8 +534,9 @@ Check the response on the browser.
 
 ![app details endpoint](https://github.com/user-attachments/assets/9861c308-1bcb-4c8c-8e16-336496a2f4b1)
 
-Now the application uses the external `application.properties` file and starts on port 8082. The values for other
-properties also picked up from the same `application.properties` file (external to the jar).
+> [!NOTE]
+> Now the application uses the external `application.properties` file and starts on port 8082. The values for other
+> properties also picked up from the same `application.properties` file (external to the jar).
 
 ### Run the project from command line using maven with an external application properties file
 
@@ -563,19 +566,20 @@ Check the response on the browser.
 
 ![app details endpoint](https://github.com/user-attachments/assets/9861c308-1bcb-4c8c-8e16-336496a2f4b1)
 
-Now the application uses the external `application.properties` file and starts on port 8082. The values for other
-properties also picked up from the same `application.properties` file (external to the jar).
+> [!NOTE]
+> Now the application uses the external `application.properties` file and starts on port 8082. The values for other
+> properties also picked up from the same `application.properties` file (external to the jar).
 
 > [!TIP]
 > Make sure to run the application from the folder where the external `application.properties` file is placed. In
 > our example the `application.properties` file is placed in the project root folder and the command to start the
 > application is executed from the same folder.
 
-> [!WARNING]  
-> Check the below screenshot.
+> [!WARNING]
+> We copied the same `application.properties` file inside the target folder. In this case, the commands should be
+> executed from within the target folder, otherwise the `application.properties` file will NOT be picked up.
 >
-> We copied the same `application.properties` file inside the target folder. In this case, if the commands are not
-> executed from the target folder, the `application.properties` file will NOT be picked up.
+> Check the below screenshot.
 
 ![application properties file inside target folder](https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99)
 

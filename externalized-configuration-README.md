@@ -473,8 +473,8 @@ Check the response on the browser.
 
 ![app details endpoint](https://github.com/user-attachments/assets/ac5ce80d-c417-4b37-8509-3872c0875501)
 
-The application uses the `application.properties` file from inside the jar and started on port 8081. The values for
-other properties also picked up from the same `application.properties` file (inside the jar).
+The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for other
+properties also picked up from the same `application.properties` file (inside the jar).
 
 ### Run the project from command line using maven with the internal application properties file
 

@@ -1,13 +1,13 @@
-> [!NOTE]  
+> [!NOTE]
 > Highlights information that users should take into account, even when skimming.
 
 > [!TIP]
 > Optional information to help a user be more successful.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Crucial information necessary for users to succeed.
 
-> [!WARNING]  
+> [!WARNING]
 > Critical content demanding immediate user attention due to potential risks.
 
 > [!CAUTION]

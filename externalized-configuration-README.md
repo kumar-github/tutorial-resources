@@ -354,7 +354,7 @@ We can see the below response
 ### The Environment abstraction
 
 The `Environment` interface is a perfect example for abstraction. It is integrated in the container that models two key
-aspects of the application environment: `profiles` and `properties`. Here we only talk about the `properties` aspect.
+aspects of the application environment: `profiles` and `properties`. Here we only talk about the `properties`.
 Properties may originate from a variety of sources: properties files, JVM system properties, system environment
 variables, JNDI, servlet context parameters, ad-hoc Properties objects, Map objects, and so on. The role of the
 `Environment` object with relation to properties is to provide the user with a convenient service interface for

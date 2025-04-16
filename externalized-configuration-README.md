@@ -701,6 +701,8 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 <br><br>
 ![multiple line echo](https://github.com/user-attachments/assets/a30b19a9-5b0a-4fd5-8761-31c9eababde3)
 <br><br>
+![single line echo](https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e)
+<br><br>
 ![change directory](https://github.com/user-attachments/assets/b989181b-2dbe-4860-bde1-b57501fd681a)
 <br><br>
 ![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
@@ -711,10 +713,3 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 <br><br>
 ![run using maven](https://github.com/user-attachments/assets/d84345b3-b9c1-48f9-8347-3183db1a90c9)
 <br><br>
-![multiple line export](https://github.com/user-attachments/assets/91f29e78-340e-4edd-9525-f7bd07505b30)
-<br><br>
-![single line echo](https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e)
-
-
-
-

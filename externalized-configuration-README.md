@@ -70,6 +70,9 @@ Table Of Contents
         * [Run the project from command line using maven with the internal application properties file](#run-the-project-from-command-line-using-maven-with-the-internal-application-properties-file)
         * [Run the project from command line using java with an external application properties file](#run-the-project-from-command-line-using-java-with-an-external-application-properties-file)
         * [Run the project from command line using maven with an external application properties file](#run-the-project-from-command-line-using-maven-with-an-external-application-properties-file)
+    * [Commit-04 :sparkles:](#commit-04-sparkles)
+        * [Overriding the properties using environment variables](#overriding-the-properties-using-environment-variables)
+        * [Binding from environment variables](#binding-from-environment-variables)
 
 <br/>
 
@@ -582,6 +585,44 @@ Check the response on the browser.
 > Check the below screenshot.
 
 ![application properties file inside target folder](https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99)
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-04 :sparkles:
+
+| **Agenda for this commit**                                |      Covered?      |
+|-----------------------------------------------------------|:------------------:|
+| 1. Overriding the properties using environment variables. | :white_check_mark: |
+| 2. Binding from environment variables.                    | :white_check_mark: |
+
+### Overriding the properties using environment variables
+
+### Binding from environment variables
+
+> [!IMPORTANT]
+> Most operating systems impose strict rules around the names that can be used for environment variables. For example,
+> Linux shell variables can contain only letters (a to z or A to Z), numbers (0 to 9) or the underscore character (_).
+> By convention, Unix shell variables will also have their names in UPPERCASE.
+
+Spring Boot’s relaxed binding rules are, as much as possible, designed to be compatible with these naming restrictions.
+To convert a property name in the canonical-form to an environment variable name you can follow the below rules:
+
+- Replace dots (.) with underscores (_).
+- Remove any dashes (-).
+- Convert to uppercase.
+
+For example, the configuration property `spring.main.log-startup-info` would be an environment variable named
+`SPRING_MAIN_LOGSTARTUPINFO`.
 
 :question:**Any Questions**:question:
 

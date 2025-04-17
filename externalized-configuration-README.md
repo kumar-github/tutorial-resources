@@ -780,6 +780,8 @@ Run the application using java with command line arguments. [*Approach-1*]
 java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Dserver.port=8084 -Dapp.username=admin-cl -Dapp.password=secret-cl -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
 
+![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
+
 > [!TIP]
 > The `-D` switch in java allows you to pass a system property to the application as *key-value* pair. In plain java,
 > you can use `System.getProperty(...)` method to access these properties.
@@ -800,8 +802,6 @@ java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Ds
 
 > [!WARNING]
 > If the arguments are NOT prefixed with `--`, Spring will not add it to the `Environment` abstraction.
-
-![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
 
 Check the response on the browser.
 

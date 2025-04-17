@@ -814,7 +814,7 @@ Check the response on the browser.
 
 > [!TIP]
 > By default, Spring converts any system properties (prefixed with `-D`) and command line arguments that are
-> prefixed with `--` to a property and adds them to the Spring's `Environment` abstraction.
+> prefixed with `--` to a Spring property and adds them to the `Environment` abstraction.
 >
 > If you do NOT want command line properties to be added to the `Environment`, you can disable them by using
 > `SpringApplication.setAddCommandLineProperties(false)`.

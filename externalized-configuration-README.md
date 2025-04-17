@@ -799,7 +799,7 @@ java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Ds
 > with `--` and adds them to the `Environment` abstraction.
 
 > [!WARNING]
-> If the arguments are not prefixed with `--` then Spring will not add it to the `Environment` abstraction.
+> If the arguments are NOT prefixed with `--`, Spring will not add it to the `Environment` abstraction.
 
 ![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
 

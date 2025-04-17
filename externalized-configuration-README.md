@@ -688,14 +688,14 @@ Check the response on the browser.
 ![app details endpoint on browser](https://github.com/user-attachments/assets/22ac35c2-b33a-418d-8042-d396fd19cc4e)
 
 > [!NOTE]
-> Now the application searches the environment variables and use it to inject the values for the properties. If the
-> environment variables does not exists then it falls back to the `application.properties` file. The application
-> starts on port 8083 and the values for other properties also inject from the environment variables.
+> Now the application uses the environment variables to inject the values for the properties. If the environment
+> variables does not exists then it falls back to the `application.properties` file. The application starts on port 8083
+> and the values for other properties also injected from the environment variables.
 
 > [!NOTE]
 > Even though we did not explicitly pass any of the properties to the application from command line, Spring is able
-> to translate the environment variables to the correct application properties. This is because of the naming
-> convention we followed for the environment variables.
+> to translate the environment variables to the correct application properties. This is because of the naming convention
+> we followed for the environment variables.
 > Example:
 >
 > `SPRING_APPLICATION_NAME` is translated to `spring.application.name`

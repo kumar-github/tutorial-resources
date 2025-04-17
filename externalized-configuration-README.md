@@ -712,6 +712,10 @@ Check the response on the browser.
 >
 > `spring_application_name`, `server_port`, `app_username`, `app_password`
 
+> [!NOTE]
+> In the `HelloController` class, we used both `@Value` annotation and the `Environment` abstraction to access the
+> properties just for reference and to show that it works.
+
 ### Binding from environment variables
 
 > [!IMPORTANT]

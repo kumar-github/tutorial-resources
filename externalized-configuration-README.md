@@ -73,6 +73,8 @@ Table Of Contents
     * [Commit-04 :sparkles:](#commit-04-sparkles)
         * [Overriding the properties using environment variables](#overriding-the-properties-using-environment-variables)
         * [Binding from environment variables](#binding-from-environment-variables)
+    * [Commit-05 :sparkles:](#commit-05-sparkles)
+        * [Overriding the properties using command line arguments](#overriding-the-properties-using-command-line-arguments)
 
 <br/>
 
@@ -443,7 +445,7 @@ jar that will override the values of the above mentioned properties.
 Go to the project root directory.
 
 ```bash
-cd spring-boot-externalized-configuration-101/ 
+cd spring-boot-externalized-configuration-101/
 ```
 
 ![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
@@ -485,7 +487,7 @@ Check the response on the browser.
 Go to the project root directory.
 
 ```bash
-cd spring-boot-externalized-configuration-101/ 
+cd spring-boot-externalized-configuration-101/
 ```
 
 ![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
@@ -732,6 +734,85 @@ To convert a property name in the canonical-form to an environment variable name
 
 For example, the configuration property `spring.main.log-startup-info` would be an environment variable named
 `SPRING_MAIN_LOGSTARTUPINFO`.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-05 :sparkles:
+
+| **Agenda for this commit**                                 |      Covered?      |
+|------------------------------------------------------------|:------------------:|
+| 1. Overriding the properties using command line arguments. | :white_check_mark: |
+
+### Overriding the properties using command line arguments
+
+In the previous section, we have discussed about overriding the properties via environment variables. In this section we
+will see, how to override the properties via command line arguments.
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/
+```
+
+![change directory](https://github.com/user-attachments/assets/b989181b-2dbe-4860-bde1-b57501fd681a)
+
+Generate the jar.
+
+```bash
+./mvnw clean package
+```
+
+![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
+
+Run the application using java with command line arguments. [Approach-1]
+
+```bash
+java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Dserver.port=8084 -Dapp.username=admin-cl -Dapp.password=secret-cl -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
+
+Check the response on the browser.
+
+![app details endpoint on browser using java with command line-1](https://github.com/user-attachments/assets/d5300fca-714d-40c9-b0af-ec85c8882871)
+
+Run the application using java with command line arguments. [Approach-2]
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.application.name=spring-boot-externalized-configuration-101-cl --server.port=8085 --app.username=admin-cl --app.password=secret-cl
+```
+
+![run using java with command line-2](https://github.com/user-attachments/assets/e8d01ea6-094e-413d-a1dc-cc2a3975e1cc)
+
+Check the response on the browser.
+
+![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
+
+Run the application using maven with command line arguments.
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.arguments="--spring.application.name=spring-boot-externalized-configuration-101-cl --server.port=8086 --app.username=admin-cl --app.password=secret-cl"
+```
+
+![run using maven with command line](https://github.com/user-attachments/assets/fa71dfe4-1d74-4bd1-b3c2-ea4e357f1927)
+
+Check the response on the browser.
+
+![app details endpoint on browser using maven with command line](https://github.com/user-attachments/assets/b36b5778-383f-4398-a3fe-9e9c90d0612f)
+
+> [!IMPORTANT]
+> Arguments passed via command line have higher precedence and override values coming from any other sources like
+`application.properties` file (both internal and external) and environment variables.
 
 :question:**Any Questions**:question:
 

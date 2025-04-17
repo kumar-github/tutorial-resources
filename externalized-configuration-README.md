@@ -631,8 +631,9 @@ Check the response on the browser.
 ![app details endpoint on browser before setting env variables](https://github.com/user-attachments/assets/d2d947ff-514c-443b-96a2-7c07a155ac3a)
 
 > [!NOTE]
-> The application injects the properties from the `application.properties` file from inside the jar and starts on port
-> 8081. The values for other properties also picked up from the same `application.properties` file (inside the jar).
+> The application injects the properties from the `application.properties` file from inside the jar.
+> The application starts on port 8081 and the values for other properties also picked up from the same
+> `application.properties` file (inside the jar).
 
 Set the environment variables as per your OS.
 
@@ -640,6 +641,7 @@ Set the environment variables as per your OS.
 
 > [!TIP]
 > You can set multiple environment variables at once. Check the below screenshot.
+>
 > ![single line export](https://github.com/user-attachments/assets/10f22d9c-38fa-4117-b3be-4669b8fb38dc)
 
 Check if the environment variables reflects your values.
@@ -648,6 +650,7 @@ Check if the environment variables reflects your values.
 
 > [!TIP]
 > You can echo multiple environment variables at once. Check the below screenshot.
+>
 > ![single line echo](https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e)
 
 Go to the project root directory.

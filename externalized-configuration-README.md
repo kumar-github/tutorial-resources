@@ -631,8 +631,8 @@ Check the response on the browser.
 ![app details endpoint on browser before setting env variables](https://github.com/user-attachments/assets/d2d947ff-514c-443b-96a2-7c07a155ac3a)
 
 > [!NOTE]
-> The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for
-> other properties also picked up from the same `application.properties` file (inside the jar).
+> The application injects the properties from the `application.properties` file from inside the jar and starts on port
+> 8081. The values for other properties also picked up from the same `application.properties` file (inside the jar).
 
 Set the environment variables as per your OS.
 

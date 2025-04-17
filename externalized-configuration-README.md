@@ -828,3 +828,11 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 <br><br>
 ![app details endpoint on browser before setting env variables](https://github.com/user-attachments/assets/d2d947ff-514c-443b-96a2-7c07a155ac3a)
 <br><br>
+<br><br>
+<br><br>
+<br><br>
+![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
+<br><br>
+![run using java with command line-2](https://github.com/user-attachments/assets/e8d01ea6-094e-413d-a1dc-cc2a3975e1cc)
+<br><br>
+![run using maven with command line](https://github.com/user-attachments/assets/fa71dfe4-1d74-4bd1-b3c2-ea4e357f1927)

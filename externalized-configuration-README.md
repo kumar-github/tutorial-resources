@@ -813,8 +813,11 @@ Check the response on the browser.
 > key-value pairs.
 
 > [!TIP]
-> Spring internally reads all the incoming system properties(prefixed with `-D`) and the arguments that are prefixed
-> with `--` and adds them to the `Environment` abstraction.
+> By default, Spring converts any system properties (prefixed with `-D`) and command line arguments that are
+> prefixed with `--` to a property and adds them to the Spring's `Environment` abstraction.
+>
+> If you do NOT want command line properties to be added to the `Environment`, you can disable them by using
+> `SpringApplication.setAddCommandLineProperties(false)`.
 
 > [!WARNING]
 > If the arguments are NOT prefixed with `--`, Spring will not add it to the `Environment` abstraction.

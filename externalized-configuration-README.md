@@ -782,6 +782,22 @@ java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Ds
 
 ![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
 
+Check the response on the browser.
+
+![app details endpoint on browser using java with command line-1](https://github.com/user-attachments/assets/d5300fca-714d-40c9-b0af-ec85c8882871)
+
+Run the application using java with command line arguments. [*Approach-2*]
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.application.name=spring-boot-externalized-configuration-101-cl --server.port=8085 --app.username=admin-cl --app.password=secret-cl
+```
+
+![run using java with command line-2](https://github.com/user-attachments/assets/e8d01ea6-094e-413d-a1dc-cc2a3975e1cc)
+
+Check the response on the browser.
+
+![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
+
 > [!TIP]
 > The `-D` switch in java allows you to pass a system property to the application as *key-value* pair. In plain java,
 > you can use `System.getProperty(...)` method to access these properties.
@@ -802,22 +818,6 @@ java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Ds
 
 > [!WARNING]
 > If the arguments are NOT prefixed with `--`, Spring will not add it to the `Environment` abstraction.
-
-Check the response on the browser.
-
-![app details endpoint on browser using java with command line-1](https://github.com/user-attachments/assets/d5300fca-714d-40c9-b0af-ec85c8882871)
-
-Run the application using java with command line arguments. [*Approach-2*]
-
-```bash
-java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.application.name=spring-boot-externalized-configuration-101-cl --server.port=8085 --app.username=admin-cl --app.password=secret-cl
-```
-
-![run using java with command line-2](https://github.com/user-attachments/assets/e8d01ea6-094e-413d-a1dc-cc2a3975e1cc)
-
-Check the response on the browser.
-
-![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
 
 Run the application using maven with command line arguments.
 

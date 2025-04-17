@@ -706,6 +706,11 @@ Check the response on the browser.
 >
 > `APP_PASSWORD` is translated to `app.password`
 
+> [!NOTE]
+> It is just the OS's naming convention that the environment variables are in uppercase. Spring does not demand this.
+> The application behaves exactly same even if the environment variables are in lowercase as below.
+> `spring_application_name`, `server_port`, `app_username`, `app_password`
+
 ### Binding from environment variables
 
 > [!IMPORTANT]

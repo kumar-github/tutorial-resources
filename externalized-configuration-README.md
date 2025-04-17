@@ -548,7 +548,7 @@ Follow the above steps to create a new `application.properties` file and place i
 Go to the project root directory.
 
 ```bash
-cd spring-boot-externalized-configuration-101/ 
+cd spring-boot-externalized-configuration-101/
 ```
 
 ![change directory](https://github.com/user-attachments/assets/a69d50fe-2091-470d-84da-9faf4338b575)
@@ -606,6 +606,102 @@ Check the response on the browser.
 | 2. Binding from environment variables.                    | :white_check_mark: |
 
 ### Overriding the properties using environment variables
+
+In the previous section, we have discussed about overriding the properties using an external `application.properties`
+file. In this section we will see, how to override the properties via environment variables.
+
+Make sure environment variables are NOT set.
+
+![multiple line echo before setting env variables](https://github.com/user-attachments/assets/ffde260a-4fed-4199-bac9-42f3726e1e5c)
+
+Run the application from command line using either java or maven
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+or
+
+```bash
+./mvnw spring-boot:run
+```
+
+Check the response on the browser.
+
+![app details endpoint on browser before setting env variables](https://github.com/user-attachments/assets/d2d947ff-514c-443b-96a2-7c07a155ac3a)
+
+> [!NOTE]
+> The application uses the `application.properties` file from inside the jar and starts on port 8081. The values for
+> other properties also picked up from the same `application.properties` file (inside the jar).
+
+Set the environment variables as per your OS.
+
+![multiple line export](https://github.com/user-attachments/assets/0cde4ea6-668f-41ac-b4ac-9876d7dcceec)
+
+> [!TIP]
+> You can set multiple environment variables at once. Check the below screenshot.
+> ![single line export](https://github.com/user-attachments/assets/10f22d9c-38fa-4117-b3be-4669b8fb38dc)
+
+Check if the environment variables reflects your values.
+
+![multiple line echo](https://github.com/user-attachments/assets/a30b19a9-5b0a-4fd5-8761-31c9eababde3)
+
+> [!TIP]
+> You can echo multiple environment variables at once. Check the below screenshot.
+> ![single line echo](https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e)
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/
+```
+
+![change directory](https://github.com/user-attachments/assets/b989181b-2dbe-4860-bde1-b57501fd681a)
+
+Generate the jar.
+
+```bash
+./mvnw clean package
+```
+
+![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
+
+Run the application using java OR maven.
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+![run using java](https://github.com/user-attachments/assets/59136705-6009-488b-8575-a6429a1d391d)
+
+```bash
+./mvnw spring-boot:run
+```
+
+![run using maven](https://github.com/user-attachments/assets/d84345b3-b9c1-48f9-8347-3183db1a90c9)
+
+Check the response on the browser.
+
+![app details endpoint on browser](https://github.com/user-attachments/assets/22ac35c2-b33a-418d-8042-d396fd19cc4e)
+
+> [!NOTE]
+> Now the application searches the environment variables and use it to inject the values for the properties. If the
+> environment variables does not exists then it falls back to the `application.properties` file. The application
+> starts on port 8083 and the values for other properties also inject from the environment variables.
+
+> [!NOTE]
+> Even though we did not explicitly pass any of the properties to the application from command line, Spring is able
+> to translate the environment variables to the correct application properties. This is because of the naming
+> convention we followed for the environment variables.
+> Example:
+>
+> `SPRING_APPLICATION_NAME` is translated to `spring.application.name`
+>
+> `SERVER_PORT` is translated to `server.port`
+>
+> `APP_USERNAME` is translated to `app.username`
+>
+> `APP_PASSWORD` is translated to `app.password`
 
 ### Binding from environment variables
 

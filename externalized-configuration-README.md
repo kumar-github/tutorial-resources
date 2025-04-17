@@ -774,11 +774,32 @@ Generate the jar.
 
 ![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
 
-Run the application using java with command line arguments. [Approach-1]
+Run the application using java with command line arguments. [*Approach-1*]
 
 ```bash
 java -Dspring.application.name=spring-boot-externalized-configuration-101-cl -Dserver.port=8084 -Dapp.username=admin-cl -Dapp.password=secret-cl -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
+
+> [!TIP]
+> The `-D` switch in java allows you to pass a system property to the application as *key-value* pair. In plain java,
+> you can use `System.getProperty(...)` method to access these properties.
+
+> [!WARNING]
+> `-D` should be passed before the `-jar` switch.
+
+> [!IMPORTANT]
+> Any values passed after the class or jar name will be considered as arguments to the *main* method and treated as
+> plain strings(NOT interpreted as key-value pair). These arguments are just arbitrary strings and may or may not be
+> prefixed with `--`. Java does not care whether it is prefixed with `--` or not and treat it as plain strings(NOT
+> interpreted as key-value pair). If needed, you have to write your own logic to read those values and split them as
+> key-value pairs.
+
+> [!TIP]
+> Spring internally reads all the incoming system properties(prefixed with `-D`) and the arguments that are prefixed
+> with `--` and adds them to the `Environment` abstraction.
+
+> [!WARNING]
+> If the arguments are not prefixed with `--` then Spring will not add it to the `Environment` abstraction.
 
 ![run using java with command line-1](https://github.com/user-attachments/assets/997500be-5edc-43d1-9e42-e8875bc7c495)
 
@@ -786,7 +807,7 @@ Check the response on the browser.
 
 ![app details endpoint on browser using java with command line-1](https://github.com/user-attachments/assets/d5300fca-714d-40c9-b0af-ec85c8882871)
 
-Run the application using java with command line arguments. [Approach-2]
+Run the application using java with command line arguments. [*Approach-2*]
 
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.application.name=spring-boot-externalized-configuration-101-cl --server.port=8085 --app.username=admin-cl --app.password=secret-cl

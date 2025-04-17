@@ -836,3 +836,9 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 ![run using java with command line-2](https://github.com/user-attachments/assets/e8d01ea6-094e-413d-a1dc-cc2a3975e1cc)
 <br><br>
 ![run using maven with command line](https://github.com/user-attachments/assets/fa71dfe4-1d74-4bd1-b3c2-ea4e357f1927)
+<br><br>
+![app details endpoint on browser using java with command line-1](https://github.com/user-attachments/assets/d5300fca-714d-40c9-b0af-ec85c8882871)
+<br><br>
+![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
+<br><br>
+![app details endpoint on browser using maven with command line](https://github.com/user-attachments/assets/b36b5778-383f-4398-a3fe-9e9c90d0612f)

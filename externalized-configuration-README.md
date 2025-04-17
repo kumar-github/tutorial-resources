@@ -713,3 +713,9 @@ For example, the configuration property `spring.main.log-startup-info` would be 
 <br><br>
 ![run using maven](https://github.com/user-attachments/assets/d84345b3-b9c1-48f9-8347-3183db1a90c9)
 <br><br>
+![multiple line echo before setting env variables](https://github.com/user-attachments/assets/ffde260a-4fed-4199-bac9-42f3726e1e5c)
+<br><br>
+![single line echo before setting env variables](https://github.com/user-attachments/assets/9d53d38b-310f-4443-94ac-42178c8ce3d7)
+<br><br>
+![app details endpoint on browser before setting env variables](https://github.com/user-attachments/assets/d2d947ff-514c-443b-96a2-7c07a155ac3a)
+<br><br>

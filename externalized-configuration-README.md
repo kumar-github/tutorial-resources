@@ -1017,7 +1017,7 @@ annotation, it will create the below two problems.
 ![app details endpoint on browser using maven with command line](https://github.com/user-attachments/assets/b36b5778-383f-4398-a3fe-9e9c90d0612f)
 
 
-$${\color{green}This text will be green}$$
+$${\color{green}**[Something]**}$$
 
 
 

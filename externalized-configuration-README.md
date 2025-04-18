@@ -75,6 +75,8 @@ Table Of Contents
         * [Binding from environment variables](#binding-from-environment-variables)
     * [Commit-05 :sparkles:](#commit-05-sparkles)
         * [Overriding the properties using command line arguments](#overriding-the-properties-using-command-line-arguments)
+    * [Commit-06 :sparkles:](#commit-06-sparkles)
+        * [Changing the default configuration file](#changing-the-default-configuration-file)
 
 <br/>
 
@@ -837,6 +839,74 @@ Check the response on the browser.
 > [!IMPORTANT]
 > Arguments passed via command line have higher precedence and override values coming from any other sources like
 `application.properties` file (both internal and external) and environment variables.
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-06 :sparkles:
+
+| **Agenda for this commit**                  |      Covered?      |
+|---------------------------------------------|:------------------:|
+| 1. Changing the default configuration file. | :white_check_mark: |
+
+### Changing the default configuration file
+
+For whatever reasons, if you do not like `application.properties` as the configuration file name, you can switch to
+another file name by specifying the `spring.config.name` environment property.
+
+For example, to look for `app.properties` instead of `application.properties` file, you can run the application as
+below:
+
+```bash
+java -Dspring.config.name=app -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+or
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.config.name=app
+```
+
+> [!TIP]
+> As a matter of convention `-D` is mostly for system and/or environment properties and `spring.config.name` is specific
+> to spring, it is better to use the `--` approach.
+
+> [!IMPORTANT]
+> `spring.config.name` is used very early in the bootstrapping process to determine which files have to be loaded. So it
+> must be defined as an environment property (typically an OS environment variable, a system property, or a command-line
+> argument).
+
+To demonstrate this scenario, We have renamed the `application.properties` file to `app.properties`. In the
+`HelloController` class, we have used the `@Value` annotation to inject the values from the `application.properties`
+file. Since we do not have the `application.properties` file and did not mention any default value in the `@Value`
+annotation, it will create the below two problems.
+
+1. When we generate the jar using `./mvnw clean package` the tests are executed automatically and as part of the
+   test, Spring tries to create an application context with the `HelloController` bean inside it. Since the
+   `HelloController` bean should be injected with properties that are available in the `application.properties` file
+   and that does not exists now. The tests are failed and the build will fail. **[Solution: Set those properties as
+   environment variables before generating the jar or skip the tests]**
+2. When we run the application, Spring tries to create an application context with the `HelloController` bean
+   inside it. Since the `HelloController` bean should be injected with properties that are available in the
+   `application.properties` file and that does not exists now. The application will fail to
+   start. **[Solution: Set those properties as environment variables before running the application or specify the
+   `spring.config.name` property so that a file with that name (app.properties in our case) will be used as a
+   PropertySource]**
+
+[//]: # (So we will skip the tests when generating the jar and pass the `spring.config.name` property when starting the)
+
+[//]: # (application.)
+
+Remember, if you don not pass the `spring.config.name` property the application will fail to start.
 
 :question:**Any Questions**:question:
 

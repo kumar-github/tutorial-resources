@@ -1015,3 +1015,10 @@ annotation, it will create the below two problems.
 ![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
 <br><br>
 ![app details endpoint on browser using maven with command line](https://github.com/user-attachments/assets/b36b5778-383f-4398-a3fe-9e9c90d0612f)
+
+
+$${\color{blue}This text will be blue}$$
+
+
+
+

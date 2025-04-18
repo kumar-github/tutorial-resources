@@ -893,8 +893,8 @@ annotation, it will create the below two problems.
 1. When we generate the jar using `./mvnw clean package` the tests are executed automatically and as part of the
    test, Spring tries to create an application context with the `HelloController` bean in it. Since the
    `HelloController` bean should be injected with properties that are available in the `application.properties` file
-   and that does not exists now. The tests are failed and the build will fail. $${\color{green}**[Solution: Set
-   those properties as environment variables before generating the jar or skip the tests]**}$$
+   and that does not exists now. The tests are failed and the build will fail. **[Solution: Set those properties as
+   environment variables before generating the jar or skip the tests]**
 2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
    Since the `HelloController` bean should be injected with properties that are available in the
    `application.properties` file and that does not exists now. The application will fail to start. **[Solution: Set
@@ -903,8 +903,8 @@ annotation, it will create the below two problems.
    properties in our case) will be used as a PropertySource]**
 
 > [!CAUTION]
-> Remember, if you did not set those properties as environment variables or does not pass them as command line
-> arguments or does not pass the `spring.config.name` property the **application will NOT start**.
+> If you DID NOT SET those properties as environment variables or DOES NOT PASS them as command line arguments or DOES
+> NOT PASS the `spring.config.name` property the **application will NOT start**.
 
 :question:**Any Questions**:question:
 

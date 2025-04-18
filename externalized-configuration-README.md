@@ -891,22 +891,19 @@ file. Since we do not have the `application.properties` file and did not mention
 annotation, it will create the below two problems.
 
 1. When we generate the jar using `./mvnw clean package` the tests are executed automatically and as part of the
-   test, Spring tries to create an application context with the `HelloController` bean inside it. Since the
+   test, Spring tries to create an application context with the `HelloController` bean in it. Since the
    `HelloController` bean should be injected with properties that are available in the `application.properties` file
    and that does not exists now. The tests are failed and the build will fail. **[Solution: Set those properties as
    environment variables before generating the jar or skip the tests]**
-2. When we run the application, Spring tries to create an application context with the `HelloController` bean
-   inside it. Since the `HelloController` bean should be injected with properties that are available in the
-   `application.properties` file and that does not exists now. The application will fail to
-   start. **[Solution: Set those properties as environment variables before running the application or specify the
+2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
+   Since the `HelloController` bean should be injected with properties that are available in the
+   `application.properties` file and that does not exists now. The application will fail to start. **[Solution: Set
+   those properties as environment variables before running the application or specify the
    `spring.config.name` property so that a file with that name (app.properties in our case) will be used as a
    PropertySource]**
 
-[//]: # (So we will skip the tests when generating the jar and pass the `spring.config.name` property when starting the)
-
-[//]: # (application.)
-
-Remember, if you don not pass the `spring.config.name` property the application will fail to start.
+> [!CAUTION]
+> Remember, if you don not pass the `spring.config.name` property the application will fail to start.
 
 :question:**Any Questions**:question:
 

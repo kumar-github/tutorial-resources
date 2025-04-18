@@ -898,12 +898,13 @@ annotation, it will create the below two problems.
 2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
    Since the `HelloController` bean should be injected with properties that are available in the
    `application.properties` file and that does not exists now. The application will fail to start. **[Solution: Set
-   those properties as environment variables before running the application or specify the
-   `spring.config.name` property so that a file with that name (app.properties in our case) will be used as a
-   PropertySource]**
+   those properties as environment variables before running the application or pass them as command line arguments
+   while running the application or specify the `spring.config.name` property so that a file with that name (app.
+   properties in our case) will be used as a PropertySource]**
 
 > [!CAUTION]
-> Remember, if you don not pass the `spring.config.name` property the application will fail to start.
+> Remember, if you did not set those properties as environment variables or does not pass them as command line
+> arguments or does not pass the `spring.config.name` property the **application will NOT start**.
 
 :question:**Any Questions**:question:
 

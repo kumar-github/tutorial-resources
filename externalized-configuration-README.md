@@ -893,8 +893,8 @@ annotation, it will create the below two problems.
 1. When we generate the jar using `./mvnw clean package` the tests are executed automatically and as part of the
    test, Spring tries to create an application context with the `HelloController` bean in it. Since the
    `HelloController` bean should be injected with properties that are available in the `application.properties` file
-   and that does not exists now. The tests are failed and the build will fail. **[Solution: Set those properties as
-   environment variables before generating the jar or skip the tests]**
+   and that does not exists now. The tests are failed and the build will fail. $${\color{green}**[Solution: Set
+   those properties as environment variables before generating the jar or skip the tests]**}$$
 2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
    Since the `HelloController` bean should be injected with properties that are available in the
    `application.properties` file and that does not exists now. The application will fail to start. **[Solution: Set

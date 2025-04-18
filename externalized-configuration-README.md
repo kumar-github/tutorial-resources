@@ -866,6 +866,9 @@ another file name by specifying the `spring.config.name` environment property.
 For example, to look for `app.properties` instead of `application.properties` file, you can run the application as
 below:
 
+> [!IMPORTANT]
+> Remember, you need to have `app.properties` file in the classpath (resources folder).
+
 ```bash
 java -Dspring.config.name=app -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
@@ -904,7 +907,7 @@ annotation, it will create the below two problems.
 
 > [!CAUTION]
 > If you DID NOT SET those properties as environment variables before running the application or DOES NOT PASS them as
-> command line arguments while running the application or DOES NOT PASS the `spring.config.name` property while
+> command line arguments while running the application or DOES NOT SPECIFY the `spring.config.name` property while
 > running the application, the **application will NOT start**.
 
 :question:**Any Questions**:question:

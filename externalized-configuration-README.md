@@ -1029,7 +1029,7 @@ $${\color{green}**[Something  is  in  Green]**}$$
    environment variables before generating the jar or skip the tests]**}$$
 2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
    Since the `HelloController` bean should be injected with properties that are available in the
-   `application.properties` file and that does not exists now. The application will fail to start. **[Solution: Set
+   `application.properties` file and that does not exists now. The application will fail to start. <span style="color:green;">**[Solution: Set
    those properties as environment variables before running the application or pass them as command line arguments
    while running the application or specify the `spring.config.name` property so that a file with that name (app.
-   properties in our case) will be used as a PropertySource]**
+   properties in our case) will be used as a PropertySource]**</span>

@@ -903,8 +903,9 @@ annotation, it will create the below two problems.
    properties in our case) will be used as a PropertySource]**
 
 > [!CAUTION]
-> If you DID NOT SET those properties as environment variables or DOES NOT PASS them as command line arguments or DOES
-> NOT PASS the `spring.config.name` property the **application will NOT start**.
+> If you DID NOT SET those properties as environment variables before running the application or DOES NOT PASS them as
+> command line arguments while running the application or DOES NOT PASS the `spring.config.name` property while
+> running the application, the **application will NOT start**.
 
 :question:**Any Questions**:question:
 

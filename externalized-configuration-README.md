@@ -866,9 +866,6 @@ another file name by specifying the `spring.config.name` environment property.
 For example, to look for `app.properties` instead of `application.properties` file, you can run the application as
 below:
 
-> [!IMPORTANT]
-> Remember, you need to have `app.properties` file in the classpath (resources folder).
-
 ```bash
 java -Dspring.config.name=app -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
@@ -878,6 +875,9 @@ or
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.config.name=app
 ```
+
+> [!IMPORTANT]
+> Remember, you need to have `app.properties` file in the classpath (resources folder).
 
 > [!TIP]
 > As a matter of convention `-D` is mostly for system and/or environment properties and `spring.config.name` is specific

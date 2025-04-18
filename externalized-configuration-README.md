@@ -877,7 +877,7 @@ java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar -
 ```
 
 > [!IMPORTANT]
-> Remember, you need to have `app.properties` file in the classpath (resources folder).
+> You need to have `app.properties` file in the classpath (resources folder) in order for the above command to work.
 
 > [!TIP]
 > As a matter of convention `-D` is mostly for system and/or environment properties and `spring.config.name` is specific

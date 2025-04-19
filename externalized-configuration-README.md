@@ -1019,3 +1019,21 @@ annotation, it will create the below two problems.
 ![app details endpoint on browser using java with command line-2](https://github.com/user-attachments/assets/68f8717c-aba4-4314-acd9-3c2ad040b31e)
 <br><br>
 ![app details endpoint on browser using maven with command line](https://github.com/user-attachments/assets/b36b5778-383f-4398-a3fe-9e9c90d0612f)
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+![maven clean package skip tests](https://github.com/user-attachments/assets/948f7b11-096c-4745-8b83-a0cc8ed276c0)
+<br><br>
+![run using java with spring config name as system property](https://github.com/user-attachments/assets/663fd219-08e1-4105-94ac-2f7752fc290e)
+<br><br>
+![run using java with spring config name as command line arg](https://github.com/user-attachments/assets/e5f49d6e-192d-4593-a948-f9afa6294c68)
+<br><br>
+![app test fail-1](https://github.com/user-attachments/assets/f275d4fc-c4a8-4bdd-8379-8739db8c250e)
+<br><br>
+![app test fail-2](https://github.com/user-attachments/assets/47041f6b-ebc9-4f80-a7ba-a1192619d3bb)
+<br><br>
+![app test fail-3](https://github.com/user-attachments/assets/5021d858-ef26-4c94-a855-e6678674451a)
+<br><br>
+![app run fail](https://github.com/user-attachments/assets/4bb1a61f-c3d1-4ddc-9b2e-61bee6f6a158)
+<br><br>

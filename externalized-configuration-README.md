@@ -1035,3 +1035,7 @@ annotation, it will create the below two problems.
 <br><br>
 ![app run fail](https://github.com/user-attachments/assets/ed616248-6ae6-4fe4-ab73-4d575823d5a6)
 <br><br>
+![application properties file before rename](https://github.com/user-attachments/assets/ad31cb6e-41ae-4bd7-aea8-8eb6357fc1fc)
+<br><br>
+![app properties file after rename](https://github.com/user-attachments/assets/90f25cfc-28fa-49dc-9773-63440381e474)
+<br><br>

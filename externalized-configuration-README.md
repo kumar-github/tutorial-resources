@@ -1040,3 +1040,6 @@ annotation, it will create the below two problems.
 ![app properties file after rename](https://github.com/user-attachments/assets/90f25cfc-28fa-49dc-9773-63440381e474)
 <br><br>
 ![run using maven with spring config name](https://github.com/user-attachments/assets/cd4ce738-af3a-406b-9d2d-863d5f9786e7)
+<br><br>
+![app details endpoint on browser](https://github.com/user-attachments/assets/b45b8635-4f3c-4432-aa43-0a9cb53da8b1)
+<br><br>

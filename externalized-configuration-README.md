@@ -138,9 +138,9 @@ Property values can be injected directly into your beans by using the `@Value` a
 
 ## Run Locally
 
-Clone the project either via HTTPS or SSH
+Clone the project either via HTTPS or SSH.
 
-Using HTTPS
+Using HTTPS.
 
 ```bash
 git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
@@ -148,7 +148,7 @@ git clone https://github.com/kumar-github/spring-boot-externalized-configuration
 
 ![clone using https](https://github.com/user-attachments/assets/d96cea39-d852-43d0-8575-6a7bcddc010e)
 
-Using SSH
+Using SSH.
 
 ```bash
 git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101.git
@@ -156,7 +156,7 @@ git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101
 
 ![clone using https](https://github.com/user-attachments/assets/ff8df5e4-b89d-493f-a6d3-e95250ffc988)
 
-Go to the project root directory
+Go to the project root directory.
 
 ```bash
 cd spring-boot-externalized-configuration-101
@@ -164,7 +164,7 @@ cd spring-boot-externalized-configuration-101
 
 ![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
-Start the service
+Start the service.
 
 ```bash
 ./mvnw spring-boot:run
@@ -207,7 +207,7 @@ Open the project in your favourite IDE and go to the `Application.java` file and
 
 ### Run the project from command line using maven
 
-Go to the project root directory
+Go to the project root directory.
 
 ```bash
 cd spring-boot-externalized-configuration-101
@@ -215,7 +215,7 @@ cd spring-boot-externalized-configuration-101
 
 ![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
-Run the application
+Run the application.
 
 ```bash
 ./mvnw spring-boot:run
@@ -228,7 +228,7 @@ Run the application
 
 ### Run the project from command line using java
 
-Go to the project root directory
+Go to the project root directory.
 
 ```bash
 cd spring-boot-externalized-configuration-101
@@ -236,7 +236,7 @@ cd spring-boot-externalized-configuration-101
 
 ![change directory](https://github.com/user-attachments/assets/6d4e9450-a2fa-4619-ae26-dc67a07ab84d)
 
-Generate the jar
+Generate the jar.
 
 ```bash
 ./mvnw clean package
@@ -244,7 +244,7 @@ Generate the jar
 
 ![maven clean package](https://github.com/user-attachments/assets/e3f7eb40-f709-4b03-b4d3-80791a93fedd)
 
-Run the application
+Run the application.
 
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
@@ -310,11 +310,11 @@ app.username            = admin
 >
 > Example: `app.database.url`, `app.database.driver-class-name`, `app.database.security.username` etc
 
-Run the application and hit the below endpoint
+Run the application and hit the below endpoint.
 
 `http://localhost:8081/appDetails`
 
-We can see the below response
+We can see the below response.
 
 ![app details endpoint](https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1)
 
@@ -356,11 +356,11 @@ value.
     }
 ```
 
-Run the application and hit the below endpoint
+Run the application and hit the below endpoint.
 
 `http://localhost:8081/appDetails`
 
-We can see the below response
+We can see the below response.
 
 ![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/7ab09997-0615-4453-8f9a-f232c96ec6dd)
 
@@ -618,7 +618,7 @@ Make sure environment variables are NOT set.
 
 ![multiple line echo before setting env variables](https://github.com/user-attachments/assets/ffde260a-4fed-4199-bac9-42f3726e1e5c)
 
-Run the application from command line using either java or maven
+Run the application from command line using either java or maven.
 
 ```bash
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
@@ -909,6 +909,76 @@ annotation, it will create the below two problems.
 > If you DID NOT SET those properties as environment variables before running the application or DOES NOT PASS them as
 > command line arguments while running the application or DOES NOT SPECIFY the `spring.config.name` property while
 > running the application, the **application will NOT start**.
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/
+```
+
+![change directory](https://github.com/user-attachments/assets/b989181b-2dbe-4860-bde1-b57501fd681a)
+
+Before renaming the `application.properties` file.
+
+![application properties file before rename](https://github.com/user-attachments/assets/ad31cb6e-41ae-4bd7-aea8-8eb6357fc1fc)
+
+After renaming the `application.properties` file to `app.properties`.
+
+![app properties file after rename](https://github.com/user-attachments/assets/90f25cfc-28fa-49dc-9773-63440381e474)
+
+Generating the jar without skipping the tests will fail.
+
+```bash
+./mvnw clean package
+```
+
+![maven clean package](https://github.com/user-attachments/assets/7cc05b60-1fcc-4e34-a1a0-c1b8d97f2020)
+
+Since `application.properties` file does not exists, the build will fail. Check the below screenshots.
+
+![app test fail-1](https://github.com/user-attachments/assets/ca9a4191-ab2f-4f46-836e-b479d435f4e1)
+
+![app test fail-3](https://github.com/user-attachments/assets/55de40fe-cd11-490a-8dd6-780d725ce9d0)
+
+Generate the jar by skipping the tests.
+
+```bash
+./mvnw clean package -DskipTests=true
+```
+
+![maven clean package skip tests](https://github.com/user-attachments/assets/948f7b11-096c-4745-8b83-a0cc8ed276c0)
+
+Running the application without `spring.config.name` will fail. Check the below screenshot.
+
+![app run fail](https://github.com/user-attachments/assets/ed616248-6ae6-4fe4-ab73-4d575823d5a6)
+
+Run the application from command line using java by passing `spring.config.name`.
+
+```bash
+java -Dspring.config.name=app -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+![run using java with spring config name as system property](https://github.com/user-attachments/assets/663fd219-08e1-4105-94ac-2f7752fc290e)
+
+or
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar --spring.config.name=app
+```
+
+![run using java with spring config name as command line arg](https://github.com/user-attachments/assets/e5f49d6e-192d-4593-a948-f9afa6294c68)
+
+Run the application from command line using maven by passing `spring.config.name`.
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.arguments="--spring.config.name=app"
+```
+
+![run using maven with spring config name](https://github.com/user-attachments/assets/cd4ce738-af3a-406b-9d2d-863d5f9786e7)
+
+Check the response on the browser.
+
+![app details endpoint on browser](https://github.com/user-attachments/assets/b45b8635-4f3c-4432-aa43-0a9cb53da8b1)
 
 :question:**Any Questions**:question:
 

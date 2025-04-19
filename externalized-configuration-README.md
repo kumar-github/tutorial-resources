@@ -1029,11 +1029,11 @@ annotation, it will create the below two problems.
 <br><br>
 ![run using java with spring config name as command line arg](https://github.com/user-attachments/assets/e5f49d6e-192d-4593-a948-f9afa6294c68)
 <br><br>
-![app test fail-1](https://github.com/user-attachments/assets/f275d4fc-c4a8-4bdd-8379-8739db8c250e)
+![app test fail-1](https://github.com/user-attachments/assets/ca9a4191-ab2f-4f46-836e-b479d435f4e1)
 <br><br>
-![app test fail-2](https://github.com/user-attachments/assets/47041f6b-ebc9-4f80-a7ba-a1192619d3bb)
+![app test fail-2](https://github.com/user-attachments/assets/b37ac6f0-c98d-402a-bfc9-0387cc1a670e)
 <br><br>
-![app test fail-3](https://github.com/user-attachments/assets/5021d858-ef26-4c94-a855-e6678674451a)
+![app test fail-3](https://github.com/user-attachments/assets/55de40fe-cd11-490a-8dd6-780d725ce9d0)
 <br><br>
-![app run fail](https://github.com/user-attachments/assets/4bb1a61f-c3d1-4ddc-9b2e-61bee6f6a158)
+![app run fail](https://github.com/user-attachments/assets/ed616248-6ae6-4fe4-ab73-4d575823d5a6)
 <br><br>

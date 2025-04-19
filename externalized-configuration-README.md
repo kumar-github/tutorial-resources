@@ -896,15 +896,14 @@ annotation, it will create the below two problems.
 1. When we generate the jar using `./mvnw clean package` the tests are executed automatically and as part of the test,
    Spring tries to create an application context with the `HelloController` bean in it. Since the `HelloController` bean
    should be injected with properties that are NOT available now (because `application.properties` file does not
-   exists), the tests are failed and the build will fail.
+   exists), the tests fail and the build will fail.
    **[Solution: Set those properties as environment variables before generating the jar or skip the tests]**
 2. When we run the application, Spring tries to create an application context with the `HelloController` bean in it.
-   Since the `HelloController` bean should be injected with properties that are NOT available now
-3. (because `application.properties` file does not exists), the application will fail to start.
-   **[Solution: Set those properties as environment variables before running the application or pass them as command
-   line arguments while running the application or specify the `spring.config.name` property so that a file with
-   that name (app.properties in our case) will be used as a property source]
-   **
+   Since the `HelloController` bean should be injected with properties that are NOT available now (because
+   `application.properties` file does not exists), the application will fail to start.
+   **[Solution: Set those properties as environment variables before running the application OR pass them as command
+   line arguments while running the application OR specify the `spring.config.name` property so that a file with
+   that name (app.properties in our case) will be used as a property source]**
 
 > [!CAUTION]
 > If you DID NOT SET those properties as environment variables before running the application or DOES NOT PASS them as

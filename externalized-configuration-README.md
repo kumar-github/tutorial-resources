@@ -1113,3 +1113,7 @@ Check the response on the browser.
 <br><br>
 ![app details endpoint on browser](https://github.com/user-attachments/assets/b45b8635-4f3c-4432-aa43-0a9cb53da8b1)
 <br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>

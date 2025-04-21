@@ -82,7 +82,8 @@ Using HTTPS.
 git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
 ```
 
-<img src="https://github.com/user-attachments/assets/7bf6ed23-1b24-4cc9-9762-65fe29c80240" alt="git clone using https" title="git clone using https" width="1050"/>
+<img src="https://github.com/user-attachments/assets/7bf6ed23-1b24-4cc9-9762-65fe29c80240" alt="git clone using
+https" title="git clone using https" width="1050">
 
 Using SSH.
 
@@ -90,7 +91,7 @@ Using SSH.
 git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101.git
 ```
 
-<img src="https://github.com/user-attachments/assets/a8396741-ab1d-4e81-a383-c218fa3a56ef" alt="git clone using ssh" title="git clone using ssh" width="1050"/>
+<img src="https://github.com/user-attachments/assets/a8396741-ab1d-4e81-a383-c218fa3a56ef" alt="git clone using ssh" title="git clone using ssh" width="1050">
 
 Go to the project root directory.
 
@@ -98,7 +99,7 @@ Go to the project root directory.
 cd spring-boot-externalized-configuration-101
 ```
 
-<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050"/>
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050">
 
 Run the application.
 
@@ -106,7 +107,7 @@ Run the application.
 ./mvnw spring-boot:run
 ```
 
-<img src="https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d" alt="maven spring boot run simple" title="maven spring boot run simple" width="1050"/>
+<img src="https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d" alt="maven spring boot run simple" title="maven spring boot run simple" width="1050">
 
 ---
 
@@ -135,7 +136,7 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 Open the project in your favourite IDE and go to the `Application.java` file and run the application.
 
-<img src="https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f" alt="run from ide" title="run from ide" width="1050"/>
+<img src="https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f" alt="run from ide" title="run from ide" width="1050">
 
 ### Run the project from command line using maven
 
@@ -145,7 +146,7 @@ Go to the project root directory.
 cd spring-boot-externalized-configuration-101
 ```
 
-<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050"/>
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050">
 
 Run the application.
 
@@ -153,7 +154,7 @@ Run the application.
 ./mvnw spring-boot:run
 ```
 
-<img src="https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d" alt="run using maven" title="run using maven" width="1050"/>
+<img src="https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d" alt="run using maven" title="run using maven" width="1050">
 
 > [!NOTE]
 > I am using the maven wrapper command to run the project.
@@ -166,7 +167,7 @@ Go to the project root directory.
 cd spring-boot-externalized-configuration-101
 ```
 
-<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050"/>
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050">
 
 Generate the jar.
 
@@ -174,11 +175,11 @@ Generate the jar.
 ./mvnw clean package
 ```
 
-<img src="https://github.com/user-attachments/assets/3ff834d2-8454-4fda-a12d-07959ba1b724" alt="maven clean package" title="maven clean package" width="1050"/>
+<img src="https://github.com/user-attachments/assets/3ff834d2-8454-4fda-a12d-07959ba1b724" alt="maven clean package" title="maven clean package" width="1050">
 
 Target folder with jar generated.
 
-<img src="https://github.com/user-attachments/assets/504931aa-6930-4748-b7d2-19273dd45a1c" alt="ls and ls target folder" title="ls and ls target folder" width="1050"/>
+<img src="https://github.com/user-attachments/assets/504931aa-6930-4748-b7d2-19273dd45a1c" alt="ls and ls target folder" title="ls and ls target folder" width="1050">
 
 Run the application.
 
@@ -186,7 +187,7 @@ Run the application.
 java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
 ```
 
-<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" alt="run using java" title="run using java" width="1050"/>
+<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" alt="run using java" title="run using java" width="1050">
 
 > [!NOTE]
 > Make sure java is on the path.

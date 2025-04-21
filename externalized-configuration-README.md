@@ -13,28 +13,10 @@
 > [!CAUTION]
 > Negative potential consequences of an action.
 
-<br/><br/><br/><br/><br/><br/><br/><br/>
-
-This project will walk you through a simple demo of externalizing the configurations in a *Spring Boot* application .
-It will help you to understand various approaches in externalizing the configurations in an application step by step.
-Each concept is covered in-depth and organized as individual git commits. The commits are numbered sequentially starting
-from `00`, `01`, `02` and so on. As you go through it, take your time to understand the changes made to the
-code in each commit. In order to follow along, clone the repository to your local machine, revert back to the
-initial commit and then start applying the commits one by one starting from `00`. This `README.MD` file will be updated
-in every commit and will tell you what has been covered in the specific commit.
-
-<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" title="change directory and ls without target folder-small" width=1000/>
-<img src="https://github.com/user-attachments/assets/ae676117-248e-40dd-ae99-1e620970c264" title="change directory and ls without target folder-big" width=1000/>
-
-<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" title="java jar run simple" width=1000/>
-<img src="https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f" width=1000/>
-
-<br/><br/><br/><br/><br/><br/><br/><br/>
-
 <br/><br/><br/><br/>
 ![ls](https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6 "ls")
 <br/><br>
-![change directory and ls without target folder-small](https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a "change directory and ls without target folder-small")
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder-small" title="change directory and ls without target folder-small" width=1000/>
 <br/><br>
 ![change directory and ls without target folder-big](https://github.com/user-attachments/assets/ae676117-248e-40dd-ae99-1e620970c264 "change directory and ls without target folder-big")
 <br/><br>

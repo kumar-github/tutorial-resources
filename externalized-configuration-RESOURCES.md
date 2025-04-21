@@ -14,9 +14,9 @@
 > Negative potential consequences of an action.
 
 <br/><br/><br/><br/>
-<img src="https://github.com/user-attachments/assets/67a8d53a-2c26-4a85-8cb5-4e6e75d2317a", alt="git clone using https", title="git clone using https" width=1000/>
+<img src="https://github.com/user-attachments/assets/67a8d53a-2c26-4a85-8cb5-4e6e75d2317a" alt="git clone using https" title="git clone using https" width=1000/>
 <br/><br>
-<img src="[https://github.com/user-attachments/assets/67a8d53a-2c26-4a85-8cb5-4e6e75d2317a](https://github.com/user-attachments/assets/a8396741-ab1d-4e81-a383-c218fa3a56ef)", alt="git clone using ssh", title="git clone using ssh" width=1000/>
+<img src="https://github.com/user-attachments/assets/a8396741-ab1d-4e81-a383-c218fa3a56ef" alt="git clone using ssh" title="git clone using ssh" width=1000/>
 <br/><br>
 <img src="https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6" alt="ls" title="ls" width=1000/>
 <br/><br>

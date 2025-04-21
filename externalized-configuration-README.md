@@ -14,9 +14,9 @@
 > Negative potential consequences of an action.
 
 <br/><br/><br/><br/>
-![ls](https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6 | width=100 | "ls")
+![ls](https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6 | width=100 "ls")
 <br/><br>
-<img src="https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6" width=100/>
+<img src="https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6" width=300/>
 <br/><br>
 ![change directory and ls without target folder-small](https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a "change directory and ls without target folder-small")
 <br/><br>

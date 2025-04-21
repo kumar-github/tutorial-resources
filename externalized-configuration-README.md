@@ -18,7 +18,7 @@
 
 <img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" title="change directory and ls without target folder-small" width=900/>
 <img src="https://github.com/user-attachments/assets/ae676117-248e-40dd-ae99-1e620970c264" title="change directory and ls without target folder-big" width=900)
-<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" title="java jar run simple" width=900)
+<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" title="java jar run simple" width=900/>
 
 <br/><br/><br/><br/><br/><br/><br/><br/>
 

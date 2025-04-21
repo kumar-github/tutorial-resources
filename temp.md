@@ -100,7 +100,7 @@ cd spring-boot-externalized-configuration-101
 
 <img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1000"/>
 
-Start the service.
+Run the application.
 
 ```bash
 ./mvnw spring-boot:run

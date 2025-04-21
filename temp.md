@@ -102,9 +102,7 @@ Using HTTPS.
 git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
 ```
 
-[//]: # (![clone using https]&#40;https://github.com/user-attachments/assets/d96cea39-d852-43d0-8575-6a7bcddc010e&#41;)
-<img src="https://github.com/user-attachments/assets/d96cea39-d852-43d0-8575-6a7bcddc010e" alt="clone using https"
-title="clone using https" width=1000/>
+<img src="https://github.com/user-attachments/assets/7bf6ed23-1b24-4cc9-9762-65fe29c80240" alt="git clone using https" title="git clone using https" width=1000/>
 
 Using SSH.
 
@@ -112,7 +110,7 @@ Using SSH.
 git clone git@github.com:kumar-github/spring-boot-externalized-configuration-101.git
 ```
 
-![clone using https](https://github.com/user-attachments/assets/ff8df5e4-b89d-493f-a6d3-e95250ffc988)
+<img src="https://github.com/user-attachments/assets/a8396741-ab1d-4e81-a383-c218fa3a56ef" alt="git clone using ssh" title="git clone using ssh" width=1000/>
 
 Go to the project root directory.
 

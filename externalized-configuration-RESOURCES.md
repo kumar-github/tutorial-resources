@@ -34,6 +34,8 @@
 <br/><br>
 ![maven spring boot run simple](https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d "maven spring boot run simple")
 <br/><br>
+![run from ide](https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f)
+<br/><br>
 ![java jar run simple](https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186 "java jar run simple")
 <br/><br>
 ![java jar run with system properties](https://github.com/user-attachments/assets/6e5b7c02-f933-4820-a506-bd538c9d99e3 "java jar run with system properties")

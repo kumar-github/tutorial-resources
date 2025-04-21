@@ -13,7 +13,36 @@
 > [!CAUTION]
 > Negative potential consequences of an action.
 
-<br/>
+<br/><br/><br/><br/>
+![ls](https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6)
+<br/><br>
+![change directory and ls without target folder-small](https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a)
+<br/><br>
+![change directory and ls without target folder-big](https://github.com/user-attachments/assets/ae676117-248e-40dd-ae99-1e620970c264)
+<br/><br>
+![change directory and ls with target folder-big](https://github.com/user-attachments/assets/fde36629-2c5f-4f66-98ae-74dd73cb0c54)
+<br/><br>
+![ls target folder-small](https://github.com/user-attachments/assets/bc554deb-212b-4e22-85b4-75b47c5f24c8)
+<br/><br>
+![ls target folder-big](https://github.com/user-attachments/assets/da67e56a-e1f0-483a-89a4-4f4d458da30e)
+<br/><br>
+![ls and ls target folder-big](https://github.com/user-attachments/assets/504931aa-6930-4748-b7d2-19273dd45a1c)
+<br/><br>
+![maven clean package](https://github.com/user-attachments/assets/3ff834d2-8454-4fda-a12d-07959ba1b724)
+<br/><br>
+![maven spring boot run simple](https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d)
+<br/><br>
+![java jar run simple](https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186)
+<br/><br>
+![java jar run with system properties](https://github.com/user-attachments/assets/6e5b7c02-f933-4820-a506-bd538c9d99e3)
+<br/><br>
+![java jar run with command line args](https://github.com/user-attachments/assets/2e32fa41-47bb-4348-8a22-f2a4fe5607fa)
+<br/><br>
+![maven spring boot run with arguments](https://github.com/user-attachments/assets/1fa9b2b9-8029-4ed9-85bc-acd362137fb3)
+<br/><br>
+![maven spring boot run with spring config name](https://github.com/user-attachments/assets/af2ddba1-171c-4f12-a4e2-41ca053fcd75)
+<br/><br>
+
 
 ---
 

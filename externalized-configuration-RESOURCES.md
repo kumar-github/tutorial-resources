@@ -20,9 +20,7 @@
 <br/><br>
 <img src="https://github.com/user-attachments/assets/06ce1c18-187d-4039-a0d1-150e1ab7a7d6" alt="ls" title="ls" width=1000/>
 <br/><br>
-<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder-small" title="change directory and ls without target folder-small" width=1000/>
-<br/><br>
-![change directory and ls without target folder-big](https://github.com/user-attachments/assets/ae676117-248e-40dd-ae99-1e620970c264 "change directory and ls without target folder-big")
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width=1000/>
 <br/><br>
 ![change directory and ls with target folder-big](https://github.com/user-attachments/assets/fde36629-2c5f-4f66-98ae-74dd73cb0c54 "change directory and ls with target folder-big")
 <br/><br>

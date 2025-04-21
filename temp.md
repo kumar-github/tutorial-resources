@@ -82,7 +82,7 @@ Using HTTPS.
 git clone https://github.com/kumar-github/spring-boot-externalized-configuration-101.git
 ```
 
-<img src="https://github.com/user-attachments/assets/7bf6ed23-1b24-4cc9-9762-65fe29c80240" alt="git clone using https" title="git clone using https" width="1000"/>
+<img src="https://github.com/user-attachments/assets/7bf6ed23-1b24-4cc9-9762-65fe29c80240" alt="git clone using https" title="git clone using https" width="1050"/>
 
 Using SSH.
 

@@ -134,9 +134,10 @@ We have created a spring boot project via [Spring Initializr](https://start.spri
 
 ### Run the project from IDE
 
-Open the project in your favourite IDE and go to the `Application.java` file and run the application.
+Open the project in your favourite IDE, go to the `Application.java` file and run the application by clicking the gutter
+icons.
 
-<img src="https://github.com/user-attachments/assets/07a5101b-02a3-401e-acc9-6d4d7531403f" alt="run from ide" title="run from ide" width="1050">
+<img src="https://github.com/user-attachments/assets/672a6194-2f0a-4e67-b79a-08621484397f" alt="run from ide" title="run from ide" width="1050">
 
 ### Run the project from command line using maven
 

@@ -68,11 +68,15 @@ code in each commit. In order to follow along, clone the repository to your loca
 initial commit and then start applying the commits one by one starting from `00`. This `README.MD` file will be updated
 in every commit and will tell you what has been covered in the specific commit.
 
----
+<br/>
 
 ---
 
 ---
+
+---
+
+<br/>
 
 Table Of Contents
 =================

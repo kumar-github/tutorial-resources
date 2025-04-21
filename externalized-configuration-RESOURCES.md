@@ -22,6 +22,8 @@
 <br/><br>
 <img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width=1000/>
 <br/><br>
+<img src="https://github.com/user-attachments/assets/672a6194-2f0a-4e67-b79a-08621484397f" alt="run from ide" title="run from ide" width="1050">
+<br/><br>
 ![change directory and ls with target folder-big](https://github.com/user-attachments/assets/fde36629-2c5f-4f66-98ae-74dd73cb0c54 "change directory and ls with target folder-big")
 <br/><br>
 ![ls target folder-small](https://github.com/user-attachments/assets/bc554deb-212b-4e22-85b4-75b47c5f24c8 "ls target folder-small")

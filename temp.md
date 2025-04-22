@@ -32,6 +32,9 @@ Table Of Contents
     * [Commit-01 :sparkles:](#commit-01-sparkles)
         * [Add custom properties in application properties file](#add-custom-properties-in-application-properties-file)
         * [Access the custom properties using @Value annotation](#access-the-custom-properties-using-value-annotation)
+    * [Commit-02 :sparkles:](#commit-02-sparkles)
+        * [Access the properties using the Environment abstraction](#access-the-properties-using-the-environment-abstraction)
+        * [The Environment abstraction](#the-environment-abstraction)
 
 ---
 
@@ -257,7 +260,102 @@ Run the application and hit the below endpoint.
 
 We can see the below response.
 
-<img src="https://github.com/user-attachments/assets/7dcea6df-ae02-498b-beb7-36289376a2d1" alt="app details endpoint" title="app details endpoint" width="1050">
+<img src="https://github.com/user-attachments/assets/b688b7c3-1235-4ae4-b9d7-e0733e53662b" alt="app details endpoint" title="app details endpoint" width="1050">
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-02 :sparkles:
+
+| **Agenda for this commit**                                  |      Covered?      |
+|-------------------------------------------------------------|:------------------:|
+| 1. Access the properties using the Environment abstraction. | :white_check_mark: |
+| 2. The Environment abstraction.                             | :white_check_mark: |
+
+### Access the properties using the Environment abstraction
+
+In the previous commit, we have used `@Value` annotation to access the properties from the `application.properties`
+file. In this commit, we will use Spring's `Environment` abstraction to do the same. We also added a new custom property
+named `app.password` to the `application.properties` file. In the `HelloController` class, we have removed all the
+`@Value` annotated fields and instead we used the `Environment` abstraction's `getProperty(...)` method to get the
+value.
+
+```java
+    @GetMapping("/appDetails")
+    public String appDetails() {
+        final String appName    = environment.getProperty("spring.application.name");
+        final String serverPort = environment.getProperty("server.port");
+        final String username   = environment.getProperty("app.username");
+        final String password   = environment.getProperty("app.password");
+        return appName + " : " + serverPort + " : " + username + " : " + password;
+    }
+```
+
+Run the application and hit the below endpoint.
+
+`http://localhost:8081/appDetails`
+
+We can see the below response.
+
+<img src="https://github.com/user-attachments/assets/9f1347ef-d023-4f03-95ce-3f644fea9963" alt="app details endpoint using environment abstraction" title="app details endpoint using environment abstraction" width="1050">
+
+### The Environment abstraction
+
+The `Environment` interface is a perfect example for abstraction. It is integrated in the container that models two key
+aspects of the application environment: `profiles` and `properties`. Here we only talk about the `properties`.
+Properties may originate from a variety of sources: properties files, JVM system properties, system environment
+variables, JNDI, servlet context parameters, ad-hoc Properties objects, Map objects, and so on. The role of the
+`Environment` object with relation to properties is to provide the user with a convenient service interface for
+configuring property sources and resolving properties from them. You can use the `Environment` interface to read
+properties literally from any property sources listed above. As a user, you don't have to worry about the underlying
+source from which a property is coming from.
+
+Spring’s Environment abstraction provides search operations over a configurable hierarchy of property sources. Consider
+the following code snippet:
+
+```java
+@Autowired
+private Environment environment;
+
+...
+
+boolean containsMyProperty = environment.containsProperty("my-property");
+System.out.println("Does my environment contain the 'my-property' property? " + containsMyProperty);
+```
+
+In the preceding snippet, we see a high-level way of asking Spring whether the `my-property` property is defined for the
+current environment. To answer this question, the `Environment` object performs a search over a set of `PropertySource`
+objects. A `PropertySource` is a simple abstraction over any source of key-value pairs, and Spring’s
+`StandardEnvironment` is configured with two `PropertySource` objects.
+
+- one representing the set of JVM system properties. (`System.getProperties()`)
+- one representing the set of system environment variables. (`System.getenv()`)
+
+> [!TIP]
+> The search performed is hierarchical. By default, system properties have precedence over environment variables. So, if
+> the `my-property` property happens to be set in both places during a call to `environment.getProperty("my-property")`,
+> the system property value **wins** and is returned.
+
+> [!NOTE]
+> Note that property values are not merged but rather completely overridden by a succeeding entry.
+
+The following figure shows how the Spring environment is created from the available configuration property sources.
+
+<img src="https://github.com/user-attachments/assets/64e922ce-2e48-4c7e-990c-2f7ab7cf8f14" alt="spring configuration generated from java property sources" title="spring configuration generated from java property sources" width="1050">
+
+> [!TIP]
+> The entire mechanism is configurable. If you have a custom source of properties that you want to integrate into
+> the `Environment`'s search, you can do so by implementing and instantiating your own `PropertySource` and add it to
+> the set of `PropertySources` for the current `Environment`.
 
 :question:**Any Questions**:question:
 

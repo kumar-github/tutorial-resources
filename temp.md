@@ -41,6 +41,9 @@ Table Of Contents
         * [Run the project from command line using maven with the internal application properties file](#run-the-project-from-command-line-using-maven-with-the-internal-application-properties-file)
         * [Run the project from command line using java with an external application properties file](#run-the-project-from-command-line-using-java-with-an-external-application-properties-file)
         * [Run the project from command line using maven with an external application properties file](#run-the-project-from-command-line-using-maven-with-an-external-application-properties-file)
+    * [Commit-04 :sparkles:](#commit-04-sparkles)
+        * [Overriding the properties using environment variables](#overriding-the-properties-using-environment-variables)
+        * [Binding from environment variables](#binding-from-environment-variables)
 
 ---
 
@@ -539,6 +542,153 @@ Check the response on the browser.
 > Check the below screenshot.
 
 <img src="https://github.com/user-attachments/assets/80066648-676d-4b56-b341-7464eba48c99" alt="application properties file inside target folder" title="application properties file inside target folder" width="1050">
+
+:question:**Any Questions**:question:
+
+<br/>
+
+---
+
+---
+
+---
+
+<br/>
+
+## Commit-04 :sparkles:
+
+| **Agenda for this commit**                                |      Covered?      |
+|-----------------------------------------------------------|:------------------:|
+| 1. Overriding the properties using environment variables. | :white_check_mark: |
+| 2. Binding from environment variables.                    | :white_check_mark: |
+
+### Overriding the properties using environment variables
+
+In the previous section, we have discussed about overriding the properties using an external `application.properties`
+file. In this section we will see, how to override the properties via environment variables.
+
+Make sure environment variables are NOT set.
+
+<img src="https://github.com/user-attachments/assets/ffde260a-4fed-4199-bac9-42f3726e1e5c" alt="multiple line echo before setting env variables" title="multiple line echo before setting env variables" width="430">
+
+Run the application from command line using either java or maven.
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+or
+
+```bash
+./mvnw spring-boot:run
+```
+
+Check the response on the browser.
+
+<img src="https://github.com/user-attachments/assets/9f1347ef-d023-4f03-95ce-3f644fea9963" alt="app details endpoint on browser before setting env variables" title="app details endpoint on browser before setting env variables" width="1050">
+
+> [!NOTE]
+> The application injects the properties from the `application.properties` file from inside the jar.
+> The application starts on port 8081 and the values for other properties also picked up from the same
+> `application.properties` file (inside the jar).
+
+Set the environment variables as per your OS.
+
+<img src="https://github.com/user-attachments/assets/0cde4ea6-668f-41ac-b4ac-9876d7dcceec" alt="multiple line export" title="multiple line export" width="1050">
+
+> [!TIP]
+> You can set multiple environment variables at once. Check the below screenshot.
+>
+> <img src="https://github.com/user-attachments/assets/10f22d9c-38fa-4117-b3be-4669b8fb38dc" alt="single line export" title="single line export" width="1050">
+
+Check if the environment variables reflects your values.
+
+<img src="https://github.com/user-attachments/assets/a30b19a9-5b0a-4fd5-8761-31c9eababde3" alt="multiple line echo" title="multiple line echo" width="430">
+
+> [!TIP]
+> You can echo multiple environment variables at once. Check the below screenshot.
+>
+> <img src="https://github.com/user-attachments/assets/f7529f44-a2bd-435c-b35a-ebf97a6df91e" alt="single line echo" title="single line echo" width="1050">
+
+Go to the project root directory.
+
+```bash
+cd spring-boot-externalized-configuration-101/
+```
+
+<img src="https://github.com/user-attachments/assets/0affda3b-f1a2-45bb-bfb4-697148b77f0a" alt="change directory and ls without target folder" title="change directory and ls without target folder" width="1050">
+
+Generate the jar.
+
+```bash
+./mvnw clean package
+```
+
+<img src="https://github.com/user-attachments/assets/3ff834d2-8454-4fda-a12d-07959ba1b724" alt="maven clean package" title="maven clean package" width="1050">
+
+Run the application using java OR maven.
+
+```bash
+java -jar target/spring-boot-externalized-configuration-101-0.0.1-SNAPSHOT.jar
+```
+
+<img src="https://github.com/user-attachments/assets/b1a577d9-4a7c-4818-b23b-640dc90b0186" alt="run using java" title="run using java" width="1050">
+
+```bash
+./mvnw spring-boot:run
+```
+
+<img src="https://github.com/user-attachments/assets/f3620e20-1eaa-4137-af64-f78e041da83d" alt="maven spring boot run simple" title="maven spring boot run simple" width="1050">
+
+Check the response on the browser.
+
+<img src="https://github.com/user-attachments/assets/22ac35c2-b33a-418d-8042-d396fd19cc4e" alt="app details endpoint on browser" title="app details endpoint on browser" width="1050">
+
+> [!NOTE]
+> Now the application uses the environment variables to inject the values for the properties. If the environment
+> variables does not exists then it falls back to the `application.properties` file. The application starts on port 8083
+> and the values for other properties also injected from the environment variables.
+
+> [!NOTE]
+> Even though we did not explicitly pass any of the properties to the application from command line, Spring is able
+> to translate the environment variables to the correct application properties. This is because of the naming convention
+> we followed for the environment variables.
+> Example:
+>
+> `SPRING_APPLICATION_NAME` is translated to `spring.application.name`
+>
+> `SERVER_PORT` is translated to `server.port`
+>
+> `APP_USERNAME` is translated to `app.username`
+>
+> `APP_PASSWORD` is translated to `app.password`
+
+> [!NOTE]
+> It is just the OS's naming convention that the environment variables are in uppercase. Spring does not demand this.
+> The application behaves exactly the same even if the environment variables are in lowercase as below.
+>
+> `spring_application_name`, `server_port`, `app_username`, `app_password`
+
+> [!NOTE]
+> In the `HelloController` class, we used both `@Value` annotation and the `Environment` abstraction to access the
+> properties just for reference and to show that it works.
+
+### Binding from environment variables
+
+> [!IMPORTANT]
+> Most operating systems impose strict rules around the names that can be used for environment variables. For example,
+> Linux shell variables can contain only letters (a to z or A to Z), numbers (0 to 9) or the underscore character (_).
+> By convention, Unix shell variables will also have their names in UPPERCASE.
+
+Spring Boot’s relaxed binding rules are, as much as possible, designed to be compatible with these naming restrictions.
+To convert a property name in the canonical-form to an environment variable name you can follow the below rules:
+
+- Replace dots (.) with underscores (_).
+- Remove any dashes (-).
+- Convert to uppercase.
+
+For example, the configuration property `spring.main.log-startup-info` would be an environment variable named
+`SPRING_MAIN_LOGSTARTUPINFO`.
 
 :question:**Any Questions**:question:
 

@@ -46,6 +46,8 @@
 <br/><br>
 ![app details endpoint](https://github.com/user-attachments/assets/b688b7c3-1235-4ae4-b9d7-e0733e53662b)
 <br/><br>
+![app details endpoint using environment abstraction](https://github.com/user-attachments/assets/9f1347ef-d023-4f03-95ce-3f644fea9963)
+<br/><br>
 ![maven spring boot run with arguments](https://github.com/user-attachments/assets/1fa9b2b9-8029-4ed9-85bc-acd362137fb3 "maven spring boot run with arguments")
 <br/><br>
 ![maven spring boot run with spring config name](https://github.com/user-attachments/assets/af2ddba1-171c-4f12-a4e2-41ca053fcd75 "maven spring boot run with spring config name")

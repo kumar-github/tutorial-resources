@@ -51,6 +51,10 @@
 ![maven spring boot run with arguments](https://github.com/user-attachments/assets/1fa9b2b9-8029-4ed9-85bc-acd362137fb3 "maven spring boot run with arguments")
 <br/><br>
 ![maven spring boot run with spring config name](https://github.com/user-attachments/assets/af2ddba1-171c-4f12-a4e2-41ca053fcd75 "maven spring boot run with spring config name")
+<br/><br>
+![run using java with spring config name as system property](https://github.com/user-attachments/assets/3d50228f-23ce-4f32-afe8-666939e5ff7f)
+<br/><br>
+![run using java with spring config name as command line arg](https://github.com/user-attachments/assets/b84aeb75-0fe9-453e-b6bc-146b6f77d547)
 <br/><br><br/><br>
 
 

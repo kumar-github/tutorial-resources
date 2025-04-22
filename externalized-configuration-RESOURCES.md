@@ -44,7 +44,7 @@
 <br/><br>
 ![java jar run with command line args](https://github.com/user-attachments/assets/2e32fa41-47bb-4348-8a22-f2a4fe5607fa "java jar run with command line args")
 <br/><br>
-![app details endpoint](https://github.com/user-attachments/assets/0f0a41fc-7909-45b0-a342-7d5a285c6b94)
+![app details endpoint](https://github.com/user-attachments/assets/b688b7c3-1235-4ae4-b9d7-e0733e53662b)
 <br/><br>
 ![maven spring boot run with arguments](https://github.com/user-attachments/assets/1fa9b2b9-8029-4ed9-85bc-acd362137fb3 "maven spring boot run with arguments")
 <br/><br>

@@ -52,6 +52,60 @@ classDiagram
 ```
 
 ```mermaid
+%%{init: {'theme': 'default'}}%%
+classDiagram
+    class Animal {
+        +int age
+        +String gender
+        +isMammal()
+        +mate()
+    }
+    class Duck {
+        +String beakColor
+        +swim()
+        +quack()
+    }
+
+    Animal <|-- Duck
+```
+
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+classDiagram
+    class Animal {
+        +int age
+        +String gender
+        +isMammal()
+        +mate()
+    }
+    class Duck {
+        +String beakColor
+        +swim()
+        +quack()
+    }
+
+    Animal <|-- Duck
+```
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+classDiagram
+    class Animal {
+        +int age
+        +String gender
+        +isMammal()
+        +mate()
+    }
+    class Duck {
+        +String beakColor
+        +swim()
+        +quack()
+    }
+
+    Animal <|-- Duck
+```
+
+```mermaid
 %%{init: {'theme': 'forest'}}%%
 classDiagram
     class Animal {

@@ -4,7 +4,7 @@ Dark
 %%{init: {'theme': 'dark'}}%%
 sequenceDiagram
     participant C as Client
-    box Filter Chain
+    box rgb(30, 30, 30) Filter Chain
         participant F1 as LoggingFilter (Pre)
         participant F2 as HeaderCheckFilter (Pre)
         participant F3 as CompressionFilter (Post)

@@ -205,7 +205,7 @@ Forest
 %%{init: {'theme': 'forest'}}%%
 sequenceDiagram
     participant C as Client
-    box Filter Chain
+    box rgb(220, 255, 220) Filter Chain
         participant F1 as LoggingFilter (Pre)
         participant F2 as HeaderCheckFilter (Pre)
         participant F3 as CompressionFilter (Post)

@@ -559,6 +559,14 @@ graph TB
     end
 ```
 
+
+<img width="284" height="413" alt="F1" src="https://github.com/user-attachments/assets/de6b08c1-a63e-484a-8872-1d805776dc8a" />
+
+
+<img width="284" height="413" alt="F2" src="https://github.com/user-attachments/assets/bc1a5036-2ff2-48a5-8408-91846cc78ac5" />
+
+
+
 The client sends a request to the application, and the servlet container creates a `FilterChain`, which contains the
 `Filter` instances, and a `Servlet` that should process the `HttpServletRequest`, based on the path of the request URI.
 In a Spring MVC application, the `Servlet` is an instance of `DispatcherServlet`. At most, one `Servlet` can handle a

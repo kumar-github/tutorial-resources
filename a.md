@@ -562,8 +562,6 @@ graph TB
 <p align="center">
 <img alt="F1" src="https://github.com/user-attachments/assets/de6b08c1-a63e-484a-8872-1d805776dc8a" />
 <img alt="F2" src="https://github.com/user-attachments/assets/bc1a5036-2ff2-48a5-8408-91846cc78ac5" />
-<img alt="F1" src="https://github.com/user-attachments/assets/4a0eaff5-7367-4bbe-ab11-f8e80abe0e6c" />
-<img alt="F2" src="https://github.com/user-attachments/assets/63c30037-87f7-493b-bafe-4ea75296ca7b" />
 <img alt="F3" src="https://github.com/user-attachments/assets/3473fc61-903f-4868-ba93-016abee83d28" />
 <img alt="F4" src="https://github.com/user-attachments/assets/88de64e2-e49f-4542-9242-db91b40efdf3" />
 </p>

@@ -1,15 +1,11 @@
 # Spring Boot Security 101
 
 <p align="center">
-<img alt="F1" src="https://github.com/user-attachments/assets/e4bff8e5-3e8c-499c-b154-5c894a93f14b" />
-<img alt="F2" src="https://github.com/user-attachments/assets/121afb06-7742-494c-b006-8053ec52ba05" />
-<img alt="F3" src="https://github.com/user-attachments/assets/af7ed29f-92d2-4509-ad73-ade5e31fede7" />
-<img alt="F4" src="https://github.com/user-attachments/assets/e2fbc41f-5229-4d0f-a12f-d43f87e6be37" />
-<img alt="F5" src="https://github.com/user-attachments/assets/eb834685-c4a1-4853-ae3a-6d81a26120f0" />
-<img alt="F6" src="https://github.com/user-attachments/assets/9095f7ab-adfa-48a9-b68e-3284e38a474a" />
-
-  <br><br>
-
-<img alt="F1" src="https://github.com/user-attachments/assets/9e3fd51c-78b9-4a33-8898-8152f1a1c835" />
-<img alt="F2" src="https://github.com/user-attachments/assets/32c86f08-93d5-49bf-a055-72208ff18a4b" />  
+<img alt="F1" src="https://github.com/user-attachments/assets/494f8ca4-c647-4273-b8ae-5fc6dc704b3c" />
+<img alt="F2" src="https://github.com/user-attachments/assets/a6ebf966-8dc1-4d97-a8ed-1d3654c6671f" />
+<img alt="F3" src="https://github.com/user-attachments/assets/1d2d4ce7-c268-452f-829d-24d51fe12f72" />
+<img alt="F4" src="https://github.com/user-attachments/assets/9e3cc0e2-042c-4ef8-9e57-7e9e1c0ef9ec" />
+<img alt="F5" src="https://github.com/user-attachments/assets/d4e342dd-bc45-4442-8e54-089faaef1b59" />
+<img alt="F6" src="https://github.com/user-attachments/assets/875d5e42-6cb1-4c3f-a08c-b3f5856f54f1" />
+<img alt="F7" src="https://github.com/user-attachments/assets/25bd9c78-936e-4037-bfa5-b3ff80ff8810" />
 </p>

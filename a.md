@@ -1,7 +1,5 @@
 # Spring Boot Security 101
 
-# Spring Boot Security 101
-
 Spring Security is a powerful and highly customizable authentication and authorization (access-control) framework. It
 also provides protection against common attacks like CSRF etc. It is the de-facto standard for securing Spring-based
 applications.
@@ -97,6 +95,7 @@ while keeping the tests relatively fast.
 The easiest way to set up a `MockMvc` in a `@WebMvcTest` is by directly autowiring it like below:
 
 ```java
+
 @WebMvcTest(controllers = SampleController.class)
 class SampleControllerMockMvcUnitTest {
 
@@ -108,6 +107,7 @@ class SampleControllerMockMvcUnitTest {
 We can set up a `MockMvc` in a `@SpringBootTest` like below:
 
 ```java
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 class SampleControllerMockMvcUnitTest {
@@ -211,6 +211,7 @@ class Demo {
 ```
 
 ```java
+
 @ExtendWith(MockitoExtension.class)
 class Demo {
 
@@ -539,9 +540,8 @@ The below sequence diagram shows the flow of a FilterChain with two filters whic
 three filters which work on the response (post-process).
 
 <p align="center">
-<img alt="filters-sequence-diagram" src="https://github.com/user-attachments/assets/ad6677b4-a174-4cec-b6f7-75b0ac2ae0d3" />
+<img alt="filters-sequence-diagram" src="https://github.com/user-attachments/assets/ad6677b4-a174-4cec-b6f7-75b0ac2ae0d3">
 </p>
-
 
 ## Spring Security Architecture
 
@@ -550,16 +550,9 @@ work. If the above sequence diagram is confusing, then let's break it down a lit
 
 The following image shows the typical layering of the handlers for a single HTTP request.
 
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
-
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> Filter2[Filter-2] <--> Filter3[Filter-3] <--> Servlet[Servlet]
-    end
-```
+<p align="center">
+<img width="500px" alt="filter-chain" src="https://github.com/user-attachments/assets/494f8ca4-c647-4273-b8ae-5fc6dc704b3c">
+</p>
 
 The client sends a request to the application, and the servlet container creates a `FilterChain`, which contains the
 `Filter` instances, and a `Servlet` that should process the `HttpServletRequest`, based on the path of the request URI.
@@ -571,7 +564,7 @@ single `HttpServletRequest` and `HttpServletResponse`. However, more than one `F
 2. Modify the `HttpServletRequest` or `HttpServletResponse`, which is then used by the downstream `Filter` instances and
    the `Servlet`.
 
-The power of the Filter comes from the FilterChain that is passed into it.
+The power of the `Filter` comes from the `FilterChain` that is passed into it.
 
 ```java
 
@@ -598,21 +591,9 @@ through the standard Servlet container mechanisms but delegate all the work to a
 
 Here is a picture of how `DelegatingFilterProxy` fits into the `Filter` instances and the `FilterChain`.
 
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
-
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction TB
-            BeanFilter-1[Bean Filter-1]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-```
+<p align="center">
+<img width="500px" alt="delegating-filter-proxy" src="https://github.com/user-attachments/assets/a6ebf966-8dc1-4d97-a8ed-1d3654c6671f">
+</p>
 
 `DelegatingFilterProxy` looks up `Bean Filter-1` from the `ApplicationContext` and then invokes `Bean Filter-1`. The
 following listing shows pseudocode of `DelegatingFilterProxy`:
@@ -628,7 +609,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
   `DelegatingFilterProxy` `delegate` is an instance of `Bean Filter-1`.
 - `delegate.doFilter(...)` delegate work to the Spring Bean.
 
-> [!INFO]
+> [!NOTE]
 > Another benefit of `DelegatingFilterProxy` is that it allows delaying looking up `Filter` bean instances. This is
 > important because the container needs to register the `Filter` instances before the container can start up. However,
 > Spring typically uses a `ContextLoaderListener` to load the Spring Beans, which is not done until after the `Filter`
@@ -642,55 +623,53 @@ provided by Spring Security that allows delegating to many `Filter` instances th
 
 The following image shows the role of `FilterChainProxy`.
 
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
+<p align="center">
+<img width="800px" alt="filter-chain-proxy" src="https://github.com/user-attachments/assets/e9534b09-bce7-452b-b7a1-bb8426368152">
+</p>
 
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction LR
-            FilterChainProxy[FilterChainProxy]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-    FilterChainProxy --> SecurityFilterChain[SecurityFilterChain]
-```
+### SecurityFilterChain
 
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
+`SecurityFilterChain` is used by `FilterChainProxy` to determine which Spring Security `Filter` instances should be
+invoked for the current request.
 
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction LR
-            FilterChainProxy[FilterChainProxy]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-    subgraph SecurityFilterChain[SecurityFilterChain]
-        direction TB
-        SecurityFilter-1[SecurityFilter-1] <--> SecurityFilter-2[SecurityFilter-2] <--> SecurityFilter-3[SecurityFilter-3]
-    end
-%%    FilterChainProxy --> SecurityFilterChain[SecurityFilterChain]
-```
-
-
-
-
+The following image shows the role of `SecurityFilterChain`.
 
 <p align="center">
-<img alt="F1" src="https://github.com/user-attachments/assets/494f8ca4-c647-4273-b8ae-5fc6dc704b3c">
-<img alt="F2" src="https://github.com/user-attachments/assets/a6ebf966-8dc1-4d97-a8ed-1d3654c6671f">
-<img alt="F3" src="https://github.com/user-attachments/assets/1d2d4ce7-c268-452f-829d-24d51fe12f72">
-<img alt="F4" src="https://github.com/user-attachments/assets/e9534b09-bce7-452b-b7a1-bb8426368152">
-<img alt="F5" src="https://github.com/user-attachments/assets/d4e342dd-bc45-4442-8e54-089faaef1b59">
-<img alt="F6" src="https://github.com/user-attachments/assets/875d5e42-6cb1-4c3f-a08c-b3f5856f54f1">
-<img alt="F7" src="https://github.com/user-attachments/assets/25bd9c78-936e-4037-bfa5-b3ff80ff8810">
-<img src="https://github.com/user-attachments/assets/3fd31eae-89d1-47c3-a958-d3519309eec7" />
+<img width="800px" alt="security-filter-chain" src="https://github.com/user-attachments/assets/d4e342dd-bc45-4442-8e54-089faaef1b59">
 </p>
+
+The Security Filters in `SecurityFilterChain` are typically Beans, but they are registered with `FilterChainProxy`
+instead of `DelegatingFilterProxy`. `FilterChainProxy` provides a number of advantages to registering directly with the
+Servlet container or `DelegatingFilterProxy`.
+
+First, it provides a starting point for all of Spring Security’s Servlet support.
+
+> [!TIP]
+> For that reason, if you try to troubleshoot Spring Security’s Servlet support, adding a debug point in
+`FilterChainProxy` is a great place to start.
+
+Second, since `FilterChainProxy` is central to Spring Security usage, it can perform tasks that are not viewed as
+optional. For example, it clears out the `SecurityContext` to avoid memory leaks. It also applies Spring Security’s
+HttpFirewall to protect applications against certain types of attacks.
+
+In addition, it provides more flexibility in determining when a `SecurityFilterChain` should be invoked. In a Servlet
+container, `Filter` instances are invoked based upon the URL alone. However, `FilterChainProxy` can determine invocation
+based upon anything in the `HttpServletRequest` by using the `RequestMatcher` interface.
+
+The following image shows multiple `SecurityFilterChain` instances:
+
+<p align="center">
+<img width="1000px" alt="security-filter-chains" src="https://github.com/user-attachments/assets/3fd31eae-89d1-47c3-a958-d3519309eec7">
+</p>
+
+In the multiple security filter chain figure, `FilterChainProxy` decides which `SecurityFilterChain` should be used.
+Only the first `SecurityFilterChain` that matches is invoked. If a URL of `/api/messages/` is requested, it first
+matches on the `SecurityFilterChain-1` pattern of `/api/**`, so only `SecurityFilterChain-1` is invoked, even though it
+also matches on `SecurityFilterChain-N`. If a URL of `/messages/` is requested, it does not match on the
+`SecurityFilterChain-1` pattern of `/api/**`, so `FilterChainProxy` continues trying each `SecurityFilterChain`.
+Assuming that no other `SecurityFilterChain` instances match, `SecurityFilterChain-N` is invoked.
+
+Notice that `SecurityFilterChain-1` has only three security `Filter` instances configured. However,
+`SecurityFilterChain-N` has four security `Filter` instances configured. It is important to note that each
+`SecurityFilterChain` can be unique and can be configured in isolation. In fact, a `SecurityFilterChain` might have zero
+security `Filter` instances if the application wants Spring Security to ignore certain requests.

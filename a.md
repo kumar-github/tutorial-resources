@@ -560,8 +560,10 @@ graph TB
 ```
 
 <p align="center">
-<img alt="F5" src="https://github.com/user-attachments/assets/3fe7e50a-9e98-4019-89a3-e62c781d0234" />
-<img alt="F6" src="https://github.com/user-attachments/assets/5b5e6c18-c672-40b1-b1f4-eed0554d0e1d" />
+    <img alt="F1" src="https://github.com/user-attachments/assets/a86aaa2e-3bd5-4ec2-95ba-ef5f3d7cba2d" />
+    <img alt="F2" src="https://github.com/user-attachments/assets/4993c1fc-842a-471f-8894-bbe8c414fd24" />
+    <img alt="F3" src="https://github.com/user-attachments/assets/050e27fa-b3ad-4c06-9dab-0fdef78e5365" />
+    <img alt="F4" src="https://github.com/user-attachments/assets/31b45299-cef1-48cb-88c9-737766e4aeac" />
 </p>
 
 

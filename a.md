@@ -539,8 +539,7 @@ The below sequence diagram shows the flow of a FilterChain with two filters whic
 three filters which work on the response (post-process).
 
 <p align="center">
-<img width="1600px" src="https://github.com/user-attachments/assets/ad6677b4-a174-4cec-b6f7-75b0ac2ae0d3" 
-alt="filters-sequence-diagram"/>
+<img alt="filters-sequence-diagram" src="https://github.com/user-attachments/assets/ad6677b4-a174-4cec-b6f7-75b0ac2ae0d3" />
 </p>
 
 

@@ -560,8 +560,6 @@ graph TB
 ```
 
 <p align="center">
-<img alt="F1" src="https://github.com/user-attachments/assets/2ea882ce-ab9c-4eb6-9f13-c79e2bda9a9c" />
-<img alt="F3" src="https://github.com/user-attachments/assets/36092165-ee9b-4cf2-a54f-09723f83f6be" />
 <img alt="F2" src="https://github.com/user-attachments/assets/382fbf9b-6bde-4ce4-8c11-d4884414fbd2" />
 <img alt="F4" src="https://github.com/user-attachments/assets/184444f7-98fb-4572-8c0b-4799a3e0b183" />
 </p>
@@ -604,22 +602,6 @@ through the standard Servlet container mechanisms but delegate all the work to a
 
 Here is a picture of how `DelegatingFilterProxy` fits into the `Filter` instances and the `FilterChain`.
 
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
-
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction TB
-            BeanFilter-1[Bean Filter-1]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-```
-
 `DelegatingFilterProxy` looks up `Bean Filter-1` from the `ApplicationContext` and then invokes `Bean Filter-1`. The
 following listing shows pseudocode of `DelegatingFilterProxy`:
 
@@ -647,41 +629,3 @@ provided by Spring Security that allows delegating to many `Filter` instances th
 `FilterChainProxy` is a `Bean`, it is typically wrapped in a `DelegatingFilterProxy`.
 
 The following image shows the role of `FilterChainProxy`.
-
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
-
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction LR
-            FilterChainProxy[FilterChainProxy]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-    FilterChainProxy --> SecurityFilterChain[SecurityFilterChain]
-```
-
-```mermaid
-%%{init: {'theme': 'dark'}}%%
-graph TB
-    Client[Client] <--> Filter-1
-
-    subgraph FilterChain[Filter Chain]
-        direction TB
-        Filter-1[Filter-1] <--> DelegatingFilterProxy
-        subgraph DelegatingFilterProxy[DelegatingFilterProxy]
-            direction LR
-            FilterChainProxy[FilterChainProxy]
-        end
-        DelegatingFilterProxy <--> Filter2[Filter-3] <--> Servlet[Servlet]
-    end
-    subgraph SecurityFilterChain[SecurityFilterChain]
-        direction TB
-        SecurityFilter-1[SecurityFilter-1] <--> SecurityFilter-2[SecurityFilter-2] <--> SecurityFilter-3[SecurityFilter-3]
-    end
-%%    FilterChainProxy --> SecurityFilterChain[SecurityFilterChain]
-```

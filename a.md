@@ -490,10 +490,6 @@ If the pre-processing and post-processing are needed only for a single servlet, 
 respective servlet itself. But what if the same kind of pre-processing and post-processing is needed in multiple
 servlets?
 
-Let's say we want to _log_ all the requests coming from the client and _look for a specific HTTP header_ in the request
-before they reach the target servlet (Pre Processing). Once the request is processed by the target servlet, we want to
-_add a specif HTTP header_, _encrypt_ and _compress_ the response before it is sent to the client (Post Processing).
-
 Filters and FilterChains are the way to achieve this.
 
 ### Filter
@@ -524,29 +520,154 @@ passing a request and response to the next filter in the chain.
 Filters can be chained together so that a group of filters can act on the input and output of a specified resource or
 group of resources.
 
-A typical implementation of a FilterChain would follow the following pattern:
+Let's say we want to _log_ all the requests coming from the client and _look for a specific HTTP header_ in the request
+before it reaches the target servlet (Pre Processing). If the header is not found, then we want to return a
+`400 Bad Request` http status code and terminate the request from proceeding further. If the header is found, then we
+want to continue with the request processing. Once the request is processed by the target servlet, we want to _add a
+specific HTTP header_, _encrypt_ and _compress_ the response before it is sent to the client (Post Processing).
+
+A typical implementation of the above-mentioned scenario using filters and filter chain would be as follows:
 
 1. The client sends a request.
-2. The web container determines the applicable filters and creates a FilterChain.
-3. The container invokes the `doFilter()` method of the first filter in the chain.
-4. Within the filter's `doFilter()` method, any code before `chain.doFilter()` is executed as pre-processing.
-5. `chain.doFilter()` calls the next filter (or the target servlet if it is the last filter in the chain).
-6. When the target servlet finishes, control returns up the chain.
-7. Any code after `chain.doFilter()` in the filter's method is executed as post-processing and calls the previous
-   filter in the chain.
-8. The final response is sent back to the client.
+2. The servlet container determines the applicable `Filter`s and creates a `FilterChain`.
+3. The servlet container invokes the `doFilter()` method of the first filter in the chain. In our case, it is the
+   `LoggingFilter`.
+4. Within the `LoggingFilter`'s `doFilter()` method, any code before `filterChain.doFilter()` is executed. In our case,
+   we are just logging the request. This is Pre Processing.
+5. `filterChain.doFilter()` in `LoggingFilter` calls the next filter in the filter chain. In our case, it is
+   the `HeaderCheckFilter`.
+6. Within the `HeaderCheckFilter`'s `doFilter()` method, any code before `filterChain.doFilter()` is executed. In our
+   case, we are checking if the request contains a specific header. If the **header is not found**, we return a
+   `400 Bad Request` http status code and terminate the request. If the **header is found**, we continue with the
+   request processing. This is Pre Processing.
+7. Next `CompressionFilter`'s `doFilter()` method is called but there is nothing to pre-process.
+8. Next `EncryptionFilter`'s `doFilter()` method is called but there is nothing to pre-process.
+9. Next `HeaderAddFilter`'s `doFilter()` method is called but there is nothing to pre-process.
+10. Next the request is passed to the target servlet as there is no filter in the chain. In our case, it is the
+    `FilterDemoController`.
+11. The `FilterDemoController` processes the request and generates the response.
+12. Next the `HeaderAddFilter`'s `doFilter()` method is called with the response. In our case, we are adding a
+    specific header to the response. This is Post Processing.
+13. Next the `EncryptionFilter`'s `doFilter()` method is called with the response. In our case, we are just logging
+    the response as encrypted. This is Post Processing.
+14. Next the `CompressionFilter`'s `doFilter()` method is called with the response. In our case, we are checking if the
+    response contains a specific header which was added by the `HeaderAddFilter` and log a message depends on the
+    header is present or not. This is Post Processing.
+15. Next, the final post-processed response is sent back to the client.
 
-The below sequence diagram shows the flow of a FilterChain with two filters which work on the request (pre-process) and
-three filters which work on the response (post-process).
+Check the below sequence diagram for a better understanding of the above-mentioned scenario.
 
 <p align="center">
 <img alt="filters-sequence-diagram" src="https://github.com/user-attachments/assets/ad6677b4-a174-4cec-b6f7-75b0ac2ae0d3">
 </p>
 
+Sample code for the above scenario has been implemented for reference. Run the code and hit the url
+`http://localhost:8080/hello` in _Postman_ or using _curl_ with and without the `X-Api-Version` header to see how
+different filters are working.
+
+> [!WARNING]
+> Do not worry about the `401 Unauthorized` http status code as we have Spring Security in place. What we are interested
+> in here is the log messages in the console and the response headers.
+
+> [!NOTE]
+> The filters are configured to intercept only the requests with `/hello` path and nothing else. This is done to prevent
+> our `SampleController` from being intercepted by the filters and that will make the tests fail.
+
+Request without the `X-Api-Version` header:
+
+```bash
+curl http://localhost:8080/hello
+```
+
+Console log:
+
+```terminaloutput
+2026-03-12T14:42:13.958+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-7] d.b.s.filters.LoggingFilter       : Request received : /hello
+2026-03-12T14:42:13.959+05:30 ERROR 21837 --- [spring-boot-security-101] [nio-8080-exec-7] d.b.s.filters.HeaderCheckFilter   : Required header missing. Request aborted.
+```
+
+Response with headers:
+
+```bash
+HTTP/1.1 401
+Set-Cookie: JSESSIONID=B6AE161F889EDEB5072EF11B4F4F9A76; Path=/; HttpOnly
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Thu, 12 Mar 2026 09:13:21 GMT
+```
+
+Request with `X-Api-Version` header:
+
+```bash
+curl -i -H "X-Api-Version: 1.1" http://localhost:8080/hello
+```
+
+Console log:
+
+```terminaloutput
+2026-03-12T14:42:48.391+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-9] d.b.s.filters.LoggingFilter       : Request received : /hello
+2026-03-12T14:42:48.391+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-9] d.b.s.filters.HeaderCheckFilter   : Required header found. Request will proceed.
+2026-03-12T14:42:48.391+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-9] d.b.s.filters.HeaderAddFilter     : Header added to response.
+2026-03-12T14:42:48.394+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-9] d.b.s.filters.EncryptionFilter    : Response Encrypted.
+2026-03-12T14:42:48.394+05:30  INFO 21837 --- [spring-boot-security-101] [nio-8080-exec-9] d.b.s.filters.CompressionFilter   : Header found. Response Compressed.
+```
+
+Response with headers:
+
+```bash
+HTTP/1.1 401
+X-Allow-Compression: true
+Set-Cookie: JSESSIONID=E63B9A3A903E3D705A440A29C67AA858; Path=/; HttpOnly
+WWW-Authenticate: Basic realm="Realm"
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Thu, 12 Mar 2026 09:12:48 GMT
+```
+
+Request with `X-Api-Version` header and authentication:
+
+```bash
+curl -i -H "X-Api-Version: 1.1" -u "dev-user-1:dev-password-1" http://localhost:8080/hello
+```
+
+```terminaloutput
+2026-03-12T15:13:21.797+05:30  INFO 28344 --- [spring-boot-security-101] [nio-8080-exec-8] d.b.s.filters.LoggingFilter       : Request received : /hello
+2026-03-12T15:13:21.797+05:30  INFO 28344 --- [spring-boot-security-101] [nio-8080-exec-8] d.b.s.filters.HeaderCheckFilter   : Required header found. Request will proceed.
+2026-03-12T15:13:21.797+05:30  INFO 28344 --- [spring-boot-security-101] [nio-8080-exec-8] d.b.s.filters.HeaderAddFilter     : Header added to response.
+2026-03-12T15:13:21.912+05:30  INFO 28344 --- [spring-boot-security-101] [nio-8080-exec-8] d.b.s.filters.EncryptionFilter    : Response Encrypted.
+2026-03-12T15:13:21.912+05:30  INFO 28344 --- [spring-boot-security-101] [nio-8080-exec-8] d.b.s.filters.CompressionFilter   : Header found. Response Compressed.
+```
+
+Response with headers:
+
+```bash
+HTTP/1.1 200
+X-Allow-Compression: true
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 5
+Date: Thu, 12 Mar 2026 09:36:42 GMT
+
+Hello%
+```
+
 ## Spring Security Architecture
 
-Spring Security’s Servlet support is completely based on Servlet Filters, and it is important to understand how they
-work. If the above sequence diagram is confusing, then let's break it down a little bit.
+In the previous section, we have seen how filters and filter chains work together to achieve pre-processing and
+post-processing of requests and responses.
+
+Spring Security is completely based on Servlet `Filter`s and `FilterChain`s, and it is important to understand how they
+work. If the previews section was not clear enough, then let's break it down a little bit.
 
 The following image shows the typical layering of the handlers for a single HTTP request.
 
@@ -554,17 +675,17 @@ The following image shows the typical layering of the handlers for a single HTTP
 <img width="500px" alt="filter-chain" src="https://github.com/user-attachments/assets/494f8ca4-c647-4273-b8ae-5fc6dc704b3c">
 </p>
 
-The client sends a request to the application, and the servlet container creates a `FilterChain`, which contains the
-`Filter` instances, and a `Servlet` that should process the `HttpServletRequest`, based on the path of the request URI.
-In a Spring MVC application, the `Servlet` is an instance of `DispatcherServlet`. At most, one `Servlet` can handle a
-single `HttpServletRequest` and `HttpServletResponse`. However, more than one `Filter` can be used to:
+The client sends a request to the application, and the servlet container creates a `FilterChain`, which contains one
+or more `Filter` instances, and a `Servlet` that should process the `HttpServletRequest`, based on the path of the
+request URI. In a Spring MVC application, the `Servlet` is an instance of `DispatcherServlet`. At most, one `Servlet`
+can handle a single `HttpServletRequest` and `HttpServletResponse`. However, more than one `Filter` can be used to:
 
 1. Prevent downstream `Filter` instances or the `Servlet` from being invoked. In this case, typically the `Filter`
    itself writes the `HttpServletResponse`.
 2. Modify the `HttpServletRequest` or `HttpServletResponse`, which is then used by the downstream `Filter` instances and
    the `Servlet`.
 
-The power of the `Filter` comes from the `FilterChain` that is passed into it.
+The power of the `Filter`s comes from the `FilterChain` that is passed into it.
 
 ```java
 

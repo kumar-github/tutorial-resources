@@ -721,20 +721,22 @@ following listing shows pseudocode of `DelegatingFilterProxy`:
 
 ```java
 public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+    // 1
     Filter delegate = getFilterBean(someBeanName);
+    // 2
     delegate.doFilter(request, response);
 }
 ```
 
-- The `getFilterBean(...)` lazily get `Filter` that was registered as a Spring Bean. For example, in
-  `DelegatingFilterProxy` `delegate` is an instance of `Bean Filter-1`.
-- `delegate.doFilter(...)` delegate work to the Spring Bean.
+1. The `getFilterBean(...)` lazily get `Filter` that was registered as a Spring Bean. For example, in
+   `DelegatingFilterProxy` `delegate` is an instance of `Bean Filter-1`.
+2. `delegate.doFilter(...)` delegate work to the Spring Bean.
 
 > [!NOTE]
 > Another benefit of `DelegatingFilterProxy` is that it allows delaying looking up `Filter` bean instances. This is
-> important because the container needs to register the `Filter` instances before the container can start up. However,
-> Spring typically uses a `ContextLoaderListener` to load the Spring Beans, which is not done until after the `Filter`
-> instances need to be registered.
+> important because the servlet container needs to register the `Filter` instances before the servlet container can
+> start up. However, Spring typically uses a `ContextLoaderListener` to load the Spring Beans, which is not done until
+> after the `Filter` instances need to be registered.
 
 ### FilterChainProxy
 

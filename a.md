@@ -1028,3 +1028,8 @@ Because of that, filters are often not Spring beans.
 However, if your filter needs to be a Spring bean (to take advantage of dependency injection, for example) you can tell
 Spring Boot to not register it with the container by declaring a FilterRegistrationBean bean and setting its enabled
 property to false:
+
+
+<img width="1766" height="775" alt="2026-03-11" src="https://github.com/user-attachments/assets/f0893931-b379-441c-8e32-2af2aba508e6">
+
+

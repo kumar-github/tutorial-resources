@@ -798,17 +798,14 @@ Notice that `SecurityFilterChain-1` has only three security `Filter` instances c
 `SecurityFilterChain` can be unique and can be configured in isolation. In fact, a `SecurityFilterChain` might have zero
 security `Filter` instances if the application wants Spring Security to ignore certain requests.
 
-------------------------------------------------------------------------------
-
-## Security Filters
+### Security Filters
 
 The Security Filters are inserted into the `FilterChainProxy` with the `SecurityFilterChain` API. Those filters can be
-used for a number of different purposes, like exploit protection, authentication, authorization, and more. The filters
-are executed in a specific order to guarantee that they are invoked at the right time, for example, the `Filter` that
-performs authentication should be invoked before the `Filter` that performs authorization. It is typically not necessary
-to know the ordering of Spring Security’s `Filter`s. However, there are times that it is beneficial to know the
-ordering,
-if you want to know them, you can check the `FilterOrderRegistration` code.
+used for a number of different purposes, like _exploit protection_, _authentication_, _authorization_ and more. The
+filters are executed in a specific order to guarantee that they are invoked at the right time, for example, the `Filter`
+that performs authentication should be invoked before the `Filter` that performs authorization. It is typically not
+necessary to know the ordering of Spring Security’s `Filter`s. However, there are times that it is beneficial to know
+the ordering, if you want to know them, you can check the `FilterOrderRegistration` code.
 
 These security filters are most often declared using an `HttpSecurity` instance. To exemplify the above paragraph, let’s
 consider the following security configuration:
@@ -826,7 +823,6 @@ public class SecurityConfig {
             .formLogin(Customizer.withDefaults())
             .authorizeHttpRequests((authorize) -> authorize.anyRequest()
                                                            .authenticated());
-
         return http.build();
     }
 }
@@ -851,14 +847,14 @@ The above configuration will result in the following `Filter` ordering:
 
 #### Printing the Security Filters
 
-There are times it is useful to see the list of security `Filter`s that are invoked for a particular request.
-For example, we want to make sure that the filter you have added is in the list of the security filters.
+There are times it is useful to see the list of security `Filter`s that are invoked for a particular request. For
+example, we want to make sure that the filter we have added is in the list of the security filters.
 
-The list of filters is printed at DEBUG level on the application startup, so we can see something like the following on
-the console output, for example:
+The list of filters is printed at `DEBUG` level on the application startup, so we can see something like the following
+on the console output, for example:
 
 ```terminaloutput
-2023-06-14T08:55:22.321-03:00  DEBUG 76975 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [ DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CsrfFilter, LogoutFilter, UsernamePasswordAuthenticationFilter, DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter, BasicAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter]
+0000-00-00T00:00:00.000-00:00  DEBUG 12345 --- [     main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [ DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CsrfFilter, LogoutFilter, UsernamePasswordAuthenticationFilter, DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter, BasicAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter]
 ```
 
 And that will give a pretty good idea of the security filters that are configured for each filter chain.
@@ -869,7 +865,7 @@ We can also configure our application to print the invocation of each filter for
 the filter we have added is invoked for a particular request or to check where an exception is coming from.
 
 Spring Security provides comprehensive logging of all security-related events at the `DEBUG` and `TRACE` level. This can
-be invaluable when debugging our application because for security measures Spring Security does not add any detail of
+be invaluable when debugging our application because, for security measures, Spring Security does not add any detail of
 why a request has been rejected to the response body. If you come across a `401` or `403` error, it is very likely that
 you will find a log message that will help you understand what is going on.
 
@@ -878,15 +874,15 @@ without the _CSRF_ token. With no logs, the user will see a `403` error with no 
 rejected. However, if we enable logging for Spring Security, we will see a log message like this:
 
 ```terminaloutput
-2023-06-14T09:44:25.797-03:00 DEBUG 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /hello
-2023-06-14T09:44:25.797-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking DisableEncodeUrlFilter (1/15)
-2023-06-14T09:44:25.798-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking WebAsyncManagerIntegrationFilter (2/15)
-2023-06-14T09:44:25.800-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking SecurityContextHolderFilter (3/15)
-2023-06-14T09:44:25.801-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking HeaderWriterFilter (4/15)
-2023-06-14T09:44:25.802-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking CsrfFilter (5/15)
-2023-06-14T09:44:25.814-03:00 DEBUG 76975 --- [nio-8080-exec-1] o.s.security.web.csrf.CsrfFilter         : Invalid CSRF token found for http://localhost:8080/hello
-2023-06-14T09:44:25.814-03:00 DEBUG 76975 --- [nio-8080-exec-1] o.s.s.w.access.AccessDeniedHandlerImpl   : Responding with 403 status code
-2023-06-14T09:44:25.814-03:00 TRACE 76975 --- [nio-8080-exec-1] o.s.s.w.header.writers.HstsHeaderWriter  : Not injecting HSTS header since it did not match request to [Is Secure]
+0000-00-00T00:00:00.000-00:00 DEBUG 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /hello
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking DisableEncodeUrlFilter (1/15)
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking WebAsyncManagerIntegrationFilter (2/15)
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking SecurityContextHolderFilter (3/15)
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking HeaderWriterFilter (4/15)
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Invoking CsrfFilter (5/15)
+0000-00-00T00:00:00.000-00:00 DEBUG 12345 --- [nio-8080-exec-1] o.s.security.web.csrf.CsrfFilter         : Invalid CSRF token found for http://localhost:8080/hello
+0000-00-00T00:00:00.000-00:00 DEBUG 12345 --- [nio-8080-exec-1] o.s.s.w.access.AccessDeniedHandlerImpl   : Responding with 403 status code
+0000-00-00T00:00:00.000-00:00 TRACE 12345 --- [nio-8080-exec-1] o.s.s.w.header.writers.HstsHeaderWriter  : Not injecting HSTS header since it did not match request to [Is Secure]
 ```
 
 It becomes clear that the _CSRF_ token is missing and that is why the request is being denied.
@@ -910,126 +906,10 @@ or add the following to the `logback.xml` file:
 </configuration>
 ```
 
-#### Adding Filters to the Filter Chain
+**<mark>
+Bottom line: Spring security is just a bunch of servlet Filters in a FilterChain that are added automatically when
+Spring Security dependency is included. Those filters by default intercept all the requests and check if it needs
+authentication, and if it does, then make sure it is authenticated to allow the request to proceed.
+</mark>**
 
-Most of the time, the default Security Filters are enough to provide security to our application. However, there might
-be times that we want to add a custom Filter to the `SecurityFilterChain`.
-
-`HttpSecurity` comes with three methods for adding filters:
-
-* `#addFilterBefore(Filter, Class<?>)` adds your filter before another filter.
-* `#addFilterAfter(Filter, Class<?>)` adds your filter after another filter.
-* `#addFilterAt(Filter, Class<?>)` replaces another filter with your filter.
-
-#### Adding a Custom Filter
-
-If you are creating a filter of your own, you will need to determine its location in the filter chain. Take a look at
-the following key events that occur in the filter chain:
-
-1. `SecurityContext` is loaded from the session.
-2. Request is protected from common exploits; _secure headers_, _CORS_, _CSRF_.
-3. Request is _authenticated_.
-4. Request is _authorized_.
-
-Consider which events you need to have happened to locate your filter. The following is a rule of thumb:
-
-| If your filter is a(n)    | Then place it after           | As these events have already occurred |
-|---------------------------|-------------------------------|---------------------------------------|
-| exploit protection filter | SecurityContextHolderFilter   | 1                                     |
-| authentication filter     | LogoutFilter                  | 1, 2                                  |
-| authorization filter      | AnonymousAuthenticationFilter | 1, 2, 3                               |
-
-> [!TIP]
-> Most commonly, applications add a custom authentication. This means they should be placed after `LogoutFilter`.
-
-
-For example, let’s say that we want to add a `Filter` that gets a tenant id header and check if the current user has
-access to that tenant.
-
-First, let’s create the `Filter`:
-
-```java
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-
-public class TenantFilter implements Filter {
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws
-                                                                                                                  IOException,
-                                                                                                                  ServletException {
-        HttpServletRequest  request  = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-        // 1
-        String tenantId = request.getHeader("X-Tenant-Id");
-        // 2
-        boolean hasAccess = isUserAllowed(tenantId);
-        if (hasAccess) {
-            // 3
-            filterChain.doFilter(request, response);
-            return;
-        }
-        // 4
-        throw new AccessDeniedException("Access denied");
-    }
-}
-```
-
-The sample code above does the following:
-
-1. Get the tenant id from the request header.
-2. Check if the current user has access to the tenant id.
-3. If the user has access, then invoke the rest of the filters in the chain.
-4. If the user does not have access, then throw an `AccessDeniedException`.
-
-> [!TIP]
-> Instead of implementing `Filter`, you can extend from `OncePerRequestFilter` which is a base class for filters that
-> are only invoked once per request and provides a `doFilterInternal` method with the `HttpServletRequest` and
-> `HttpServletResponse` parameters.
-
-Now, we need to add the filter to the `SecurityFilterChain`. The previous description already gives us a clue on where
-to add the filter. Since we need to know the current user, we need to add it after the authentication filters.
-
-Based on the rule of thumb, add it after `AnonymousAuthenticationFilter`, the last authentication filter in the chain
-like below:
-
-```java
-
-@Bean
-SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    // 1
-    http.addFilterAfter(new TenantFilter(), AnonymousAuthenticationFilter.class);
-    return http.build();
-}
-```
-
-1. Use `HttpSecurity#addFilterAfter` to add the `TenantFilter` after the `AnonymousAuthenticationFilter`.
-
-By adding the filter after the `AnonymousAuthenticationFilter` we are making sure that the `TenantFilter` is invoked
-after the authentication filters.
-
-Now the `TenantFilter` will be invoked in the filter chain and will check if the current user has access to the tenant
-id.
-
-Declaring Your Filter as a Bean
-When you declare a Filter as a Spring bean, either by annotating it with @Component or by declaring it as a bean in your
-configuration, Spring Boot automatically registers it with the embedded container. That may cause the filter to be
-invoked twice, once by the container and once by Spring Security and in a different order.
-
-Because of that, filters are often not Spring beans.
-
-However, if your filter needs to be a Spring bean (to take advantage of dependency injection, for example) you can tell
-Spring Boot to not register it with the container by declaring a FilterRegistrationBean bean and setting its enabled
-property to false:
-
-
-<img width="1766" height="775" alt="2026-03-11" src="https://github.com/user-attachments/assets/f0893931-b379-441c-8e32-2af2aba508e6">
-
-
+But where are those `Filter`s and `FilterChain` configured? We will find out in the upcoming sections.

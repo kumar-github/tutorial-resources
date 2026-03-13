@@ -912,4 +912,75 @@ Spring Security dependency is included. Those filters by default intercept all t
 authentication, and if it does, then make sure it is authenticated to allow the request to proceed.
 </mark>**
 
-But where are those `Filter`s and `FilterChain` configured? We will find out in the upcoming sections.
+_But where are those `Filter`s and `FilterChain` configured?_ We will find out in the upcoming sections.
+
+## Enabled TRACE Logging
+
+As we have seen in the [Logging the Security Events](#logging-the-security-events) section, enabling `TRACE` logging
+for `org.springframework.security` package will give us a lot of information about the security events.
+
+We can see the below log message in the console output when the application starts:
+
+```terminaloutput
+2026-03-13T11:22:25.265+05:30 DEBUG 24531 --- [spring-boot-security-101] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CsrfFilter, LogoutFilter, UsernamePasswordAuthenticationFilter, DefaultResourcesFilter, DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter, BasicAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, AuthorizationFilter
+```
+
+Hitting the `http://localhost:8080/unsecured/home` endpoint from _curl_ with valid credentials will result in the below
+log message in the console output:
+
+```bash
+curl -i -u "dev-user-1:dev-password-1" http://localhost:8080/unsecured/home
+```
+
+```terminaloutput
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Trying to match request against DefaultSecurityFilterChain defined as 'defaultSecurityFilterChain' in [class path resource [org/springframework/boot/security/autoconfigure/web/servlet/ServletWebSecurityAutoConfiguration$SecurityFilterChainConfiguration.class]] matching [any request] and having filters [DisableEncodeUrl, WebAsyncManagerIntegration, SecurityContextHolder, HeaderWriter, Csrf, Logout, UsernamePasswordAuthentication, DefaultResources, DefaultLoginPageGenerating, DefaultLogoutPageGenerating, BasicAuthentication, RequestCacheAware, SecurityContextHolderAwareRequest, AnonymousAuthentication, ExceptionTranslation, Authorization] (1/1)
+2026-03-13T11:24:44.754+05:30 DEBUG 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /unsecured/home
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking DisableEncodeUrlFilter (1/16)
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking WebAsyncManagerIntegrationFilter (2/16)
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking SecurityContextHolderFilter (3/16)
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking HeaderWriterFilter (4/16)
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking CsrfFilter (5/16)
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] s.s.w.c.CsrfTokenRequestAttributeHandler : Wrote a CSRF token to the following request attributes: [_csrf, org.springframework.security.web.csrf.CsrfToken]
+2026-03-13T11:24:44.754+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.csrf.CsrfFilter         : Did not protect against CSRF since request did not match IsNotHttpMethod [TRACE, HEAD, GET, OPTIONS]
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking LogoutFilter (6/16)
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.a.logout.LogoutFilter            : Did not match request to PathPattern [POST /logout]
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking UsernamePasswordAuthenticationFilter (7/16)
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] w.a.UsernamePasswordAuthenticationFilter : Did not match request to PathPattern [POST /login]
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking DefaultResourcesFilter (8/16)
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking DefaultLoginPageGeneratingFilter (9/16)
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking DefaultLogoutPageGeneratingFilter (10/16)
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] .w.a.u.DefaultLogoutPageGeneratingFilter : Did not render default logout page since request did not match [PathPattern [GET /logout]]
+2026-03-13T11:24:44.755+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking BasicAuthenticationFilter (11/16)
+2026-03-13T11:24:44.761+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.a.www.BasicAuthenticationFilter  : Found username 'dev-user-1' in Basic Authorization header
+2026-03-13T11:24:44.761+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] w.c.HttpSessionSecurityContextRepository : No HttpSession currently exists
+2026-03-13T11:24:44.761+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] .s.s.w.c.SupplierDeferredSecurityContext : Created SecurityContextImpl [Null authentication]
+2026-03-13T11:24:44.761+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] .s.s.w.c.SupplierDeferredSecurityContext : Created SecurityContextImpl [Null authentication]
+2026-03-13T11:24:44.762+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.authentication.ProviderManager     : Authenticating request with DaoAuthenticationProvider (1/1)
+2026-03-13T11:24:45.044+05:30 DEBUG 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-03-13T11:24:45.048+05:30 DEBUG 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.a.www.BasicAuthenticationFilter  : Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=dev-user-1, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-13T05:54:45.044790Z]]]
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking RequestCacheAwareFilter (12/16)
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.s.HttpSessionRequestCache        : matchingRequestParameterName is required for getMatchingRequest to lookup a value, but not provided
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking SecurityContextHolderAwareRequestFilter (13/16)
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking AnonymousAuthenticationFilter (14/16)
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking ExceptionTranslationFilter (15/16)
+2026-03-13T11:24:45.048+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Invoking AuthorizationFilter (16/16)
+2026-03-13T11:24:45.049+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] estMatcherDelegatingAuthorizationManager : Authorizing GET /unsecured/home
+2026-03-13T11:24:45.049+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] estMatcherDelegatingAuthorizationManager : Checking authorization on GET /unsecured/home using org.springframework.security.authorization.AuthenticatedAuthorizationManager@2925c6d2
+2026-03-13T11:24:45.049+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Did not set SecurityContextHolder since already authenticated UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=dev-user-1, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER, FactorGrantedAuthority [authority=FACTOR_PASSWORD, issuedAt=2026-03-13T05:54:45.044790Z]]]
+2026-03-13T11:24:45.049+05:30 DEBUG 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /unsecured/home
+=> /UNSECURED/HOME
+2026-03-13T11:24:45.108+05:30 TRACE 24531 --- [spring-boot-security-101] [nio-8080-exec-2] o.s.s.w.header.writers.HstsHeaderWriter  : Not injecting HSTS header since it did not match request to [Is Secure]
+```
+
+The above log message shows the entire security chain followed to get to the endpoint including the location, type
+and name of the filter chain bean (`ServletWebSecurityAutoConfiguration$SecurityFilterChainConfiguration.class` =>
+`DefaultSecurityFilterChain` => `defaultSecurityFilterChain`) and all the filters in the order they are applied.
+
+> [!NOTE]
+> Enabling the TRACE level logging is not recommended for production environments as it can generate a lot of noise but
+> is useful in development environments for learning and debugging. We are going to keep it enabled throughout this
+> tutorial.
+
+> [!TIP]
+> Try the curl command without credentials or with wrong credentials and see the log messages in the console output to
+> understand what is different and what exceptions are thrown etc.

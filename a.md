@@ -1,5 +1,7 @@
 # Spring Boot Security 101
 
+
+
 Spring Security is a powerful and highly customizable authentication and authorization (access-control) framework. It
 also provides protection against common attacks like CSRF etc. It is the de-facto standard for securing Spring-based
 applications.

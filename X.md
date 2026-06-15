@@ -1,6 +1,10 @@
 <div align="center">
 
 # ⏱️ timing-utils - A Java Timing Utility Library
+
+⏱
+⏲
+
 # ⏱ timing-utils - A Java Timing Utility Library
 
 

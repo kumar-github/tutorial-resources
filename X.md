@@ -267,8 +267,11 @@ otherwise well-optimized method.
 If an invocation throws:
 
 - the failure count is incremented,
+
 - the exception is retained as the **last exception**,
+
 - execution **continues** with the next iteration,
+
 - and the failed iteration's timing is **excluded** from statistics.
 
 > [!IMPORTANT]

@@ -37,7 +37,7 @@ Package: `dev.badprogrammer.util.timing`
 
 ## Overview
 
-This library answers only **one** question, asked in two very different contexts:
+This library is very simple and answers just **one** question, asked in two very different contexts:
 
 > ### "How long did that take?"
 
@@ -159,13 +159,13 @@ A minimal taste of both classes:
 
 ```java
 // One-off measurement during an investigation
-TimedResult<User> timedResult = StopWatch.measure(() -> getUserById(101));
+final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
 System.out.println(timedResult);
 ```
 
 ```java
 // Repeated measurement during a performance investigation
-TimingStatistics stats = StopWatch.measureRepeatedly(() -> getUserById(101), 20, 3);
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
 System.out.println(stats);
 ```
 
@@ -211,18 +211,24 @@ Times **one invocation** of a method and returns both its result and its elapsed
 
 ```java
 // Returns a value, no checked exception
-TimedResult<String> result = StopWatch.measure(() -> cache.get("key"));
-String value = result.getResult();
-long millis = result.getElapsedMillis();
-
-// Returns a value, declares a checked exception
-TimedResult<Connection> result = StopWatch.measureChecked(() -> dataSource.getConnection());
+final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
+final User              result      = timedResult.getResult();
+final long              millis      = timedResult.getElapsedMillis();
 
 // Void method, no checked exception
-TimedResult<Void> result = StopWatch.measure(() -> cache.evictAll());
+final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
+final Void              result      = timedResult.getResult();
+final long              millis      = timedResult.getElapsedMillis();
+
+// Returns a value, declares a checked exception
+final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dataSource.getConnection());
+final Connection              result      = timedResult.getResult();
+final long                    millis      = timedResult.getElapsedMillis();
 
 // Void method declares a checked exception
-TimedResult<Void> result = StopWatch.measureChecked(() -> connection.close());
+final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dataSource.closeConnection());
+final Void              result      = timedResult.getResult();
+final long              millis      = timedResult.getElapsedMillis();
 ```
 
 #### Method naming convention

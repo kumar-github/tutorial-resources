@@ -70,6 +70,7 @@ Most Java codebases accumulate timing code in one of two unsatisfying forms:
 - Scattered `System.nanoTime()` pairs with manual subtraction, duplicated across the codebase, straightforward to
   implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking
   timing code into business logic.
+  
 - Ad-hoc `try { ... } finally { log.debug("took {}ms", ...) }` blocks that vary in format from method to method,
   making logs hard to search or aggregate.
 

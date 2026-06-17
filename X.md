@@ -250,16 +250,12 @@ extended to the upcoming `compare`, `compareChecked` methods.
 
 ### Repeated Measurement — `measureRepeatedly` / `measureRepeatedlyChecked`
 
-Invokes a method a fixed number of times (with a set of optional warmup-iterations whose stats are ignored) and
-returns an `TimingStatistics` — statistics across all **successful** invocations, plus failure tracking.
+Invokes a method a fixed number of times and returns a `TimingStatistics` — statistics across all **successful**
+invocations, plus failure tracking.
 
 ```java
-TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dataSource.getConnection(), 1000, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dataSource.getConnection(), 1000, 5);
 System.out.println(stats);
-
-// TimingStatistics[Total iterations = 1000, Successful iterations = 998, Failed iterations = 2, Total elapsed time = 
-// 11976ms, Average elapsed time = 12.001ms, Minimum elapsed time = 8ms, Maximum elapsed time = 45ms, Last exception 
-// = SQLException: connection timeout on call 20]
 
 if (stats.hasFailures()) {
     stats.getLastException()

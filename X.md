@@ -151,7 +151,7 @@ Either way, add the dependency to your `pom.xml`:
 <dependency>
     <groupId>dev.badprogrammer</groupId>
     <artifactId>timing-utils</artifactId>
-    <version>0.1.0</version>
+    <version>LATEST_VERSION</version>
 </dependency>
 ```
 
@@ -159,8 +159,14 @@ A minimal taste of both classes:
 
 ```java
 // One-off measurement during an investigation
-TimedResult<User> result = StopWatch.measure(() -> getUserById(101));
-System.out.printf("Elapsed: %dms (%dns)", result.getElapsedMillis(), result.getElapsedNanos());
+TimedResult<User> timedResult = StopWatch.measure(() -> getUserById(101));
+System.out.println(timedResult);
+```
+
+```java
+// Repeated measurement during a performance investigation
+TimingStatistics stats = StopWatch.measureRepeatedly(() -> getUserById(101), 20, 3);
+System.out.println(stats);
 ```
 
 ```java

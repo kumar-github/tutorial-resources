@@ -136,7 +136,7 @@ These principles were established early in the design phase and applied across e
 Clone the repository and install it to your local Maven repository:
 
 ```bash
-git clone https://github.com/kumar-github/timing-utils.git
+git clone https://github.com/dev-badprogrammer/timing-utils.git
 cd timing-utils
 mvn clean install
 ```

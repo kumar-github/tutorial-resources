@@ -161,12 +161,17 @@ A minimal taste of both classes:
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
 System.out.println(timedResult);
+
+// TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
 
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
 System.out.println(stats);
+
+// TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
+// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
 ```
 
 ```java
@@ -176,6 +181,8 @@ public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 }
+
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection | Elapsed = 38ms (38459480ns)
 ```
 
 ### Building and Running Tests
@@ -214,6 +221,14 @@ Times **one invocation** of a method and returns both its result and its elapsed
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
 final User              result      = timedResult.getResult();
 final long              millis      = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+
+// TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
+// Result: User[id=101, name=John Doe]
+// ElapsedMillis: 78ms
 
 // Void method, no checked exception
 final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());

@@ -2,7 +2,6 @@
 
 # ⏱️ timing-utils - A Java Timing Utility Library
 
-
 **A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
@@ -38,7 +37,7 @@ Package: `dev.badprogrammer.util.timing`
 
 ## Overview
 
-This library answers one question, asked in two very different contexts:
+This library answers only **one** question, asked in two very different contexts:
 
 > ### "How long did that take?"
 
@@ -71,6 +70,7 @@ Most Java codebases accumulate timing code in one of two unsatisfying forms:
 - Scattered `System.nanoTime()` pairs with manual subtraction, duplicated across the codebase, straightforward to
   implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking
   timing code into business logic.
+
 - Ad-hoc `try { ... } finally { log.debug("took {}ms", ...) }` blocks that vary in format from method to method,
   making logs hard to search or aggregate.
 
@@ -90,13 +90,18 @@ These principles were established early in the design phase and applied across e
   conversions happen only at the point of retrieval — via `TimeUnit.NANOSECONDS.toMillis()` — so no rounding error
   accumulates during aggregation.
 - **Always return, never throw (for repeated measurement).** `measureRepeatedly()` and `measureRepeatedlyChecked()`
-  always return a result, even if any or every iteration fails. Failure information is *inspected*, not *caught*.
-- **A slow failure is different from a slow success — keep them separate.** Failed iteration timings do not pollute
-  the successful performance statistics. Failures are represented by a count and an exception, not by mystery numbers
-  mixed into an average.
-- **The right tool has the right shape.** `StopWatch` is a stateless static utility because it needs no state.
-  `TimingLogger` is an `AutoCloseable` instance because it must carry a start time across a `try`-block's lifetime.
-  Neither is forced into the other's shape for the sake of "consistency."
+  always return a result, even if any or every iteration fails. Failure information is **captured** and **surfaced** for
+  inspection — **never rethrown**.
+- **A slow failure is different from a slow success — keep them separate.** A failed iteration's elapsed time is
+  meaningless in isolation: an instant validation failure and a 30-second timeout are both "failures," but averaging
+  them tells you nothing useful about either. Failed timings are excluded from the successful performance statistics
+  entirely. Failures are represented by a count and the last exception — which already conveys more than any timing
+  could.
+- **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
+  it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
+  `AutoCloseable` instance and because it must capture `startNanos` at `start()` and use it in `close()`, potentially
+  much later — that single `long` is state that must survive across the `try`-block's lifetime. Neither is forced into
+  the other's shape for the sake of consistency.
 
 ---
 
@@ -122,22 +127,7 @@ These principles were established early in the design phase and applied across e
 
 ### Adding `timing-utils` to Your Project
 
-**Option 1 — Maven Central**
-
-Once published, no build step is needed.
-
-Either way, add the dependency to your `pom.xml`:
-
-```xml
-
-<dependency>
-    <groupId>dev.badprogrammer</groupId>
-    <artifactId>timing-utils</artifactId>
-    <version>0.1.0</version>
-</dependency>
-```
-
-**Option 2 — Build from source**
+**Option 1 — Build from source (available now)**
 
 Clone the repository and install it to your local Maven repository:
 
@@ -145,6 +135,20 @@ Clone the repository and install it to your local Maven repository:
 git clone https://github.com/kumar-github/timing-utils.git
 cd timing-utils
 mvn clean install
+```
+
+**Option 2 — Maven Central (coming soon)**
+
+Once published, no build step is needed.
+
+Either way, add the dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>dev.badprogrammer</groupId>
+    <artifactId>timing-utils</artifactId>
+    <version>0.1.0</version>
+</dependency>
 ```
 
 A minimal taste of both classes:

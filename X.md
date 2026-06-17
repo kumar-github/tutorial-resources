@@ -24,9 +24,9 @@ Package: `dev.badprogrammer.util.timing`
 - [Getting Started](#getting-started)
 - [Package Structure](#package-structure)
 - [Features](#features)
-    - [Single Measurement — `measure`, `measureChecked`](#single-measurement--measure-measurechecked)
-    - [Repeated Measurement — `measureRepeatedly`,
-      `measureRepeatedlyChecked`](#repeated-measurement--measurerepeatedly-measurerepeatedlychecked)
+    - [Single Measurement — `measure` / `measureChecked`](#single-measurement--measure--measurechecked)
+    - [Repeated Measurement — `measureRepeatedly` /
+      `measureRepeatedlyChecked`](#repeated-measurement--measurerepeatedly--measurerepeatedlychecked)
     - [Ambient Production Timing — `TimingLogger`](#ambient-production-timing--timinglogger)
     - [Supporting Types](#supporting-types)
 - [Design Decisions & Their Reasoning](#design-decisions--their-reasoning)
@@ -205,7 +205,7 @@ dev.badprogrammer.util.timing
 
 ## Features
 
-### Single Measurement — `measure`, `measureChecked`
+### Single Measurement — `measure` / `measureChecked`
 
 Times **one invocation** of a method and returns both its result and its elapsed time, wrapped in a `TimedResult<T>`.
 
@@ -242,7 +242,7 @@ extended to the upcoming `compare`, `compareChecked` methods.
 
 ---
 
-### Repeated Measurement — `measureRepeatedly`, `measureRepeatedlyChecked`
+### Repeated Measurement — `measureRepeatedly` / `measureRepeatedlyChecked`
 
 Invokes a method a fixed number of times (with a set of optional warmup-iterations whose stats are ignored) and
 returns an `TimingStatistics` — statistics across all **successful** invocations, plus failure tracking.

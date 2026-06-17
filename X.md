@@ -178,7 +178,7 @@ System.out.println(stats);
 // Permanent production timing
 public Connection getConnection() throws SQLException {
     try (TimingLogger timer = TimingLogger.start("getConnection", log)) {
-        return dataSource.getConnection();
+        return dbUtils.getConnection();
     }
 }
 
@@ -235,15 +235,39 @@ final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.pub
 final Void              result      = timedResult.getResult();
 final long              millis      = timedResult.getElapsedMillis();
 
+System.out.println(timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+
+// TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
+// Result: null
+// ElapsedMillis: 3ms
+
 // Returns a value, declares a checked exception
-final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dataSource.getConnection());
+final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
 final Connection              result      = timedResult.getResult();
 final long                    millis      = timedResult.getElapsedMillis();
 
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+
+// TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
+// Result: org.postgresql.jdbc.PgConnection@5e9f23b4
+// ElapsedMillis: 11ms
+
 // Void method declares a checked exception
-final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dataSource.closeConnection());
+final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
 final Void              result      = timedResult.getResult();
 final long              millis      = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+
+// TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
+// Result: null
+// ElapsedMillis: 6ms
 ```
 
 #### Method naming convention
@@ -269,7 +293,7 @@ Invokes a method a fixed number of times and returns a `TimingStatistics` — st
 invocations, plus failure tracking.
 
 ```java
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dataSource.getConnection(), 1000, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println(stats);
 
 if (stats.hasFailures()) {
@@ -334,7 +358,7 @@ block exits — normally **or** via exception.
 ```java
 public Connection getConnection() throws SQLException {
     try (TimingLogger timer = TimingLogger.start("getConnection", log)) {
-        return dataSource.getConnection();
+        return dbUtils.getConnection();
     }
 }
 // Logs: TIMED | getConnection | Elapsed = 12ms (12004311ns)
@@ -347,7 +371,7 @@ automatically, with **no code change**:
 
 ```java
 try(TimingLogger timer = TimingLogger.start("getConnection", log, 1000)){
-        return dataSource.getConnection();
+        return dbUtils.getConnection();
 }
 // Normal: DEBUG TIMED | getConnection | Elapsed = 12ms (12004311ns)
 // Slow: WARN TIMED | getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
@@ -411,7 +435,7 @@ the compiler:
 // Without CheckedSupplier — forced wrapping, original type lost
 Supplier<Connection> s = () -> {
     try {
-        return dataSource.getConnection();
+        return dbUtils.getConnection();
     }
     catch (SQLException e) {
         throw new RuntimeException(e);
@@ -419,7 +443,7 @@ Supplier<Connection> s = () -> {
 };
 
 // With CheckedSupplier — clean and direct, original type preserved
-CheckedSupplier<Connection> s = () -> dataSource.getConnection();
+CheckedSupplier<Connection> s = () -> dbUtils.getConnection();
 ```
 
 ---

@@ -164,7 +164,7 @@ System.out.println(timedResult);
 ```
 
 ```java
-// Repeated measurement during a performance investigation
+// Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
 System.out.println(stats);
 ```
@@ -236,12 +236,12 @@ final long              millis      = timedResult.getElapsedMillis();
 Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells
 you which one to reach for:
 
-| If your method                                                | Use                                  |
-|---------------------------------------------------------------|--------------------------------------|
-| Returns a value and **does not declares** a checked exception | `measure(Supplier<T>)`               |
-| Is `void` and **does not declares** a checked exception       | `measure(Runnable)`                  |
-| Returns a value and **declares** a checked exception          | `measureChecked(CheckedSupplier<T>)` |
-| Is `void` and **declares** a checked exception                | `measureChecked(CheckedRunnable)`    |
+| If your method                                                    | Use                                  |
+|-------------------------------------------------------------------|--------------------------------------|
+| **returns a value** and **does not declares** a checked exception | `measure(Supplier<T>)`               |
+| **is `void`** and **does not declares** a checked exception       | `measure(Runnable)`                  |
+| **returns a value** and **declares** a checked exception          | `measureChecked(CheckedSupplier<T>)` |
+| **is `void`** and **declares** a checked exception                | `measureChecked(CheckedRunnable)`    |
 
 This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
 extended to the upcoming `compare`, `compareChecked` methods.

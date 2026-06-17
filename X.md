@@ -531,8 +531,11 @@ been discussed or being discussed, but not yet promised.
 ### ✅ Implemented
 
 - Single measurement — `measure`, `measureChecked`
+
 - Repeated measurement — `measureRepeatedly`, `measureRepeatedlyChecked`
+
 - Failure tracking — `hasFailures()`, `getLastException()`
+
 - Ambient production timing — `TimingLogger`
 
 ### 🔜 Roadmap
@@ -540,7 +543,9 @@ been discussed or being discussed, but not yet promised.
 Committed next steps, in order:
 
 1. Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`
+
 2. `Candidate` based comparison API — replaces the six-argument `compare` signature with a paired label-and-method input
+
 3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`
 
 ### 💭 Future Considerations

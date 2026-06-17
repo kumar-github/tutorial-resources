@@ -70,7 +70,7 @@ Most Java codebases accumulate timing code in one of two unsatisfying forms:
 - Scattered `System.nanoTime()` pairs with manual subtraction, duplicated across the codebase, straightforward to
   implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking
   timing code into business logic.
-  
+
 - Ad-hoc `try { ... } finally { log.debug("took {}ms", ...) }` blocks that vary in format from method to method,
   making logs hard to search or aggregate.
 
@@ -86,17 +86,21 @@ These principles were established early in the design phase and applied across e
 
 - **No side effects.** Neither `StopWatch` nor `TimingLogger` retries, caches, modifies, or intercepts the measured
   method in any way. Any side effect you observe is the method's own.
+
 - **Measure in nanos, report in millis.** `System.nanoTime()` is used internally for maximum precision. Millisecond
   conversions happen only at the point of retrieval — via `TimeUnit.NANOSECONDS.toMillis()` — so no rounding error
   accumulates during aggregation.
+
 - **Always return, never throw (for repeated measurement).** `measureRepeatedly()` and `measureRepeatedlyChecked()`
   always return a result, even if any or every iteration fails. Failure information is **captured** and **surfaced** for
   inspection — **never rethrown**.
+
 - **A slow failure is different from a slow success — keep them separate.** A failed iteration's elapsed time is
   meaningless in isolation: an instant validation failure and a 30-second timeout are both "failures," but averaging
   them tells you nothing useful about either. Failed timings are excluded from the successful performance statistics
   entirely. Failures are represented by a count and the last exception — which already conveys more than any timing
   could.
+
 - **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
   it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
   `AutoCloseable` instance and because it must capture `startNanos` at `start()` and use it in `close()`, potentially

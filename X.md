@@ -37,7 +37,7 @@ Package: `dev.badprogrammer.util.timing`
 
 ## Overview
 
-This library is very simple and answers just **one** question, asked in two very different contexts:
+This library is simple and answers just **one** question, asked in two very different contexts:
 
 > ### "How long did that take?"
 
@@ -160,19 +160,18 @@ A minimal taste of both classes:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-System.out.println(timedResult);
+System.out.println("TimedResult: " + timedResult);
 
-// TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
+// TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
 
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
-System.out.println(stats);
+System.out.println("Stats: " + stats);
 
-// TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
-// Maximum elapsed time = 13ms]
+// Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
+// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
 ```
 
 ```java

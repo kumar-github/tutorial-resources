@@ -155,9 +155,9 @@ Either way, add the dependency to your `pom.xml`:
 </dependency>
 ```
 
-A minimal taste of both classes:
+**A minimal taste of both classes.**
 
-* Measure a method once and return the result:
+Measure a method once and return the result:
 
 ```java
 // One-off measurement during an investigation
@@ -167,7 +167,7 @@ System.out.println("TimedResult: " + timedResult);
 // TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
 
-* Measure a method repeatedly and return the aggregated statistics across all iterations:
+Measure a method repeatedly and return the aggregated statistics across all iterations:
 
 ```java
 // Repeated measurement during a serious performance investigation
@@ -179,7 +179,7 @@ System.out.println("Stats: " + stats);
 // Maximum elapsed time = 13ms]
 ```
 
-* Measure a method permanently in production and log the result automatically:
+Measure a method permanently in production and log the result automatically:
 
 ```java
 // Permanent production timing

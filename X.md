@@ -230,6 +230,7 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // Result: User[id=101, name=John Doe]
 // ElapsedMillis: 78ms
 
+
 // Void method, no checked exception
 final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
 final Void              result      = timedResult.getResult();
@@ -243,6 +244,7 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // Result: null
 // ElapsedMillis: 3ms
 
+
 // Returns a value, declares a checked exception
 final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
 final Connection              result      = timedResult.getResult();
@@ -255,6 +257,7 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
 // Result: org.postgresql.jdbc.PgConnection@5e9f23b4
 // ElapsedMillis: 11ms
+
 
 // Void method declares a checked exception
 final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());

@@ -175,8 +175,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.get
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
-// Maximum elapsed time = 13ms]
+//  Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
+//  Maximum elapsed time = 13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:
@@ -190,7 +190,7 @@ public Connection getConnection() throws SQLException {
 }
 
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
-// Elapsed = 38ms (38459480ns)
+//  Elapsed = 38ms (38459480ns)
 ```
 
 ### Building and Running Tests
@@ -305,24 +305,29 @@ you which one to reach for:
 | **is `void`** and **declares** a checked exception                | `measureChecked(CheckedRunnable)`    |
 
 This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
-extended to the upcoming `compare`, `compareChecked` methods.
+extended to the upcoming features like `compare`, `compareChecked` etc.
 
 ---
 
 ### Repeated Measurement — `measureRepeatedly` / `measureRepeatedlyChecked`
 
-Invokes a method a fixed number of times and returns a `TimingStatistics` — statistics across all **successful**
-invocations, plus failure tracking.
+Invokes a method **repeatedly** for a fixed number of times and returns a `TimingStatistics` — statistics across all
+**successful** invocations, plus failure tracking.
 
 ```java
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
-System.out.println(stats);
+System.out.println("Stats: " + stats);
 
 if (stats.hasFailures()) {
     stats.getLastException()
          .ifPresent(
-              e -> log.warn("{} of {} iterations failed: {}", stats.getFailedIterations(), stats.getTotalIterations(), e.getMessage()));
+              e -> System.out.printf("%d out of %d iterations failed: %s", stats.getFailedIterations(), stats.getTotalIterations(), e.getMessage()));
 }
+
+// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
+//  Total elapsed time = 4719ms, Average elapsed time = 5.899ms, Minimum elapsed time = 5ms,
+//  Maximum elapsed time = 6ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+// 200 out of 1000 iterations failed: The connection attempt failed
 ```
 
 #### Warmup iterations
@@ -345,14 +350,15 @@ If an invocation throws:
 
 > [!IMPORTANT]
 > `measureRepeatedly` and `measureRepeatedlyChecked` **always return** a `TimingStatistics` — even if *every single
-> iteration* fails. There is nothing to catch.
+> iteration* fails. Exceptions are captured and surfaced via `hasFailures()` and `getLastException()` but never
+> rethrown.
 
 ```java
-// All 1000 iterations fail — still returns a valid result, never throws
+// Even if all 1000 iterations fail — still returns a valid result, never throws
 TimingStatistics stats = StopWatch.measureRepeatedly(() -> unreliableCall(), 1000, 0);
 stats.hasFailures();              // true
-stats.getFailedIterations();      // 1000
 stats.getSuccessfulIterations();  // 0
+stats.getFailedIterations();      // 1000
 stats.getLastException();         // Optional containing the last exception thrown
 ```
 
@@ -374,8 +380,9 @@ stats.getLastException();         // Optional containing the last exception thro
 
 ### Ambient Production Timing — `TimingLogger`
 
-A **non-invasive** `AutoCloseable` that times a method body and logs the elapsed time automatically when the `try`
-block exits — normally **or** via exception.
+A **non-invasive** `AutoCloseable` that times a method by wrapping the method body in a try-with-resources block and
+logs the elapsed time automatically when the `try` block exits—whether normally or with an exception—without requiring
+any code restructuring.
 
 ```java
 public Connection getConnection() throws SQLException {
@@ -383,7 +390,9 @@ public Connection getConnection() throws SQLException {
         return dbUtils.getConnection();
     }
 }
-// Logs: TIMED | getConnection | Elapsed = 12ms (12004311ns)
+
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
+    Elapsed = 12ms (12004311ns)
 ```
 
 #### Slow-call detection
@@ -395,8 +404,12 @@ automatically, with **no code change**:
 try(TimingLogger timer = TimingLogger.start("getConnection", log, 1000)){
         return dbUtils.getConnection();
 }
-// Normal: DEBUG TIMED | getConnection | Elapsed = 12ms (12004311ns)
-// Slow: WARN TIMED | getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
+// Normal call:
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection | 
+    Elapsed = 12ms (12004311ns)
+// Slow call:
+// 00:00:00.000 [main] WARN dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
+//  Elapsed = 1340ms (1340291884ns) | SLOW
 ```
 
 > [!TIP]
@@ -426,7 +439,7 @@ escalation surfaces problems automatically.
 
 > [!WARNING]
 > `close()` is the one method in this library with an absolute guarantee — it **never throws**, under any circumstance.
-> A `close()` that throws inside `try`-with-resources can suppress the *original* exception from the `try` block,
+> A `close()` that throws inside try-with-resources can suppress the *original* exception from the `try` block,
 > silently swallowing real errors. Any unexpected failure inside `close()` itself is caught and logged at `ERROR` as a
 > last resort.
 
@@ -436,7 +449,7 @@ escalation surfaces problems automatically.
 
 #### `TimedResult<T>`
 
-Immutable holder for a single invocation's return value and elapsed time.
+Immutable holder capturing a single invocation's return value and elapsed time.
 
 ```java
 public T getResult();             // the method's return value (null for void methods)
@@ -450,8 +463,13 @@ public long getElapsedMillis();   // converted from nanos via TimeUnit
 
 Functional interfaces equivalent to `Supplier<T>` and `Runnable`, but declaring `throws Exception` on their single
 abstract method. This lets you pass a lambda that throws a checked exception (`SQLException`, `IOException` etc.)
-directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to satisfy
-the compiler:
+directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a `try`/`catch` just to
+satisfy the compiler:
+
+> [!NOTE]
+> Java's standard `Supplier<T>` and `Runnable` don't allow their functional methods to throw checked exceptions. This
+> forces you to wrap every checked-exception-throwing lambda in an artificial `try`/`catch` cluttering your code with
+> boilerplate. These variants remove that friction.
 
 ```java
 // Without CheckedSupplier — forced wrapping, original type lost

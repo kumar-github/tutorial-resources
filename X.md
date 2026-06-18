@@ -407,11 +407,12 @@ try(TimingLogger timer = TimingLogger.start("getConnection", log, 1000)){
         return dbUtils.getConnection();
 }
 // Normal call:
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection | 
-    Elapsed = 12ms (12004311ns)
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED |
+//  getConnection | Elapsed = 12ms (12004311ns)
+
 // Slow call:
-// 00:00:00.000 [main] WARN dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
-//  Elapsed = 1340ms (1340291884ns) | SLOW
+// 00:00:00.000 [main] WARN dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED |
+//  getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
 ```
 
 > [!TIP]

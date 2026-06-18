@@ -175,8 +175,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.get
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-//  Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
-//  Maximum elapsed time = 13ms]
+// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
+// Maximum elapsed time = 13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:
@@ -190,7 +190,7 @@ public Connection getConnection() throws SQLException {
 }
 
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
-//  Elapsed = 38ms (38459480ns)
+// Elapsed = 38ms (38459480ns)
 ```
 
 ### Building and Running Tests
@@ -326,9 +326,9 @@ if (stats.hasFailures()) {
 }
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
-//  Total elapsed time = 4719ms, Average elapsed time = 5.899ms, Minimum elapsed time = 5ms,
-//  Maximum elapsed time = 6ms,
-//  Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+// Total elapsed time = 4719ms, Average elapsed time = 5.899ms, Minimum elapsed time = 5ms,
+// Maximum elapsed time = 6ms,
+// Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 // 200 out of 1000 iterations failed: The connection attempt failed
 ```
 
@@ -394,7 +394,7 @@ public Connection getConnection() throws SQLException {
 }
 
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
-    Elapsed = 12ms (12004311ns)
+   Elapsed = 12ms (12004311ns)
 ```
 
 #### Slow-call detection
@@ -408,11 +408,11 @@ try(TimingLogger timer = TimingLogger.start("getConnection", log, 1000)){
 }
 // Normal call:
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED |
-//  getConnection | Elapsed = 12ms (12004311ns)
+// getConnection | Elapsed = 12ms (12004311ns)
 
 // Slow call:
 // 00:00:00.000 [main] WARN dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED |
-//  getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
+// getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
 ```
 
 > [!TIP]

@@ -103,7 +103,7 @@ These principles were established early in the design phase and applied across e
 
 - **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
   it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
-  `AutoCloseable` instance and because it must capture `startNanos` at `start()` and use it in `close()`, potentially
+  `AutoCloseable` instance because it must capture `startNanos` at `start()` and use it in `close()`, potentially
   much later — that single `long` is state that must survive across the `try`-block's lifetime. Neither is forced into
   the other's shape for the sake of consistency.
 
@@ -476,8 +476,7 @@ satisfy the compiler:
 Supplier<Connection> s = () -> {
     try {
         return dbUtils.getConnection();
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
         throw new RuntimeException(e);
     }
 };
@@ -490,8 +489,8 @@ CheckedSupplier<Connection> s = () -> dbUtils.getConnection();
 
 ## Design Decisions & Their Reasoning
 
-This section documents *why* the library looks the way it does — including a few decisions that were taken initially
-but later revisited and corrected along the way.
+This section documents *why* the library looks the way it does — including a few decisions that were taken initially but
+later revisited and corrected along the way.
 
 ### Why `measure` / `measureChecked` instead of one overloaded method
 
@@ -540,7 +539,7 @@ return — the exception type and message already convey far more about *what* w
 
 > [!IMPORTANT]
 > **The resolution:** statistics (`LongSummaryStatistics` and all derived accessors) cover **successful iterations only
-> **. Failures are represented separately and explicitly via `getFailedIterations()`, `hasFailures()`, and
+> **. Failures are represented separately and explicitly via `hasFailures()`, `getFailedIterations()`, and
 > `getLastException()`.
 
 ---
@@ -553,8 +552,9 @@ and **lost the statistics for the other 999** — directly undermining the goal 
 
 > [!IMPORTANT]
 > **The resolution:** `measureRepeatedly` and `measureRepeatedlyChecked` *always* return a `TimingStatistics`. The
-> last exception (if any) is attached to the result and inspected via `getLastException()` rather than caught. As a
-> direct consequence, `measureRepeatedlyChecked` no longer declares `throws Exception` — it has nothing left to throw.
+> last exception (if any) is captured internally and surfaced (not rethrown) via `getLastException()` for the caller to
+> inspect. As a direct consequence, `measureRepeatedlyChecked` no longer declares `throws Exception` — it has nothing
+> left to throw.
 
 ---
 
@@ -589,8 +589,8 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 ## ✅ Best Practices
 
-- ✅ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is not intended to live permanently in
-  production hot paths — Use `TimingLogger` for those usecases.
+- ✅ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
+  permanently in production hot paths — Use `TimingLogger` for those usecases.
 
 - ✅ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
   prevent JIT warm-up from dominating your results, especially for short-running methods.
@@ -611,7 +611,7 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 ## Implementation Status & Roadmap
 
-This project grows feature by feature — each one fully designed and discussed before it's built. This section reflects
+This project grows feature by feature — each one fully discussed and designed before it's built. This section reflects
 that: a flat list of what exists, an ordered list of what's committed to next, and an open-ended list of ideas that have
 been discussed or being discussed, but not yet promised.
 
@@ -652,7 +652,7 @@ library matures:
 #### ❌ Considered and rejected
 
 - **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
-  Rejected as too invasive: it would require call sites to thread a checkpoint object through their method body,
+  Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,
   contradicting the "no side effects, no restructuring required" principle that both `StopWatch` and `TimingLogger` are
   built on.
 

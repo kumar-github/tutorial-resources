@@ -321,7 +321,8 @@ System.out.println("Stats: " + stats);
 if (stats.hasFailures()) {
     stats.getLastException()
          .ifPresent(
-              e -> System.out.printf("%d out of %d iterations failed: %s", stats.getFailedIterations(), stats.getTotalIterations(), e.getMessage()));
+              e -> System.out.printf("%d out of %d iterations failed: %s",
+                                     stats.getFailedIterations(), stats.getTotalIterations(), e.getMessage()));
 }
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,

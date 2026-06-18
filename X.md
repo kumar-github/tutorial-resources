@@ -171,7 +171,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.get
 System.out.println(stats);
 
 // TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
+// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
+// Maximum elapsed time = 13ms]
 ```
 
 ```java

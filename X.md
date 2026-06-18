@@ -218,11 +218,13 @@ dev.badprogrammer.util.timing
 
 Times **one invocation** of a method and returns both its result and its elapsed time, wrapped in a `TimedResult<T>`.
 
+A method that returns a value and does not declare a checked exception on its method signature:
+
 ```java
 // Returns a value, no checked exception
-final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-final User              result      = timedResult.getResult();
-final long              millis      = timedResult.getElapsedMillis();
+final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+final User              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
@@ -233,13 +235,15 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // ElapsedMillis: 78ms
 ```
 
+A method that does not return a value (void) and does not declare a checked exception on its method signature:
+
 ```java
 // Void method, no checked exception
-final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
-final Void              result      = timedResult.getResult();
-final long              millis      = timedResult.getElapsedMillis();
+final TimedResult<Void> timedResult   = StopWatch.measure(() -> eventPublisher.publishEvent());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
-System.out.println(timedResult);
+System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
 System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 
@@ -248,11 +252,13 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // ElapsedMillis: 3ms
 ```
 
+A method that returns a value and declares a checked exception on its method signature:
+
 ```java
 // Returns a value, declares a checked exception
-final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
-final Connection              result      = timedResult.getResult();
-final long                    millis      = timedResult.getElapsedMillis();
+final TimedResult<Connection> timedResult   = StopWatch.measureChecked(() -> dbUtils.getConnection());
+final Connection              result        = timedResult.getResult();
+final long                    elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
@@ -263,11 +269,13 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // ElapsedMillis: 11ms
 ```
 
+A method that does not return a value (void) and declares a checked exception on its method signature:
+
 ```java
 // Void method declares a checked exception
-final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
-final Void              result      = timedResult.getResult();
-final long              millis      = timedResult.getElapsedMillis();
+final TimedResult<Void> timedResult   = StopWatch.measureChecked(() -> dbUtils.closeConnection());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);

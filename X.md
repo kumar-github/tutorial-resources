@@ -628,7 +628,7 @@ been discussed or being discussed, but not yet promised.
 
 - Ambient production timing — `TimingLogger`
 
-### 🔜 Roadmap
+### 🚀 Roadmap
 
 Committed next steps, in order:
 
@@ -638,7 +638,7 @@ Committed next steps, in order:
 
 3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`
 
-### 💭 Future Considerations
+### 🌟 Future Considerations
 
 Ideas raised during design discussions, not yet committed to. Some may be implemented, refined, or set aside as the
 library matures:

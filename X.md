@@ -5,15 +5,6 @@
 **A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
-![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=flat-square)
-![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=flat-square)
-![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=flat-square)
-![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=plastic)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=flat-square)
-![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils?style=flat-square)
-
-
 ![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=plastic&logo=openjdk&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=plastic)
 ![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=plastic)
@@ -21,15 +12,6 @@ performance investigations *and* permanent production logging.**
 ![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=plastic)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=plastic)
 ![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils?style=plastic)
-
-
-![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=for-the-badge)
-![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=for-the-badge)
-![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=for-the-badge)
-![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=for-the-badge)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=for-the-badge)
-![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils?style=for-the-badge)
 
 
 ![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=social&logo=openjdk&logoColor=white)

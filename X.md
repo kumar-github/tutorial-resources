@@ -8,11 +8,11 @@ performance investigations *and* permanent production logging.**
 ![Java](https://img.shields.io/badge/Java-21%2B-0?style=social)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-0?style=social)
 ![Status](https://img.shields.io/badge/status-active_development-0?style=social)
-![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)
 ![GitHub License](https://img.shields.io/github/license/dev-badprogrammer/timing-utils?style=social)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/dev-badprogrammer/timing-utils?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/dev-badprogrammer/timing-utils?style=social)
 ![GitHub Release Date](https://img.shields.io/github/release-date/dev-badprogrammer/timing-utils?style=social)
+![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/kumar-github_abcd?server=https%3A%2F%2Fsonarcloud.io&style=social)
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=social)
 

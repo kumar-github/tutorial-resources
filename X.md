@@ -5,7 +5,6 @@
 **A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
-![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk&logoColor=red)
 ![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-0?style=social)
 ![Status](https://img.shields.io/badge/status-active%20development-0style=social)

@@ -13,7 +13,7 @@ performance investigations *and* permanent production logging.**
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=plastic)
 
 
-![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=social&logo=openjdk&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=social&logo=openjdk)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=social)
 ![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=social)
 ![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)

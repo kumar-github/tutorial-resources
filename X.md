@@ -11,7 +11,6 @@ performance investigations *and* permanent production logging.**
 ![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=plastic)
 ![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=plastic)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=plastic)
-![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils?style=plastic)
 
 
 ![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=social&logo=openjdk&logoColor=white)
@@ -20,7 +19,6 @@ performance investigations *and* permanent production logging.**
 ![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)
 ![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=social)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=social)
-![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils?style=social)
 
 
 

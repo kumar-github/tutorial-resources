@@ -5,16 +5,7 @@
 **A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
-![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=plastic&logo=openjdk&logoColor=white)
-![Java](https://img.shields.io/badge/Java-21%2B-0?style=plastic&logo=openjdk)
-![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=plastic)
-![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=plastic)
-![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=plastic)
-![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=plastic)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=plastic)
-
-
-![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk&logoColor=black)
+![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk&logoColor=red)
 ![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-0?style=social)
 ![Status](https://img.shields.io/badge/status-active%20development-0style=social)

@@ -13,7 +13,7 @@ performance investigations *and* permanent production logging.**
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/dev-badprogrammer/timing-utils?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/dev-badprogrammer/timing-utils?style=social)
 ![GitHub Release Date](https://img.shields.io/github/release-date/dev-badprogrammer/timing-utils?style=social)
-![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=plastic)
+![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=social)
 
 
 Package: `dev.badprogrammer.util.timing`

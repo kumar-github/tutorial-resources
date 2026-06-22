@@ -7,7 +7,7 @@ performance investigations *and* permanent production logging.**
 
 ![Java](https://img.shields.io/badge/Java-21%2B-0?style=social&logo=openjdk)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-0?style=social)
-![Status](https://img.shields.io/badge/status-active%20development-0?style=social)
+![Status](https://img.shields.io/badge/status-active_development-0?style=social)
 ![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)
 ![License](https://img.shields.io/github/license/kumar-github/timing-utils?style=social)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils?style=social)

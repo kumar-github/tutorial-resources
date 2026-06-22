@@ -8,6 +8,10 @@ performance investigations *and* permanent production logging.**
 ![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-SLF4J%20only-4c9a2a?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active%20development-2f81f7?style=flat-square)
+![Maven Central](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils)
+![License](https://img.shields.io/github/license/kumar-github/timing-utils)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kumar-github/timing-utils)
+![GitHub Release](https://img.shields.io/github/v/release/kumar-github/timing-utils)
 
 Package: `dev.badprogrammer.util.timing`
 
@@ -71,7 +75,7 @@ Most Java codebases accumulate timing code in one of two unsatisfying forms:
   implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking
   timing code into business logic.
 
-- Ad-hoc `try { ... } finally { log.debug("took {}ms", ...) }` blocks that vary in format from method to method,
+- Ad-hoc `try { ... } finally { logger.debug("took {}ms", ...) }` blocks that vary in format from method to method,
   making logs hard to search or aggregate.
 
 `timing-utils` exists to make both of these **boring** — a single, **non-invasive**, well-tested, consistent way to
@@ -184,7 +188,7 @@ Measure a method permanently in production and log the result automatically:
 ```java
 // Permanent production timing
 public Connection getConnection() throws SQLException {
-    try (TimingLogger timer = TimingLogger.start("getConnection", log)) {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger)) {
         return dbUtils.getConnection();
     }
 }
@@ -388,7 +392,7 @@ any code restructuring.
 
 ```java
 public Connection getConnection() throws SQLException {
-    try (TimingLogger timer = TimingLogger.start("getConnection", log)) {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger)) {
         return dbUtils.getConnection();
     }
 }
@@ -403,7 +407,7 @@ Pass a threshold in milliseconds. If elapsed time exceeds it, the log line escal
 automatically, with **no code change**:
 
 ```java
-try(TimingLogger timer = TimingLogger.start("getConnection", log, 1000)){
+try(TimingLogger ignored = TimingLogger.start("getConnection", logger, 1000)){
         return dbUtils.getConnection();
 }
 // Normal call:

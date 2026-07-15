@@ -165,9 +165,7 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-System.out.
-
-println("TimedResult: "+timedResult);
+System.out.println("TimedResult: " + timedResult);
 
 // TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
@@ -177,9 +175,7 @@ Measure a method repeatedly and return the aggregated statistics across all iter
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
-System.out.
-
-println("Stats: "+stats);
+System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
 // Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
@@ -196,8 +192,8 @@ public Connection getConnection() throws SQLException {
     }
 }
 
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-// Elapsed = 38ms (38459480ns)
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | 
+// getConnection | Elapsed = 38ms (38459480ns)
 ```
 
 ### Building and Running Tests

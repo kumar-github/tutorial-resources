@@ -692,6 +692,28 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 ---
 
+## 🟢 Best Practices
+
+- 🟢 **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
+  permanently in production hot paths — Use `TimingLogger` for those usecases.
+
+- 🟢 **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
+  prevent JIT warm-up from dominating your results, especially for short-running methods.
+
+- 🟢 **Inspect failures, don't catch them.** `measureRepeatedly` and `measureRepeatedlyChecked` never throw — check
+  `hasFailures()` and `getLastException()` after the call rather than wrapping it in `try`/`catch`.
+
+- 🟢 **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
+  other log output — never share a single logger across unrelated classes.
+
+- 🟢 **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold
+  that never fires provides no value. Tune it against your actual latency expectations.
+
+- 🟢 **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
+  under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
+
+---
+
 ## Implementation Status & Roadmap
 
 This project grows feature by feature — each one fully discussed and designed before it's built. This section reflects

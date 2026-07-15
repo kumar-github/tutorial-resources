@@ -253,18 +253,12 @@ A method that returns a value and does not declare a checked exception on its me
 ```java
 // Returns a value, no checked exception
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-final User result = timedResult.getResult();
-final long elapsedMillis = timedResult.getElapsedMillis();
+final User result                   = timedResult.getResult();
+final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.
-
-println("TimedResult: "+timedResult);
-System.out.
-
-println("Result: "+result);
-System.out.
-
-printf("ElapsedMillis: %dms",elapsedMillis);
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
 // Result: User[id=101, name=John Doe]

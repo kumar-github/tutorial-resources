@@ -15,8 +15,7 @@ performance investigations *and* permanent production logging.**
 ![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=social)
 
-
-Package: `dev.badprogrammer.util.timing`
+Package: `dev.badprogrammer.timing`
 
 </div>
 
@@ -29,6 +28,7 @@ Package: `dev.badprogrammer.util.timing`
 - [Design Philosophy](#design-philosophy)
 - [Tech Stack & Prerequisites](#tech-stack--prerequisites)
 - [Getting Started](#getting-started)
+- [Development Setup](#development-setup)
 - [Package Structure](#package-structure)
 - [Features](#features)
     - [Single Measurement — `measure` / `measureChecked`](#single-measurement--measure--measurechecked)
@@ -134,7 +134,7 @@ These principles were established early in the design phase and applied across e
 
 > [!NOTE]
 > Maven Central coordinates will be published once the library reaches its first stable release. Until then, vendor
-> the `dev.badprogrammer.util.timing` package directly into your project's source.
+> the `dev.badprogrammer.timing` package directly into your project's source.
 
 ### Adding `timing-utils` to Your Project
 
@@ -155,10 +155,11 @@ Once published, no build step is needed.
 Either way, add the dependency to your `pom.xml`:
 
 ```xml
+
 <dependency>
-    <groupId>dev.badprogrammer</groupId>
-    <artifactId>timing-utils</artifactId>
-    <version>LATEST_VERSION</version>
+  <groupId>dev.badprogrammer</groupId>
+  <artifactId>timing-utils</artifactId>
+  <version>LATEST_VERSION</version>
 </dependency>
 ```
 
@@ -169,7 +170,9 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-System.out.println("TimedResult: " + timedResult);
+System.out.
+
+println("TimedResult: "+timedResult);
 
 // TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
@@ -179,7 +182,9 @@ Measure a method repeatedly and return the aggregated statistics across all iter
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
-System.out.println("Stats: " + stats);
+System.out.
+
+println("Stats: "+stats);
 
 // Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
 // Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
@@ -211,16 +216,33 @@ mvn test            # runs tests only
 
 ---
 
+## Development Setup
+
+This repo uses a shared git hook to enforce a 70-character limit on commit message subject lines – GitHub truncates
+longer titles and spills the overflow into the PR description, which breaks the PR template.
+Enable it once after cloning the repository by running the below command from the root of your project.
+
+```bash
+git config core.hooksPath .githooks
+```
+
+---
+
 ## Package Structure
 
 ```
-dev.badprogrammer.util.timing
-├── StopWatch             — stateless utility: measure, measureRepeatedly
-├── TimingLogger          — AutoCloseable: ambient production timing
-├── TimedResult<T>        — result of a single measured invocation
-├── TimingStatistics      — statistics from repeated invocations
-├── CheckedSupplier<T>    — Supplier<T> that may throw a checked exception
-└── CheckedRunnable       — Runnable that may throw a checked exception
+dev.badprogrammer.timing
+├── util
+│   ├── StopWatch             -> stateless utility: measure, measureRepeatedly
+│   └── TimingLogger          -> AutoCloseable: ambient production timing
+│
+├── function
+│   ├── CheckedSupplier<T>    -> Supplier<T> that may throw a checked exception
+│   └── CheckedRunnable       -> Runnable that may throw a checked exception
+│
+└── type
+    ├── TimedResult<T>        -> result of a single measured invocation
+    └── TimingStatistics      -> statistics from repeated invocations
 ```
 
 ---
@@ -235,13 +257,19 @@ A method that returns a value and does not declare a checked exception on its me
 
 ```java
 // Returns a value, no checked exception
-final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
-final User              result        = timedResult.getResult();
-final long              elapsedMillis = timedResult.getElapsedMillis();
+final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
+final User result = timedResult.getResult();
+final long elapsedMillis = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.
+
+println("TimedResult: "+timedResult);
+System.out.
+
+println("Result: "+result);
+System.out.
+
+printf("ElapsedMillis: %dms",elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
 // Result: User[id=101, name=John Doe]
@@ -252,13 +280,19 @@ A method that does not return a value (void) and does not declare a checked exce
 
 ```java
 // Void method, no checked exception
-final TimedResult<Void> timedResult   = StopWatch.measure(() -> eventPublisher.publishEvent());
-final Void              result        = timedResult.getResult();
-final long              elapsedMillis = timedResult.getElapsedMillis();
+final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
+final Void result = timedResult.getResult();
+final long elapsedMillis = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.
+
+println("TimedResult: "+timedResult);
+System.out.
+
+println("Result: "+result);
+System.out.
+
+printf("ElapsedMillis: %dms",elapsedMillis);
 
 // TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
 // Result: null
@@ -269,13 +303,19 @@ A method that returns a value and declares a checked exception on its method sig
 
 ```java
 // Returns a value, declares a checked exception
-final TimedResult<Connection> timedResult   = StopWatch.measureChecked(() -> dbUtils.getConnection());
-final Connection              result        = timedResult.getResult();
-final long                    elapsedMillis = timedResult.getElapsedMillis();
+final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
+final Connection result = timedResult.getResult();
+final long elapsedMillis = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.
+
+println("TimedResult: "+timedResult);
+System.out.
+
+println("Result: "+result);
+System.out.
+
+printf("ElapsedMillis: %dms",elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
 // Result: org.postgresql.jdbc.PgConnection@5e9f23b4
@@ -286,13 +326,19 @@ A method that does not return a value (void) and declares a checked exception on
 
 ```java
 // Void method declares a checked exception
-final TimedResult<Void> timedResult   = StopWatch.measureChecked(() -> dbUtils.closeConnection());
-final Void              result        = timedResult.getResult();
-final long              elapsedMillis = timedResult.getElapsedMillis();
+final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
+final Void result = timedResult.getResult();
+final long elapsedMillis = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.
+
+println("TimedResult: "+timedResult);
+System.out.
+
+println("Result: "+result);
+System.out.
+
+printf("ElapsedMillis: %dms",elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
 // Result: null
@@ -323,14 +369,27 @@ Invokes a method **repeatedly** for a fixed number of times and returns a `Timin
 
 ```java
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
-System.out.println("Stats: " + stats);
+System.out.
 
-if (stats.hasFailures()) {
-    stats.getLastException()
-         .ifPresent(
-              e -> System.out.printf("%d out of %d iterations failed: %s",
-                                     stats.getFailedIterations(), stats.getTotalIterations(), e.getMessage()));
-}
+println("Stats: "+stats);
+
+if(stats.
+
+hasFailures()){
+        stats.
+
+getLastException()
+         .
+
+ifPresent(e ->System.out.
+
+printf("%d out of %d iterations failed: %s",
+       stats.getFailedIterations(),stats.
+
+getTotalIterations(),e.
+
+getMessage()));
+        }
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
 // Total elapsed time = 4719ms, Average elapsed time = 5.899ms, Minimum elapsed time = 5ms,
@@ -365,10 +424,18 @@ If an invocation throws:
 ```java
 // Even if all 1000 iterations fail — still returns a valid result, never throws
 TimingStatistics stats = StopWatch.measureRepeatedly(() -> unreliableCall(), 1000, 0);
-stats.hasFailures();              // true
-stats.getSuccessfulIterations();  // 0
-stats.getFailedIterations();      // 1000
-stats.getLastException();         // Optional containing the last exception thrown
+stats.
+
+hasFailures();              // true
+stats.
+
+getSuccessfulIterations();  // 0
+stats.
+
+getFailedIterations();      // 1000
+stats.
+
+getLastException();         // Optional containing the last exception thrown
 ```
 
 #### `TimingStatistics` accessors
@@ -401,7 +468,9 @@ public Connection getConnection() throws SQLException {
 }
 
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED | getConnection |
-   Elapsed = 12ms (12004311ns)
+Elapsed =12
+
+ms(12004311ns)
 ```
 
 #### Slow-call detection
@@ -411,7 +480,9 @@ automatically, with **no code change**:
 
 ```java
 try(TimingLogger ignored = TimingLogger.start("getConnection", logger, 1000)){
-        return dbUtils.getConnection();
+        return dbUtils.
+
+getConnection();
 }
 // Normal call:
 // 00:00:00.000 [main] DEBUG dev.badprogrammer.util.timing.examples.TimingLoggerDemo -- TIMED |
@@ -484,12 +555,12 @@ satisfy the compiler:
 ```java
 // Without CheckedSupplier — forced wrapping, original type lost
 Supplier<Connection> s = () -> {
-    try {
-        return dbUtils.getConnection();
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-};
+            try {
+                return dbUtils.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        };
 
 // With CheckedSupplier — clean and direct, original type preserved
 CheckedSupplier<Connection> s = () -> dbUtils.getConnection();

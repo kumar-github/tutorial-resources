@@ -120,11 +120,11 @@ These principles were established early in the design phase and applied across e
 
 ## Tech Stack & Prerequisites
 
-| Requirement           | Details                                                                                                 |
-|-----------------------|---------------------------------------------------------------------------------------------------------|
-| **Java**              | 21 or later — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` |
-| **SLF4J API**         | Required at compile time for `TimingLogger` only. Bring your own binding (Logback, Log4j2, etc.)        |
-| **Test dependencies** | JUnit 5, Mockito — test scope only, not required by consumers                                           |
+| Requirement           | Details                                                                                              |
+|-----------------------|------------------------------------------------------------------------------------------------------|
+| **Java**              | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc. |
+| **SLF4J API**         | Required at compile time for `TimingLogger` only. Bring your own binding like Logback, Log4j2 etc.   |
+| **Test dependencies** | JUnit 5+, Mockito — test scope only, not required by consumers                                       |
 
 > [!NOTE]
 > `StopWatch` and its supporting types (`TimedResult`, `TimingStatistics`, `CheckedSupplier`, `CheckedRunnable`)
@@ -140,7 +140,19 @@ These principles were established early in the design phase and applied across e
 
 ### Adding `timing-utils` to Your Project
 
-**Option 1 — Build from source (available now)**
+**Option 1 — Maven Central**
+
+Add the below dependency to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>dev.badprogrammer</groupId>
+  <artifactId>timing-utils</artifactId>
+  <version>LATEST_VERSION</version>
+</dependency>
+```
+
+**Option 2 — Build from source**
 
 Clone the repository and install it to your local Maven repository:
 
@@ -148,21 +160,6 @@ Clone the repository and install it to your local Maven repository:
 git clone https://github.com/dev-badprogrammer/timing-utils.git
 cd timing-utils
 mvn clean install
-```
-
-**Option 2 — Maven Central (coming soon)**
-
-Once published, no build step is needed.
-
-Either way, add the dependency to your `pom.xml`:
-
-```xml
-
-<dependency>
-  <groupId>dev.badprogrammer</groupId>
-  <artifactId>timing-utils</artifactId>
-  <version>LATEST_VERSION</version>
-</dependency>
 ```
 
 **A minimal taste of both classes.**

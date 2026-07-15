@@ -134,15 +134,11 @@ These principles were established early in the design phase and applied across e
 
 ## Getting Started
 
-> [!NOTE]
-> Maven Central coordinates will be published once the library reaches its first stable release. Until then, vendor
-> the `dev.badprogrammer.timing` package directly into your project's source.
-
 ### Adding `timing-utils` to Your Project
 
 **Option 1 — Maven Central**
 
-Add the below dependency to your `pom.xml`:
+Add the below maven co-ordinates to your `pom.xml`:
 
 ```xml
 <dependency>

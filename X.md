@@ -178,8 +178,7 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.get
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
-// Maximum elapsed time = 13ms]
+// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:
@@ -192,7 +191,7 @@ public Connection getConnection() throws SQLException {
     }
 }
 
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | 
+// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
 // getConnection | Elapsed = 38ms (38459480ns)
 ```
 
@@ -201,6 +200,7 @@ public Connection getConnection() throws SQLException {
 Standard Maven build:
 
 ```bash
+cd timing-utils
 mvn clean install   # builds the jar and runs the full test suite
 mvn test            # runs tests only
 ```
@@ -209,11 +209,15 @@ mvn test            # runs tests only
 
 ## Development Setup
 
-This repo uses a shared git hook to enforce a 70-character limit on commit message subject lines – GitHub truncates
-longer titles and spills the overflow into the PR description, which breaks the PR template.
+This repo uses a shared git hook to enforce a 70-character limit on commit message subject lines and validates the
+Conventional Commits format, preventing GitHub from truncating long titles and spilling overflow text into the PR
+description box. The hook lives in a trackable `.githooks/` directory (not the untracked `.git/hooks/`), so it's
+committed to the repo and visible to anyone who clones it.
 Enable it once after cloning the repository by running the below command from the root of your project.
 
 ```bash
+cd timing-utils
+chmod +x .githooks/commit-msg
 git config core.hooksPath .githooks
 ```
 

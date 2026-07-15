@@ -46,7 +46,7 @@ Package: `dev.badprogrammer.timing`
 
 ## Overview
 
-This library is simple and answers just **one** question, asked in two very different contexts:
+This library is simple and answers **one** question, asked in two very different contexts:
 
 > ### "How long did that take?"
 

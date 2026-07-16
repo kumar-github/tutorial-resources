@@ -525,6 +525,8 @@ A **non-invasive** `AutoCloseable` that measures a method by wrapping the method
 logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring
 any code restructuring.
 
+#### Standard usage
+
 ```java
 public Connection getConnection() throws SQLException {
     try (TimingLogger ignored = TimingLogger.start("getConnection", logger)) {
@@ -540,7 +542,7 @@ Terminal output:
 Elapsed = 12ms (12004311ns)
 ```
 
-#### Slow-call detection
+#### Slow-call detection usage
 
 Pass a threshold in milliseconds. If elapsed time exceeds it, the log line escalates from `DEBUG` to `WARN` —
 automatically, with **no code change**:

@@ -477,24 +477,30 @@ If an invocation throws:
 
 > [!IMPORTANT]
 > `measureRepeatedly` and `measureRepeatedlyChecked` **always return** a `TimingStatistics` — even if *every single
-> iteration* fails. Exceptions are captured and surfaced via `hasFailures()` and `getLastException()` but never
+> invocation* fails. Exceptions are captured and surfaced via `hasFailures()` and `getLastException()` but never
 > rethrown.
 
 ```java
-// Even if all 1000 iterations fail — still returns a valid result, never throws
-TimingStatistics stats = StopWatch.measureRepeatedly(() -> unreliableCall(), 1000, 0);
-stats.
+// Even if all 1000 invocations fail — still returns a valid result, never throws
+TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1000, 0);
+System.out.println("Stats: " + stats);
+System.out.println("Has failures: " + stats.hasFailures());
+System.out.println("Successful iterations: " + stats.getSuccessfulIterations());
+System.out.println("Failed iterations: " + stats.getFailedIterations());
+System.out.println("Last exception: " + stats.getLastException());
+```
 
-hasFailures();              // true
-stats.
+Terminal output:
 
-getSuccessfulIterations();  // 0
-stats.
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 0, Failed iterations = 1000,
+Total elapsed time = 0ms, Average elapsed time = 0.000ms, Minimum elapsed time = 0ms, Maximum elapsed time = 0ms,
+Last exception = java.lang.RuntimeException: Something went wrong]
 
-getFailedIterations();      // 1000
-stats.
-
-getLastException();         // Optional containing the last exception thrown
+Has failures: true
+Successful iterations: 0
+Failed iterations: 1000
+Last exception: Optional[java.lang.RuntimeException: Something went wrong]
 ```
 
 #### `TimingStatistics` accessors

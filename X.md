@@ -440,11 +440,11 @@ if (stats.hasFailures()) {
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 100, Successful iterations = 475, Failed iterations = 25,
-Total elapsed time = 2806ms, Average elapsed time = 5.908ms, Minimum elapsed time = 5ms,
-Maximum elapsed time = 13ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 900, Failed iterations = 100,
+Total elapsed time = 4965ms, Average elapsed time = 5.517ms, Minimum elapsed time = 5ms,
+Maximum elapsed time = 6ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
-5 out of 100 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
+100/1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```
 
 > [!WARNING]

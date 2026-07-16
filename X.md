@@ -521,8 +521,8 @@ Last exception: Optional[java.lang.RuntimeException: Something went wrong]
 
 ### Ambient Production Timing — `TimingLogger`
 
-A **non-invasive** `AutoCloseable` that times a method by wrapping the method body in a try-with-resources block and
-logs the elapsed time automatically when the `try` block exits—whether normally or with an exception—without requiring
+A **non-invasive** `AutoCloseable` that measures a method by wrapping the method body in a try-with-resources block and
+logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring
 any code restructuring.
 
 ```java
@@ -531,11 +531,13 @@ public Connection getConnection() throws SQLException {
         return dbUtils.getConnection();
     }
 }
+```
 
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-Elapsed =12
+Terminal output:
 
-ms(12004311ns)
+```terminaloutput
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed = 12ms (12004311ns)
 ```
 
 #### Slow-call detection
@@ -544,18 +546,23 @@ Pass a threshold in milliseconds. If elapsed time exceeds it, the log line escal
 automatically, with **no code change**:
 
 ```java
-try(TimingLogger ignored = TimingLogger.start("getConnection", logger, 1000)){
-        return dbUtils.
-
-getConnection();
+public Connection getConnection() throws SQLException {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger, 1000)) {
+        return dbUtils.getConnection();
+    }
 }
-// Normal call:
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
-// getConnection | Elapsed = 12ms (12004311ns)
+```
 
-// Slow call:
-// 00:00:00.000 [main] WARN dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
-// getConnection | Elapsed = 1340ms (1340291884ns) | SLOW
+Terminal output:
+
+```terminaloutput
+// Normal call
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed = 12ms (12004311ns)
+
+// Slow call
+00:00:00.000 [main] WARN dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed = 1340ms (1340291884ns) | SLOW
 ```
 
 > [!TIP]

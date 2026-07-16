@@ -460,8 +460,8 @@ Maximum elapsed time = 6ms, Last exception = org.postgresql.util.PSQLException: 
 #### Warmup iterations
 
 The first `warmupIterations` invocations run normally — their side effects happen — but their timings are **excluded**
-from statistics. This prevents JVM class-loading and JIT compilation overhead from skewing the numbers for an
-otherwise well-optimized method.
+from statistics. This prevents JVM class-loading and JIT compilation overhead from skewing the numbers, giving a true
+picture of the method's steady-state performance.
 
 #### Failure handling
 

@@ -830,8 +830,10 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 - ✅ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
   prevent JIT warm-up from dominating your results, especially for short-running methods.
 
-- ✅ **Inspect failures, don't catch them.** `measureRepeatedly` and `measureRepeatedlyChecked` never throw — check
-  `hasFailures()` and `getLastException()` after the call rather than wrapping it in `try`/`catch`.
+- ✅ **Inspect failures, don't catch them.** Even though the method you pass in may throw, `measureRepeatedly` and
+  `measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
+  `hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
+  unreachable dead code.
 
 - ✅ **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
   other log output — never share a single logger across unrelated classes.

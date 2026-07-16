@@ -408,7 +408,8 @@ if (stats.hasFailures()) {
 // The connection attempt failed
 ```
 
-> **Note:** Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in
+> [!NOTE]
+> Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in
 > may or may not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
 > Only **how long** each call took is recorded, not **what** it returned. This is why `TimingStatistics` has no
 > `getResult()` — unlike `TimedResult<T>`, there is no single result to return once you've measured hundreds or

@@ -246,9 +246,9 @@ dev.badprogrammer.timing
 
 ### Single Measurement — `measure` / `measureChecked`
 
-Times **one invocation** of a method and returns both its result and its elapsed time, wrapped in a `TimedResult<T>`.
+Measures a **single** method invocation, returning its result and elapsed time wrapped in a `TimedResult<T>`.
 
-A method that returns a value and does not declare a checked exception on its method signature:
+A method that returns a value without declaring a checked exception:
 
 ```java
 // Returns a value, no checked exception
@@ -265,69 +265,51 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 // ElapsedMillis: 78ms
 ```
 
-A method that does not return a value (void) and does not declare a checked exception on its method signature:
+A method that returns `void` without declaring a checked exception:
 
 ```java
-// Void method, no checked exception
+// Returns void, no checked exception
 final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
-final Void result = timedResult.getResult();
-final long elapsedMillis = timedResult.getElapsedMillis();
+final Void result                   = timedResult.getResult();
+final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.
-
-println("TimedResult: "+timedResult);
-System.out.
-
-println("Result: "+result);
-System.out.
-
-printf("ElapsedMillis: %dms",elapsedMillis);
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 
 // TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
 // Result: null
 // ElapsedMillis: 3ms
 ```
 
-A method that returns a value and declares a checked exception on its method signature:
+A method that returns a value and declares a checked exception:
 
 ```java
 // Returns a value, declares a checked exception
 final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
-final Connection result = timedResult.getResult();
-final long elapsedMillis = timedResult.getElapsedMillis();
+final Connection result                   = timedResult.getResult();
+final long elapsedMillis                  = timedResult.getElapsedMillis();
 
-System.out.
-
-println("TimedResult: "+timedResult);
-System.out.
-
-println("Result: "+result);
-System.out.
-
-printf("ElapsedMillis: %dms",elapsedMillis);
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
 // Result: org.postgresql.jdbc.PgConnection@5e9f23b4
 // ElapsedMillis: 11ms
 ```
 
-A method that does not return a value (void) and declares a checked exception on its method signature:
+A method that returns `void` and declares a checked exception:
 
 ```java
-// Void method declares a checked exception
+// Return void, declares a checked exception
 final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
-final Void result = timedResult.getResult();
-final long elapsedMillis = timedResult.getElapsedMillis();
+final Void result                   = timedResult.getResult();
+final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.
-
-println("TimedResult: "+timedResult);
-System.out.
-
-println("Result: "+result);
-System.out.
-
-printf("ElapsedMillis: %dms",elapsedMillis);
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 
 // TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
 // Result: null
@@ -339,12 +321,12 @@ printf("ElapsedMillis: %dms",elapsedMillis);
 Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells
 you which one to reach for:
 
-| If your method                                                    | Use                                  |
-|-------------------------------------------------------------------|--------------------------------------|
-| **returns a value** and **does not declares** a checked exception | `measure(Supplier<T>)`               |
-| **is `void`** and **does not declares** a checked exception       | `measure(Runnable)`                  |
-| **returns a value** and **declares** a checked exception          | `measureChecked(CheckedSupplier<T>)` |
-| **is `void`** and **declares** a checked exception                | `measureChecked(CheckedRunnable)`    |
+| If your method                                        | Use                                  |
+|-------------------------------------------------------|--------------------------------------|
+| returns a value without declaring a checked exception | `measure(Supplier<T>)`               |
+| returns `void` without declaring a checked exception  | `measure(Runnable)`                  |
+| returns a value and declares a checked exception      | `measureChecked(CheckedSupplier<T>)` |
+| returns `void` and declares a checked exception       | `measureChecked(CheckedRunnable)`    |
 
 This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
 extended to the upcoming features like `compare`, `compareChecked` etc.
@@ -353,39 +335,77 @@ extended to the upcoming features like `compare`, `compareChecked` etc.
 
 ### Repeated Measurement — `measureRepeatedly` / `measureRepeatedlyChecked`
 
-Invokes a method **repeatedly** for a fixed number of times and returns a `TimingStatistics` — statistics across all
-**successful** invocations, plus failure tracking.
+Measures a method invocation **repeatedly**, returning statistics across all **successful** invocations plus failure
+tracking, wrapped in a `TimingStatistics`.
+
+A method that returns a value without declaring a checked exception:
 
 ```java
+// Returns a value, no checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1000, 5);
+System.out.println("Stats: " + stats);
+
+// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+// Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms, Maximum elapsed time = 17ms]
+```
+
+A method that returns `void` without declaring a checked exception:
+
+```java
+// Returns void, no checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1000, 5);
+System.out.println("Stats: " + stats);
+
+// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+// Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms, Maximum elapsed time = 12ms]
+```
+
+A method that returns a value and declares a checked exception:
+
+```java
+// Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
-System.out.
+System.out.println("Stats: " + stats);
 
-println("Stats: "+stats);
+// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+// Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms, Maximum elapsed time = 14ms]
+```
 
-if(stats.
+A method that returns `void` and declares a checked exception:
 
-hasFailures()){
-        stats.
+```java
+// Return void, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1000, 5);
+System.out.println("Stats: " + stats);
 
-getLastException()
-         .
+// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+// Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms, Maximum elapsed time = 12ms]
+```
 
-ifPresent(e ->System.out.
+A method that returns a value and declares a checked exception with failed iterations:
 
-printf("%d out of %d iterations failed: %s",
-       stats.getFailedIterations(),stats.
-
-getTotalIterations(),e.
-
-getMessage()));
-        }
+```java
+// Returns a value, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
+System.out.println("Stats: " + stats);
+if (stats.hasFailures()) {
+    stats.getLastException()
+         .ifPresent(e -> System.out.printf("%d out of %d iterations failed. Last exception: %s",
+                                           stats.getFailedIterations(), stats.getTotalIterations(), e));
+}
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
-// Total elapsed time = 4719ms, Average elapsed time = 5.899ms, Minimum elapsed time = 5ms,
-// Maximum elapsed time = 6ms,
+// Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms, Maximum elapsed time = 9ms,
 // Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
-// 200 out of 1000 iterations failed: The connection attempt failed
+
+// 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```
+
+> **Note:** Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in
+> may or may not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
+> Only **how long** each call took is recorded, not **what** it returned. This is why `TimingStatistics` has no
+> `getResult()` — unlike `TimedResult<T>`, there is no single result to return once you've measured hundreds or
+> thousands of invocations. What `TimingStatistics` reports is purely the aggregate timing behavior across all of them.
 
 #### Warmup iterations
 

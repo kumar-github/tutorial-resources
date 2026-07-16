@@ -346,7 +346,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.get
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms, Maximum elapsed time = 17ms]
+// Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
+// Maximum elapsed time = 17ms]
 ```
 
 A method that returns `void` without declaring a checked exception:
@@ -357,7 +358,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms, Maximum elapsed time = 12ms]
+// Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms,
+// Maximum elapsed time = 12ms]
 ```
 
 A method that returns a value and declares a checked exception:
@@ -368,7 +370,8 @@ final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms, Maximum elapsed time = 14ms]
+// Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
+// Maximum elapsed time = 14ms]
 ```
 
 A method that returns `void` and declares a checked exception:
@@ -379,15 +382,17 @@ final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.
 System.out.println("Stats: " + stats);
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms, Maximum elapsed time = 12ms]
+// Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms,
+// Maximum elapsed time = 12ms]
 ```
 
-A method that returns a value and declares a checked exception with failed iterations:
+Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
 
 ```java
 // Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
+
 if (stats.hasFailures()) {
     stats.getLastException()
          .ifPresent(e -> System.out.printf("%d out of %d iterations failed. Last exception: %s",
@@ -395,8 +400,8 @@ if (stats.hasFailures()) {
 }
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
-// Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms, Maximum elapsed time = 9ms,
-// Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+// Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms,
+// Maximum elapsed time = 9ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
 // 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```

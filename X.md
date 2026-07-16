@@ -351,9 +351,6 @@ System.out.println("Stats: " + stats);
 // Maximum elapsed time = 17ms]
 ```
 
-> [!WARNING]
-> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
-
 A method that returns `void` without declaring a checked exception:
 
 ```java
@@ -366,9 +363,6 @@ System.out.println("Stats: " + stats);
 // Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms,
 // Maximum elapsed time = 12ms]
 ```
-
-> [!WARNING]
-> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 A method that returns a value and declares a checked exception:
 
@@ -383,9 +377,6 @@ System.out.println("Stats: " + stats);
 // Maximum elapsed time = 14ms]
 ```
 
-> [!WARNING]
-> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
-
 A method that returns `void` and declares a checked exception:
 
 ```java
@@ -398,9 +389,6 @@ System.out.println("Stats: " + stats);
 // Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms,
 // Maximum elapsed time = 12ms]
 ```
-
-> [!WARNING]
-> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
 

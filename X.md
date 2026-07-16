@@ -576,8 +576,8 @@ Elapsed = 1340ms (1340291884ns) | SLOW
 > [!NOTE]
 > `TimingLogger.start()` requires **your** logger, not a shared internal one. This ensures timing lines appear under
 > your class's name in the logs — filterable by package, routable by your existing logging configuration, and sitting
-> alongside your class's other log statements. A shared `timing.TimingLogger` logger would scatter timing lines under
-> an unrelated logger name, losing all context.
+> alongside your class's other log statements. A shared logger would scatter timing lines under an unrelated logger
+> name, losing all context.
 
 #### Log levels at a glance
 
@@ -587,16 +587,16 @@ Elapsed = 1340ms (1340291884ns) | SLOW
 | Threshold configured, not exceeded | `DEBUG` | `TIMED  | getConnection | Elapsed = 12ms (12004311ns)`            |
 | Threshold configured and exceeded  | `WARN`  | `TIMED  | getConnection | Elapsed = 1340ms (1340291884ns) | SLOW` |
 
-`DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them. The `SLOW`
-escalation surfaces problems automatically.
+`DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them, while
+automatic escalation to `WARN` on slow invocations surfaces problems without you having to go looking for them.
 
 #### `close()` never throws
 
 > [!WARNING]
 > `close()` is the one method in this library with an absolute guarantee — it **never throws**, under any circumstance.
-> A `close()` that throws inside try-with-resources can suppress the *original* exception from the `try` block,
-> silently swallowing real errors. Any unexpected failure inside `close()` itself is caught and logged at `ERROR` as a
-> last resort.
+> A `close()` that throws inside try-with-resources can suppress the **original exception** from the try block, silently
+> swallowing real errors. Any unexpected failure inside `close()` itself is caught and logged at `ERROR` as a last
+> resort.
 
 ---
 

@@ -713,7 +713,7 @@ guess, and nobody has to write a cast just to time a method call.
 
 ---
 
-### Why `Runnable` / `CheckedRunnable` variants delegate internally
+### Why `Runnable` / `CheckedRunnable` variants delegate to the `Supplier` variants internally
 
 Rather than duplicating the timing loop for void methods, `measure(Runnable)` and `measureRepeatedly(Runnable, ...)`
 wrap their input as a `Supplier<Void>` / `CheckedSupplier<Void>` that runs the `Runnable` and then returns null,
@@ -767,15 +767,15 @@ is as real a data point as a slow success."* That reasoning sounds correct in is
 question **"how would a caller actually use that number?"** in a repeatedly measured method.
 
 In practice, the elapsed time until an exception is thrown depends entirely on *where* in the method the failure
-occurred — an instant validation error and a 30-second connection timeout are both "failures," but their timings mean
+occurred — an instant validation error and a 30-second connection timeout are both "failures", but their timings mean
 completely different things and cannot be meaningfully averaged together. Mixing them into `getAverageMillis()`
 contaminates the picture of how the method performs *when it works*, without providing any actionable insight in
 return — the exception type and message already convey far more about *what* went wrong than its timing does.
 
 > [!IMPORTANT]
-> **The resolution:** statistics (`LongSummaryStatistics` and all derived accessors) cover **successful iterations only
-> **. Failures are represented separately and explicitly via `hasFailures()`, `getFailedIterations()`, and
-> `getLastException()`.
+> **The resolution:** statistics (`LongSummaryStatistics` and all derived accessors) cover
+> **successful iterations only**. Failures are represented separately and explicitly via `hasFailures()`,
+> `getFailedIterations()`, and `getLastException()`.
 
 ---
 

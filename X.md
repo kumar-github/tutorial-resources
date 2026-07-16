@@ -426,7 +426,7 @@ Failed iterations details are captured and surfaced via `hasFailures()` and `get
 
 ```java
 // Returns a value, declares a checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 100, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 500, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 

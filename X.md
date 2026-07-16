@@ -426,13 +426,13 @@ Failed iterations details are captured and surfaced via `hasFailures()` and `get
 
 ```java
 // Returns a value, declares a checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 500, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 if (stats.hasFailures()) {
     stats.getLastException()
-         .ifPresent(e -> System.out.printf("%d out of %d iterations failed. Last exception: %s",
+         .ifPresent(e -> System.out.printf("%d of %d iterations failed. Last exception: %s",
                                            stats.getFailedIterations(), stats.getTotalIterations(), e));
 }
 ```
@@ -440,11 +440,11 @@ if (stats.hasFailures()) {
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 950, Failed iterations = 50,
-Total elapsed time = 5267ms, Average elapsed time = 5.544ms, Minimum elapsed time = 5ms,
-Maximum elapsed time = 7ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 957, Failed iterations = 43,
+Total elapsed time = 5322ms, Average elapsed time = 5.561ms, Minimum elapsed time = 5ms,
+Maximum elapsed time = 6ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
-20 of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
+43 of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```
 
 > [!WARNING]

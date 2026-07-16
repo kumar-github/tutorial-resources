@@ -525,7 +525,7 @@ A **non-invasive** `AutoCloseable` that measures a method by wrapping the method
 logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring
 any code restructuring.
 
-#### Standard usage
+Standard usage
 
 ```java
 public Connection getConnection() throws SQLException {
@@ -542,7 +542,7 @@ Terminal output:
 Elapsed = 12ms (12004311ns)
 ```
 
-#### Slow-call detection usage
+Slow-call detection usage
 
 Pass a threshold in milliseconds. If elapsed time exceeds it, the log line escalates from `DEBUG` to `WARN` —
 automatically, with **no code change**:
@@ -611,32 +611,36 @@ public T getResult();             // the method's return value (null for void me
 
 public long getElapsedNanos();    // full precision
 
-public long getElapsedMillis();   // converted from nanos via TimeUnit
+public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 ```
 
 #### `CheckedSupplier<T>` / `CheckedRunnable`
 
 Functional interfaces equivalent to `Supplier<T>` and `Runnable`, but declaring `throws Exception` on their single
 abstract method. This lets you pass a lambda that throws a checked exception (`SQLException`, `IOException` etc.)
-directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a `try`/`catch` just to
+directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to
 satisfy the compiler:
 
 > [!NOTE]
 > Java's standard `Supplier<T>` and `Runnable` don't allow their functional methods to throw checked exceptions. This
-> forces you to wrap every checked-exception-throwing lambda in an artificial `try`/`catch` cluttering your code with
+> forces you to wrap every checked-exception-throwing lambda in an artificial try/catch cluttering your code with
 > boilerplate. These variants remove that friction.
 
-```java
-// Without CheckedSupplier — forced wrapping, original type lost
-Supplier<Connection> s = () -> {
-            try {
-                return dbUtils.getConnection();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        };
+Without `CheckedSupplier` — forced wrapping, and the original type is lost
 
-// With CheckedSupplier — clean and direct, original type preserved
+```java
+Supplier<Connection> s = () -> {
+    try {
+        return dbUtils.getConnection();
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+};
+```
+
+With `CheckedSupplier` — clean, direct, and original type preserved
+
+```java
 CheckedSupplier<Connection> s = () -> dbUtils.getConnection();
 ```
 

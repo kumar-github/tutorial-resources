@@ -654,9 +654,62 @@ later revisited and corrected along the way.
 ### Why `measure` / `measureChecked` instead of one overloaded method
 
 Java cannot cleanly disambiguate `Supplier<T>` from `CheckedSupplier<T>` via overloading when a lambda body doesn't
-declare any exception — the compiler reports an ambiguous method call. Splitting into two explicitly named methods
-removes the ambiguity entirely and makes the exception-handling expectation visible at the call site, without the caller
-needing to know *why*.
+declare any exception — the compiler reports an ambiguous method call.
+
+If `measure` were overloaded to accept either type:
+
+```java
+static <T> TimedResult<T> measure(Supplier<T> method) { ... }
+
+static <T> TimedResult<T> measure(CheckedSupplier<T> method) { ... }
+```
+
+A plain lambda with no checked exception satisfies both signatures equally:
+
+```java
+StopWatch.measure(() -> "hello");
+```
+
+Neither `Supplier<T>` nor `CheckedSupplier<T>` is declared to throw anything here, so the compiler has no basis to pick
+one over the other. It rejects the call outright:
+
+IntelliJ reports:
+
+```
+Ambiguous method call. Both measure(Supplier<String>) in StopWatch and measure(CheckedSupplier<String>) in StopWatch
+match
+```
+
+The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:
+
+```java
+// Compiles — s1 is explicitly typed as Supplier<String>, so there's nothing to infer
+Supplier<String> s1 = () -> "hello";
+StopWatch.measure(s1);
+```
+
+```java
+// Compiles — the cast tells the compiler which overload to target
+StopWatch.measure((Supplier<String>) () -> "hello");
+```
+
+Both workarounds require the *caller* to already know about the ambiguity and add extra syntax to resolve it every
+single time they write a lambda with no checked exception. That's friction nobody should have to think about just to
+call a timing method. Splitting them into two explicitly named methods removes the ambiguity entirely and makes the
+exception-handling expectation visible at the call site, without the caller needing to know *why*.
+
+```java
+// plain lambda, no ceremony
+StopWatch.measure(() -> "hello");
+```
+
+```java
+// checked exception, still no ceremony
+StopWatch.measureChecked(() -> conn.prepareStatement());
+```
+
+The method names itself disambiguate. The caller picks the method that matches their lambda; the compiler never has to
+guess, and nobody has to write a cast just to time a method call.
 
 ---
 

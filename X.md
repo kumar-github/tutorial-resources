@@ -344,7 +344,7 @@ A method that returns a value without declaring a checked exception:
 // Returns a value, no checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1000, 5);
 System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no `getResult()` on `TimingStatistics`
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
 // Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
@@ -360,11 +360,15 @@ A method that returns `void` without declaring a checked exception:
 // Returns void, no checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1000, 5);
 System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
 // Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms,
 // Maximum elapsed time = 12ms]
 ```
+
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 A method that returns a value and declares a checked exception:
 
@@ -372,11 +376,15 @@ A method that returns a value and declares a checked exception:
 // Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
 // Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
 // Maximum elapsed time = 14ms]
 ```
+
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 A method that returns `void` and declares a checked exception:
 
@@ -384,11 +392,15 @@ A method that returns `void` and declares a checked exception:
 // Return void, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
 // Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms,
 // Maximum elapsed time = 12ms]
 ```
+
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
 
@@ -396,6 +408,7 @@ Failed iterations details are captured and surfaced via `hasFailures()` and `get
 // Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 if (stats.hasFailures()) {
     stats.getLastException()
@@ -412,7 +425,10 @@ if (stats.hasFailures()) {
 // The connection attempt failed
 ```
 
-> [!NOTE]
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
+
+> [!IMPORTANT]
 > Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in may or may
 > not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
 > Only **how long** each call took is recorded, not **what** it returned. This is why `TimingStatistics` has no

@@ -403,7 +403,8 @@ if (stats.hasFailures()) {
 // Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms,
 // Maximum elapsed time = 9ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
-// 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
+// 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException:
+// The connection attempt failed
 ```
 
 > **Note:** Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in

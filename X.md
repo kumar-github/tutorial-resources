@@ -716,8 +716,31 @@ guess, and nobody has to write a cast just to time a method call.
 ### Why `Runnable` / `CheckedRunnable` variants delegate internally
 
 Rather than duplicating the timing loop for void methods, `measure(Runnable)` and `measureRepeatedly(Runnable, ...)`
-adapt their input to `Supplier<Void>` / `CheckedSupplier<Void>` and delegate to the value-returning variant. One
-implementation, one place to get the timing logic right.
+wrap their input as a `Supplier<Void>` / `CheckedSupplier<Void>` that runs the `Runnable` and then returns null,
+delegating to the value-returning variant:
+
+```java
+public static TimedResult<Void> measure(Runnable method) {
+    return measure(() -> {
+        method.run();
+        return null;
+    });
+}
+```
+
+```java
+public static TimingStatistics measureRepeatedly(Runnable method, int iterations, int warmupIterations) {
+    return measureRepeatedly(() -> {
+        method.run();
+        return null;
+    }, iterations, warmupIterations);
+}
+```
+
+This means one implementation handles the actual timing logic, with no risk of the `Runnable` and `Supplier` variants
+drifting apart or behaving differently over time. It also means every guarantee documented for the `Supplier` variants —
+warmup handling, failure tracking, exception behavior — applies identically to the `Runnable` variants, since under the
+hood, they're running the exact same code.
 
 ---
 

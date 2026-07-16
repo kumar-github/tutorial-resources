@@ -401,7 +401,8 @@ if (stats.hasFailures()) {
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
 // Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms,
-// Maximum elapsed time = 9ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+// Maximum elapsed time = 9ms, Last exception = org.postgresql.util.PSQLException:
+// The connection attempt failed]
 
 // 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException:
 // The connection attempt failed

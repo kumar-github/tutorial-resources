@@ -259,10 +259,14 @@ final long elapsedMillis            = timedResult.getElapsedMillis();
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
 System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+```
 
-// TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
-// Result: User[id=101, name=John Doe]
-// ElapsedMillis: 78ms
+Terminal output:
+
+```terminaloutput
+TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
+Result: User[id=101, name=John Doe]
+ElapsedMillis: 78ms
 ```
 
 A method that returns `void` without declaring a checked exception:
@@ -276,10 +280,14 @@ final long elapsedMillis            = timedResult.getElapsedMillis();
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
 System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+```
 
-// TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
-// Result: null
-// ElapsedMillis: 3ms
+Terminal output:
+
+```terminaloutput
+TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
+Result: null
+ElapsedMillis: 3ms
 ```
 
 A method that returns a value and declares a checked exception:
@@ -293,10 +301,14 @@ final long elapsedMillis                  = timedResult.getElapsedMillis();
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
 System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+```
 
-// TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
-// Result: org.postgresql.jdbc.PgConnection@5e9f23b4
-// ElapsedMillis: 11ms
+Terminal output:
+
+```terminaloutput
+TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
+Result: org.postgresql.jdbc.PgConnection@5e9f23b4
+ElapsedMillis: 11ms
 ```
 
 A method that returns `void` and declares a checked exception:
@@ -310,10 +322,14 @@ final long elapsedMillis            = timedResult.getElapsedMillis();
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
 System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+```
 
-// TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
-// Result: null
-// ElapsedMillis: 6ms
+Terminal output:
+
+```terminaloutput
+TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
+Result: null
+ElapsedMillis: 6ms
 ```
 
 #### Method naming convention
@@ -345,10 +361,13 @@ A method that returns a value without declaring a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+```
 
-// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
-// Maximum elapsed time = 17ms]
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms, Maximum elapsed time = 17ms]
 ```
 
 A method that returns `void` without declaring a checked exception:
@@ -358,10 +377,13 @@ A method that returns `void` without declaring a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+```
 
-// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms,
-// Maximum elapsed time = 12ms]
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms, Maximum elapsed time = 12ms]
 ```
 
 A method that returns a value and declares a checked exception:
@@ -371,10 +393,13 @@ A method that returns a value and declares a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+```
 
-// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
-// Maximum elapsed time = 14ms]
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms, Maximum elapsed time = 14ms]
 ```
 
 A method that returns `void` and declares a checked exception:
@@ -384,10 +409,13 @@ A method that returns `void` and declares a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+```
 
-// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-// Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms,
-// Maximum elapsed time = 12ms]
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms, Maximum elapsed time = 12ms]
 ```
 
 Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
@@ -403,14 +431,16 @@ if (stats.hasFailures()) {
          .ifPresent(e -> System.out.printf("%d out of %d iterations failed. Last exception: %s",
                                            stats.getFailedIterations(), stats.getTotalIterations(), e));
 }
+```
 
-// Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
-// Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms,
-// Maximum elapsed time = 9ms, Last exception = org.postgresql.util.PSQLException:
-// The connection attempt failed]
+Terminal output:
 
-// 200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException:
-// The connection attempt failed
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 800, Failed iterations = 200,
+Total elapsed time = 4604ms, Average elapsed time = 5.756ms, Minimum elapsed time = 5ms, Maximum elapsed time = 9ms,
+Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+
+200 out of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```
 
 > [!WARNING]

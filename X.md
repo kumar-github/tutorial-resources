@@ -344,11 +344,15 @@ A method that returns a value without declaring a checked exception:
 // Returns a value, no checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1000, 5);
 System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no `getResult()` on `TimingStatistics`
 
 // Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
 // Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
 // Maximum elapsed time = 17ms]
 ```
+
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
 
 A method that returns `void` without declaring a checked exception:
 
@@ -409,8 +413,8 @@ if (stats.hasFailures()) {
 ```
 
 > [!NOTE]
-> Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in
-> may or may not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
+> Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in may or may
+> not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
 > Only **how long** each call took is recorded, not **what** it returned. This is why `TimingStatistics` has no
 > `getResult()` — unlike `TimedResult<T>`, there is no single result to return once you've measured hundreds or
 > thousands of invocations. What `TimingStatistics` reports is purely the aggregate timing behavior across all of them.

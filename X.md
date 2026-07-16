@@ -444,7 +444,7 @@ Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 950, Fa
 Total elapsed time = 5267ms, Average elapsed time = 5.544ms, Minimum elapsed time = 5ms,
 Maximum elapsed time = 7ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
-10 out of 100 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
+8 out of 100 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
 ```
 
 > [!WARNING]

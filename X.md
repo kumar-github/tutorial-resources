@@ -676,8 +676,8 @@ one over the other. It rejects the call outright:
 IntelliJ reports:
 
 ```
-Ambiguous method call. Both measure(Supplier<String>) in StopWatch and measure(CheckedSupplier<String>) in StopWatch
-match
+Ambiguous method call. Both measure(Supplier<String>) in StopWatch and measure(CheckedSupplier<String>) in
+StopWatch match
 ```
 
 The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:

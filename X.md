@@ -106,11 +106,11 @@ These principles were established early in the design phase and applied across e
   always return a result, even if any or every iteration fails. Failure information is **captured** and **surfaced** for
   inspection — **never rethrown**.
 
-- **Statistics cover successful iterations only** A failed iteration's elapsed time is meaningless on its own. Failed
+- **Statistics cover successful iterations only.** A failed iteration's elapsed time is meaningless on its own. Failed
   iteration timings are discarded entirely — there's no meaningful way to compare or average them against each other; an
-  instant validation failure and a 30-second timeout are both "failures," but their durations mean completely different
-  things. Failures are represented by a count and the last exception instead — which already conveys more than any
-  timing data could.
+  instant validation failure and a 30-second timeout are both **failures**, but their durations mean completely
+  different things. Failures are represented by a count and the last exception instead — which already conveys more than
+  any timing data could.
 
 - **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
   it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an

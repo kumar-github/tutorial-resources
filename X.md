@@ -38,6 +38,7 @@ Package: `dev.badprogrammer.timing`
       `measureRepeatedlyChecked`](#repeated-measurement--measurerepeatedly--measurerepeatedlychecked)
     - [Ambient Production Timing — `TimingLogger`](#ambient-production-timing--timinglogger)
     - [Supporting Types](#supporting-types)
+    - [Supporting Functional Interfaces](#supporting-functional-interfaces)
 - [Design Decisions & Their Reasoning](#design-decisions--their-reasoning)
 - [Best Practices](#-best-practices)
 - [Testing Philosophy](#testing-philosophy)
@@ -615,9 +616,9 @@ automatic escalation to `WARN` on slow invocations surfaces problems without you
 
 ### Supporting Types
 
-#### `TimedResult<T>`
+#### `TimedResult<T>` / `TimingStatistics`
 
-Immutable holder capturing a single invocation's return value and elapsed time.
+`TimedResult<T>` is an immutable holder capturing a single invocation's return value and elapsed time.
 
 ```java
 public T getResult();             // the method's return value (null for void methods)
@@ -626,6 +627,32 @@ public long getElapsedNanos();    // full precision
 
 public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 ```
+
+`TimingStatistics` is an immutable holder for aggregated statistics from repeated invocations.
+
+```java
+public long getSuccessfulIterations();
+
+public int getFailedIterations();
+
+public long getTotalIterations();
+
+public boolean hasFailures();
+
+public Optional<Exception> getLastException();
+
+public long getMinNanos();      public long getMinMillis();
+
+public long getMaxNanos();      public long getMaxMillis();
+
+public long getTotalNanos();    public long getTotalMillis();
+
+public double getAverageNanos(); public double getAverageMillis();
+```
+
+---
+
+### Supporting Functional Interfaces
 
 #### `CheckedRunnable` / `CheckedSupplier<T>`
 

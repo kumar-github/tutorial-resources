@@ -242,17 +242,17 @@ git config core.hooksPath .githooks
 
 ```
 dev.badprogrammer.timing
-├── util
-│   ├── StopWatch             → stateless utility: measure, measureRepeatedly
-│   └── TimingLogger          → AutoCloseable: ambient production timing
-│
 ├── function
-│   ├── CheckedSupplier<T>    → Supplier<T> that may throw a checked exception
-│   └── CheckedRunnable       → Runnable that may throw a checked exception
+│   ├── CheckedRunnable       — Runnable that may throw a checked exception
+│   └── CheckedSupplier<T>    — Supplier<T> that may throw a checked exception
 │
-└── type
-    ├── TimedResult<T>        → result of a single measured invocation
-    └── TimingStatistics      → statistics from repeated invocations
+├── type
+│   ├── TimedResult<T>        — result of a single measured invocation
+│   └── TimingStatistics      — statistics from repeated invocations
+│
+└── util
+    ├── StopWatch             — stateless utility: measure, measureRepeatedly
+    └── TimingLogger          — AutoCloseable: ambient production timing
 ```
 
 ---

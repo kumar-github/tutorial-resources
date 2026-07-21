@@ -40,6 +40,7 @@ Package: `dev.badprogrammer.timing`
     - [Supporting Types](#supporting-types)
 - [Design Decisions & Their Reasoning](#design-decisions--their-reasoning)
 - [Best Practices](#-best-practices)
+- [Testing Philosophy](#testing-philosophy)
 - [Implementation Status & Roadmap](#implementation-status--roadmap)
 
 ---
@@ -77,15 +78,15 @@ different shapes to solve different problems.
 Most Java codebases accumulate timing code in one of two unsatisfying forms:
 
 - Scattered `System.nanoTime()` pairs with manual subtraction, duplicated across the codebase, straightforward to
-  implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking
-  timing code into business logic.
+  implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking timing
+  code into business logic.
 
 - Ad-hoc `try { ... } finally { logger.debug("took {}ms", ...) }` blocks that vary in format from method to method,
   making logs hard to search or aggregate.
 
 `timing-utils` exists to make both of these **boring** — a single, **non-invasive**, well-tested, consistent way to
-answer *"How long did that take?"*, whether the answer is needed once during an investigation or every time, forever,
-in production.
+answer *"How long did that take?"*, whether the answer is needed once during an investigation or every time, forever, in
+production.
 
 ---
 
@@ -112,9 +113,9 @@ These principles were established early in the design phase and applied across e
 
 - **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
   it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
-  `AutoCloseable` instance because it must capture `startNanos` at `start()` and use it in `close()`, potentially
-  much later — that single `long` is state that must survive across the `try`-block's lifetime. Neither is forced into
-  the other's shape for the sake of consistency.
+  `AutoCloseable` instance because it must capture `startNanos` at `start()` and use it in `close()`, potentially much
+  later — that single `long` is state that must survive across the `try`-block's lifetime. Neither is forced into the
+  other's shape for the sake of consistency.
 
 ---
 
@@ -166,8 +167,12 @@ Measure a method once and return the result:
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
 System.out.println("TimedResult: " + timedResult);
+```
 
-// TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
+Terminal output:
+
+```terminaloutput
+TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
 ```
 
 Measure a method repeatedly and return the aggregated statistics across all iterations:
@@ -176,9 +181,13 @@ Measure a method repeatedly and return the aggregated statistics across all iter
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
 System.out.println("Stats: " + stats);
+```
 
-// Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-// Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
+Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms, Maximum elapsed time = 13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:
@@ -190,9 +199,13 @@ public Connection getConnection() throws SQLException {
         return dbUtils.getConnection();
     }
 }
+```
 
-// 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
-// getConnection | Elapsed = 38ms (38459480ns)
+Terminal output:
+
+```terminaloutput
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
+getConnection | Elapsed = 38ms (38459480ns)
 ```
 
 ### Building and Running Tests
@@ -248,28 +261,7 @@ dev.badprogrammer.timing
 
 Measures a **single** method invocation, returning its result and elapsed time wrapped in a `TimedResult<T>`.
 
-A method that returns a value without declaring a checked exception:
-
-```java
-// Returns a value, no checked exception
-final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-final User result                   = timedResult.getResult();
-final long elapsedMillis            = timedResult.getElapsedMillis();
-
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
-```
-
-Terminal output:
-
-```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
-Result: User[id=101, name=John Doe]
-ElapsedMillis: 78ms
-```
-
-A method that returns `void` without declaring a checked exception:
+A method that returns `void` without declaring any checked exceptions:
 
 ```java
 // Returns void, no checked exception
@@ -290,13 +282,13 @@ Result: null
 ElapsedMillis: 3ms
 ```
 
-A method that returns a value and declares a checked exception:
+A method that returns a value without declaring any checked exceptions:
 
 ```java
-// Returns a value, declares a checked exception
-final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
-final Connection result                   = timedResult.getResult();
-final long elapsedMillis                  = timedResult.getElapsedMillis();
+// Returns a value, no checked exception
+final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
+final User result                   = timedResult.getResult();
+final long elapsedMillis            = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult: " + timedResult);
 System.out.println("Result: " + result);
@@ -306,9 +298,9 @@ System.out.printf("ElapsedMillis: %dms", elapsedMillis);
 Terminal output:
 
 ```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
-Result: org.postgresql.jdbc.PgConnection@5e9f23b4
-ElapsedMillis: 11ms
+TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
+Result: User[id=101, name=John Doe]
+ElapsedMillis: 78ms
 ```
 
 A method that returns `void` and declares a checked exception:
@@ -332,17 +324,38 @@ Result: null
 ElapsedMillis: 6ms
 ```
 
+A method that returns a value and declares a checked exception:
+
+```java
+// Returns a value, declares a checked exception
+final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
+final Connection result                   = timedResult.getResult();
+final long elapsedMillis                  = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult: " + timedResult);
+System.out.println("Result: " + result);
+System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+```
+
+Terminal output:
+
+```terminaloutput
+TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
+Result: org.postgresql.jdbc.PgConnection@5e9f23b4
+ElapsedMillis: 11ms
+```
+
 #### Method naming convention
 
 Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells
 you which one to reach for:
 
-| If your method                                        | Use                                  |
-|-------------------------------------------------------|--------------------------------------|
-| returns a value without declaring a checked exception | `measure(Supplier<T>)`               |
-| returns `void` without declaring a checked exception  | `measure(Runnable)`                  |
-| returns a value and declares a checked exception      | `measureChecked(CheckedSupplier<T>)` |
-| returns `void` and declares a checked exception       | `measureChecked(CheckedRunnable)`    |
+| If your method                                           | Use                                  |
+|----------------------------------------------------------|--------------------------------------|
+| returns `void` without declaring any checked exceptions  | `measure(Runnable)`                  |
+| returns a value without declaring any checked exceptions | `measure(Supplier<T>)`               |
+| returns `void` and declares checked exceptions           | `measureChecked(CheckedRunnable)`    |
+| returns a value and declares checked exceptions          | `measureChecked(CheckedSupplier<T>)` |
 
 This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
 extended to the upcoming features like `compare`, `compareChecked` etc.
@@ -354,28 +367,11 @@ extended to the upcoming features like `compare`, `compareChecked` etc.
 Measures a method invocation **repeatedly**, returning statistics across all **successful** invocations plus failure
 tracking, wrapped in a `TimingStatistics`.
 
-A method that returns a value without declaring a checked exception:
-
-```java
-// Returns a value, no checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
-```
-
-Terminal output:
-
-```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
-Maximum elapsed time = 17ms]
-```
-
-A method that returns `void` without declaring a checked exception:
+A method that returns `void` without declaring any checked exceptions:
 
 ```java
 // Returns void, no checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1000, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1_000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
@@ -388,11 +384,11 @@ Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed tim
 Maximum elapsed time = 12ms]
 ```
 
-A method that returns a value and declares a checked exception:
+A method that returns a value without declaring any checked exceptions:
 
 ```java
-// Returns a value, declares a checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
+// Returns a value, no checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1_000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
@@ -401,15 +397,15 @@ Terminal output:
 
 ```terminaloutput
 Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
-Maximum elapsed time = 14ms]
+Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
+Maximum elapsed time = 17ms]
 ```
 
 A method that returns `void` and declares a checked exception:
 
 ```java
 // Return void, declares a checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1000, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1_000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
@@ -422,11 +418,28 @@ Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed tim
 Maximum elapsed time = 12ms]
 ```
 
+A method that returns a value and declares a checked exception:
+
+```java
+// Returns a value, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
+System.out.println("Stats: " + stats);
+// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+```
+
+Terminal output:
+
+```terminaloutput
+Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
+Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
+Maximum elapsed time = 14ms]
+```
+
 Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
 
 ```java
 // Returns a value, declares a checked exception
-final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1000, 5);
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
 System.out.println("Stats: " + stats);
 // System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
@@ -482,7 +495,7 @@ If an invocation throws:
 
 ```java
 // Even if all 1000 invocations fail — still returns a valid result, never throws
-TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1000, 0);
+TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1_000, 0);
 System.out.println("Stats: " + stats);
 System.out.println("Has failures: " + stats.hasFailures());
 System.out.println("Successful iterations: " + stats.getSuccessfulIterations());
@@ -522,8 +535,8 @@ Last exception: Optional[java.lang.RuntimeException: Something went wrong]
 ### Ambient Production Timing — `TimingLogger`
 
 A **non-invasive** `AutoCloseable` that measures a method by wrapping the method body in a try-with-resources block and
-logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring
-any code restructuring.
+logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring any
+code restructuring.
 
 Standard usage
 
@@ -549,7 +562,7 @@ automatically, with **no code change**:
 
 ```java
 public Connection getConnection() throws SQLException {
-    try (TimingLogger ignored = TimingLogger.start("getConnection", logger, 1000)) {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger, 1_000)) {
         return dbUtils.getConnection();
     }
 }
@@ -614,17 +627,35 @@ public long getElapsedNanos();    // full precision
 public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 ```
 
-#### `CheckedSupplier<T>` / `CheckedRunnable`
+#### `CheckedRunnable` / `CheckedSupplier<T>`
 
-Functional interfaces equivalent to `Supplier<T>` and `Runnable`, but declaring `throws Exception` on their single
+Functional interfaces equivalent to `Runnable` and `Supplier<T>`, but declaring `throws Exception` on their single
 abstract method. This lets you pass a lambda that throws a checked exception (`SQLException`, `IOException` etc.)
-directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to
-satisfy the compiler:
+directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to satisfy
+the compiler:
 
 > [!NOTE]
-> Java's standard `Supplier<T>` and `Runnable` don't allow their functional methods to throw checked exceptions. This
+> Java's standard `Runnable` and `Supplier<T>` don't allow their functional methods to throw checked exceptions. This
 > forces you to wrap every checked-exception-throwing lambda in an artificial try/catch cluttering your code with
 > boilerplate. These variants remove that friction.
+
+Without `CheckedRunnable` — forced wrapping, and the original type is lost
+
+```java
+Runnable r = () -> {
+    try {
+        dbUtils.closeConnection();
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+};
+```
+
+With `CheckedRunnable` — clean, direct, and original type preserved
+
+```java
+CheckedRunnable r = () -> dbUtils.closeConnection();
+```
 
 Without `CheckedSupplier` — forced wrapping, and the original type is lost
 
@@ -653,63 +684,113 @@ later revisited and corrected along the way.
 
 ### Why `measure` / `measureChecked` instead of one overloaded method
 
-Java cannot cleanly disambiguate `Supplier<T>` from `CheckedSupplier<T>` via overloading when a lambda body doesn't
-declare any exception — the compiler reports an ambiguous method call.
+Java cannot cleanly disambiguate `Runnable` from `CheckedRunnable` or `Supplier<T>` from `CheckedSupplier<T>` via
+overloading when a lambda body doesn't declare any exception — the compiler reports an ambiguous method call.
 
-If `measure` were overloaded to accept either type:
+If `measure` were overloaded to accept either type (`Runnable`/`CheckedRunnable`):
 
 ```java
-static <T> TimedResult<T> measure(Supplier<T> method) { ... }
+public static TimedResult<Void> measure(final Runnable method) { ... }
 
-static <T> TimedResult<T> measure(CheckedSupplier<T> method) { ... }
+public static TimedResult<Void> measure(final CheckedRunnable method) { ... }
 ```
 
 A plain lambda with no checked exception satisfies both signatures equally:
 
 ```java
-StopWatch.measure(() -> "hello");
+StopWatch.measure(() -> eventPublisher.publishEvent());
 ```
 
-Neither `Supplier<T>` nor `CheckedSupplier<T>` is declared to throw anything here, so the compiler has no basis to pick
-one over the other. It rejects the call outright:
+Neither `Runnable` nor `CheckedRunnable` is declared to throw anything here, so the compiler has no basis to pick one
+over the other. It rejects the call outright:
 
 IntelliJ reports:
 
 ```
-Ambiguous method call. Both measure(Supplier<String>) in StopWatch and measure(CheckedSupplier<String>) in
-StopWatch match
+Ambiguous method call. Both measure(Runnable) in StopWatch and measure(CheckedRunnable) in StopWatch match
 ```
 
 The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:
 
 ```java
-// Compiles — s1 is explicitly typed as Supplier<String>, so there's nothing to infer
-Supplier<String> s1 = () -> "hello";
-StopWatch.measure(s1);
+// Compiles — r is explicitly typed as Runnable, so there's nothing to infer
+Runnable r = () -> eventPublisher.publishEvent();
+StopWatch.measure(r);
 ```
 
 ```java
 // Compiles — the cast tells the compiler which overload to target
-StopWatch.measure((Supplier<String>) () -> "hello");
+StopWatch.measure((Runnable) () -> eventPublisher.publishEvent());
 ```
 
-Both workarounds require the *caller* to already know about the ambiguity and add extra syntax to resolve it every
+The above workarounds require the *caller* to already know about the ambiguity and add extra syntax to resolve it every
 single time they write a lambda with no checked exception. That's friction nobody should have to think about just to
 call a timing method. Splitting them into two explicitly named methods removes the ambiguity entirely and makes the
 exception-handling expectation visible at the call site, without the caller needing to know *why*.
 
 ```java
 // plain lambda, no ceremony
-StopWatch.measure(() -> "hello");
+StopWatch.measure(() -> eventPublisher.publishEvent());
 ```
 
 ```java
 // checked exception, still no ceremony
-StopWatch.measureChecked(() -> conn.prepareStatement());
+StopWatch.measureChecked(() -> dbUtils.closeConnection());
 ```
 
-The method names itself disambiguate. The caller picks the method that matches their lambda; the compiler never has to
-guess, and nobody has to write a cast just to time a method call.
+The method names themselves disambiguate. The caller picks the method that matches their lambda; the compiler never has
+to guess, and nobody has to write a cast just to time a method call.
+
+**The same ambiguity applies to value-returning methods** — `Supplier<T>`/`CheckedSupplier<T>` face an identical
+problem, for the same reason:
+
+If `measure` were overloaded to accept either type (`Supplier`/`CheckedSupplier`):
+
+```java
+public static <T> TimedResult<T> measure(final Supplier<T> method) { ... }
+
+public static <T> TimedResult<T> measure(final CheckedSupplier<T> method) { ... }
+```
+
+A plain lambda with no checked exception satisfies both signatures equally:
+
+```java
+StopWatch.measure(() -> userService.getUserById(101));
+```
+
+Neither `Supplier` nor `CheckedSupplier` is declared to throw anything here, so the compiler has no basis to pick one
+over the other. It rejects the call outright:
+
+IntelliJ reports:
+
+```
+Ambiguous method call. Both measure(Supplier) in StopWatch and measure(CheckedSupplier) in StopWatch match
+```
+
+The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:
+
+```java
+// Compiles — s is explicitly typed as Supplier<User>, so there's nothing to infer
+Supplier<User> s = () -> userService.getUserById(101);
+StopWatch.measure(s);
+```
+
+```java
+// Compiles — the cast tells the compiler which overload to target
+StopWatch.measure((Supplier<User>) () -> userService.getUserById(101));
+```
+
+As explained earlier, the above workarounds are too much friction.
+
+```java
+// plain lambda, no ceremony
+StopWatch.measure(() -> userService.getUserById(101));
+```
+
+```java
+// checked exception, still no ceremony
+StopWatch.measureChecked(() -> dbUtils.getConnection());
+```
 
 ---
 
@@ -766,8 +847,8 @@ An earlier design included failed-iteration timings directly in the statistics, 
 is as real a data point as a slow success."* That reasoning sounds correct in isolation — but it doesn't survive the
 question **"how would a caller actually use that number?"** in a repeatedly measured method.
 
-In practice, the elapsed time until an exception is thrown depends entirely on *where* in the method the failure
-occurred — an instant validation error and a 30-second connection timeout are both "failures", but their timings mean
+In practice, the elapsed time until an exception is thrown depends entirely on **where** in the method the failure
+occurred. An instant validation error and a 30-second connection timeout are both "failures" — but their timings mean
 completely different things and cannot be meaningfully averaged together. Mixing them into `getAverageMillis()`
 contaminates the picture of how the method performs *when it works*, without providing any actionable insight in
 return — the exception type and message already convey far more about *what* went wrong than its timing does.
@@ -843,6 +924,18 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 - ✅ **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
   under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
+
+---
+
+## Testing Philosophy
+
+Tests are organized by method variant (`measure`, `measureChecked`, `measureRepeatedly`, `measureRepeatedlyChecked`)
+and, within each, by overload (`Supplier` vs `Runnable`) — covering delegation-specific concerns such as whether each
+variant correctly propagates or catches exceptions, counts iterations, and rejects nulls.
+
+Statistical computation facts (min/max/average/total, millis-nanos consistency) are verified once rather than duplicated
+across every repeated-measurement variant — all four converge on the same underlying computation, so repeating those
+assertions per variant wouldn't add real confidence.
 
 ---
 

@@ -37,8 +37,8 @@ Package: `dev.badprogrammer.timing`
     - [Repeated Measurement — `measureRepeatedly` /
       `measureRepeatedlyChecked`](#repeated-measurement--measurerepeatedly--measurerepeatedlychecked)
     - [Ambient Production Timing — `TimingLogger`](#ambient-production-timing--timinglogger)
-    - [Supporting Types](#supporting-types)
-    - [Supporting Functional Interfaces](#supporting-functional-interfaces)
+    - [Supporting Types — `TimedResult` / `TimingStatistics`](#supporting-types)
+    - [Supporting Functional Interfaces — `CheckedRunnable` / `CheckedSupplier`](#supporting-functional-interfaces)
 - [Design Decisions & Their Reasoning](#design-decisions--their-reasoning)
 - [Best Practices](#-best-practices)
 - [Testing Philosophy](#testing-philosophy)

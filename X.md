@@ -622,11 +622,11 @@ automatic escalation to `WARN` on slow invocations surfaces problems without you
 time.
 
 ```java
-public T    getResult();            // the method's return value (null for void methods)
+public T    getResult();         // the method's return value (null for void methods)
 
-public long getElapsedNanos();      // full precision
+public long getElapsedNanos();   // full precision
 
-public long getElapsedMillis();     // converted from nanos to millis via TimeUnit
+public long getElapsedMillis();  // converted from nanos to millis via TimeUnit
 ```
 
 `TimingStatistics` is an immutable holder for the aggregated statistics of a method measured repeatedly — timing

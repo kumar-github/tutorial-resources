@@ -5,9 +5,9 @@
 **A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
-![Java](https://img.shields.io/badge/Java-21%2B-0?style=social)
-![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-0?style=social)
-![Status](https://img.shields.io/badge/status-Active_development-0?style=social)
+![Java](https://img.shields.io/badge/Java-21%2B-lightgrey?style=social)
+![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-lightgrey?style=social)
+![Status](https://img.shields.io/badge/status-Active_development-lightgrey?style=social)
 [![GitHub License](https://img.shields.io/github/license/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/blob/main/LICENSE)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dev-badprogrammer/timing-utils?style=social)
 ](https://github.com/dev-badprogrammer/timing-utils/commits/main)
@@ -16,10 +16,6 @@ performance investigations *and* permanent production logging.**
 [![Build Status](https://img.shields.io/github/actions/workflow/status/dev-badprogrammer/timing-utils/ci-build-and-test.yml?style=social)](https://github.com/dev-badprogrammer/timing-utils/actions/workflows/ci-build-and-test.yml)
 [![GitHub Release Date](https://img.shields.io/github/release-date/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/releases)
 [![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)](https://central.sonatype.com/artifact/dev.badprogrammer/timing-utils)
-
-![Java](https://img.shields.io/badge/Java-21%2B-blue?style=social)
-![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-informational?style=social)
-![Status](https://img.shields.io/badge/status-Active_development-green?style=social)
 
 Package: `dev.badprogrammer.timing`
 
@@ -57,7 +53,7 @@ This library is simple and answers **one** question, asked in two very different
 
 Sometimes you ask this **once, deliberately** — while investigating a performance issue, writing a benchmark, or
 comparing two implementations during development. Sometimes it is **not just once**, but you want the answer **always,
-silently** — a permanent fixture in production code that logs elapsed time without anyone having to remember even it's
+silently** — a permanent fixture in production code that logs elapsed time without anyone having to remember it's even
 there.
 
 `timing-utils` solves both the problems by providing one class for each context:
@@ -418,7 +414,7 @@ Terminal output:
 
 ```terminaloutput
 Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 4632ms, Average elapsed time = 4.633ms, Minimum elapsed time = 4ms,
+Total elapsed time = 4632ms, Average elapsed time = 4.632ms, Minimum elapsed time = 4ms,
 Maximum elapsed time = 12ms]
 ```
 
@@ -539,8 +535,8 @@ Last exception: Optional[java.lang.RuntimeException: Something went wrong]
 ### Ambient Production Timing — `TimingLogger`
 
 A **non-invasive** `AutoCloseable` that measures a method by wrapping the method body in a try-with-resources block and
-logs the elapsed time automatically when the try block exits—whether normally or with an exception—without requiring any
-code restructuring.
+logs the elapsed time automatically when the try block exits — whether normally or with an exception — without requiring
+any code restructuring.
 
 Standard usage
 

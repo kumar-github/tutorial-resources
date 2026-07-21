@@ -618,7 +618,8 @@ automatic escalation to `WARN` on slow invocations surfaces problems without you
 
 #### `TimedResult<T>` / `TimingStatistics`
 
-`TimedResult<T>` is an immutable holder capturing a single invocation's return value and elapsed time.
+`TimedResult<T>` is an immutable holder for the outcome of a method measured once — its return value and the elapsed
+time.
 
 ```java
 public T getResult();             // the method's return value (null for void methods)
@@ -628,7 +629,8 @@ public long getElapsedNanos();    // full precision
 public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 ```
 
-`TimingStatistics` is an immutable holder for aggregated statistics from repeated invocations.
+`TimingStatistics` is an immutable holder for the aggregated statistics of a method measured repeatedly — timing
+distribution, success/failure counts, and elapsed time across all iterations.
 
 ```java
 public long getSuccessfulIterations();          // count of iterations that completed without throwing

@@ -631,15 +631,31 @@ public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 `TimingStatistics` is an immutable holder for aggregated statistics from repeated invocations.
 
 ```java
-public long getSuccessfulIterations();
-public int getFailedIterations();
-public long getTotalIterations();
-public boolean hasFailures();
-public Optional<Exception> getLastException();
-public long getMinNanos();      public long getMinMillis();
-public long getMaxNanos();      public long getMaxMillis();
-public long getTotalNanos();    public long getTotalMillis();
-public double getAverageNanos(); public double getAverageMillis();
+public long getSuccessfulIterations();          // count of iterations that completed without throwing
+
+public int getFailedIterations();               // count of iterations that threw
+
+public long getTotalIterations();               // successful + failed
+
+public boolean hasFailures();                   // true if any iteration failed
+
+public Optional<Exception> getLastException();  // the last exception thrown, if any
+
+public long getMinNanos();                      // shortest successful iteration, full precision
+
+public long getMinMillis();                     // shortest successful iteration, in millis
+
+public long getMaxNanos();                      // longest successful iteration, full precision
+
+public long getMaxMillis();                     // longest successful iteration, in millis
+
+public long getTotalNanos();                    // sum across all successful iterations, full precision
+
+public long getTotalMillis();                   // sum across all successful iterations, in millis
+
+public double getAverageNanos();                // mean across all successful iterations, full precision
+
+public double getAverageMillis();               // mean across all successful iterations, in millis
 ```
 
 ---

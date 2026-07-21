@@ -17,6 +17,10 @@ performance investigations *and* permanent production logging.**
 [![GitHub Release Date](https://img.shields.io/github/release-date/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/releases)
 [![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)](https://central.sonatype.com/artifact/dev.badprogrammer/timing-utils)
 
+![Java](https://img.shields.io/badge/Java-21%2B-blue?style=social)
+![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-informational?style=social)
+![Status](https://img.shields.io/badge/status-Active_development-green?style=social)
+
 Package: `dev.badprogrammer.timing`
 
 </div>

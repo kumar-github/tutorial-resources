@@ -632,21 +632,13 @@ public long getElapsedMillis();   // converted from nanos to millis via TimeUnit
 
 ```java
 public long getSuccessfulIterations();
-
 public int getFailedIterations();
-
 public long getTotalIterations();
-
 public boolean hasFailures();
-
 public Optional<Exception> getLastException();
-
 public long getMinNanos();      public long getMinMillis();
-
 public long getMaxNanos();      public long getMaxMillis();
-
 public long getTotalNanos();    public long getTotalMillis();
-
 public double getAverageNanos(); public double getAverageMillis();
 ```
 
@@ -671,8 +663,10 @@ Without `CheckedRunnable` — forced wrapping, and the original type is lost
 ```java
 Runnable r = () -> {
     try {
+        // throws SQLException
         dbUtils.closeConnection();
     } catch (SQLException e) {
+        // original type lost
         throw new RuntimeException(e);
     }
 };
@@ -689,8 +683,10 @@ Without `CheckedSupplier` — forced wrapping, and the original type is lost
 ```java
 Supplier<Connection> s = () -> {
     try {
+        // throws SQLException
         return dbUtils.getConnection();
     } catch (SQLException e) {
+        // original type lost
         throw new RuntimeException(e);
     }
 };

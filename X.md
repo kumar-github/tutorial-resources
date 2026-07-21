@@ -11,6 +11,8 @@ performance investigations *and* permanent production logging.**
 [![GitHub License](https://img.shields.io/github/license/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/blob/main/LICENSE)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dev-badprogrammer/timing-utils?style=social)
 ](https://github.com/dev-badprogrammer/timing-utils/commits/main)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/dev-badprogrammer/timing-utils?style=social)
+](https://github.com/dev-badprogrammer/timing-utils/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/commits/main)
 [![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=social)](https://sonarcloud.io/summary/overall?id=dev-badprogrammer_timing-utils)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/dev-badprogrammer/timing-utils/ci-build-and-test.yml?style=social)](https://github.com/dev-badprogrammer/timing-utils/actions/workflows/ci-build-and-test.yml)

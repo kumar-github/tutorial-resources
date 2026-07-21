@@ -633,31 +633,31 @@ public long getElapsedMillis();     // converted from nanos to millis via TimeUn
 distribution, success/failure counts, and elapsed time across all iterations.
 
 ```java
-public long                getSuccessfulIterations();     // count of iterations that completed without throwing
+public long                getSuccessfulIterations();    // count of iterations that completed without throwing
 
-public int                 getFailedIterations();         // count of iterations that threw
+public int                 getFailedIterations();        // count of iterations that threw
 
-public long                getTotalIterations();          // successful + failed
+public long                getTotalIterations();         // successful + failed
 
-public boolean             hasFailures();                 // true if any iteration failed
+public boolean             hasFailures();                // true if any iteration failed
 
-public Optional<Exception> getLastException();            // the last exception thrown, if any
+public Optional<Exception> getLastException();           // the last exception thrown, if any
 
-public long                getMinNanos();                 // shortest successful iteration, full precision
+public long                getMinNanos();                // shortest successful iteration, full precision
 
-public long                getMinMillis();                // shortest successful iteration, in millis
+public long                getMinMillis();               // shortest successful iteration, in millis
 
-public long                getMaxNanos();                 // longest successful iteration, full precision
+public long                getMaxNanos();                // longest successful iteration, full precision
 
-public long                getMaxMillis();                // longest successful iteration, in millis
+public long                getMaxMillis();               // longest successful iteration, in millis
 
-public long                getTotalNanos();               // sum across all successful iterations, full precision
+public long                getTotalNanos();              // sum across all successful iterations, full precision
 
-public long                getTotalMillis();              // sum across all successful iterations, in millis
+public long                getTotalMillis();             // sum across all successful iterations, in millis
 
-public double              getAverageNanos();             // mean across all successful iterations, full precision
+public double              getAverageNanos();            // mean across all successful iterations, full precision
 
-public double              getAverageMillis();            // mean across all successful iterations, in millis
+public double              getAverageMillis();           // mean across all successful iterations, in millis
 ```
 
 ---

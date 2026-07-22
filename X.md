@@ -109,29 +109,29 @@ These principles were established early in the design phase and applied across e
 
 - **Statistics cover successful iterations only.** A failed iteration's elapsed time is meaningless on its own. Failed
   iteration timings are discarded entirely — there's no meaningful way to compare or average them against each other; an
-  instant validation failure and a 30-second timeout are both **failures**, but their durations mean completely
+  instant validation failure and a 30-second timeout failure are both **failures**, but their durations mean completely
   different things. Failures are represented by a count and the last exception instead — which already conveys more than
   any timing data could.
 
 - **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
   it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
   `AutoCloseable` instance because it must capture `startNanos` at `start()` and use it in `close()`, potentially much
-  later — that single `long` is state that must survive across the `try` block's lifetime. Neither is forced into the
-  other's shape for the sake of consistency.
+  later — that single `long` is the state that must survive across the `try` block's lifetime. Neither is forced into
+  the other's shape for the sake of consistency.
 
 ---
 
 ## Tech Stack & Prerequisites
 
-| Requirement           | Details                                                                                              |
-|-----------------------|------------------------------------------------------------------------------------------------------|
-| **Java**              | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc. |
-| **SLF4J API**         | Required at compile time for `TimingLogger` only. Bring your own binding like Logback, Log4j2 etc.   |
-| **Test dependencies** | JUnit 5+, Mockito — test scope only, not required by consumers.                                      |
+| Requirement           | Details                                                                                                                                                      |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Java**              | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc.                                                         |
+| **SLF4J API**         | Required at compile time for `TimingLogger` only. Works with whatever SLF4J binding you already use (Logback, Log4j2, etc.) — no changes needed on your end. |
+| **Test dependencies** | JUnit 5+, Mockito — test scope only, not required by consumers.                                                                                              |
 
 > [!NOTE]
-> `StopWatch` and its supporting types (`TimedResult`, `TimingStatistics`, `CheckedRunnable`, `CheckedSupplier`)
-> are **pure Java with zero dependencies**.
+> `StopWatch` and its supporting types (`CheckedRunnable`, `CheckedSupplier`, `TimedResult`, `TimingStatistics`) are
+> **pure Java with zero dependencies**.
 
 ---
 

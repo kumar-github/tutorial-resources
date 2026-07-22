@@ -69,8 +69,9 @@ there.
 
 </div>
 
-Both are built around the same core idea — **measure in nanoseconds, report in milliseconds** — but deliberately take
-different shapes to solve different problems.
+> [!IMPORTANT]
+> Both `StopWatch` and `TimingLogger` are built around the same core idea — **measure in nanoseconds, report in
+> milliseconds** — but deliberately take different shapes to solve different problems.
 
 ---
 

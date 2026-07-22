@@ -671,7 +671,7 @@ distribution, success/failure counts, and elapsed time across all iterations.
 Functional interfaces equivalent to `Runnable` and `Supplier<T>`, but declaring `throws Exception` on their single
 abstract method. This lets you pass a lambda that throws a checked exception (`SQLException`, `IOException` etc.)
 directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to satisfy
-the compiler:
+the compiler.
 
 > [!NOTE]
 > Java's standard `Runnable` and `Supplier<T>` don't allow their functional methods to throw checked exceptions. This
@@ -717,6 +717,14 @@ With `CheckedSupplier` — clean, direct, and original type preserved
 ```java
 CheckedSupplier<Connection> s = () -> dbUtils.getConnection();
 ```
+
+> [!NOTE]
+> `CheckedRunnable`/`CheckedSupplier<T>` do **not** extend `Runnable`/`Supplier<T>` — this isn't a design choice, it's a
+> Java language rule. A subinterface can only narrow the checked exceptions an inherited method declares, never widen
+> them. Since `Runnable.run()`/`Supplier<T>.get()` declare no checked exceptions at all, extending either and
+> redeclaring the method with `throws Exception` simply doesn't compile. These are deliberately independent interfaces
+> that happen to share a method shape — the same pattern the JDK itself uses for `Callable<V>`, which doesn't extend
+> `Supplier<V>` for the identical reason.
 
 ---
 

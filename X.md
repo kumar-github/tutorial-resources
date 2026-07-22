@@ -641,44 +641,26 @@ automatic escalation to `WARN` on slow invocations surfaces problems without you
 `TimedResult<T>` is an immutable holder for the outcome of a method measured once — its return value and the elapsed
 time.
 
-```java
-public T    getResult();         // the method's return value (null for void methods)
-
-public long getElapsedNanos();   // full precision
-
-public long getElapsedMillis();  // converted from nanos to millis via TimeUnit
-```
+| Method               | Returns                                             |
+|----------------------|-----------------------------------------------------|
+| `getResult()`        | The method's return value (`null` for void methods) |
+| `getElapsedNanos()`  | Elapsed time, full precision                        |
+| `getElapsedMillis()` | Elapsed time, converted from nanos to millis        |
 
 `TimingStatistics` is an immutable holder for the aggregated statistics of a method measured repeatedly — timing
 distribution, success/failure counts, and elapsed time across all iterations.
 
-```java
-public long                getSuccessfulIterations();  // count of iterations that completed without throwing
-
-public int                 getFailedIterations();      // count of iterations that threw
-
-public long                getTotalIterations();       // successful + failed
-
-public boolean             hasFailures();              // true if any iteration failed
-
-public Optional<Exception> getLastException();         // the last exception thrown, if any
-
-public long                getMinNanos();              // shortest successful iteration, full precision
-
-public long                getMinMillis();             // shortest successful iteration, in millis
-
-public long                getMaxNanos();              // longest successful iteration, full precision
-
-public long                getMaxMillis();             // longest successful iteration, in millis
-
-public long                getTotalNanos();            // sum across all successful iterations, full precision
-
-public long                getTotalMillis();           // sum across all successful iterations, in millis
-
-public double              getAverageNanos();          // mean across all successful iterations, full precision
-
-public double              getAverageMillis();         // mean across all successful iterations, in millis
-```
+| Method                                    | Returns                                                   |
+|-------------------------------------------|-----------------------------------------------------------|
+| `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
+| `getFailedIterations()`                   | Count of iterations that threw                            |
+| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
+| `hasFailures()`                           | `true` if any iteration threw                             |
+| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
+| `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
+| `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
 
 ---
 

@@ -266,7 +266,7 @@ dev.badprogrammer.timing
 
 Measures a **single** method invocation, returning its result and elapsed time wrapped in a `TimedResult<T>`.
 
-A method that **returns `void` without declaring** any checked exceptions:
+A method that returns **`void` without declaring** any checked exceptions:
 
 ```java
 // Returns void, no checked exception
@@ -287,7 +287,7 @@ Result: null
 ElapsedMillis: 3ms
 ```
 
-A method that **returns a value without declaring** any checked exceptions:
+A method that returns a **value without declaring** any checked exceptions:
 
 ```java
 // Returns a value, no checked exception
@@ -308,7 +308,7 @@ Result: User[id=101, name=John Doe]
 ElapsedMillis: 78ms
 ```
 
-A method that **returns `void` and declares** a checked exception:
+A method that returns **`void` and declares** a checked exception:
 
 ```java
 // Return void, declares a checked exception
@@ -329,7 +329,7 @@ Result: null
 ElapsedMillis: 6ms
 ```
 
-A method that **returns a value and declares** a checked exception:
+A method that returns a **value and declares** a checked exception:
 
 ```java
 // Returns a value, declares a checked exception

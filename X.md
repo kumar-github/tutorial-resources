@@ -350,6 +350,14 @@ Result: org.postgresql.jdbc.PgConnection@5e9f23b4
 ElapsedMillis: 11ms
 ```
 
+#### `TimedResult<T>` accessors
+
+| Method               | Returns                                             |
+|----------------------|-----------------------------------------------------|
+| `getResult()`        | The method's return value (`null` for void methods) |
+| `getElapsedNanos()`  | Elapsed time, full precision                        |
+| `getElapsedMillis()` | Elapsed time, converted from nanos to millis        |
+
 #### Method naming convention
 
 Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells

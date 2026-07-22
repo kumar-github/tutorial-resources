@@ -372,7 +372,7 @@ extended to the upcoming features like `compare`, `compareChecked` etc.
 Measures a method invocation **repeatedly**, returning statistics across all **successful** invocations plus failure
 tracking, wrapped in a `TimingStatistics`.
 
-A method that returns `void` without declaring any checked exceptions:
+A method that returns **`void` without declaring** any checked exceptions:
 
 ```java
 // Returns void, no checked exception
@@ -389,7 +389,7 @@ Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed tim
 Maximum elapsed time = 12ms]
 ```
 
-A method that returns a value without declaring any checked exceptions:
+A method that returns a **value without declaring** any checked exceptions:
 
 ```java
 // Returns a value, no checked exception
@@ -406,7 +406,7 @@ Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed tim
 Maximum elapsed time = 17ms]
 ```
 
-A method that returns `void` and declares a checked exception:
+A method that returns **`void` and declares** a checked exception:
 
 ```java
 // Return void, declares a checked exception
@@ -423,7 +423,7 @@ Total elapsed time = 4632ms, Average elapsed time = 4.632ms, Minimum elapsed tim
 Maximum elapsed time = 12ms]
 ```
 
-A method that returns a value and declares a checked exception:
+A method that returns a **value and declares** a checked exception:
 
 ```java
 // Returns a value, declares a checked exception
@@ -512,8 +512,8 @@ Terminal output:
 
 ```terminaloutput
 Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 0, Failed iterations = 1000,
-Total elapsed time = 0ms, Average elapsed time = 0.000ms, Minimum elapsed time = 0ms, Maximum elapsed time = 0ms,
-Last exception = java.lang.RuntimeException: Something went wrong]
+Total elapsed time = 0ms, Average elapsed time = 0.000ms, Minimum elapsed time = 0ms,
+Maximum elapsed time = 0ms, Last exception = java.lang.RuntimeException: Something went wrong]
 
 Has failures: true
 Successful iterations: 0

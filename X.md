@@ -217,6 +217,7 @@ Standard Maven build:
 
 ```bash
 cd timing-utils
+
 mvn clean install   # builds the jar and runs the full test suite
 mvn test            # runs tests only
 ```
@@ -227,12 +228,13 @@ mvn test            # runs tests only
 
 This repo uses a shared git hook to enforce a 70-character limit on commit message subject lines and validates the
 Conventional Commits format, preventing GitHub from truncating long titles and spilling overflow text into the PR
-description box. The hook lives in a trackable `.githooks/` directory (not the untracked `.git/hooks/`), so it's
-committed to the repo and visible to anyone who clones it.
+description box. The hook lives in a trackable `.githooks/` directory (not the untracked `.git/hooks/`), committed to
+the repo and visible to anyone who clones it.
 Enable it once after cloning the repository by running the below command from the root of your project.
 
 ```bash
 cd timing-utils
+
 chmod +x .githooks/commit-msg
 git config core.hooksPath .githooks
 ```
@@ -264,7 +266,7 @@ dev.badprogrammer.timing
 
 Measures a **single** method invocation, returning its result and elapsed time wrapped in a `TimedResult<T>`.
 
-A method that returns `void` without declaring any checked exceptions:
+A method that **returns `void` without declaring** any checked exceptions:
 
 ```java
 // Returns void, no checked exception
@@ -285,7 +287,7 @@ Result: null
 ElapsedMillis: 3ms
 ```
 
-A method that returns a value without declaring any checked exceptions:
+A method that **returns a value without declaring** any checked exceptions:
 
 ```java
 // Returns a value, no checked exception
@@ -306,7 +308,7 @@ Result: User[id=101, name=John Doe]
 ElapsedMillis: 78ms
 ```
 
-A method that returns `void` and declares a checked exception:
+A method that **returns `void` and declares** a checked exception:
 
 ```java
 // Return void, declares a checked exception
@@ -327,7 +329,7 @@ Result: null
 ElapsedMillis: 6ms
 ```
 
-A method that returns a value and declares a checked exception:
+A method that **returns a value and declares** a checked exception:
 
 ```java
 // Returns a value, declares a checked exception
@@ -353,12 +355,12 @@ ElapsedMillis: 11ms
 Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells
 you which one to reach for:
 
-| If your method                                           | Use                                  |
-|----------------------------------------------------------|--------------------------------------|
-| returns `void` without declaring any checked exceptions  | `measure(Runnable)`                  |
-| returns a value without declaring any checked exceptions | `measure(Supplier<T>)`               |
-| returns `void` and declares checked exceptions           | `measureChecked(CheckedRunnable)`    |
-| returns a value and declares checked exceptions          | `measureChecked(CheckedSupplier<T>)` |
+| If your method                                               | Use                                  |
+|--------------------------------------------------------------|--------------------------------------|
+| returns **`void` without declaring** any checked exceptions  | `measure(Runnable)`                  |
+| returns a **value without declaring** any checked exceptions | `measure(Supplier<T>)`               |
+| returns **`void` and declares** checked exceptions           | `measureChecked(CheckedRunnable)`    |
+| returns a **value and declares** checked exceptions          | `measureChecked(CheckedSupplier<T>)` |
 
 This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
 extended to the upcoming features like `compare`, `compareChecked` etc.

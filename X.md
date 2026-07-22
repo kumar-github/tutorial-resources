@@ -525,15 +525,15 @@ Last exception: Optional[java.lang.RuntimeException: Something went wrong]
 
 | Method                                    | Returns                                                   |
 |-------------------------------------------|-----------------------------------------------------------|
-| `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
-| `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
-| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
-| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
 | `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
 | `getFailedIterations()`                   | Count of iterations that threw                            |
 | `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
 | `hasFailures()`                           | `true` if any iteration threw                             |
 | `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
+| `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
+| `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
 
 ---
 

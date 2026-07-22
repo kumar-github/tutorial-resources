@@ -771,6 +771,8 @@ single time they write a lambda with no checked exception. That's friction nobod
 call a timing method. Splitting them into two explicitly named methods removes the ambiguity entirely and makes the
 exception-handling expectation visible at the call site, without the caller needing to know *why*.
 
+The Solution:
+
 ```java
 // plain lambda, no ceremony
 StopWatch.measure(() -> eventPublisher.publishEvent());
@@ -824,6 +826,8 @@ StopWatch.measure((Supplier<User>) () -> userService.getUserById(101));
 ```
 
 As explained earlier, the above workarounds are too much friction.
+
+The Solution:
 
 ```java
 // plain lambda, no ceremony

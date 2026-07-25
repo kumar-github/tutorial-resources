@@ -2,7 +2,7 @@
 
 # ⏱️ timing-utils - A Java Timing Utility Library
 
-**A focused, light weight, minimal-external-dependency Java library for measuring method execution time for deliberate
+**A focused, lightweight, minimal-external-dependency Java library for measuring method execution time for deliberate
 performance investigations *and* permanent production logging.**
 
 ![Java](https://img.shields.io/badge/Java-21%2B-lightgrey?style=social)
@@ -57,7 +57,7 @@ comparing two implementations during development. Sometimes it is **not just onc
 silently** — a permanent fixture in production code that logs elapsed time without anyone having to remember it's even
 there.
 
-`timing-utils` solves both the problems by providing one class for each context:
+`timing-utils` solves both problems by providing one class for each context:
 
 <div align="center">
 
@@ -141,7 +141,8 @@ These principles were established early in the design phase and applied across e
 
 **Option 1 — Maven Central**
 
-Add the below maven co-ordinates to your `pom.xml`:
+Add the below Maven coordinates to your `pom.xml`, replacing `LATEST_VERSION` with the version shown on
+[Maven Central](https://central.sonatype.com/artifact/dev.badprogrammer/timing-utils):
 
 ```xml
 <dependency>
@@ -962,7 +963,7 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 ## ✅ Best Practices
 
 - ✅ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
-  permanently in production hot paths — Use `TimingLogger` for those usecases.
+  permanently in production hot paths — use `TimingLogger` for those use cases.
 
 - ✅ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
   prevent JIT warm-up from dominating your results, especially for short-running methods.

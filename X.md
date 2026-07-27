@@ -158,7 +158,9 @@ Clone the repository and install it to your local Maven repository:
 
 ```bash
 git clone https://github.com/dev-badprogrammer/timing-utils.git
+
 cd timing-utils
+
 mvn clean install
 ```
 
@@ -169,13 +171,13 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-System.out.println("TimedResult: " + timedResult);
+System.out.println("TimedResult:" + timedResult);
 ```
 
 Terminal output:
 
 ```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 24ms, ElapsedNanos = 24568257ns]
+TimedResult:TimedResult[elapsedMillis=24ms, elapsedNanos=24568257ns]
 ```
 
 Measure a method repeatedly and return the aggregated statistics across all iterations:
@@ -183,15 +185,14 @@ Measure a method repeatedly and return the aggregated statistics across all iter
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
-System.out.println("Stats: " + stats);
+System.out.println("Stats:" + stats);
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 20, Successful iterations = 20, Failed iterations = 0,
-Total elapsed time = 142ms, Average elapsed time = 7.120ms, Minimum elapsed time = 2ms,
-Maximum elapsed time = 13ms]
+Stats:TimingStatistics[totalIterations=20, successfulIterations=20, failedIterations=0, totalMillis=142ms,
+averageMillis=7.120ms, minMillis=2ms, maxMillis=13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:
@@ -208,8 +209,8 @@ public Connection getConnection() throws SQLException {
 Terminal output:
 
 ```terminaloutput
-00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
-getConnection | Elapsed = 38ms (38459480ns)
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed=38ms (38459480ns)
 ```
 
 ### Building and Running Tests
@@ -220,6 +221,7 @@ Standard Maven build:
 cd timing-utils
 
 mvn clean install   # builds the jar and runs the full test suite
+
 mvn test            # runs tests only
 ```
 
@@ -237,6 +239,7 @@ Enable it once after cloning the repository by running the below command from th
 cd timing-utils
 
 chmod +x .githooks/commit-msg
+
 git config core.hooksPath .githooks
 ```
 
@@ -275,17 +278,15 @@ final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.pub
 final Void result                   = timedResult.getResult();
 final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
 ```
 
 Terminal output:
 
 ```terminaloutput
-TimedResult[ElapsedMillis = 3ms, ElapsedNanos = 3033608ns]
-Result: null
-ElapsedMillis: 3ms
+TimedResult:TimedResult[elapsedMillis=3ms, elapsedNanos=3033608ns]
+Result:null
 ```
 
 A method that returns a **value without declaring** any checked exceptions:
@@ -296,17 +297,15 @@ final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUse
 final User result                   = timedResult.getResult();
 final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
 ```
 
 Terminal output:
 
 ```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 78ms, ElapsedNanos = 78284284ns]
-Result: User[id=101, name=John Doe]
-ElapsedMillis: 78ms
+TimedResult:TimedResult[elapsedMillis=78ms, elapsedNanos=78284284ns]
+Result:User[id=101, name=John Doe]
 ```
 
 A method that returns **`void` and declares** a checked exception:
@@ -317,17 +316,15 @@ final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.clo
 final Void result                   = timedResult.getResult();
 final long elapsedMillis            = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
 ```
 
 Terminal output:
 
 ```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 6ms, ElapsedNanos = 6338845ns]
-Result: null
-ElapsedMillis: 6ms
+TimedResult:TimedResult[elapsedMillis=6ms, elapsedNanos=6338845ns]
+Result:null
 ```
 
 A method that returns a **value and declares** a checked exception:
@@ -338,17 +335,15 @@ final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUti
 final Connection result                   = timedResult.getResult();
 final long elapsedMillis                  = timedResult.getElapsedMillis();
 
-System.out.println("TimedResult: " + timedResult);
-System.out.println("Result: " + result);
-System.out.printf("ElapsedMillis: %dms", elapsedMillis);
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
 ```
 
 Terminal output:
 
 ```terminaloutput
-TimedResult: TimedResult[ElapsedMillis = 11ms, ElapsedNanos = 11797399ns]
-Result: org.postgresql.jdbc.PgConnection@5e9f23b4
-ElapsedMillis: 11ms
+TimedResult:TimedResult[elapsedMillis=11ms, elapsedNanos=11797399ns]
+Result:org.postgresql.jdbc.PgConnection@5e9f23b4
 ```
 
 #### `TimedResult<T>` accessors
@@ -386,16 +381,16 @@ A method that returns **`void` without declaring** any checked exceptions:
 ```java
 // Returns void, no checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1_000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+
+System.out.println("Stats:" + stats);
+// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 2406ms, Average elapsed time = 2.406ms, Minimum elapsed time = 2ms,
-Maximum elapsed time = 12ms]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=2406ms,
+averageMillis=2.406ms, minMillis=2ms, maxMillis=12ms]
 ```
 
 A method that returns a **value without declaring** any checked exceptions:
@@ -403,16 +398,16 @@ A method that returns a **value without declaring** any checked exceptions:
 ```java
 // Returns a value, no checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1_000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+
+System.out.println("Stats:" + stats);
+// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 3671ms, Average elapsed time = 3.671ms, Minimum elapsed time = 3ms,
-Maximum elapsed time = 17ms]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=3671ms,
+averageMillis=3.671ms, minMillis=3ms, maxMillis=17ms]
 ```
 
 A method that returns **`void` and declares** a checked exception:
@@ -420,16 +415,16 @@ A method that returns **`void` and declares** a checked exception:
 ```java
 // Return void, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1_000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+
+System.out.println("Stats:" + stats);
+// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 4632ms, Average elapsed time = 4.632ms, Minimum elapsed time = 4ms,
-Maximum elapsed time = 12ms]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=4632ms,
+averageMillis=4.632ms, minMillis=4ms, maxMillis=12ms]
 ```
 
 A method that returns a **value and declares** a checked exception:
@@ -437,16 +432,16 @@ A method that returns a **value and declares** a checked exception:
 ```java
 // Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+
+System.out.println("Stats:" + stats);
+// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 1000, Failed iterations = 0,
-Total elapsed time = 5790ms, Average elapsed time = 5.790ms, Minimum elapsed time = 5ms,
-Maximum elapsed time = 14ms]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=5790ms,
+averageMillis=5.790ms, minMillis=5ms, maxMillis=14ms]
 ```
 
 Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
@@ -454,12 +449,13 @@ Failed iterations details are captured and surfaced via `hasFailures()` and `get
 ```java
 // Returns a value, declares a checked exception
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
-System.out.println("Stats: " + stats);
-// System.out.println("Result: " + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+
+System.out.println("Stats:" + stats);
+// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
 
 if (stats.hasFailures()) {
     stats.getLastException()
-         .ifPresent(e -> System.out.printf("%d of %d iterations failed. Last exception: %s",
+         .ifPresent(e -> System.out.printf("%d of %d iterations failed. Last exception:%s",
                                            stats.getFailedIterations(), stats.getTotalIterations(), e));
 }
 ```
@@ -467,11 +463,11 @@ if (stats.hasFailures()) {
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 957, Failed iterations = 43,
-Total elapsed time = 5322ms, Average elapsed time = 5.561ms, Minimum elapsed time = 5ms,
-Maximum elapsed time = 6ms, Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=957, failedIterations=43, totalMillis=5322ms,
+averageMillis=5.561ms, minMillis=5ms, maxMillis=6ms,
+Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
 
-43 of 1000 iterations failed. Last exception: org.postgresql.util.PSQLException: The connection attempt failed
+43 of 1000 iterations failed. Last exception:org.postgresql.util.PSQLException: The connection attempt failed
 ```
 
 > [!WARNING]
@@ -510,24 +506,25 @@ If an invocation throws:
 ```java
 // Even if all 1000 invocations fail — still returns a valid result, never throws
 TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1_000, 0);
-System.out.println("Stats: " + stats);
-System.out.println("Has failures: " + stats.hasFailures());
-System.out.println("Successful iterations: " + stats.getSuccessfulIterations());
-System.out.println("Failed iterations: " + stats.getFailedIterations());
-System.out.println("Last exception: " + stats.getLastException());
+System.out.println("Stats:" + stats);
+System.out.println("Total iterations:" + stats.getTotalIterations());
+System.out.println("Successful iterations:" + stats.getSuccessfulIterations());
+System.out.println("Failed iterations:" + stats.getFailedIterations());
+System.out.println("Has failures:" + stats.hasFailures());
+System.out.println("Last exception:" + stats.getLastException());
 ```
 
 Terminal output:
 
 ```terminaloutput
-Stats: TimingStatistics[Total iterations = 1000, Successful iterations = 0, Failed iterations = 1000,
-Total elapsed time = 0ms, Average elapsed time = 0.000ms, Minimum elapsed time = 0ms,
-Maximum elapsed time = 0ms, Last exception = java.lang.RuntimeException: Something went wrong]
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=0, failedIterations=1000, totalMillis=0ms,
+averageMillis=0.000ms, minMillis=0ms, maxMillis=0ms, lastException=java.lang.RuntimeException: Something went wrong]
 
-Has failures: true
-Successful iterations: 0
-Failed iterations: 1000
-Last exception: Optional[java.lang.RuntimeException: Something went wrong]
+Total iterations:1000
+Successful iterations:0
+Failed iterations:1000
+Has failures:true
+Last exception:Optional[java.lang.RuntimeException: Something went wrong]
 ```
 
 #### `TimingStatistics` accessors
@@ -574,7 +571,7 @@ Terminal output:
 
 ```terminaloutput
 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-Elapsed = 12ms (12004311ns)
+Elapsed=12ms (12004311ns)
 ```
 
 Timed code with slow call detection:
@@ -595,11 +592,11 @@ Terminal output:
 ```terminaloutput
 // Normal call
 00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-Elapsed = 12ms (12004311ns)
+Elapsed=12ms (12004311ns)
 
 // Slow call
 00:00:00.000 [main] WARN dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-Elapsed = 1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
+Elapsed=1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
 ```
 
 > [!TIP]
@@ -616,11 +613,11 @@ Elapsed = 1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
 
 #### Log levels at a glance
 
-| Condition                          | Level   | Example                                                                                         |
-|------------------------------------|---------|-------------------------------------------------------------------------------------------------|
-| No threshold configured            | `DEBUG` | `TIMED \| getConnection \| Elapsed = 12ms (12004311ns)`                                         |
-| Threshold configured, not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed = 12ms (12004311ns)`                                         |
-| Threshold configured and exceeded  | `WARN`  | `TIMED \| getConnection \| Elapsed = 1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
+| Condition                          | Level   | Example                                                                                       |
+|------------------------------------|---------|-----------------------------------------------------------------------------------------------|
+| No threshold configured            | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured, not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured and exceeded  | `WARN`  | `TIMED \| getConnection \| Elapsed=1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
 
 `DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them, while
 automatic escalation to `WARN` on slow invocations surfaces problems without you having to go looking for them.
@@ -653,15 +650,15 @@ distribution, success/failure counts, and elapsed time across all iterations.
 
 | Method                                    | Returns                                                   |
 |-------------------------------------------|-----------------------------------------------------------|
+| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
 | `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
 | `getFailedIterations()`                   | Count of iterations that threw                            |
-| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
-| `hasFailures()`                           | `true` if any iteration threw                             |
-| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
 | `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
 | `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
 | `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
 | `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
+| `hasFailures()`                           | `true` if any iteration threw                             |
+| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
 
 ---
 

@@ -533,15 +533,15 @@ Last exception:Optional[java.lang.RuntimeException: Something went wrong]
 
 | Method                                    | Returns                                                   |
 |-------------------------------------------|-----------------------------------------------------------|
+| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
 | `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
 | `getFailedIterations()`                   | Count of iterations that threw                            |
-| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
-| `hasFailures()`                           | `true` if any iteration threw                             |
-| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
-| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
-| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
 | `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
 | `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
+| `hasFailures()`                           | `true` if any iteration threw                             |
+| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
 
 ---
 
@@ -615,11 +615,11 @@ Elapsed=1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
 
 #### Log levels at a glance
 
-| Condition                          | Level   | Example                                                                                       |
-|------------------------------------|---------|-----------------------------------------------------------------------------------------------|
-| No threshold configured            | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
-| Threshold configured, not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
-| Threshold configured and exceeded  | `WARN`  | `TIMED \| getConnection \| Elapsed=1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
+| Condition                             | Level   | Example                                                                                       |
+|---------------------------------------|---------|-----------------------------------------------------------------------------------------------|
+| No threshold configured               | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured but not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured and exceeded     | `WARN`  | `TIMED \| getConnection \| Elapsed=1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
 
 `DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them, while
 automatic escalation to `WARN` on slow invocations surfaces problems without you having to go looking for them.
@@ -655,10 +655,10 @@ distribution, success/failure counts, and elapsed time across all iterations.
 | `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
 | `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
 | `getFailedIterations()`                   | Count of iterations that threw                            |
-| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
-| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
 | `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
 | `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
 | `hasFailures()`                           | `true` if any iteration threw                             |
 | `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
 
@@ -911,8 +911,8 @@ timing does.
 
 > [!IMPORTANT]
 > **The resolution:** statistics (`LongSummaryStatistics` and all derived accessors) cover
-> **successful iterations only**. Failures are represented separately and explicitly via `hasFailures()`,
-> `getFailedIterations()`, and `getLastException()`.
+> **successful iterations only**. Failures are represented separately and explicitly via `getFailedIterations()`,
+> `hasFailures()`, and `getLastException()`.
 
 ---
 

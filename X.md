@@ -384,7 +384,7 @@ A method that returns **`void` without declaring** any checked exceptions:
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1_000, 5);
 
 System.out.println("Stats:" + stats);
-// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
@@ -401,7 +401,7 @@ A method that returns a **value without declaring** any checked exceptions:
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1_000, 5);
 
 System.out.println("Stats:" + stats);
-// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
@@ -418,7 +418,7 @@ A method that returns **`void` and declares** a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1_000, 5);
 
 System.out.println("Stats:" + stats);
-// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
@@ -435,7 +435,7 @@ A method that returns a **value and declares** a checked exception:
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
 
 System.out.println("Stats:" + stats);
-// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
 ```
 
 Terminal output:
@@ -452,7 +452,7 @@ Failed iterations details are captured and surfaced via `hasFailures()` and `get
 final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
 
 System.out.println("Stats:" + stats);
-// System.out.println("Result:" + stats.getResult()); // does not compile — no getResult() on TimingStatistics
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
 
 if (stats.hasFailures()) {
     stats.getLastException()

@@ -466,7 +466,7 @@ Terminal output:
 ```terminaloutput
 Stats:TimingStatistics[totalIterations=1000, successfulIterations=957, failedIterations=43, totalMillis=5322ms,
 averageMillis=5.561ms, minMillis=5ms, maxMillis=6ms,
-Last exception = org.postgresql.util.PSQLException: The connection attempt failed]
+lastException=org.postgresql.util.PSQLException: The connection attempt failed]
 
 43 of 1000 iterations failed. Last exception:org.postgresql.util.PSQLException: The connection attempt failed
 ```

@@ -123,11 +123,11 @@ These principles were established early in the design phase and applied across e
 
 ## Tech Stack & Prerequisites
 
-| Requirement           | Details                                                                                                                                                      |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Java**              | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc.                                                         |
-| **SLF4J API**         | Required at compile time for `TimingLogger` only. Works with whatever SLF4J binding you already use (Logback, Log4j2, etc.) — no changes needed on your end. |
-| **Test dependencies** | JUnit 5+, Mockito — test scope only, not required by consumers.                                                                                              |
+| Requirement         | Details                                                                                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Java**            | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc.                                                         |
+| **SLF4J API**       | Required at compile time for `TimingLogger` only. Works with whatever SLF4J binding you already use (Logback, Log4j2, etc.) — no changes needed on your end. |
+| **JUnit / Mockito** | 6+ / 5+ — test scope only, not required by consumers.                                                                                                        |
 
 > [!NOTE]
 > `StopWatch` and its supporting types (`CheckedRunnable`, `CheckedSupplier`, `TimedResult`, `TimingStatistics`) are

@@ -171,13 +171,17 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
+final User              result      = timedResult.getResult();
+
 System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
 ```
 
 Terminal output:
 
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=24ms, elapsedNanos=24568257ns]
+Result:User[id=101, name=John Doe]
 ```
 
 Measure a method repeatedly and return the aggregated statistics across all iterations:
@@ -185,6 +189,7 @@ Measure a method repeatedly and return the aggregated statistics across all iter
 ```java
 // Repeated measurement during a serious performance investigation
 final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
+
 System.out.println("Stats:" + stats);
 ```
 
@@ -276,7 +281,6 @@ A method that returns **`void` without declaring** any checked exceptions:
 // Returns void, no checked exception
 final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
 final Void result                   = timedResult.getResult();
-final long elapsedMillis            = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
@@ -295,7 +299,6 @@ A method that returns a **value without declaring** any checked exceptions:
 // Returns a value, no checked exception
 final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
 final User result                   = timedResult.getResult();
-final long elapsedMillis            = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
@@ -314,7 +317,6 @@ A method that returns **`void` and declares** a checked exception:
 // Return void, declares a checked exception
 final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
 final Void result                   = timedResult.getResult();
-final long elapsedMillis            = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
@@ -333,7 +335,6 @@ A method that returns a **value and declares** a checked exception:
 // Returns a value, declares a checked exception
 final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
 final Connection result                   = timedResult.getResult();
-final long elapsedMillis                  = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);

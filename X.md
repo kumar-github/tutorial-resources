@@ -67,11 +67,6 @@ there.
 | **Lifecycle** | Stateless static utility                                                        | Per-invocation `AutoCloseable` resource                     |
 | **Lives**     | In a test, a debugger session, a benchmark harness                              | In the production code, inside any method body, **forever** |
 
-|                | **Use case**                                                                    | **Lives**                               | **Lives**                                                   |
-|----------------|---------------------------------------------------------------------------------|-----------------------------------------|-------------------------------------------------------------|
-| `StopWatch`    | Situational, deliberate measurement — benchmarking, investigations, comparisons | Stateless static utility                | In a test, a debugger session, a benchmark harness          |
-| `TimingLogger` | Permanent, ambient measurement embedded in production code                      | Per-invocation `AutoCloseable` resource | In the production code, inside any method body, **forever** |
-
 </div>
 
 > [!IMPORTANT]

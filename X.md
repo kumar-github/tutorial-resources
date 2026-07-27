@@ -507,6 +507,7 @@ If an invocation throws:
 ```java
 // Even if all 1000 invocations fail — still returns a valid result, never throws
 TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1_000, 0);
+
 System.out.println("Stats:" + stats);
 System.out.println("Total iterations:" + stats.getTotalIterations());
 System.out.println("Successful iterations:" + stats.getSuccessfulIterations());
@@ -520,7 +521,6 @@ Terminal output:
 ```terminaloutput
 Stats:TimingStatistics[totalIterations=1000, successfulIterations=0, failedIterations=1000, totalMillis=0ms,
 averageMillis=0.000ms, minMillis=0ms, maxMillis=0ms, lastException=java.lang.RuntimeException: Something went wrong]
-
 Total iterations:1000
 Successful iterations:0
 Failed iterations:1000

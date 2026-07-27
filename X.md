@@ -616,11 +616,11 @@ Elapsed = 1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
 
 #### Log levels at a glance
 
-| Condition                          | Level   | Example |
-|------------------------------------|---------|---------|
-| No threshold configured            | `DEBUG` | `TIMED  | getConnection \| Elapsed = 12ms (12004311ns)`            |
-| Threshold configured, not exceeded | `DEBUG` | `TIMED  | getConnection \| Elapsed = 12ms (12004311ns)`            |
-| Threshold configured and exceeded  | `WARN`  | `TIMED  | getConnection \| Elapsed = 1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
+| Condition                          | Level   | Example                                                                                         |
+|------------------------------------|---------|-------------------------------------------------------------------------------------------------|
+| No threshold configured            | `DEBUG` | `TIMED \| getConnection \| Elapsed = 12ms (12004311ns)`                                         |
+| Threshold configured, not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed = 12ms (12004311ns)`                                         |
+| Threshold configured and exceeded  | `WARN`  | `TIMED \| getConnection \| Elapsed = 1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
 
 `DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them, while
 automatic escalation to `WARN` on slow invocations surfaces problems without you having to go looking for them.

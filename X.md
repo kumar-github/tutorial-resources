@@ -1030,15 +1030,15 @@ been discussed or being discussed, but not yet promised.
 
 Committed next steps, in order:
 
-1. Global default slow threshold for `TimingLogger` — `TimingLogger.setDefaultSlowThreshold(millis)` configures a shared
-   threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
-   `start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
-   exceptions.
+○ Global default slow threshold for `TimingLogger` — `TimingLogger.setDefaultSlowThreshold(millis)` configures a shared
+threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
+`start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
+exceptions.
 
-2. Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`, accepting paired
-   `Candidate` (label + method) inputs.
+○ Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`, accepting paired
+`Candidate` (label + method) inputs.
 
-3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
+○ Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
 ### □ Future Considerations
 

@@ -1025,18 +1025,18 @@ Committed next steps, in order:
 
 3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
-### ◇ Future Considerations
+### □ Future Considerations
 
 Ideas raised during design discussions, not yet committed to. Some may be implemented, refined, or set aside as the
 library matures:
 
-◇ **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics
+□ **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics
 platforms, structured logging, MDC) without coupling the library to a JSON dependency
 
-◇ **MDC integration for `TimingLogger`** — attaching elapsed time to the logging context rather than (or in addition to)
+□ **MDC integration for `TimingLogger`** — attaching elapsed time to the logging context rather than (or in addition to)
 a log line; depends on the consuming application's log-aggregation stack
 
-◇ **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
+□ **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
 `TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
 
 #### ✗ Considered and rejected

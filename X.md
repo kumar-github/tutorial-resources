@@ -977,7 +977,7 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 ## ✓ Best Practices
 
 ✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live permanently
-in production hot paths — use `TimingLogger` for those use cases.
+in production hot paths, use `TimingLogger` for those use cases.
 
 ✓ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
 prevent JIT warm-up from dominating your results, especially for short-running methods.

@@ -678,7 +678,7 @@ the compiler.
 > forces you to wrap every checked-exception-throwing lambda in an artificial try/catch cluttering your code with
 > boilerplate. These variants remove that friction.
 
-Without `CheckedRunnable` — forced wrapping, and the original type is lost
+Without `CheckedRunnable` — forced ugly wrapping, and the original type is lost
 
 ```java
 Runnable r = () -> {
@@ -698,7 +698,7 @@ With `CheckedRunnable` — clean, direct, and original type preserved
 CheckedRunnable r = () -> dbUtils.closeConnection();
 ```
 
-Without `CheckedSupplier` — forced wrapping, and the original type is lost
+Without `CheckedSupplier` — forced ugly wrapping, and the original type is lost
 
 ```java
 Supplier<Connection> s = () -> {
@@ -779,7 +779,7 @@ single time they write a lambda with no checked exception. That's friction nobod
 call a timing method. Splitting them into two explicitly named methods removes the ambiguity entirely and makes the
 exception-handling expectation visible at the call site, without the caller needing to know *why*.
 
-The Solution:
+The solution:
 
 ```java
 // plain lambda, no ceremony
@@ -835,7 +835,7 @@ StopWatch.measure((Supplier<User>) () -> userService.getUserById(101));
 
 As explained earlier, the above workarounds are too much friction.
 
-The Solution:
+The solution:
 
 ```java
 // plain lambda, no ceremony
@@ -1015,11 +1015,15 @@ been discussed or being discussed, but not yet promised.
 
 Committed next steps, in order:
 
-1. Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`
+1. Global default slow threshold for `TimingLogger` — `TimingLogger.setDefaultSlowThreshold(millis)` configures a shared
+   threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
+   `start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
+   exceptions.
 
-2. `Candidate` based comparison API — replaces the six-argument `compare` signature with a paired label-and-method input
+2. Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`, accepting paired
+   `Candidate` (label + method) inputs.
 
-3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`
+3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
 ### 🌟 Future Considerations
 

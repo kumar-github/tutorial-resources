@@ -1063,9 +1063,9 @@ library matures:
 - **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
   `TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
 
-#### ✗ ✕ Considered and rejected
+#### ✗ Considered and rejected
 
-- **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
+✕ **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
   Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,
   contradicting the "no side effects, no restructuring required" principle that both `StopWatch` and `TimingLogger` are
   built on.

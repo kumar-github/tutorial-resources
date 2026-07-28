@@ -983,6 +983,30 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 ---
 
+## ✓ Best Practices
+
+- ✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
+  permanently in production hot paths — use `TimingLogger` for those use cases.
+
+- ✓ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
+  prevent JIT warm-up from dominating your results, especially for short-running methods.
+
+- ✓ **Inspect failures, don't catch them.** Even though the method you pass in may throw, `measureRepeatedly` and
+  `measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
+  `hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
+  unreachable dead code.
+
+- ✓ **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
+  other log output — never share a single logger across unrelated classes.
+
+- ✓ **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold
+  that never fires provides no value. Tune it against your actual latency expectations.
+
+- ✓ **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
+  under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
+
+---
+
 ## Testing Philosophy
 
 Tests are organized by method variant (`measure`, `measureChecked`, `measureRepeatedly`, `measureRepeatedlyChecked`)
@@ -1001,7 +1025,7 @@ This project grows feature by feature — each one fully discussed and designed 
 that: a flat list of what exists, an ordered list of what's committed to next, and an open-ended list of ideas that have
 been discussed or being discussed, but not yet promised.
 
-### ✅ Implemented
+### ✓ Implemented
 
 - Single measurement — `measure`, `measureChecked`
 
@@ -1039,7 +1063,7 @@ library matures:
 - **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
   `TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
 
-#### ❌ Considered and rejected
+#### ✗ Considered and rejected
 
 - **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
   Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,

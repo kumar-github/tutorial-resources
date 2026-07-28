@@ -959,51 +959,27 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 
 ---
 
-## ✅ Best Practices
-
-- ✅ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
-  permanently in production hot paths — use `TimingLogger` for those use cases.
-
-- ✅ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
-  prevent JIT warm-up from dominating your results, especially for short-running methods.
-
-- ✅ **Inspect failures, don't catch them.** Even though the method you pass in may throw, `measureRepeatedly` and
-  `measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
-  `hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
-  unreachable dead code.
-
-- ✅ **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
-  other log output — never share a single logger across unrelated classes.
-
-- ✅ **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold
-  that never fires provides no value. Tune it against your actual latency expectations.
-
-- ✅ **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
-  under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
-
----
-
 ## ✓ Best Practices
 
-✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live
-  permanently in production hot paths — use `TimingLogger` for those use cases.
+✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live permanently
+in production hot paths — use `TimingLogger` for those use cases.
 
 ✓ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
-  prevent JIT warm-up from dominating your results, especially for short-running methods.
+prevent JIT warm-up from dominating your results, especially for short-running methods.
 
 ✓ **Inspect failures, don't catch them.** Even though the method you pass in may throw, `measureRepeatedly` and
-  `measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
-  `hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
-  unreachable dead code.
+`measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
+`hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
+unreachable dead code.
 
 ✓ **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
-  other log output — never share a single logger across unrelated classes.
+other log output — never share a single logger across unrelated classes.
 
-✓ **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold
-  that never fires provides no value. Tune it against your actual latency expectations.
+✓ **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold that
+never fires provides no value. Tune it against your actual latency expectations.
 
 ✓ **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
-  under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
+under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
 
 ---
 
@@ -1027,15 +1003,15 @@ been discussed or being discussed, but not yet promised.
 
 ### ✓ Implemented
 
-- Single measurement — `measure`, `measureChecked`
+✓ Single measurement — `measure`, `measureChecked`
 
-- Repeated measurement — `measureRepeatedly`, `measureRepeatedlyChecked`
+✓ Repeated measurement — `measureRepeatedly`, `measureRepeatedlyChecked`
 
-- Failure tracking — `hasFailures()`, `getLastException()`
+✓ Failure tracking — `hasFailures()`, `getLastException()`
 
-- Ambient production timing — `TimingLogger`
+✓ Ambient production timing — `TimingLogger`
 
-### 🚀 Roadmap
+### ○ Roadmap
 
 Committed next steps, in order:
 
@@ -1049,26 +1025,26 @@ Committed next steps, in order:
 
 3. Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
-### 🌟 Future Considerations
+### ◇ Future Considerations
 
 Ideas raised during design discussions, not yet committed to. Some may be implemented, refined, or set aside as the
 library matures:
 
-- **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics
-  platforms, structured logging, MDC) without coupling the library to a JSON dependency
+◇ **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics
+platforms, structured logging, MDC) without coupling the library to a JSON dependency
 
-- **MDC integration for `TimingLogger`** — attaching elapsed time to the logging context rather than (or in addition to)
-  a log line; depends on the consuming application's log-aggregation stack
+◇ **MDC integration for `TimingLogger`** — attaching elapsed time to the logging context rather than (or in addition to)
+a log line; depends on the consuming application's log-aggregation stack
 
-- **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
-  `TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
+◇ **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
+`TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
 
 #### ✗ Considered and rejected
 
-✕ **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
-  Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,
-  contradicting the "no side effects, no restructuring required" principle that both `StopWatch` and `TimingLogger` are
-  built on.
+✗ **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
+Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,
+contradicting the "no side effects, no restructuring required" principle that both `StopWatch` and `TimingLogger` are
+built on.
 
 ---
 

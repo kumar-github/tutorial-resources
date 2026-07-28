@@ -170,11 +170,13 @@ Measure a method once and return the result:
 
 ```java
 // One-off measurement during an investigation
-final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-final User              result      = timedResult.getResult();
+final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+final User              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
 Terminal output:
@@ -182,6 +184,7 @@ Terminal output:
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=24ms, elapsedNanos=24568257ns]
 Result:User[id=101, name=John Doe]
+ElapsedMillis:24
 ```
 
 Measure a method repeatedly and return the aggregated statistics across all iterations:
@@ -279,11 +282,13 @@ A method that returns **`void` without declaring** any checked exceptions:
 
 ```java
 // Returns void, no checked exception
-final TimedResult<Void> timedResult = StopWatch.measure(() -> eventPublisher.publishEvent());
-final Void result                   = timedResult.getResult();
+final TimedResult<Void> timedResult   = StopWatch.measure(() -> eventPublisher.publishEvent());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
 Terminal output:
@@ -291,17 +296,20 @@ Terminal output:
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=3ms, elapsedNanos=3033608ns]
 Result:null
+ElapsedMillis:3
 ```
 
 A method that returns a **value without declaring** any checked exceptions:
 
 ```java
 // Returns a value, no checked exception
-final TimedResult<User> timedResult = StopWatch.measure(() -> userService.getUserById(101));
-final User result                   = timedResult.getResult();
+final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+final User              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
 Terminal output:
@@ -309,17 +317,20 @@ Terminal output:
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=78ms, elapsedNanos=78284284ns]
 Result:User[id=101, name=John Doe]
+ElapsedMillis:78
 ```
 
 A method that returns **`void` and declares** a checked exception:
 
 ```java
 // Return void, declares a checked exception
-final TimedResult<Void> timedResult = StopWatch.measureChecked(() -> dbUtils.closeConnection());
-final Void result                   = timedResult.getResult();
+final TimedResult<Void> timedResult   = StopWatch.measureChecked(() -> dbUtils.closeConnection());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
 Terminal output:
@@ -327,17 +338,20 @@ Terminal output:
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=6ms, elapsedNanos=6338845ns]
 Result:null
+ElapsedMillis:6
 ```
 
 A method that returns a **value and declares** a checked exception:
 
 ```java
 // Returns a value, declares a checked exception
-final TimedResult<Connection> timedResult = StopWatch.measureChecked(() -> dbUtils.getConnection());
-final Connection result                   = timedResult.getResult();
+final TimedResult<Connection> timedResult   = StopWatch.measureChecked(() -> dbUtils.getConnection());
+final Connection              result        = timedResult.getResult();
+final long                    elapsedMillis = timedResult.getElapsedMillis();
 
 System.out.println("TimedResult:" + timedResult);
 System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
 Terminal output:
@@ -345,6 +359,7 @@ Terminal output:
 ```terminaloutput
 TimedResult:TimedResult[elapsedMillis=11ms, elapsedNanos=11797399ns]
 Result:org.postgresql.jdbc.PgConnection@5e9f23b4
+ElapsedMillis:11
 ```
 
 #### `TimedResult<T>` accessors
@@ -962,7 +977,7 @@ the no-threshold overload `start(label, logger)`. Validation rejects only **nega
 ## ✓ Best Practices
 
 ✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live permanently
-in production hot paths, use `TimingLogger` for those use cases.
+in production hot paths — use `TimingLogger` for those use cases.
 
 ✓ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
 prevent JIT warm-up from dominating your results, especially for short-running methods.
@@ -1038,6 +1053,12 @@ a log line; depends on the consuming application's log-aggregation stack
 
 □ **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
 `TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
+
+□ **Opt-in `TRACE`-level internal logging** — visibility into per-iteration progress during long `measureRepeatedly`
+runs (currently only the final aggregated `TimingStatistics` is observable). Silent by default, matching
+`TimingLogger`'s own **invisible until configured** philosophy. For `StopWatch` specifically, this would require
+resolving a real conflict with its documented **zero-dependency** guarantee — either accepting that trade-off or finding
+a dependency-free mechanism (e.g. a pluggable callback) instead of SLF4J directly
 
 ### ✗ Considered and rejected
 

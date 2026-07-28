@@ -1035,8 +1035,8 @@ threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into
 `start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
 exceptions.
 
-○ Head-to-head comparison — `compare`, `compareChecked` methods returning a `ComparisonResult`, accepting paired
-`Candidate` (label + method) inputs.
+○ Head-to-head comparison — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
+inputs and return a `ComparisonResult`.
 
 ○ Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 

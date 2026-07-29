@@ -1028,21 +1028,21 @@ been discussed or being discussed, but not yet promised.
 
 ### ○ Roadmap
 
-Committed next steps, in order:
+Committed next steps:
 
 ① Global default slow threshold for `TimingLogger` — `TimingLogger.setDefaultSlowThreshold(millis)` configures a shared
-   threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
-   `start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
-   exceptions.
+threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
+`start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
+exceptions.
 
 ② Head-to-head comparison — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
-   inputs and return a `ComparisonResult`
+inputs and return a `ComparisonResult`
 
 ③ Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
 ### □ Future Considerations
 
-Ideas raised during design discussions, not yet committed to. Some may be implemented, refined, or set aside as the
+Ideas raised during design discussions but not yet committed to. Some may be implemented, refined, or set aside as the
 library matures:
 
 □ **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics

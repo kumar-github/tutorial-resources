@@ -1038,7 +1038,7 @@ Committed next steps, in order:
 ② Head-to-head comparison — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
    inputs and return a `ComparisonResult`
 
-② Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
+③ Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
 ### □ Future Considerations
 

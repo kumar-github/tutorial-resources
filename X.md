@@ -1018,27 +1018,27 @@ been discussed or being discussed, but not yet promised.
 
 ### ✓ Implemented
 
-✓ Single measurement — `measure`, `measureChecked`
+✓ **Single measurement** — `measure`, `measureChecked`
 
-✓ Repeated measurement — `measureRepeatedly`, `measureRepeatedlyChecked`
+✓ **Repeated measurement** — `measureRepeatedly`, `measureRepeatedlyChecked`
 
-✓ Failure tracking — `hasFailures()`, `getLastException()`
+✓ **Failure tracking** — `hasFailures()`, `getLastException()`
 
-✓ Ambient production timing — `TimingLogger`
+✓ **Ambient production timing** — `TimingLogger`
 
 ### ○ Roadmap
 
 Committed next steps:
 
-① Global default slow threshold for `TimingLogger` — `TimingLogger.setDefaultSlowThreshold(millis)` configures a shared
-threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
+① **Global default slow threshold for `TimingLogger`** — `TimingLogger.setDefaultSlowThreshold(millis)` configures a
+shared threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
 `start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
 exceptions.
 
-② Head-to-head comparison — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
-inputs and return a `ComparisonResult`
+② **Head-to-head comparison** — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
+inputs and return a `ComparisonResult`.
 
-③ Percentile statistics — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
+③ **Percentile statistics** — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
 
 ### □ Future Considerations
 

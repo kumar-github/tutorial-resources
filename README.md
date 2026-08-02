@@ -200,8 +200,8 @@ System.out.println("Stats:" + stats);
 Terminal output:
 
 ```terminaloutput
-Stats:TimingStatistics[totalIterations=20, successfulIterations=20, failedIterations=0, totalMillis=142ms,
-averageMillis=7.120ms, minMillis=2ms, maxMillis=13ms]
+Stats:TimingStatistics[totalIterations=20, successfulIterations=20, failedIterations=0,
+totalMillis=142ms, averageMillis=7.120ms, minMillis=2ms, maxMillis=13ms]
 ```
 
 Measure a method permanently in production and log the result automatically:

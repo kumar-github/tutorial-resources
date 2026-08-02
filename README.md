@@ -171,6 +171,7 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+
 final User              result        = timedResult.getResult();
 final long              elapsedMillis = timedResult.getElapsedMillis();
 

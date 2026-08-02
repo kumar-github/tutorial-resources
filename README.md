@@ -1,1341 +1,1076 @@
-# Spring Boot Actuator Demo
-> **Every day is a learning day.**
+<div align="center">
 
-This project will walk you through a simple demo of Spring Boot Actuator. It will help you in understanding **Spring Boot Actuator** module step by step. Each concept is covered in-depth and organized as individual git commits. The commits are numbered sequentially starting from `00`, `01`, `02` and so on. As you go through it, take the time to understand the changes each step makes to the code. You can clone the entire project to your local machine and then start applying the commits one by one starting from `00`. This `README.md` file will be updated in every commit and will tell you what has been covered in the specific commit.
+# ⏱️ timing-utils - A Java Timing Utility Library ⏱️
 
-<br/>
+**A focused, lightweight, minimal-external-dependency Java library for measuring method execution time for deliberate
+performance investigations *and* permanent production logging.**
 
----
+![Java](https://img.shields.io/badge/Java-21%2B-lightgrey?style=social)
+![Dependencies](https://img.shields.io/badge/dependencies-SLF4J_only-lightgrey?style=social)
+![Status](https://img.shields.io/badge/status-Active_development-lightgrey?style=social)
+[![GitHub License](https://img.shields.io/github/license/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/blob/main/LICENSE)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dev-badprogrammer/timing-utils?style=social)
+](https://github.com/dev-badprogrammer/timing-utils/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/commits/main)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/dev-badprogrammer_timing-utils?server=https%3A%2F%2Fsonarcloud.io&style=social)](https://sonarcloud.io/summary/overall?id=dev-badprogrammer_timing-utils)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/dev-badprogrammer/timing-utils/ci-build-and-test.yml?style=social)](https://github.com/dev-badprogrammer/timing-utils/actions/workflows/ci-build-and-test.yml)
+[![GitHub Release Date](https://img.shields.io/github/release-date/dev-badprogrammer/timing-utils?style=social)](https://github.com/dev-badprogrammer/timing-utils/releases)
+[![Maven Central Version](https://img.shields.io/maven-central/v/dev.badprogrammer/timing-utils?style=social)](https://central.sonatype.com/artifact/dev.badprogrammer/timing-utils)
 
----
+Package: `dev.badprogrammer.timing`
 
----
+</div>
 
-<br/>
+<br>
 
-Table Of Contents
-=================
+## Table of Contents
 
-* [Spring Boot Actuator Demo](#spring-boot-actuator-demo)
-  * [Few things about Spring Boot Actuator](#few-things-about-spring-boot-actuator)
-  * [Complete Reference](#complete-reference)
-  * [Requirements](#requirements)
-  * [Run Locally](#run-locally)
-  * [Commit-00 :sparkles:](#commit-00-sparkles)
-    * [Project Creation](#project-creation)
-    * [Start the Project and Observe the Console Log](#start-the-project-and-observe-the-console-log)
-    * [Talk About Accessing Endpoints Over HTTP and JMX](#talk-about-accessing-endpoints-over-http-and-jmx)
-  * [Commit-01 :sparkles:](#commit-01-sparkles)
-    * [Customizing JMX Domain](#customizing-jmx-domain)
-    * [Customizing the Management Server Port](#customizing-the-management-server-port)
-    * [Customizing the Management Server Base Path](#customizing-the-management-server-base-path)
-    * [Customizing the Web Endpoints Base Path](#customizing-the-web-endpoints-base-path)
-  * [Commit-02 :sparkles:](#commit-02-sparkles)
-    * [Enabling All Endpoints](#enabling-all-endpoints)
-    * [Enabling Individual Endpoints](#enabling-individual-endpoints)
-    * [Quick note about Spring's Auto Configuration.](#quick-note-about-springs-auto-configuration)
-    * [Disabling All Endpoints](#disabling-all-endpoints)
-    * [Disabling Individual Endpoints](#disabling-individual-endpoints)
-  * [Commit-03 :sparkles:](#commit-03-sparkles)
-    * [Removed All the Previous Configs](#removed-all-the-previous-configs)
-  * [Commit-04 :sparkles:](#commit-04-sparkles)
-    * [Exposing JMX Endpoints](#exposing-jmx-endpoints)
-    * [Hiding All JMX Endpoints](#hiding-all-jmx-endpoints)
-    * [Hiding Individual JMX Endpoints](#hiding-individual-jmx-endpoints)
-    * [Exposing HTTP Endpoints](#exposing-http-endpoints)
-    * [Exposing All HTTP Endpoints](#exposing-all-http-endpoints)
-    * [Exposing Individual HTTP Endpoints](#exposing-individual-http-endpoints)
-    * [Hiding All HTTP Endpoints](#hiding-all-http-endpoints)
-    * [Hiding Individual HTTP Endpoints](#hiding-individual-http-endpoints)
-  * [Commit-05 :sparkles:](#commit-05-sparkles)
-    * [Reverted All the Previous Configs](#reverted-all-the-previous-configs)
-  * [Commit-06 :sparkles:](#commit-06-sparkles)
-    * [The Info Endpoint](#the-info-endpoint)
-    * [The Built-In Info Contributors](#the-built-in-info-contributors)
-    * [Exposing the info Endpoint](#exposing-the-info-endpoint)
-    * [Enabling Individual Endpoints Under Info Endpoint](#enabling-individual-endpoints-under-info-endpoint)
-    * [Adding Information to the env Endpoint](#adding-information-to-the-env-endpoint)
-    * [Writing Custom InfoContributors](#writing-custom-infocontributors)
-  * [Commit-07 :sparkles:](#commit-07-sparkles)
-    * [The Health Endpoint](#the-health-endpoint)
-    * [Show Full Health Details](#show-full-health-details)
-    * [Auto Configured HealthIndicators](#auto-configured-healthindicators)
-    * [Writing Custom HealthIndicators](#writing-custom-healthindicators)
-  * [Commit-08 :sparkles:](#commit-08-sparkles)
-    * [The Shutdown Endpoint](#the-shutdown-endpoint)
-    * [Enabling The Shutdown Endpoint](#enabling-the-shutdown-endpoint)
-    * [Exposing The Shutdown Endpoint Over JMX](#exposing-the-shutdown-endpoint-over-jmx)
-    * [Exposing The Shutdown Endpoint Over HTTP](#exposing-the-shutdown-endpoint-over-http)
-  * [Commit-09 :sparkles:](#commit-09-sparkles)
-    * [Implementing Custom Endpoints](#implementing-custom-endpoints)
-    * [Receiving Input](#receiving-input)
-    * [Sample Custom Web Endpoint](#sample-custom-web-endpoint)
-    * [Web Endpoint Response Status](#web-endpoint-response-status)
-  * [Commit-10 :sparkles:](#commit-10-sparkles)
-    * [Securing The Management Endpoints](#securing-the-management-endpoints)
-    * [Bringing In Spring Boot Security Dependency](#bringing-in-spring-boot-security-dependency)
-    * [Full Health Details With Authorization](#full-health-details-with-authorization)
-
-<br/>
+- [Overview](#overview)
+- [Why This Library Exists](#why-this-library-exists)
+- [Design Philosophy](#design-philosophy)
+- [Tech Stack & Prerequisites](#tech-stack--prerequisites)
+- [Getting Started](#getting-started)
+- [Development Setup](#development-setup)
+- [Package Structure](#package-structure)
+- [Features](#features)
+    - [Single Measurement — `measure` / `measureChecked`](#single-measurement--measure--measurechecked)
+    - [Repeated Measurement — `measureRepeatedly` /
+      `measureRepeatedlyChecked`](#repeated-measurement--measurerepeatedly--measurerepeatedlychecked)
+    - [Ambient Production Timing — `TimingLogger`](#ambient-production-timing--timinglogger)
+    - [Supporting Types — `TimedResult` / `TimingStatistics`](#supporting-types)
+    - [Supporting Functional Interfaces — `CheckedRunnable` / `CheckedSupplier`](#supporting-functional-interfaces)
+- [Design Decisions & Their Reasoning](#design-decisions--their-reasoning)
+- [Best Practices](#-best-practices)
+- [Testing Philosophy](#testing-philosophy)
+- [Implementation Status & Roadmap](#implementation-status--roadmap)
 
 ---
 
----
+## Overview
+
+This library is simple and answers **one** question, asked in two very different contexts:
+
+> ### "How long did that take?"
+
+Sometimes you ask this **once, deliberately** — while investigating a performance issue, writing a benchmark, or
+comparing two implementations during development. Sometimes it is **not just once**, but you want the answer **always,
+silently** — a permanent fixture in production code that logs elapsed time without anyone having to remember it's even
+there.
+
+`timing-utils` solves both problems by providing one class for each context:
+
+<div align="center">
+
+|               | `StopWatch`                                                                     | `TimingLogger`                                              |
+|---------------|---------------------------------------------------------------------------------|-------------------------------------------------------------|
+| **Use case**  | Situational, deliberate measurement — benchmarking, investigations, comparisons | Permanent, ambient measurement embedded in production code  |
+| **Lifecycle** | Stateless static utility                                                        | Per-invocation `AutoCloseable` resource                     |
+| **Lives**     | In a test, a debugger session, a benchmark harness                              | In the production code, inside any method body, **forever** |
+
+</div>
+
+> [!IMPORTANT]
+> Both `StopWatch` and `TimingLogger` are built around the same core idea — **measure in nanoseconds, report in
+> milliseconds** — but deliberately take different shapes to solve different problems.
 
 ---
 
-<br/>
+## Why This Library Exists
 
-## Few things about Spring Boot Actuator
+Most Java codebases accumulate timing code in one of two unsatisfying forms:
 
-*Spring Boot Actuator* module helps you monitor and manage and interact with your application. You can choose to manage and monitor your application using **HTTP** endpoints or with **JMX**. Spring Boot includes a number of built-in endpoints and lets you add your own.
+- Scattered `System.nanoTime()` pairs with manual subtraction, duplicated across the codebase, straightforward to
+  implement, also easy to get subtly wrong — forgetting unit conversions, measuring the wrong scope, or leaking timing
+  code into business logic.
 
-You can *enable* or *disable* each individual endpoint and *expose* them (make them remotely accessible) over **HTTP** or **JMX**. An endpoint is considered to be *available* when it is both *enabled* and *exposed*. The built-in endpoints are auto configured only when they are available. Most applications choose exposure over HTTP, where the `ID` of the endpoint and a prefix of `/actuator` is mapped to a URL.
-For example, by default, the health endpoint is mapped to `/actuator/health`.
+- Ad-hoc `try { ... } finally { logger.debug("took {}ms", ...) }` blocks that vary in format from method to method,
+  making logs hard to search or aggregate.
 
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Complete Reference
-
-[Spring Boot Actuator Reference](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
-
-<br/>
+`timing-utils` exists to make both of these **boring** — a single, **non-invasive**, well-tested, consistent way to
+answer *"How long did that take?"*, whether the answer is needed once during an investigation or every time, forever, in
+production.
 
 ---
 
----
+## Design Philosophy
+
+These principles were established early in the design phase and applied across every class in the library:
+
+- **No side effects.** Neither `StopWatch` nor `TimingLogger` retries, caches, modifies, or intercepts the measured
+  method in any way. Any side effect you observe is the method's own.
+
+- **Measure in nanos, report in millis.** `System.nanoTime()` is used internally for maximum precision. Millisecond
+  conversions happen only at the point of retrieval — via `TimeUnit.NANOSECONDS.toMillis()` — so no rounding error
+  accumulates during aggregation.
+
+- **Always return, never throw (for repeated measurement).** `measureRepeatedly()` and `measureRepeatedlyChecked()`
+  always return a result, even if any or every iteration fails. Failure information is **captured** and **surfaced** for
+  inspection — **never rethrown**.
+
+- **Statistics cover successful iterations only.** A failed iteration's elapsed time is meaningless on its own. Failed
+  iteration timings are discarded entirely — there's no meaningful way to compare or average them against each other; an
+  instant validation failure and a 30-second timeout failure are both **failures**, but their durations mean completely
+  different things. Failures are represented by a count and the last exception instead — which already conveys more than
+  any timing data could.
+
+- **The right tool has the right shape.** `StopWatch` is a stateless static utility — every method receives everything
+  it needs as parameters and returns everything it produces as a value, so no instance is needed. `TimingLogger` is an
+  `AutoCloseable` instance because it must capture `startNanos` at `start()` and use it in `close()`, potentially much
+  later — that single `long` is the state that must survive across the `try` block's lifetime. Neither is forced into
+  the other's shape for the sake of consistency.
 
 ---
 
-<br/>
+## Tech Stack & Prerequisites
 
-## Requirements
+| Requirement         | Details                                                                                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Java**            | 21+ — uses `var`, `String.formatted()`, `java.util.Optional`, `java.util.LongSummaryStatistics` etc.                                                         |
+| **SLF4J API**       | Required at compile time for `TimingLogger` only. Works with whatever SLF4J binding you already use (Logback, Log4j2, etc.) — no changes needed on your end. |
+| **JUnit / Mockito** | 6+ / 5+ — test scope only, not required by consumers.                                                                                                        |
 
-* OpenJDK 17+
-* Apache Maven 3.9.4+
-
-<br/>
+> [!NOTE]
+> `StopWatch` and its supporting types (`CheckedRunnable`, `CheckedSupplier`, `TimedResult`, `TimingStatistics`) are
+> **pure Java with zero dependencies**.
 
 ---
 
----
+## Getting Started
 
----
+### Adding `timing-utils` to Your Project
 
-<br/>
+**Option 1 — Maven Central**
 
-## Run Locally
+Add the below Maven coordinates to your `pom.xml`, replacing `LATEST_VERSION` with the version shown on
+[Maven Central](https://central.sonatype.com/artifact/dev.badprogrammer/timing-utils):
 
-Clone the project
+```xml
+<dependency>
+  <groupId>dev.badprogrammer</groupId>
+  <artifactId>timing-utils</artifactId>
+  <version>LATEST_VERSION</version>
+</dependency>
+```
+
+**Option 2 — Build from source**
+
+Clone the repository and install it to your local Maven repository:
 
 ```bash
-git clone https://github.com/kumar-github/spring-boot-actuator-demo
+git clone https://github.com/dev-badprogrammer/timing-utils.git
+
+cd timing-utils
+
+mvn clean install
 ```
 
-Go to the project root directory
+**A minimal taste of both classes.**
+
+Measure a method once and return the result:
+
+```java
+// One-off measurement during an investigation
+final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+final User              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
+```
+
+Terminal output:
+
+```terminaloutput
+TimedResult:TimedResult[elapsedMillis=24ms, elapsedNanos=24568257ns]
+Result:User[id=101, name=John Doe]
+ElapsedMillis:24
+```
+
+Measure a method repeatedly and return the aggregated statistics across all iterations:
+
+```java
+// Repeated measurement during a serious performance investigation
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 20, 3);
+
+System.out.println("Stats:" + stats);
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=20, successfulIterations=20, failedIterations=0, totalMillis=142ms,
+averageMillis=7.120ms, minMillis=2ms, maxMillis=13ms]
+```
+
+Measure a method permanently in production and log the result automatically:
+
+```java
+// Permanent production timing
+public Connection getConnection() throws SQLException {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger)) {
+        return dbUtils.getConnection();
+    }
+}
+```
+
+Terminal output:
+
+```terminaloutput
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed=38ms (38459480ns)
+```
+
+### Building and Running Tests
+
+Standard Maven build:
 
 ```bash
-cd spring-boot-actuator-demo
+cd timing-utils
+
+mvn clean install   # builds the jar and runs the full test suite
+
+mvn test            # runs tests only
 ```
 
-Start the service
+---
+
+## Development Setup
+
+This repo uses a shared git hook to enforce a 70-character limit on commit message subject lines and validates the
+Conventional Commits format, preventing GitHub from truncating long titles and spilling overflow text into the PR
+description box. The hook lives in a trackable `.githooks/` directory (not the untracked `.git/hooks/`), committed to
+the repo and visible to anyone who clones it.
+Enable it once after cloning the repository by running the below command from the root of your project.
 
 ```bash
-./mvnw spring-boot:run
-```
+cd timing-utils
 
-<br/>
+chmod +x .githooks/commit-msg
+
+git config core.hooksPath .githooks
+```
 
 ---
 
----
+## Package Structure
 
----
-
-<br/>
-
-## Commit-00 :sparkles:
-
-*This is the Initial Commit.*
-
-| **Agenda for this commit**                                      |      Covered?      |
-|-----------------------------------------------------------------|:------------------:|
-| 1. Project creation with required dependencies.                 | :white_check_mark: |
-| 2. Observe actuator related console log.                        | :white_check_mark: |
-| 3. Access the actuator endpoints over **HTTP**.                 | :white_check_mark: |
-| 4. Talk about `health` endpoint.                                | :white_check_mark: |
-| 5. Access the actuator endpoints over **JMX** using `jconsole`. | :white_check_mark: |
-| 6. Talk briefly about `info` endpoint.                          | :white_check_mark: |
-
-### Project Creation
-
-We have created a spring boot project via [Spring Initializr](https://start.spring.io/) with below dependencies.
-
-1. `spring-boot-starter-web`
-2. `spring-boot-starter-actuator`
-3. `spring-boot-devtools`
-
-*Note: `spring-boot-devtools` is not mandatory but i am using here because of the live reload feature which will save some development time.*
-
-### Start the Project and Observe the Console Log
-
-At this point, the application can be started and accessed on `http://localhost:9090`. Though accessing `http://localhost:9090` will give you a `Whitelabel Error Page` but that is understandable since we did not map any controller to handle the request.
-
-But we can find the below line logged in the console which is the proof that actuator is enabled.
-
-```console
-Exposing 1 endpoint(s) beneath base path '/actuator'
 ```
-
-### Talk About Accessing Endpoints Over HTTP and JMX
-
-Once the service is started, open your browser and hit `http://localhost:9090/actuator`. You will be getting a response that is similar to this
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    },
-    "health": {
-      "href": "http://localhost:9090/actuator/health",
-      "templated": false
-    },
-    "health-path": {
-      "href": "http://localhost:9090/actuator/health/{*path}",
-      "templated": true
-    }
-  }
-}
+dev.badprogrammer.timing
+├── function
+│   ├── CheckedRunnable       — Runnable that may throw a checked exception
+│   └── CheckedSupplier<T>    — Supplier<T> that may throw a checked exception
+│
+├── type
+│   ├── TimedResult<T>        — result of a single measured invocation
+│   └── TimingStatistics      — statistics from repeated invocations
+│
+└── util
+    ├── StopWatch             — stateless utility: measure, measureRepeatedly
+    └── TimingLogger          — AutoCloseable: ambient production timing
 ```
-
-The `health` endpoint is the only one that is exposed over **HTTP** by default. Though other endpoints are enabled, they are **not exposed** over ***HTTP*** (but ***exposed*** over **JMX**) because of security reasons. You can access the `health` endpoint through `http://localhost:9090/actuator/health` which will give you the below response.
-
-```json
-{
-  "status": "UP"
-}
-```
-
-*Note: Though the `health` endpoint is exposed, it is not giving all the details except the status of the service. We will tweak this in a moment to provide more details.*
-
-Besides, you can access all the endpoints over **JMX** using `jconsole` from your `Terminal`.
-
-*Note: Compared to **HTTP**, **JMX** is considered to be secure and all the endpoints are exposed by default. Below is the sample screenshot of the endpoints exposed via **JMX**.*
-
-![Endpoints Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/f192df0d-59cb-4a32-8f55-e7c031ee6e59)
-
-You can access the individual endpoints like `beans`, `health`, `info` etc here.
-
-*Note: Spend some time exploring few endpoints like `beans`, `health`, `info` etc.*
-
-*Note: The `info` endpoint does not return any information at the moment but we are going to fix it soon.*
-
-:question:**Any Questions**:question:
-
-<br/>
 
 ---
 
----
+## Features
 
----
+### Single Measurement — `measure` / `measureChecked`
 
-<br/>
+Measures a **single** method invocation, returning its result and elapsed time wrapped in a `TimedResult<T>`.
 
-## Commit-01 :sparkles:
-
-| **Agenda for this commit**                      |      Covered?      |
-|-------------------------------------------------|:------------------:|
-| 1. Customizing **JMX** Domain.                  | :white_check_mark: |
-| 2. Customizing the Management Server Port.      | :white_check_mark: |
-| 3. Customizing the Management Server Base Path. | :white_check_mark: |
-| 4. Customizing the Web Endpoints Base Path.     | :white_check_mark: |
-
-### Customizing JMX Domain
-
-By default, Spring Boot exposes all management endpoints as **JMX** MBeans under the `org.springframework.boot` (except `shutdown`) domain. You can customize the **JMX** domain under which endpoints are exposed using the `management.endpoints.jmx.domain` property as below.
-
-```properties
-management.endpoints.jmx.domain=tech.badprogrammer.app
-```
-
-*Below is the sample screenshot after changing the **JMX** domain.*
-
-![JMX Custom Domain](https://github.com/kumar-github/tutorial-resources/assets/2657313/3c756d7d-ebb6-4c83-a7f1-a0f45b123d65)
-
-
-### Customizing the Management Server Port
-
-By default management endpoints are exposed on the same HTTP port in which the service is running. But it is possible to expose them on a different HTTP port, using the `management.server.port` property as below.
-
-```properties
-management.server.port=9123
-```
-
-After changing the management server port like above, the way to access the endpoints over **HTTP** is as below
-
-```http
-http://localhost:9123/actuator
-```
-
-### Customizing the Management Server Base Path
-
-By default the *management server's base path* is configured to `/` and the *web endpoints base path* is configured to `actuator`. So the default way to access any endpoint over **HTTP** is the *management server base path* followed by the *web endpoints base path* which is `/actuator`
-
-If needed, the management server's base path can be configured using the `management.server.base-path` property as below
-
-```properties
-management.server.base-path=/management
-```
-
-After changing the management server base path like above, the way to access the endpoints over **HTTP** is as below
-
-```http
-http://localhost:9123/management/actuator
-```
-
-*Note: The management sever base path change will work only if a custom management server port is configured.*
-
-### Customizing the Web Endpoints Base Path
-
-By default all the web endpoints are grouped under `/actuator` endpoint. But sometimes, it is useful to customize the prefix of the endpoints. For example, our application might already use `/actuator` for another purpose. We can use the `management.endpoints.web.base-path` property to change the prefix for the web endpoint as  below.
-
-```properties
-management.endpoints.web.base-path=/admin
-```
-
-*Note: The above path is relative to the servlet context path when the management server is sharing the main server port and relative to the management server base path when a separate management server port is configured.*
-
-After configuring the web endpoints base path like above, the endpoints can be accessed by either
-
-```http
-http://localhost:9090/admin
-```
-
-or
-
-```http
-http://localhost:9123/management/admin
-```
-
-depends on the `management.server.port` property configuration.
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-02 :sparkles:
-
-| **Agenda for this commit**                            |      Covered?      |
-|-------------------------------------------------------|:------------------:|
-| 1. Enabling All Endpoints.                            | :white_check_mark: |
-| 2. Enabling Individual Endpoints (`shutdown`).        | :white_check_mark: |
-| 3. Talk briefly about CONDITION EVALUATION DELTA.     | :white_check_mark: |
-| 4. Disabling All Endpoints.                           | :white_check_mark: |
-| 5. Disabling Individual Endpoints (`health`, `info`). | :white_check_mark: |
-
-### Enabling All Endpoints
-
-By default all management endpoints are **enabled** (except `shutdown`). You don't have to do anything extra to enable them.
-
-### Enabling Individual Endpoints
-
-To enable individual endpoints, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
-
-~~~properties
-management.endpoint.shutdown.enabled=true
-~~~
-
-Since the `shutdown` endpoint is **enabled** now, it is automatically **exposed** over **JMX**. *Check the below screenshot.*
-
-![Shutdown Endpoint Enabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/3fa9152a-ea61-4799-a0fc-b4f65191ccce)
-
-### Quick note about Spring's Auto Configuration.
-
-If `spring-boot-dev-tools` dependency is available in the classpath, then you can observe the below CONDITION EVALUATION DELTA in the console log after enabling the `shutdown` endpoint.
-
-```console
-0000-00-00T00:00:00.000+00:00  INFO 33229 --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
-
-==========================
-CONDITION EVALUATION DELTA
-==========================
-
-Positive matches:
------------------
-
-   ShutdownEndpointAutoConfiguration matched:
-      - @ConditionalOnAvailableEndpoint marked as exposed by a 'management.endpoints.jmx.exposure' property (OnAvailableEndpointCondition)
-
-   ShutdownEndpointAutoConfiguration#shutdownEndpoint matched:
-      - @ConditionalOnMissingBean (types: org.springframework.boot.actuate.context.ShutdownEndpoint; SearchStrategy: all) did not find any beans (OnBeanCondition)
-
-Negative matches:
------------------
-
-    None
-
-Exclusions:
------------
-
-    None
-
-Unconditional classes:
-----------------------
-
-    None
-```
-
-Since we enabled the `shutdown` endpoint in the `application.properties`, that triggered the `ShutdownEndpointAutoConfiguration` which then created the `ShutdownEndpoint` bean automatically.
-
-### Disabling All Endpoints
-
-To disable all the endpoints, you can use the `management.endpoints.enabled-by-default` property as below.
-
-~~~properties
-management.endpoints.enabled-by-default=false
-~~~
-
-After setting the `management.endpoints.enabled-by-default` property to `false`, all the endpoints are **disabled** and hence **not exposed**. *Check the below screenshot.*
-
-![All Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/a7be2812-7f5f-4070-b5fa-05347ecea94a)
-
-*Note: A **disabled** endpoint will not be exposed neither over **JMX** nor over **HTTP**.*
-
-*Note: The `shutdown` endpoint is visible because we **enabled** it individually.*
-
-### Disabling Individual Endpoints
-
-To disable an individual endpoint, you can use the respective `management.endpoint.<ENDPOINT_ID>.enabled` property as below.
-
-~~~properties
-management.endpoint.beans.enabled=false
-management.endpoint.health.enabled=false
-management.endpoint.info.enabled=false
-~~~
-
-After disabling `beans`, `health`, `info` endpoints, they are **not exposed**. *Check the below screenshot.*
-
-![Beans-Health-Info Endpoints Disabled](https://github.com/kumar-github/tutorial-resources/assets/2657313/371bc9ce-8a5c-4747-91fd-f83f2bbb4104)
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-03 :sparkles:
-
-| **Agenda for this commit**            |      Covered?      |
-|---------------------------------------|:------------------:|
-| 1. Removing all the previous configs. | :white_check_mark: |
-
-### Removed All the Previous Configs
-Removed all the previously made config changes so that we can start fresh.
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-04 :sparkles:
-
-| **Agenda for this commit**                 |      Covered?      |
-|--------------------------------------------|:------------------:|
-| 1. Exposing **JMX** Endpoints.             | :white_check_mark: |
-| 2. Hiding All **JMX** Endpoints.           | :white_check_mark: |
-| 3. Hiding Individual **JMX** Endpoints.    | :white_check_mark: |
-| 4. Exposing **HTTP** Endpoints.            | :white_check_mark: |
-| 5. Exposing All **HTTP** Endpoints.        | :white_check_mark: |
-| 6. Exposing Individual **HTTP** Endpoints. | :white_check_mark: |
-| 7. Hiding All **HTTP** Endpoints.          | :white_check_mark: |
-| 8. Hiding Individual **HTTP** Endpoints.   | :white_check_mark: |
-
-### Exposing JMX Endpoints
-
-All **enabled** endpoints are by default **exposed** over **JMX**. You don't have to do anything extra.
-
-### Hiding All JMX Endpoints
-
-To **hide** (not expose) all the endpoints that are **exposed** over **JMX**, use the `management.endpoints.jmx.exposure.exclude` property as below.
-
-~~~properties
-management.endpoints.jmx.exposure.exclude=*
-~~~
-
-![All JMX Endpoints Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/98d960ec-51ea-4da5-a766-4a1e42bab72a)
-
-### Hiding Individual JMX Endpoints
-
-To **hide** (not expose) individual endpoints that are **exposed** over **JMX**, use the `management.endpoints.jmx.exposure.exclude` property as below.
-
-~~~properties
-management.endpoints.jmx.exposure.exclude=beans,health,info
-~~~
-
-![JMX Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3ad8cf00-7e3c-4b18-9fb6-7adae06462c6)
-
-### Exposing HTTP Endpoints
-
-Although the endpoints are **enabled** by default, most of them are not exposed (except `http` endpoint) over **HTTP** like **JMX**.
-
-### Exposing All HTTP Endpoints
-
-To expose all the (*enabled*) endpoints over **HTTP**, use the `management.endpoints.web.exposure.include` property as below.
-
-~~~properties
-management.endpoints.web.exposure.include=*
-~~~
-
-![All HTTP Endpoints Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/037b4cc9-5037-4da4-88c4-e937a0760e28)
-
-### Exposing Individual HTTP Endpoints
-
-Any (*enabled*) endpoint can be exposed over **HTTP** by using the `management.endpoints.web.exposure.include` property as below.
-
-~~~properties
-management.endpoints.web.exposure.include=beans,health,info
-~~~
-
-![HTTP Endpoints beans-health-info Exposed](https://github.com/kumar-github/tutorial-resources/assets/2657313/96629de9-993f-4dfb-8380-2c8eacb0d85a)
-
-### Hiding All HTTP Endpoints
-
-To hide (not expose) all endpoints over **HTTP**, use the `management.endpoints.web.exposure.exclude` property as below.
-
-~~~properties
-management.endpoints.web.exposure.exclude=*
-~~~
-
-![All HTTP Endpoints Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/84153c3c-7a51-4b69-bba4-07321d4a7aa9)
-
-### Hiding Individual HTTP Endpoints
-
-To hide (not expose) individual endpoints over **HTTP**, use the `management.endpoints.web.exposure.exclude` property as below.
-
-~~~properties
-management.endpoints.web.exposure.exclude=health
-~~~
-
-![HTTP health Endpoint Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/b793c50e-0905-45a6-8284-00e67f7a1f7b)
-
-Both `management.endpoints.web.exposure.exclude` and `management.endpoints.web.exposure.include` properties can be used together to have more fine-grained control over what to expose and what not to like below
-
-```properties
-management.endpoints.web.exposure.include=*
-management.endpoints.web.exposure.exclude=beans,health,info
-```
-
-![HTTP Endpoints beans-health-info Excluded](https://github.com/kumar-github/tutorial-resources/assets/2657313/3910ea39-2a73-4106-927e-cad4d1832c71)
-
-As `management.endpoints.web.exposure.exclude` has more priority than `management.endpoints.web.exposure.include`, the above configuration will expose all endpoints over **HTTP** and hides only the `beans`, `health`, `info` endpoints.
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-05 :sparkles:
-
-| **Agenda for this commit**             |      Covered?      |
-|----------------------------------------|:------------------:|
-| 1. Reverting all the previous configs. | :white_check_mark: |
-
-### Reverted All the Previous Configs
-Reverted all the previously made config changes so that we can start fresh.
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-06 :sparkles:
-
-| **Agenda for this commit**                              |      Covered?      |
-|---------------------------------------------------------|:------------------:|
-| 1. About `info` endpoint.                               | :white_check_mark: |
-| 2. The Built-In Info Contributors.                      | :white_check_mark: |
-| 3. Exposing the `info` endpoint.                        | :white_check_mark: |
-| 4. Enabling Individual Endpoints Under `info` Endpoint. | :white_check_mark: |
-| 5. Adding Information to the `env` Endpoint.            | :white_check_mark: |
-| 6. Writing Custom InfoContributors.                     | :white_check_mark: |
-
-### The Info Endpoint
-
-The `info` endpoint is useful, if you want to expose information related to your application like the *environment details*, *java runtime details*, *git information*, *OS information*, *build information* or any arbitrary information. Spring collects the information from the `InfoContributor` beans. The `InfoContributor` beans are responsible for contributing the information. The below are some of the built-in *InfoContributors*.
-
-### The Built-In Info Contributors
-
-| ID    | Name                         | Description                                                                | Prerequisites                                | Default Status |
-|-------|------------------------------|----------------------------------------------------------------------------|----------------------------------------------|----------------|
-| build | `BuildInfoContributor`       | Exposes build information.                                                 | A `META-INF/build-info.properties` resource. | Enabled        |
-| env   | `EnvironmentInfoContributor` | Exposes any property from the `Environment` whose name starts with *info*. | None.                                        | Disabled       |
-| git   | `GitInfoContributor`         | Exposes git information.                                                   | A `git.properties` resource.                 | Enabled        |
-| java  | `JavaInfoContributor`        | Exposes Java runtime information.                                          | None.                                        | Disabled       |
-| os    | `OsInfoContributor`          | Exposes Operating System information.                                      | None.                                        | Disabled       |
-
-*Note: All the above `InfoContributor`s are grouped under the `info` endpoint and can be enabled/disabled individually. We can also write our own custom `InfoContributor` to provide more detailed information.*
-
-### Exposing the info Endpoint
-
-Though the `info` endpoint is enabled by default, it is **not exposed** over **HTTP**. To expose the `info` endpoint over **HTTP** use the `management.endpoints.web.exposure.include` property as below.
-
-```properties
-management.endpoints.web.exposure.include=info
-```
-
-Once exposed, we can access the `info` endpoint via the below url.
-
-`http://localhost:9090/actuator/info`
-
-```json
-{}
-```
-
-By default, the `info` endpoint returns an empty response. It is because either, the specific `InfoContributor` might be disabled or the pre-requisite is not met.
-
-The `build` and `git` endpoints (under the `info` endpoint) are enabled by default but it is not shown because the prerequisite for `BuildInfoContributor` and the `GitInfoContributor` is not met.
-The `env`, `java`, `os` endpoints (under the `info` endpoint) are not shown because they are not enabled by default.
-
-### Enabling Individual Endpoints Under Info Endpoint
-
-To enable the `build` and `git` endpoints, we need to have `build-info.properties` and `git.properties` in the classpath. We are not going to talk about it in this tutorial.
-
-To enable the `env`, `java`, `os` endpoints, use the respective `management.info.<ID>.enabled` property as below.
-
-```properties
-management.info.env.enabled=true
-management.info.java.enabled=true
-management.info.os.enabled=true
-```
-
-After enabling the `env`, `java` and `os` endpoints, accessing the `info` endpoint will return the below response.
-
-```json
-{
-  "java": {
-    "version": "17.0.3",
-    "vendor": {
-      "name": "Eclipse Adoptium",
-      "version": "Temurin-17.0.3+7"
-    },
-    "runtime": {
-      "name": "OpenJDK Runtime Environment",
-      "version": "17.0.3+7"
-    },
-    "jvm": {
-      "name": "OpenJDK 64-Bit Server VM",
-      "vendor": "Eclipse Adoptium",
-      "version": "17.0.3+7"
-    }
-  },
-  "os": {
-    "name": "Mac OS X",
-    "version": "13.4.1",
-    "arch": "x86_64"
-  }
-}
-```
-
-We can see the `java` endpoint returns the *java runtime information* and the `os` endpoint returns the *os information*. The `env` endpoint is still missing because currently we did not have any information added under `env`.
-
-### Adding Information to the env Endpoint
-
-To add information to the `env` endpoint, use the `info.*` property like below.
-
-```properties
-info.env.application.name=Spring Boot Actuator Demo
-info.env.application.description=Step by step tutorial for Spring Boot Actuator
-info.env.application.encoding=UTF-8
-info.env.application.java.version=17
-```
-*Note: Any property that starts with the word *info* will be automatically picked up and displayed under `info` endpoint. I have added the `env` key just to group them and it is not mandatory.*
-
-After adding the above properties, we can see the below response.
-
-```json
-{
-  "env": {
-    "application": {
-      "name": "Spring Boot Actuator Demo",
-      "description": "Step by step tutorial for Spring Boot Actuator",
-      "encoding": "UTF-8",
-      "java": {
-        "version": "17"
-      }
-    }
-  },
-  "java": {
-    "version": "17.0.3",
-    "vendor": {
-      "name": "Eclipse Adoptium",
-      "version": "Temurin-17.0.3+7"
-    },
-    "runtime": {
-      "name": "OpenJDK Runtime Environment",
-      "version": "17.0.3+7"
-    },
-    "jvm": {
-      "name": "OpenJDK 64-Bit Server VM",
-      "vendor": "Eclipse Adoptium",
-      "version": "17.0.3+7"
-    }
-  },
-  "os": {
-    "name": "Mac OS X",
-    "version": "13.4.1",
-    "arch": "x86_64"
-  }
-}
-```
-
-*Note: If we use any build tools like *Gradle* or *Maven*, then instead of hard coding these values, we could expand the *info* properties at build time like below.*
-
-```properties
-info.env.application.name=@project.name@
-info.env.application.description=@project.description@
-info.env.application.encoding=@project.build.sourceEncoding@
-info.env.application.java.version=@java.version@
-```
-
-After setting the above properties, you can see the below response.
-
-```json
-{
-  "env": {
-    "application": {
-      "name": "spring-boot-actuator-demo",
-      "description": "spring-boot-actuator-demo",
-      "encoding": "UTF-8",
-      "java": {
-        "version": "17.0.3"
-      }
-    }
-  },
-  "java": {
-    "version": "17.0.3",
-    "vendor": {
-      "name": "Eclipse Adoptium",
-      "version": "Temurin-17.0.3+7"
-    },
-    "runtime": {
-      "name": "OpenJDK Runtime Environment",
-      "version": "17.0.3+7"
-    },
-    "jvm": {
-      "name": "OpenJDK 64-Bit Server VM",
-      "vendor": "Eclipse Adoptium",
-      "version": "17.0.3+7"
-    }
-  },
-  "os": {
-    "name": "Mac OS X",
-    "version": "13.4.1",
-    "arch": "x86_64"
-  }
-}
-```
-
-### Writing Custom InfoContributors
-
-We can write our own custom `InfoContributor`s to provide custom and more detailed information about the application. These custom information can be pulled from various sources like *database*, *remote API*, *environment variables* etc.
-
-Custom `InfoContributor`s can be implemented in below 2 ways.
-
-Approach-1
-```java
-@Bean
-public InfoContributor appDetailsInfoContributor() {
-  return new MapInfoContributor(
-    Map.of("appDetails",
-      Map.of(
-        "serverPort", environment.getProperty("server.port"),
-        "defaultProfiles", environment.getDefaultProfiles()
-      )
-    )
-  );
-}
-```
-
-Approach-2
-```java
-@Component
-public class PersonalInfoContributor implements InfoContributor {
-
-  @Override
-  public void contribute(final Info.Builder builder) {
-    builder.withDetails(
-      Map.of("personalDetails",
-        Map.of("githubUrl", "https://github.com/kumar-github/spring-boot-actuator-demo",
-          "linkedInUrl", "https://www.linkedin.com/in/saravana-kumar-m")));
-  }
-}
-```
-
-Below is the response after adding the above custom info contributors.
-
-```json
-{
-  "env": {
-    "application": {
-      "name": "spring-boot-actuator-demo",
-      "description": "spring-boot-actuator-demo",
-      "encoding": "UTF-8",
-      "java": {
-        "version": "17.0.3"
-      }
-    }
-  },
-  "java": {
-    "version": "17.0.3",
-    "vendor": {
-      "name": "Eclipse Adoptium",
-      "version": "Temurin-17.0.3+7"
-    },
-    "runtime": {
-      "name": "OpenJDK Runtime Environment",
-      "version": "17.0.3+7"
-    },
-    "jvm": {
-      "name": "OpenJDK 64-Bit Server VM",
-      "vendor": "Eclipse Adoptium",
-      "version": "17.0.3+7"
-    }
-  },
-  "os": {
-    "name": "Mac OS X",
-    "version": "13.4.1",
-    "arch": "x86_64"
-  },
-  "personalDetails": {
-    "linkedInUrl": "https://www.linkedin.com/in/saravana-kumar-m",
-    "githubUrl": "https://github.com/kumar-github/spring-boot-actuator-demo"
-  },
-  "appDetails": {
-    "defaultProfiles": [
-      "default"
-    ],
-    "serverPort": "9090"
-  }
-}
-```
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-07 :sparkles:
-
-| **Agenda for this commit**           |      Covered?      |
-|--------------------------------------|:------------------:|
-| 1. About `health` endpoint.          | :white_check_mark: |
-| 2. Show Full Health Details.         | :white_check_mark: |
-| 3. Auto Configured HealthIndicators. | :white_check_mark: |
-| 4. Writing Custom HealthIndicators.  | :white_check_mark: |
-
-### The Health Endpoint
-
-The `health` endpoint helps to check the status of a running application. It is often used by monitoring tools to alert someone when a production system goes down.
-Health information about an application is collected from the content of a `HealthContributorRegistry` (by default, all `HealthContributor` instances defined in your ApplicationContext). Spring Boot includes a number of auto-configured HealthContributors, and you can also write your own.
-
-A `HealthContributor` can be either a `HealthIndicator` or a `CompositeHealthContributor`. A `HealthIndicator` provides actual health information, including a `Status`. A `CompositeHealthContributor` provides a composite of other HealthContributors. Taken together, contributors form a tree structure to represent the overall system health.
-
-By default the `health` endpoint is **enabled** and **exposed** over both **JMX** and **HTTP**. If needed, the `health` endpoint can be enabled or disabled using the `management.endpoint.health.enabled` property like below.
-
-```properties
-management.endpoint.health.enabled=true
-```
-
-The `health` endpoint can be exposed over **JMX** using the `management.endpoints.jmx.exposure.include` property like below.
-
-```properties
-management.endpoints.jmx.exposure.include=health
-```
-
-The `health` endpoint can be exposed over **HTTP** using the `management.endpoints.web.exposure.include` property like below.
-
-```properties
-management.endpoints.web.exposure.include=health
-```
-
-By default, the `health` endpoint just reveals the status of the application like below.
-
-```json
-{
-  "status": "UP"
-}
-```
-
-### Show Full Health Details
-
-To show the full health details, use the `management.endpoint.health.show-details` property like below.
-```properties
-management.endpoint.health.show-details=always
-```
-*Note: We can also use the `when_authorized` value, to reveal the details only to an authorized user using spring security.*
-
-After setting the `management.endpoint.health.show-details` property to `always`, you can see the below response.
-
-```json
-{
-  "status": "UP",
-  "components": {
-    "diskSpace": {
-      "status": "UP",
-      "details": {
-        "total": 250685575168,
-        "free": 21200076800,
-        "threshold": 10485760,
-        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
-        "exists": true
-      }
-    },
-    "ping": {
-      "status": "UP"
-    }
-  }
-}
-```
-
-### Auto Configured HealthIndicators
-When appropriate, Spring Boot auto-configures the HealthIndicators listed in the following table.
-
-| Key           | Name                             | Description                                             |
-|---------------|----------------------------------|---------------------------------------------------------|
-| cassandra     | CassandraDriverHealthIndicator   | Checks that a Cassandra database is up.                 |
-| couchbase     | CouchbaseHealthIndicator         | Checks that a Couchbase cluster is up.                  |
-| db            | DataSourceHealthIndicator        | Checks that a connection to DataSource can be obtained. |
-| diskspace     | DiskSpaceHealthIndicator         | Checks for low disk space.                              |
-| elasticsearch | ElasticsearchRestHealthIndicator | Checks that an Elasticsearch cluster is up.             |
-| hazelcast     | HazelcastHealthIndicator         | Checks that a Hazelcast server is up.                   |
-| influxdb      | InfluxDbHealthIndicator          | Checks that an InfluxDB server is up.                   |
-| jms           | JmsHealthIndicator               | Checks that a JMS broker is up.                         |
-| ldap          | LdapHealthIndicator              | Checks that an LDAP server is up.                       |
-| mail          | MailHealthIndicator              | Checks that a mail server is up.                        |
-| mongo         | MongoHealthIndicator             | Checks that a Mongo database is up.                     |
-| neo4j         | Neo4jHealthIndicator             | Checks that a Neo4j database is up.                     |
-| ping          | PingHealthIndicator              | Always responds with UP.                                |
-| rabbit        | RabbitHealthIndicator            | Checks that a Rabbit server is up.                      |
-| redis         | RedisHealthIndicator             | Checks that a Redis server is up.                       |
-
-You can also **enable** or **disable** selected indicators using the `management.health.<KEY>.enabled` property like below.
-```properties
-management.health.db.enabled=true
-management.health.diskspace.enabled=false
-```
-
-### Writing Custom HealthIndicators
-To provide custom health information, you can register Spring beans that implement the `HealthIndicator` interface and implement the `health()` method and return a `Health` response. The `Health` response should include a status and can optionally include additional details to be displayed. The following code shows a sample `HealthIndicator` implementation:
+A method that returns **`void` without declaring** any checked exceptions:
 
 ```java
-@Component("AppHealth")
-public class MyHealthIndicator implements HealthIndicator {
+// Returns void, no checked exception
+final TimedResult<Void> timedResult   = StopWatch.measure(() -> eventPublisher.publishEvent());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
 
-    @Override
-    public Health health() {
-        int errorCode = check();
-        if (errorCode != 0) {
-            return Health.down()
-                         .withDetail("Error Code", errorCode)
-                         .build();
-        }
-        return Health.up()
-                     .build();
-    }
-
-    private int check() {
-        return new Random().nextInt(2);
-    }
-}
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
-*Note: The identifier for a given HealthIndicator is the name of the bean without the `HealthIndicator` suffix, if it exists. In the above example, the health information is available in an entry named `my` if the name is not provided in the `@Component` annotation. Since the name is provided in the `@Component` annotation, the entry name would be `AppHealth`. Check the below response.*
+Terminal output:
 
-```json
-{
-  "status": "DOWN",
-  "components": {
-    "AppHealth": {
-      "status": "DOWN",
-      "details": {
-        "Error Code": 1
-      }
-    },
-    "diskSpace": {
-      "status": "UP",
-      "details": {
-        "total": 250685575168,
-        "free": 21993676800,
-        "threshold": 10485760,
-        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
-        "exists": true
-      }
-    },
-    "ping": {
-      "status": "UP"
-    }
-  }
-}
+```terminaloutput
+TimedResult:TimedResult[elapsedMillis=3ms, elapsedNanos=3033608ns]
+Result:null
+ElapsedMillis:3
 ```
 
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-08 :sparkles:
-
-| **Agenda for this commit**                                  |      Covered?      |
-|-------------------------------------------------------------|:------------------:|
-| 1. About `shutdown` endpoint.                               | :white_check_mark: |
-| 2. Enabling the `shutdown` endpoint.                        | :white_check_mark: |
-| 3. Exposing the `shutdown` endpoint over **JMX** endpoint.  | :white_check_mark: |
-| 4. Exposing the `shutdown` endpoint over **HTTP** endpoint. | :white_check_mark: |
-
-### The Shutdown Endpoint
-
-As the name suggests, the `shutdown` endpoint will help to *shutdown* the application remotely.
-
-### Enabling The Shutdown Endpoint
-
-The `shutdown` endpoint is disabled by default for security reasons and hence not exposed neither over **JMX** nor over **HTTP**. To enable the `shutdown` endpoint, use the `management.endpoint.shutdown.enabled` property as below.
-
-```properties
-management.endpoint.shutdown.enabled=true
-```
-
-### Exposing The Shutdown Endpoint Over JMX
-
-Enabling the `shutdown` endpoint will automatically exposes it over **JMX**. Check the below screenshot.
-
-![Shutdown Endpoint Exposed Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/c968024d-4441-4ac3-8647-44b4e23007b2)
-
-Invoking the `shutdown` operation will shutdown the application. Check the below screenshot and the console log.
-
-![Shutdown Operation Invoked Over JMX](https://github.com/kumar-github/tutorial-resources/assets/2657313/8a647589-8425-4148-bbec-f11b53823764)
-
-```console
-0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-
-Process finished with exit code 1
-```
-
-### Exposing The Shutdown Endpoint Over HTTP
-
-Enabling the `shutdown` endpoint will **not expose** it over **HTTP** automatically. To expose the `shutdown` endpoint over **HTTP**, use the `management.endpoints.web.exposure.include` property as below.
-
-```properties
-management.endpoints.web.exposure.include=shutdown
-```
-
-After exposing the `shutdown` endpoint over **HTTP**, you can see the below json response.
-
-```json
-{
-  "_links": {
-    "self": {
-      "href": "http://localhost:9090/actuator",
-      "templated": false
-    },
-    "shutdown": {
-      "href": "http://localhost:9090/actuator/shutdown",
-      "templated": false
-    }
-  }
-}
-```
-
-To invoke the `shutdown` operation over **HTTP**, you have to make a **POST** request like below. Check the below screenshot and the console log.
-
-![Shutdown Operation Invoked Over HTTP](https://github.com/kumar-github/tutorial-resources/assets/2657313/04934f3e-00d9-474d-b9d7-8493b43efae3)
-
-```console
-0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-0000-00-00T00:00:00.000+00:00  INFO 26323 --- [       Thread-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-
-Process finished with exit code 1
-```
-*Note: It is not a good practice to **enable** and **expose** the `shutdown` endpoint without implementing proper authorization. If not, you may end up bringing down a production application by mistake.*
-
-:question:**Any Questions**:question:
-
-<br/>
-
----
-
----
-
----
-
-<br/>
-
-## Commit-09 :sparkles:
-
-| **Agenda for this commit**        |      Covered?      |
-|-----------------------------------|:------------------:|
-| 1. Implementing custom endpoints. | :white_check_mark: |
-| 2. Receiving input.               | :white_check_mark: |
-| 3. Sample custom web endpoint.    | :white_check_mark: |
-| 4. Web endpoint response status.  | :white_check_mark: |
-
-### Implementing Custom Endpoints
-
-To write a custom endpoint that should be picked up by the *Actuator*, it should be a spring bean (annotated with `@Bean` or `@Component`) that is annotated with `@Endpoint` annotation. Any methods that are annotated with `@ReadOperation`, `@WriteOperation`, or `@DeleteOperation` are automatically exposed over **JMX** and **HTTP**.
-
-The following code snippet exposes a read operation that returns a person object:
+A method that returns a **value without declaring** any checked exceptions:
 
 ```java
-@ReadOperation
-public Person getPersonData() {
-  return new Person(1001, "Marius");
-}
+// Returns a value, no checked exception
+final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+final User              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
-You can also write technology-specific endpoints by using `@JmxEndpoint` or `@WebEndpoint`. These endpoints are restricted to their respective technologies. For example, `@WebEndpoint` is exposed only over **HTTP** and not over **JMX** and vice-versa.
-You can also write technology-specific extensions by using `@EndpointWebExtension` and `@EndpointJmxExtension`. These annotations let you provide technology-specific operations to augment an existing endpoint.
+Terminal output:
 
-### Receiving Input
-
-Operations on an endpoint can receive input through their parameters. When exposed over the web, the values for these parameters are taken from the URL’s query parameters and from the JSON request body. When exposed over **JMX**, the parameters are mapped to the parameters of the MBean’s operations. Parameters are required by default. They can be made optional by annotating them with either `@javax.annotation.Nullable` or `@org.springframework.lang.Nullable`.
-
-You can map each root property in the JSON request body to a parameter of the endpoint. Consider the following JSON request body:
-
-```json
-{
-  "id": 1001,
-  "name": "Marius"
-}
+```terminaloutput
+TimedResult:TimedResult[elapsedMillis=78ms, elapsedNanos=78284284ns]
+Result:User[id=101, name=John Doe]
+ElapsedMillis:78
 ```
 
-You can use this to invoke a write operation that takes *int id* and *String name* parameters, as the following snippet shows:
+A method that returns **`void` and declares** a checked exception:
 
 ```java
-@WriteOperation
-public void updateData(int id, String name) {
-  // injects 1001 into id and "Marius" into name
-}
+// Return void, declares a checked exception
+final TimedResult<Void> timedResult   = StopWatch.measureChecked(() -> dbUtils.closeConnection());
+final Void              result        = timedResult.getResult();
+final long              elapsedMillis = timedResult.getElapsedMillis();
+
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
-### Sample Custom Web Endpoint
+Terminal output:
 
-Below is the sample code snippet to create a custom web endpoint.
+```terminaloutput
+TimedResult:TimedResult[elapsedMillis=6ms, elapsedNanos=6338845ns]
+Result:null
+ElapsedMillis:6
+```
+
+A method that returns a **value and declares** a checked exception:
 
 ```java
-@WebEndpoint(id = "person")
-@Component
-public class CustomPersonEndpoint {
+// Returns a value, declares a checked exception
+final TimedResult<Connection> timedResult   = StopWatch.measureChecked(() -> dbUtils.getConnection());
+final Connection              result        = timedResult.getResult();
+final long                    elapsedMillis = timedResult.getElapsedMillis();
 
-  private final Map < Integer, String > data = new HashMap < > ();
-
-  // GET: http://localhost:9090/actuator/person?id=1
-  @ReadOperation
-  public Map < Integer, String > readPersonData(int id) {
-    final String value = data.get(id);
-    return (value != null) ? Map.of(id, value) : Collections.emptyMap();
-  }
-
-  // POST: http://localhost:9090/actuator/person
-  // {
-  //   "id": 1001,
-  //   "name": "Marius"
-  // }
-  @WriteOperation
-  public Map < Integer, String > writePersonData(int id, String name) {
-    data.put(id, name);
-    return data;
-  }
-
-  // GET: http://localhost:9090/actuator/person/{id}
-  @DeleteOperation
-  public void deletePersonData(@Selector int id) {
-    data.remove(id);
-  }
-}
+System.out.println("TimedResult:" + timedResult);
+System.out.println("Result:" + result);
+System.out.println("ElapsedMillis:" + elapsedMillis);
 ```
 
-The above custom endpoint can be exposed using the `management.endpoints.web.exposure.include` property as below.
-```properties
-management.endpoints.web.exposure.include=person
+Terminal output:
+
+```terminaloutput
+TimedResult:TimedResult[elapsedMillis=11ms, elapsedNanos=11797399ns]
+Result:org.postgresql.jdbc.PgConnection@5e9f23b4
+ElapsedMillis:11
 ```
 
-*Note: To let the input be mapped to the operation method’s parameters, Java code that implements an endpoint should be compiled with `-parameters`. This will happen automatically if you use Spring Boot’s Gradle plugin or if you use Maven and spring-boot-starter-parent.*
+#### `TimedResult<T>` accessors
 
-### Web Endpoint Response Status
+| Method               | Returns                                             |
+|----------------------|-----------------------------------------------------|
+| `getResult()`        | The method's return value (`null` for void methods) |
+| `getElapsedNanos()`  | Elapsed time, full precision                        |
+| `getElapsedMillis()` | Elapsed time, converted from nanos to millis        |
 
-The default response status for an endpoint operation depends on the operation type (read, write, or delete) and what, if anything, the operation returns.
+#### Method naming convention
 
-* If a `@ReadOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `404 (Not Found)`.
-* If a `@WriteOperation` or `@DeleteOperation` returns a value, the response status will be `200 (OK)`. If it does not return a value, the response status will be `204 (No Content)`.
-* If an operation is invoked without a required parameter or with a parameter that cannot be converted to the required type, the operation method will not be called, and the response status will be `400 (Bad Request)`.
+Every measurement method in this library comes in two variants — `measure` and `measureChecked`. The name itself tells
+you which one to reach for:
 
-:question:**Any Questions**:question:
+| If your method                                               | Use                                  |
+|--------------------------------------------------------------|--------------------------------------|
+| returns **`void` without declaring** any checked exceptions  | `measure(Runnable)`                  |
+| returns a **value without declaring** any checked exceptions | `measure(Supplier<T>)`               |
+| returns **`void` and declares** checked exceptions           | `measureChecked(CheckedRunnable)`    |
+| returns a **value and declares** checked exceptions          | `measureChecked(CheckedSupplier<T>)` |
 
-<br/>
+This naming convention is used consistently for `measureRepeatedly` / `measureRepeatedlyChecked` as well, and will be
+extended to the upcoming features like `compare`, `compareChecked` etc.
 
 ---
 
+### Repeated Measurement — `measureRepeatedly` / `measureRepeatedlyChecked`
+
+Measures a method invocation **repeatedly**, returning statistics across all **successful** invocations plus failure
+tracking, wrapped in a `TimingStatistics`.
+
+A method that returns **`void` without declaring** any checked exceptions:
+
+```java
+// Returns void, no checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> eventPublisher.publishEvent(), 1_000, 5);
+
+System.out.println("Stats:" + stats);
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=2406ms,
+averageMillis=2.406ms, minMillis=2ms, maxMillis=12ms]
+```
+
+A method that returns a **value without declaring** any checked exceptions:
+
+```java
+// Returns a value, no checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedly(() -> userService.getUserById(101), 1_000, 5);
+
+System.out.println("Stats:" + stats);
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=3671ms,
+averageMillis=3.671ms, minMillis=3ms, maxMillis=17ms]
+```
+
+A method that returns **`void` and declares** a checked exception:
+
+```java
+// Return void, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.closeConnection(), 1_000, 5);
+
+System.out.println("Stats:" + stats);
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=4632ms,
+averageMillis=4.632ms, minMillis=4ms, maxMillis=12ms]
+```
+
+A method that returns a **value and declares** a checked exception:
+
+```java
+// Returns a value, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
+
+System.out.println("Stats:" + stats);
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=1000, failedIterations=0, totalMillis=5790ms,
+averageMillis=5.790ms, minMillis=5ms, maxMillis=14ms]
+```
+
+Failed iterations details are captured and surfaced via `hasFailures()` and `getLastException()`:
+
+```java
+// Returns a value, declares a checked exception
+final TimingStatistics stats = StopWatch.measureRepeatedlyChecked(() -> dbUtils.getConnection(), 1_000, 5);
+
+System.out.println("Stats:" + stats);
+// stats.getResult();   // does not compile — no getResult() on TimingStatistics
+
+if (stats.hasFailures()) {
+    stats.getLastException()
+         .ifPresent(e -> System.out.printf("%d of %d iterations failed. Last exception:%s",
+                                           stats.getFailedIterations(), stats.getTotalIterations(), e));
+}
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=957, failedIterations=43, totalMillis=5322ms,
+averageMillis=5.561ms, minMillis=5ms, maxMillis=6ms,
+lastException=org.postgresql.util.PSQLException: The connection attempt failed]
+
+43 of 1000 iterations failed. Last exception:org.postgresql.util.PSQLException: The connection attempt failed
+```
+
+> [!WARNING]
+> ~~`stats.getResult();`~~ — doesn't exist. There is no `getResult()` on `TimingStatistics`.
+
+> [!IMPORTANT]
+> Unlike `measure`/`measureChecked`, the return value of each invocation is discarded — the method passed in may or may
+> not return something, but `measureRepeatedly`/`measureRepeatedlyChecked` never retain or expose it.
+> Only **how long** each call took is recorded, not **what** it returned. This is why `TimingStatistics` has no
+> `getResult()` — unlike `TimedResult<T>`, there is no single result to return once you've measured hundreds or
+> thousands of invocations. What `TimingStatistics` reports is purely the aggregate timing behavior across all of them.
+
+#### Warmup iterations
+
+The first `warmupIterations` invocations run normally — their side effects happen — but their timings are **excluded**
+from statistics. This prevents JVM class-loading and JIT compilation overhead from skewing the numbers, giving a true
+picture of the method's steady-state performance.
+
+#### Failure handling
+
+If an invocation throws:
+
+- the failure count is incremented,
+
+- the exception is retained as the **last exception**,
+
+- execution **continues** with the next iteration,
+
+- and the failed iteration's timing is **excluded** from statistics.
+
+> [!IMPORTANT]
+> `measureRepeatedly` and `measureRepeatedlyChecked` **always return** a `TimingStatistics` — even if *every single
+> invocation* fails. Exceptions are captured and surfaced via `hasFailures()` and `getLastException()` but never
+> rethrown.
+
+```java
+// Even if all 1000 invocations fail — still returns a valid result, never throws
+TimingStatistics stats = StopWatch.measureRepeatedly(() -> unavailableService(), 1_000, 0);
+
+System.out.println("Stats:" + stats);
+System.out.println("Total iterations:" + stats.getTotalIterations());
+System.out.println("Successful iterations:" + stats.getSuccessfulIterations());
+System.out.println("Failed iterations:" + stats.getFailedIterations());
+System.out.println("Has failures:" + stats.hasFailures());
+System.out.println("Last exception:" + stats.getLastException());
+```
+
+Terminal output:
+
+```terminaloutput
+Stats:TimingStatistics[totalIterations=1000, successfulIterations=0, failedIterations=1000, totalMillis=0ms,
+averageMillis=0.000ms, minMillis=0ms, maxMillis=0ms,
+lastException=java.lang.RuntimeException: Something went wrong]
+Total iterations:1000
+Successful iterations:0
+Failed iterations:1000
+Has failures:true
+Last exception:Optional[java.lang.RuntimeException: Something went wrong]
+```
+
+#### `TimingStatistics` accessors
+
+| Method                                    | Returns                                                   |
+|-------------------------------------------|-----------------------------------------------------------|
+| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
+| `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
+| `getFailedIterations()`                   | Count of iterations that threw                            |
+| `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
+| `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
+| `hasFailures()`                           | `true` if any iteration threw                             |
+| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
+
 ---
 
----
+### Ambient Production Timing — `TimingLogger`
 
-<br/>
+A **non-invasive** `AutoCloseable` that measures a method by wrapping the method body in a try-with-resources block and
+logs the elapsed time automatically when the try block exits — whether normally or with an exception — without requiring
+any code restructuring.
 
-## Commit-10 :sparkles:
+Normal code:
 
-| **Agenda for this commit**                   |      Covered?      |
-|----------------------------------------------|:------------------:|
-| 1. Securing the management endpoints.        | :white_check_mark: |
-| 2. Bring in Spring Boot Security dependency. | :white_check_mark: |
-| 3. Full health details with authorization.   | :white_check_mark: |
-
-### Securing The Management Endpoints
-
-Before setting the `management.endpoints.web.exposure.include`, ensure that the endpoints are secured by placing them behind a **firewall**, or are secured by something like **Spring Security**.
-
-### Bringing In Spring Boot Security Dependency
-
-If Spring Security dependency is on the classpath and if you define a custom `SecurityFilterChain` bean, Spring Boot auto-configuration backs off and lets you fully control the actuator access rules. Since we did not define any `SecurityFilterChain` bean (we are not going to, since this is not a Spring Security tutorial), Spring Security's auto-configuration will lock all the actuator endpoints except the `health` endpoint.
-
-Accessing `http://localhost:9090/actuator` or any other url except `http://localhost:9090/actuator/health` will be automatically redirected to `http://localhost:9090/login` with the below auto-generated login page.
-
-![spring-security-sign-in](https://github.com/kumar-github/tutorial-resources/assets/2657313/56295661-9779-4366-832a-c3bcecb0cee1)
-
-You need to sign in, in order to see (*if exposed*) the other endpoints like `beans`, `info` etc. Accessing `http://localhost:9090/health` will give you the below response.
-
-```json
-{
-  "status": "UP"
+```java
+public Connection getConnection() throws SQLException {
+    return dbUtils.getConnection();
 }
 ```
 
-You are able to access the `health` endpoint because it is not secured by Spring Security by default and, you are not seeing the full health details because you are not authorized.
+Timed code:
 
-### Full Health Details With Authorization
-
-Set the `management.endpoint.health.show-details` property to `when_authorized` instead of `always` as below.
-
-`management.endpoint.health.show-details=when_authorized`
-
-This above setting will make the full health details to be displayed but only for an authorized user.
-
-Because you are not an authorized user at the moment, accessing the `http://localhost:9090/actuator/health` endpoint will give you the below response.
-
-```json
-{
-  "status": "UP"
-}
-```
-or
-```json
-{
-  "status": "DOWN"
-}
-```
-*Note: Remember, `health` endpoint is not secured by Spring Security by default.*
-
-Now let's authorize ourself by signing in. Open a new tab with url `http://localhost:9090/actuator`, you will be redirected to the auto-generated login page. Since we did not configure any user name and password in the `application.properties` file or anywhere, Spring will generate a default user name and password. The default user name is `user` and the password will be auto-generated upon service start-up and logged in the console like below.
-
-```console
-Using generated security password: 6dc9fa57-fbdf-4be1-98a3-c0007724069b
-```
-
-Now enter `user` in the username field and `6dc9fa57-fbdf-4be1-98a3-c0007724069b` in the password field and you will be logged in successfully. Now open a new tab and hit the url `http://localhost:9090/actuator/health`. You can see the below response.
-
-```json
-{
-  "status": "UP",
-  "components": {
-    "AppHealth": {
-      "status": "UP"
-    },
-    "diskSpace": {
-      "status": "UP",
-      "details": {
-        "total": 250685575168,
-        "free": 28970192896,
-        "threshold": 10485760,
-        "path": "/Users/kumar/GitHub/personal/SPRING BOOT/spring-boot-actuator-demo/.",
-        "exists": true
-      }
-    },
-    "ping": {
-      "status": "UP"
+```java
+public Connection getConnection() throws SQLException {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger)) {
+        return dbUtils.getConnection();
     }
-  }
 }
 ```
 
-You can logout by accessing the url `http://localhost:9090/logout`. If you try the `health` endpoint after logging out, you will not see the full health details instead just the status.
+Terminal output:
 
-:question:**Any Questions**:question:
+```terminaloutput
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed=12ms (12004311ns)
+```
 
-<br/>
+Timed code with slow call detection:
+
+Pass a threshold in milliseconds. If elapsed time exceeds it, the log line escalates from `DEBUG` to `WARN` —
+automatically, with **no code change**:
+
+```java
+public Connection getConnection() throws SQLException {
+    try (TimingLogger ignored = TimingLogger.start("getConnection", logger, 1_000)) {
+        return dbUtils.getConnection();
+    }
+}
+```
+
+Terminal output:
+
+```terminaloutput
+// Normal call
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed=12ms (12004311ns)
+
+// Slow call
+00:00:00.000 [main] WARN dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
+Elapsed=1340ms (1340291884ns) | SLOW — exceeded 1000ms threshold
+```
+
+> [!TIP]
+> Passing `0` (or omitting the parameter entirely) disables threshold checking — every invocation logs at `DEBUG`. `0`
+> is a deliberate, valid sentinel — only **negative** values are rejected.
+
+#### Why the caller's logger is mandatory
+
+> [!NOTE]
+> `TimingLogger.start()` requires **your** logger, not a shared internal one. This ensures timing lines appear under
+> your class's name in the logs — filterable by package, routable by your existing logging configuration, and sitting
+> alongside your class's other log statements. A shared logger would scatter timing lines under an unrelated logger
+> name, losing all context.
+
+#### Log levels at a glance
+
+| Condition                             | Level   | Example                                                                                       |
+|---------------------------------------|---------|-----------------------------------------------------------------------------------------------|
+| No threshold configured               | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured but not exceeded | `DEBUG` | `TIMED \| getConnection \| Elapsed=12ms (12004311ns)`                                         |
+| Threshold configured and exceeded     | `WARN`  | `TIMED \| getConnection \| Elapsed=1340ms (1340291884ns) \| SLOW — exceeded 1000ms threshold` |
+
+`DEBUG` keeps timing lines invisible at typical production log levels (`INFO`, `WARN`) until you need them, while
+automatic escalation to `WARN` on slow invocations surfaces problems without you having to go looking for them.
+
+#### `close()` never throws
+
+> [!WARNING]
+> `close()` is the one method in this library with an absolute guarantee — it **never throws**, under any circumstance.
+> A `close()` that throws inside try-with-resources can suppress the **original exception** from the try block, silently
+> swallowing real errors. Any unexpected failure inside `close()` itself is caught and logged at `ERROR` as a last
+> resort.
 
 ---
 
----
+### Supporting Types
+
+#### `TimedResult<T>` / `TimingStatistics`
+
+`TimedResult<T>` is an immutable holder for the outcome of a method measured once — its return value and the elapsed
+time.
+
+| Method               | Returns                                             |
+|----------------------|-----------------------------------------------------|
+| `getResult()`        | The method's return value (`null` for void methods) |
+| `getElapsedNanos()`  | Elapsed time, full precision                        |
+| `getElapsedMillis()` | Elapsed time, converted from nanos to millis        |
+
+`TimingStatistics` is an immutable holder for the aggregated statistics of a method measured repeatedly — timing
+distribution, success/failure counts, and elapsed time across all iterations.
+
+| Method                                    | Returns                                                   |
+|-------------------------------------------|-----------------------------------------------------------|
+| `getTotalIterations()`                    | `getSuccessfulIterations() + getFailedIterations()`       |
+| `getSuccessfulIterations()`               | Count of iterations that did not throw                    |
+| `getFailedIterations()`                   | Count of iterations that threw                            |
+| `getTotalNanos()`, `getTotalMillis()`     | Sum of elapsed time across successful iterations          |
+| `getAverageNanos()`, `getAverageMillis()` | Mean elapsed time per successful iteration                |
+| `getMinNanos()`, `getMinMillis()`         | Fastest successful iteration                              |
+| `getMaxNanos()`, `getMaxMillis()`         | Slowest successful iteration                              |
+| `hasFailures()`                           | `true` if any iteration threw                             |
+| `getLastException()`                      | `Optional<Exception>` — the last exception thrown, if any |
 
 ---
 
-<br/>
+### Supporting Functional Interfaces
+
+#### `CheckedRunnable` / `CheckedSupplier<T>`
+
+Functional interfaces equivalent to `Runnable` and `Supplier<T>`, but declaring `throws Exception` on their single
+abstract method. This lets you pass a lambda that throws a checked exception (`SQLException`, `IOException` etc.)
+directly to `measureChecked` / `measureRepeatedlyChecked`, without forcing you to wrap it in a try/catch just to satisfy
+the compiler.
+
+> [!NOTE]
+> Java's standard `Runnable` and `Supplier<T>` don't allow their functional methods to throw checked exceptions. This
+> forces you to wrap every checked-exception-throwing lambda in an artificial try/catch cluttering your code with
+> boilerplate. These variants remove that friction.
+
+Without `CheckedRunnable` — forced ugly wrapping, and the original type is lost
+
+```java
+Runnable r = () -> {
+    try {
+        // throws SQLException
+        dbUtils.closeConnection();
+    } catch (SQLException e) {
+        // original type lost
+        throw new RuntimeException(e);
+    }
+};
+```
+
+With `CheckedRunnable` — clean, direct, and original type preserved
+
+```java
+CheckedRunnable r = () -> dbUtils.closeConnection();
+```
+
+Without `CheckedSupplier` — forced ugly wrapping, and the original type is lost
+
+```java
+Supplier<Connection> s = () -> {
+    try {
+        // throws SQLException
+        return dbUtils.getConnection();
+    } catch (SQLException e) {
+        // original type lost
+        throw new RuntimeException(e);
+    }
+};
+```
+
+With `CheckedSupplier` — clean, direct, and original type preserved
+
+```java
+CheckedSupplier<Connection> s = () -> dbUtils.getConnection();
+```
+
+> [!NOTE]
+> `CheckedRunnable`/`CheckedSupplier<T>` do **not** extend `Runnable`/`Supplier<T>` — this isn't a design choice, it's a
+> Java language rule. A subinterface can only narrow the checked exceptions an inherited method declares, never widen
+> them. Since `Runnable.run()`/`Supplier<T>.get()` declare no checked exceptions at all, extending either and
+> redeclaring the method with `throws Exception` simply doesn't compile. These are deliberately independent interfaces
+> that happen to share a method shape — the same pattern the JDK itself uses for `Callable<V>`, which doesn't extend
+> `Supplier<V>` for the identical reason.
+
+---
+
+## Design Decisions & Their Reasoning
+
+This section documents *why* the library looks the way it does — including a few decisions that were taken initially but
+later revisited and corrected along the way.
+
+### Why `measure` / `measureChecked` instead of one overloaded method
+
+Java cannot cleanly disambiguate `Runnable` from `CheckedRunnable` or `Supplier<T>` from `CheckedSupplier<T>` via
+overloading when a lambda body doesn't declare any exception — the compiler reports an ambiguous method call.
+
+If `measure` were overloaded to accept either type (`Runnable`/`CheckedRunnable`):
+
+```java
+public static TimedResult<Void> measure(final Runnable method) { ... }
+
+public static TimedResult<Void> measure(final CheckedRunnable method) { ... }
+```
+
+A plain lambda with no checked exception satisfies both signatures equally:
+
+```java
+StopWatch.measure(() -> eventPublisher.publishEvent());
+```
+
+Neither `Runnable` nor `CheckedRunnable` is declared to throw anything here, so the compiler has no basis to pick one
+over the other. It rejects the call outright:
+
+IntelliJ reports:
+
+```
+Ambiguous method call. Both measure(Runnable) in StopWatch and measure(CheckedRunnable) in StopWatch match
+```
+
+The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:
+
+```java
+// Compiles — r is explicitly typed as Runnable, so there's nothing to infer
+Runnable r = () -> eventPublisher.publishEvent();
+StopWatch.measure(r);
+```
+
+```java
+// Compiles — the cast tells the compiler which overload to target
+StopWatch.measure((Runnable) () -> eventPublisher.publishEvent());
+```
+
+The above workarounds require the *caller* to already know about the ambiguity and add extra syntax to resolve it every
+single time they write a lambda with no checked exception. That's friction nobody should have to think about just to
+call a timing method. Splitting them into two explicitly named methods removes the ambiguity entirely and makes the
+exception-handling expectation visible at the call site, without the caller needing to know *why*.
+
+The solution:
+
+```java
+// plain lambda, no ceremony
+StopWatch.measure(() -> eventPublisher.publishEvent());
+```
+
+```java
+// checked exception, still no ceremony
+StopWatch.measureChecked(() -> dbUtils.closeConnection());
+```
+
+The method names themselves disambiguate. The caller picks the method that matches their lambda; the compiler never has
+to guess, and nobody has to write a cast just to time a method call.
+
+**The same ambiguity applies to value-returning methods** — `Supplier<T>`/`CheckedSupplier<T>` face an identical
+problem, for the same reason:
+
+If `measure` were overloaded to accept either type (`Supplier`/`CheckedSupplier`):
+
+```java
+public static <T> TimedResult<T> measure(final Supplier<T> method) { ... }
+
+public static <T> TimedResult<T> measure(final CheckedSupplier<T> method) { ... }
+```
+
+A plain lambda with no checked exception satisfies both signatures equally:
+
+```java
+StopWatch.measure(() -> userService.getUserById(101));
+```
+
+Neither `Supplier` nor `CheckedSupplier` is declared to throw anything here, so the compiler has no basis to pick one
+over the other. It rejects the call outright:
+
+IntelliJ reports:
+
+```
+Ambiguous method call. Both measure(Supplier) in StopWatch and measure(CheckedSupplier) in StopWatch match
+```
+
+The ambiguity *can* be worked around — by explicitly storing it in a variable or casting the lambda inline:
+
+```java
+// Compiles — s is explicitly typed as Supplier<User>, so there's nothing to infer
+Supplier<User> s = () -> userService.getUserById(101);
+StopWatch.measure(s);
+```
+
+```java
+// Compiles — the cast tells the compiler which overload to target
+StopWatch.measure((Supplier<User>) () -> userService.getUserById(101));
+```
+
+As explained earlier, the above workarounds are too much friction.
+
+The solution:
+
+```java
+// plain lambda, no ceremony
+StopWatch.measure(() -> userService.getUserById(101));
+```
+
+```java
+// checked exception, still no ceremony
+StopWatch.measureChecked(() -> dbUtils.getConnection());
+```
+
+---
+
+### Why `Runnable` / `CheckedRunnable` variants delegate to the `Supplier` variants internally
+
+Rather than duplicating the timing loop for void methods, `measure(Runnable)` and `measureRepeatedly(Runnable, ...)`
+wrap their input as a `Supplier<Void>` / `CheckedSupplier<Void>` that runs the `Runnable` and then returns null,
+delegating to the value-returning variant.
+
+```java
+public static TimedResult<Void> measure(Runnable method) {
+    return measure(() -> {
+        method.run();
+        return null;
+    });
+}
+```
+
+```java
+public static TimingStatistics measureRepeatedly(Runnable method, int iterations, int warmupIterations) {
+    return measureRepeatedly(() -> {
+        method.run();
+        return null;
+    }, iterations, warmupIterations);
+}
+```
+
+This means one implementation handles the actual timing logic, with no risk of the `Runnable` and `Supplier` variants
+drifting apart or behaving differently over time. It also means every guarantee documented for the `Supplier` variants —
+warmup handling, failure tracking, exception behavior — applies identically to the `Runnable` variants, since under the
+hood, they're running the exact same code.
+
+---
+
+### `TimedResult`: nanos internally, millis on retrieval
+
+Elapsed time is captured via `System.nanoTime()` and stored as-is. Millisecond conversion happens only when
+`getElapsedMillis()` is called, via `TimeUnit.NANOSECONDS.toMillis()` — never by manual division. This keeps the
+conversion consistent everywhere it's used and avoids subtle rounding bugs from repeated division.
+
+---
+
+### `TimingStatistics`: built on `LongSummaryStatistics`
+
+Total, average, min, and max are delegated entirely to `java.util.LongSummaryStatistics` — a battle-tested JDK class. No
+custom arithmetic is performed for these core statistics, eliminating an entire category of off-by-one or precision
+bugs.
+
+---
+
+### The big correction: failure timings do **not** belong in performance statistics
+
+An earlier design included failed-iteration timings directly in the statistics, on the reasoning that *"a slow failure
+is as real a data point as a slow success."* That reasoning sounds correct in isolation — but it doesn't survive the
+question **"how would a caller actually use that number?"** in a repeatedly measured method.
+
+In practice, the elapsed time until an exception is thrown depends entirely on **where** in the method the failure
+occurred. An instant validation failure and a 30-second connection timeout failure are both "failures" — but their
+timings mean completely different things and cannot be meaningfully averaged together. Mixing them into
+`getAverageMillis()` contaminates the picture of how the method performs *when it works*, without providing any
+actionable insight in return — the exception type and message already convey far more about *what* went wrong than its
+timing does.
+
+> [!IMPORTANT]
+> **The resolution:** statistics (`LongSummaryStatistics` and all derived accessors) cover
+> **successful iterations only**. Failures are represented separately and explicitly via `getFailedIterations()`,
+> `hasFailures()`, and `getLastException()`.
+
+---
+
+### The second correction: "always return, never throw"
+
+The original design for `measureRepeatedly` re-threw the *last* exception after the loop completed if any iteration had
+failed. This created a contradiction: if even one out of a thousand iterations failed, the caller received an exception
+and **lost the statistics for the other 999** — directly undermining the goal of returning useful aggregated data.
+
+> [!IMPORTANT]
+> **The resolution:** `measureRepeatedly` and `measureRepeatedlyChecked` *always* return a `TimingStatistics`. The
+> last exception (if any) is captured internally and surfaced (not rethrown) via `getLastException()` for the caller to
+> inspect. As a direct consequence, `measureRepeatedlyChecked` no longer declares `throws Exception` — it has nothing
+> left to throw.
+
+---
+
+### Warmup iterations are a first-class concept, not an afterthought
+
+JIT compilation and class loading make the first few invocations of *any* method artificially slow — this has nothing to
+do with the method's real performance. Rather than asking callers to discard early results manually, `warmupIterations`
+is a required parameter: those invocations execute (with real side effects) but are excluded from every statistic.
+
+---
+
+### `StopWatch` is static; `TimingLogger` is an instance — and that's correct
+
+`StopWatch` is a stateless utility — every method receives everything it needs as parameters and returns a result. This
+is the same shape as `java.util.Arrays` or `java.util.Collections`, and a private constructor enforces it cannot be
+instantiated.
+
+`TimingLogger`, by contrast, **must** carry state — specifically, the start time captured when `start()` is called —
+across to `close()`, which may happen much later in a different point of the method body. `AutoCloseable` requires an
+instance with a lifecycle; there is no honest way to make this static. Each class has the shape its responsibilities
+demand, rather than being forced into uniformity for its own sake.
+
+---
+
+### `TimingLogger`'s threshold: `0` means "no threshold," and `< 0` is invalid
+
+`NO_THRESHOLD = 0L` is a deliberate, user-passable sentinel — calling `start(label, logger, 0)` is equivalent to calling
+the no-threshold overload `start(label, logger)`. Validation rejects only **negative** values (`slowThresholdMillis <
+0`), not zero, because zero has a legitimate meaning here rather than being a degenerate edge case to reject.
+
+---
+
+## ✓ Best Practices
+
+✓ **Use `StopWatch` for investigations, benchmarks, and one-off questions.** It is **not** intended to live permanently
+in production hot paths, use `TimingLogger` for those use cases.
+
+✓ **Always give `measureRepeatedly` a meaningful warmup count.** A handful of warmup iterations (5–10 is often enough)
+prevent JIT warm-up from dominating your results, especially for short-running methods.
+
+✓ **Inspect failures, don't catch them.** Even though the method you pass in may throw, `measureRepeatedly` and
+`measureRepeatedlyChecked` catch it internally and never propagate it — the call itself never throws. Check
+`hasFailures()` and `getLastException()` after the call instead of wrapping it in try/catch, which would be
+unreachable dead code.
+
+✓ **Pass your own class's logger to `TimingLogger`.** This keeps timing lines filterable and contextual alongside your
+other log output — never share a single logger across unrelated classes.
+
+✓ **Set slow thresholds based on real SLAs, not guesses.** A threshold that fires constantly is noise; a threshold that
+never fires provides no value. Tune it against your actual latency expectations.
+
+✓ **Don't mix `measure` and `measureChecked` mentally — let the compiler guide you.** If your lambda doesn't compile
+under `measure`, that's the signal to use `measureChecked` instead, not to wrap the exception yourself.
+
+---
+
+## Testing Philosophy
+
+Tests are organized by method variant (`measure`, `measureChecked`, `measureRepeatedly`, `measureRepeatedlyChecked`)
+and, within each, by overload (`Supplier` vs `Runnable`) — covering delegation-specific concerns such as whether each
+variant correctly propagates or catches exceptions, counts iterations, and rejects nulls.
+
+Statistical computation facts (min/max/average/total, millis-nanos consistency) are verified once rather than duplicated
+across every repeated-measurement variant — all four converge on the same underlying computation, so repeating those
+assertions per variant wouldn't add real confidence.
+
+---
+
+## Implementation Status & Roadmap
+
+This project grows feature by feature — each one fully discussed and designed before it's built. This section reflects
+that: a flat list of what exists, an ordered list of what's committed to next, and an open-ended list of ideas that have
+been discussed or being discussed, but not yet promised.
+
+### ✓ Implemented
+
+✓ **Single measurement** — `measure`, `measureChecked`
+
+✓ **Repeated measurement** — `measureRepeatedly`, `measureRepeatedlyChecked`
+
+✓ **Failure tracking** — `hasFailures()`, `getLastException()`
+
+✓ **Ambient production timing** — `TimingLogger`
+
+### ○ Roadmap
+
+Committed next steps:
+
+① **Global default slow threshold for `TimingLogger`** — `TimingLogger.setDefaultSlowThreshold(millis)` configures a
+shared threshold once; `startWithDefaultThreshold(label, logger)` opts a call site into it explicitly. The existing
+`start(label, logger)` overload is unaffected — slow-call detection stays opt-in at every call site, with no
+exceptions.
+
+② **Head-to-head comparison** — `compare` / `compareChecked` methods that accept paired `Candidate` (label and method)
+inputs and return a `ComparisonResult`.
+
+③ **Percentile statistics** — `getPercentileMillis()` for P50 / P75 / P95 / P99 on `TimingStatistics`.
+
+### □ Future Considerations
+
+Ideas raised during design discussions but not yet committed to. Some may be implemented, refined, or set aside as the
+library matures:
+
+□ **`toMap()` on `ComparisonResult`** — a flat `Map<String, Object>` representation for external consumption (metrics
+platforms, structured logging, MDC) without coupling the library to a JSON dependency
+
+□ **MDC integration for `TimingLogger`** — attaching elapsed time to the logging context rather than (or in addition to)
+a log line; depends on the consuming application's log-aggregation stack
+
+□ **Spring AOP `@Timed` module** — an optional, separate module providing an annotation-based alternative to
+`TimingLogger` for Spring Boot consumers, without adding a Spring dependency to the core library
+
+□ **Opt-in `TRACE`-level internal logging** — visibility into per-iteration progress during long `measureRepeatedly`
+runs (currently only the final aggregated `TimingStatistics` is observable). Silent by default, matching
+`TimingLogger`'s own **invisible until configured** philosophy. For `StopWatch` specifically, this would require
+resolving a real conflict with its documented **zero-dependency** guarantee — either accepting that trade-off or finding
+a dependency-free mechanism (e.g. a pluggable callback) instead of SLF4J directly
+
+### ✗ Considered and rejected
+
+✗ **Checkpoint / `CheckpointTimer`** — a mechanism for recording multiple named splits within a single timed block.
+Rejected as too invasive: it would require call sites to pass a checkpoint object through their method body,
+contradicting the "no side effects, no restructuring required" principle that both `StopWatch` and `TimingLogger` are
+built on.
+
+---
+
+<div align="center">
+
+📌 *This README is a living document and will be updated as each feature above is implemented and committed.*
+
+</div>

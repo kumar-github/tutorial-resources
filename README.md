@@ -218,8 +218,8 @@ public Connection getConnection() throws SQLException {
 Terminal output:
 
 ```terminaloutput
-00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED | getConnection |
-Elapsed=38ms (38459480ns)
+00:00:00.000 [main] DEBUG dev.badprogrammer.timing.util.examples.TimingLoggerDemo -- TIMED |
+getConnection | Elapsed=38ms (38459480ns)
 ```
 
 ### Building and Running Tests

@@ -171,6 +171,7 @@ Measure a method once and return the result:
 ```java
 // One-off measurement during an investigation
 final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+
 final User              result        = timedResult.getResult();
 final long              elapsedMillis = timedResult.getElapsedMillis();
 
@@ -283,6 +284,7 @@ A method that returns **`void` without declaring** any checked exceptions:
 ```java
 // Returns void, no checked exception
 final TimedResult<Void> timedResult   = StopWatch.measure(() -> eventPublisher.publishEvent());
+
 final Void              result        = timedResult.getResult();
 final long              elapsedMillis = timedResult.getElapsedMillis();
 
@@ -304,6 +306,7 @@ A method that returns a **value without declaring** any checked exceptions:
 ```java
 // Returns a value, no checked exception
 final TimedResult<User> timedResult   = StopWatch.measure(() -> userService.getUserById(101));
+
 final User              result        = timedResult.getResult();
 final long              elapsedMillis = timedResult.getElapsedMillis();
 
@@ -325,6 +328,7 @@ A method that returns **`void` and declares** a checked exception:
 ```java
 // Return void, declares a checked exception
 final TimedResult<Void> timedResult   = StopWatch.measureChecked(() -> dbUtils.closeConnection());
+
 final Void              result        = timedResult.getResult();
 final long              elapsedMillis = timedResult.getElapsedMillis();
 
@@ -346,6 +350,7 @@ A method that returns a **value and declares** a checked exception:
 ```java
 // Returns a value, declares a checked exception
 final TimedResult<Connection> timedResult   = StopWatch.measureChecked(() -> dbUtils.getConnection());
+
 final Connection              result        = timedResult.getResult();
 final long                    elapsedMillis = timedResult.getElapsedMillis();
 
